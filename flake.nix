@@ -8,7 +8,7 @@
   inputs =
     {
       # Track channels with commits tested and built by hydra
-      nixos.url = "github:nixos/nixpkgs/nixos-21.11";
+      nixos.url = "github:nixos/nixpkgs/nixos-22.05";
       latest.url = "github:nixos/nixpkgs/nixos-unstable";
       # For darwin hosts: it can be helpful to track this darwin-specific stable
       # channel equivalent to the `nixos-*` channels for NixOS. For one, these
