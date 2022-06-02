@@ -4,12 +4,9 @@
 	home.packages = with pkgs; [ 
 		htop yarn poetry awscli python39Packages.pip
 		gnumake 
-		ripgrep lsd bat fd-find jq bottom gtop gping procs httpie curlie zoxide 
+		ripgrep lsd bat fd jq bottom gtop gping procs httpie curlie zoxide 
 	];
 
-
-	nixpkgs.overlays = [
-	];
 
 	programs.neovim = {
 		enable = true;
