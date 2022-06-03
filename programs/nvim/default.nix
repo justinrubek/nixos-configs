@@ -46,5 +46,8 @@ in
     # Aesthetic
     nvim-treesitter
 
+    # tpope
+    vim-abolish
+
   ];
 }
