@@ -1,0 +1,56 @@
+name: build workstation
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  build-system:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v15
+        with:
+          extra_nix_config: |
+            access-tokens = github=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup nix cache
+        uses: cachix/cachix-action@v10
+        with:
+          name: '${{ secrets.CACHIX_CACHE_NAME }}'
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
+      - name: Build home
+        run: nix build .#workstationHome
+
+      - name: Zip build
+        run: zip -qq -r home.zip result
+
+      - name: Determine version
+        id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Create release
+        uses: actions/create-release@v1
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          release_name: ${{ steps.get_version.outputs.version }}
+          tag_name: ${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Upload build to GitHub
+        uses: actions/upload-release-asset@v1
+        id: upload_build
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: "${{ steps.download.outputs.download-path }}/build.zip"
+          asset_name: home.zip
+          asset_content_type: application/zip
