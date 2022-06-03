@@ -1,6 +1,12 @@
 local opt = vim.opt
 local g = vim.g
 
+vim.cmd [[
+    set nowrap
+
+    map ; :
+]]
+
 g.mapleader = ' '
 vim.api.nvim_set_keymap('n', '<Leader><Space>', ':set hlsearch!<CR>', { noremap = true, silent = true })
 

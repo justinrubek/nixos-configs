@@ -14,13 +14,14 @@ in {
     xdg.enable = true;
 
 	home.packages = with pkgs; [ 
-		ripgrep fd gtop gping procs httpie curlie duf zip
+		git ripgrep fd gtop gping procs httpie curlie duf zip unzip
         tectonic
         speedcrunch flameshot bitwarden
         ffmpeg youtube-dl obs-studio vlc
         blender kdenlive
         steam protontricks
         rofi
+        gnumake gcc
 	];
 
 	programs.neovim = import ./programs/nvim pkgs;
