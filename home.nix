@@ -1,4 +1,7 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: 
+let
+  nvim = import ./config/nvim;
+in {
         home.username = "justin";
 	home.homeDirectory = "/home/justin";
 	home.packages = with pkgs; [ 
@@ -8,9 +11,7 @@
 	];
 
 
-	programs.neovim = {
-		enable = true;
-	};
+	programs.neovim = nvim pkgs;
 
 	programs.git = {
 		enable = true;
