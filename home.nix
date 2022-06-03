@@ -1,7 +1,5 @@
 { pkgs, username, ... }: 
 let
-  nvim = import ./config/nvim;
-
   shellAliases = {
       vi = "nvim";
       cat = "bat";
@@ -13,15 +11,13 @@ let
 in {
     home.username = "justin";
     home.homeDirectory = "/home/justin";
-	home.packages = with pkgs; [ 
-		htop yarn poetry awscli python39Packages.pip
-		gnumake 
-		ripgrep lsd fd jq bottom gtop gping procs httpie curlie zoxide 
-	];
     xdg.enable = true;
 
+	home.packages = with pkgs; [ 
+		ripgrep fd gtop gping procs httpie curlie
+	];
 
-	programs.neovim = nvim pkgs;
+	programs.neovim = import ./config/nvim pkgs;
 
 	programs.git = {
 		enable = true;
@@ -31,7 +27,7 @@ in {
 
 	programs.bash = {
 	  enable = true;
-		inherit shellAliases;
+	  inherit shellAliases;
     };
 
     programs.zsh = {
@@ -65,6 +61,22 @@ in {
 		'';
 	};
 
+    programs.broot = {
+        enable = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+    };
     programs.bat.enable = true;
     programs.fzf.enable = true;
+    programs.lsd = {
+        enable = true;
+        enableAliases = true;
+    };
+    programs.htop.enable = true;
+    programs.bottom.enable = true;
+    programs.jq.enable = true;
+    programs.zoxide = {
+        enable = true;
+        enableBashIntegration = true;
+    };
 }
