@@ -23,6 +23,7 @@ in {
     configuration = import ./home.nix {
       inherit nur pkgs;
       inherit (pkgs) config lib stdenv;
+      inherit username;
     };
   };
 }

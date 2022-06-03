@@ -2,9 +2,9 @@ local opt = vim.opt
 local g = vim.g
 
 g.mapleader = ' '
+vim.api.nvim_set_keymap('n', '<Leader><Space>', ':set hlsearch!<CR>', { noremap = true, silent = true })
 
 opt.undofile = true
-opt.undodir = "${HOME}/.cache/"
 
 opt.smartindent = true
 opt.autoindent = true
@@ -18,7 +18,8 @@ opt.mouse = "a"
 
 opt.termguicolors = true
 opt.cursorline = true
-opt.number = true
+opt.relativenumber = true
+opt.scrolloff = 12
 
 opt.viminfo = ""
 opt.viminfofile = "NONE"
