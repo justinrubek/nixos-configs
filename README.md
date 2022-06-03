@@ -23,6 +23,8 @@ nix build .#workstationHome
 result/activate
 ```
 
+A script has been provided: `switchHome.sh`
+
 ## inspirational help
 
 https://gvolpe.com/blog/nix-flakes/
