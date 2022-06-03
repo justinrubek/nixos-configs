@@ -14,7 +14,13 @@ in {
     xdg.enable = true;
 
 	home.packages = with pkgs; [ 
-		ripgrep fd gtop gping procs httpie curlie duf
+		ripgrep fd gtop gping procs httpie curlie duf zip
+        tectonic
+        speedcrunch flameshot bitwarden
+        ffmpeg youtube-dl obs-studio vlc
+        blender kdenlive
+        steam protontricks
+        rofi
 	];
 
 	programs.neovim = import ./programs/nvim pkgs;
@@ -79,4 +85,6 @@ in {
         enable = true;
         enableBashIntegration = true;
     };
+
+    programs.mpv.enable = true;
 }
