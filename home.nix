@@ -14,10 +14,10 @@ in {
     xdg.enable = true;
 
 	home.packages = with pkgs; [ 
-		ripgrep fd gtop gping procs httpie curlie
+		ripgrep fd gtop gping procs httpie curlie duf
 	];
 
-	programs.neovim = import ./config/nvim pkgs;
+	programs.neovim = import ./programs/nvim pkgs;
 
 	programs.git = {
 		enable = true;
