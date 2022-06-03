@@ -51,6 +51,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: "${{ steps.download.outputs.download-path }}/home.zip"
+          asset_path: home.zip
           asset_name: home.zip
           asset_content_type: application/zip
