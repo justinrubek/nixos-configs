@@ -22,6 +22,7 @@ in
         luafile ${PWD}/settings.lua
         luafile ${PWD}/plugins/lsp.lua
         luafile ${PWD}/plugins/treesitter.lua
+        luafile ${PWD}/plugins/bufferline.lua
       ]]
     end, 70)
     EOF
@@ -38,6 +39,7 @@ in
 
     # navigation
     telescope-nvim
+    bufferline-nvim
 
     # File tree
     nvim-web-devicons
