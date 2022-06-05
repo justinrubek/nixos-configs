@@ -21,6 +21,9 @@ local setup = function()
 
     local mappings = {
         ["f"] = { require("telescope.builtin").find_files, "find file" },
+        b = {
+            f = { "<cmd>Telescope buffers<cr>", "find" },
+        },
     }
 
     local vmappings = {
