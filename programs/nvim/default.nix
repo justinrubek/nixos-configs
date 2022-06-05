@@ -28,6 +28,7 @@ in
         luafile ${PWD}/lua/treesitter.lua
         luafile ${PWD}/lua/bufferline.lua
         luafile ${PWD}/lua/which-key.lua
+        luafile ${PWD}/lua/keymaps.lua
       ]]
       end, 70)
     EOF
