@@ -10,6 +10,15 @@ let
         sha256 = "sha256-GMrNOCVcd0cM0jNaeuJhGQumuFaNeZT9Z7+5K5/y7jo=";
       };
   };
+  cmp-copilot = pkgs.vimUtils.buildVimPlugin {
+      name = "cmp-copilot";
+      src = pkgs.fetchFromGitHub {
+        owner = "hrsh7th";
+        repo = "cmp-copilot";
+        rev = "1f3f31c";
+        sha256 = "sha256-2j3Y2vvBHXLD+fPH7fbvjKadd6X/uuHI0ajkjTJR35I=";
+      };
+  };
 in
 {
   enable = true;
@@ -39,9 +48,16 @@ in
     indentLine
 
     # lsp
+    luasnip
     nvim-lsp-installer
     nvim-lspconfig
-    nvim-compe
+    cmp-copilot
+    cmp-nvim-lsp
+    cmp-buffer
+    cmp-path
+    cmp-vsnip
+    cmp-cmdline
+    nvim-cmp
 
     # navigation
     telescope-nvim
