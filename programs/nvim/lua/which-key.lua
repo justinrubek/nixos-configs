@@ -19,6 +19,7 @@ local setup = function()
         nowait = true,
     }
 
+    -- Mappings: object keys become labeled option prompts to run the given functions
     local mappings = {
         ["f"] = { require("telescope.builtin").find_files, "find file" },
 
@@ -31,6 +32,13 @@ local setup = function()
             o = { "<cmd>Telescope git_status<cr>", "find changed files" },
             b = { "<cmd>Telescope git_branches<cr>", "checkout branch" },
             c = { "<cmd>Telescope git_commits<cr>", "checkout commits" },
+        },
+        l = {
+            name = "lsp",
+            p = {
+                name = "peek",
+                d = { "", "TODO" },
+            },
         },
     }
 
