@@ -21,8 +21,16 @@ local setup = function()
 
     local mappings = {
         ["f"] = { require("telescope.builtin").find_files, "find file" },
+
         b = {
+            name = "buffers",
             f = { "<cmd>Telescope buffers<cr>", "find" },
+        },
+        g = {
+            name = "git",
+            o = { "<cmd>Telescope git_status<cr>", "find changed files" },
+            b = { "<cmd>Telescope git_branches<cr>", "checkout branch" },
+            c = { "<cmd>Telescope git_commits<cr>", "checkout commits" },
         },
     }
 
