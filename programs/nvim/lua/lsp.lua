@@ -12,11 +12,13 @@ require("nvim-lsp-installer").setup({
 
 local luasnip = require('luasnip')
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 
 local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
+
 
 -- Autocompletion
 cmp.setup({
@@ -40,16 +42,14 @@ cmp.setup({
     },
     formatting = { 
         fields = {'menu', 'abbr', 'kind' },
-        format = function(entry, vim_item)
-            local menu_icon = {
-                nvim_lsp = 'λ',
-                luasnip = '⋗',
-                buffer = 'Ω',
-                path = '🖫',
-            }
-            vim_item.menu = menu_icon[entry.source.name]
-            return vim_item
-        end,
+        format = lspkind.cmp_format({
+            mode = 'symbol_text',
+            preset = "codicons",
+            maxwidth = 50,
+            before = function(entry, vim_item)
+                return vim_item
+            end,
+        })
     },
     mapping = cmp.mapping.preset.insert({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),

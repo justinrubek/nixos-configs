@@ -62,6 +62,7 @@ in
     luasnip
     nvim-lsp-installer
     nvim-lspconfig
+    lspkind-nvim
     cmp-copilot
     cmp-nvim-lsp
     cmp-buffer

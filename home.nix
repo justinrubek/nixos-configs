@@ -14,6 +14,7 @@ in {
     home.homeDirectory = "/home/justin";
     home.sessionVariables = shellVariables;
     xdg.enable = true;
+    fonts.fontconfig.enable = true;
 
 	home.packages = with pkgs; [ 
 		git ripgrep fd gtop gping procs httpie curlie duf zip unzip
@@ -25,6 +26,7 @@ in {
         rofi
         gnumake gcc
         discord
+        nerdfonts
 	];
 
 	programs.neovim = import ./programs/nvim pkgs;
