@@ -27,6 +27,7 @@ in {
 	];
 
 	programs.neovim = import ./programs/nvim pkgs;
+	programs.firefox = import ./programs/firefox { inherit pkgs username; };
 
 	programs.git = {
 		enable = true;
