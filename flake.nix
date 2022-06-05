@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.05";
     unixpkgs.url = "nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
 
     nurpkgs = {
       url = github:nix-community/NUR;
@@ -22,9 +23,8 @@
   };
 
   outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, ... }:
+    inputs.flake-utils.lib.eachDefaultSystem (system: 
     let
-      system = "x86_64-linux";
-
       overlays = [
         inputs.neovim-nightly-overlay.overlay
       ];
@@ -48,9 +48,9 @@
         };
       };
 
-      packages.x86_64-linux = {
+      packages = {
 	    workstation = nixosConfigurations.workstation.config.system.build.toplevel;
 	    workstationHome = homeConfigurations.main.activationPackage;
       };
-    };
+    });
 }
