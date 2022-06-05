@@ -19,6 +19,15 @@ let
         sha256 = "sha256-2j3Y2vvBHXLD+fPH7fbvjKadd6X/uuHI0ajkjTJR35I=";
       };
   };
+  nvim-lastplace = pkgs.vimUtils.buildVimPlugin {
+      name = "nvim-lastplace";
+      src = pkgs.fetchFromGitHub {
+        owner = "ethanholz";
+        repo = "nvim-lastplace";
+        rev = "30fe710";
+        sha256 = "sha256-MPA1NpqOoKoYu2VaE0Jr4Ct3WZLKH9ER6x5smjWAUhM=";
+      };
+  };
 in
 {
   enable = true;
@@ -38,6 +47,7 @@ in
         luafile ${PWD}/lua/bufferline.lua
         luafile ${PWD}/lua/which-key.lua
         luafile ${PWD}/lua/keymaps.lua
+        luafile ${PWD}/lua/lastplace.lua
       ]]
       end, 70)
     EOF
@@ -46,6 +56,7 @@ in
   plugins = with pkgs.vimPlugins; [
     plenary-nvim
     indentLine
+    nvim-lastplace
 
     # lsp
     luasnip
