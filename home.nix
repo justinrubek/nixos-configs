@@ -7,6 +7,7 @@ let
 
   shellVariables = {
       EDITOR = "vi";
+      VISUAL = "vi";
   };
 in {
     home.username = "justin";
