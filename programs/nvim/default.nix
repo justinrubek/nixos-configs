@@ -20,11 +20,12 @@ in
     vim.defer_fn(function()
       vim.cmd [[
         luafile ${PWD}/settings.lua
-        luafile ${PWD}/plugins/lsp.lua
-        luafile ${PWD}/plugins/treesitter.lua
-        luafile ${PWD}/plugins/bufferline.lua
+        luafile ${PWD}/lua/lsp.lua
+        luafile ${PWD}/lua/treesitter.lua
+        luafile ${PWD}/lua/bufferline.lua
+        luafile ${PWD}/lua/which-key.lua
       ]]
-    end, 70)
+      end, 70)
     EOF
   '';
   
@@ -51,5 +52,7 @@ in
     # tpope
     vim-abolish
 
+    # folke
+    which-key-nvim
   ];
 }
