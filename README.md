@@ -25,6 +25,14 @@ result/activate
 
 A script has been provided: `switchHome.sh`
 
-## inspirational help
+
+## features
+
+- neovim configured with lsp and a number of productivity features/controls
+- firefox with extensions pre-installed
+- a number of cli tools for daily use
+
+
+## inspiration/helping hands
 
 https://gvolpe.com/blog/nix-flakes/
