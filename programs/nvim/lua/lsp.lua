@@ -40,13 +40,15 @@ cmp.setup({
     },
     formatting = { 
         fields = {'menu', 'abbr', 'kind' },
-        format = function(entry, item)
+        format = function(entry, vim_item)
             local menu_icon = {
                 nvim_lsp = 'λ',
                 luasnip = '⋗',
                 buffer = 'Ω',
                 path = '🖫',
             }
+            vim_item.menu = menu_icon[entry.source.name]
+            return vim_item
         end,
     },
     mapping = cmp.mapping.preset.insert({
