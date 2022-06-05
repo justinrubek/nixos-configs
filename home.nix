@@ -21,7 +21,7 @@ in {
         speedcrunch flameshot bitwarden
         ffmpeg youtube-dl obs-studio vlc
         blender kdenlive
-        steam protontricks
+        protontricks
         rofi
         gnumake gcc
 	];
@@ -91,4 +91,5 @@ in {
     };
 
     programs.mpv.enable = true;
+
 }
