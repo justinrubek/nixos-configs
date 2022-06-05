@@ -12,6 +12,7 @@ let
 in {
     home.username = "justin";
     home.homeDirectory = "/home/justin";
+    home.sessionVariables = shellVariables;
     xdg.enable = true;
 
 	home.packages = with pkgs; [ 
