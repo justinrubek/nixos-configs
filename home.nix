@@ -24,6 +24,7 @@ in {
         protontricks
         rofi
         gnumake gcc
+        discord
 	];
 
 	programs.neovim = import ./programs/nvim pkgs;
