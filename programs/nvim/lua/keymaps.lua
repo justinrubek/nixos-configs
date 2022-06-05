@@ -1,12 +1,24 @@
 local keymap_modes = {
     normal = "n",
     insert = "i",
+    visual = "v",
+    visual_block = "x",
 }
 
 local keymaps = {
     normal = {
         ["<S-l>"] = ":BufferLineCycleNext<CR>",
         ["<S-h>"] = ":BufferLineCyclePrev<CR>",
+    },
+    visual = {
+        -- Indenting
+        ["<"] = "<gv",
+        [">"] = ">gv",
+    },
+    visual_block = {
+        -- Move entire block
+        ["K"] = ":move '<-2<CR>gv-gv",
+        ["J"] = ":move '>+1<CR>gv-gv",
     },
 }
 
