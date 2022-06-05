@@ -14,12 +14,16 @@ in
 {
   enable = true;
   vimAlias = true;
+
+  withNodeJs = true;
+  withPython3 = true;
   
   extraConfig = ''
     lua << EOF
     vim.defer_fn(function()
       vim.cmd [[
         luafile ${PWD}/settings.lua
+        luafile ${PWD}/lua/copilot.lua
         luafile ${PWD}/lua/lsp.lua
         luafile ${PWD}/lua/treesitter.lua
         luafile ${PWD}/lua/bufferline.lua
@@ -54,5 +58,8 @@ in
 
     # folke
     which-key-nvim
+    
+
+    copilot-vim
   ];
 }
