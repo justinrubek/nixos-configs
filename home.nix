@@ -24,7 +24,8 @@ in {
         blender kdenlive
         protontricks
         rofi
-        gnumake gcc cargo
+        gnumake gcc
+        cargo rust-analyzer
         discord
         nerdfonts
 	];
