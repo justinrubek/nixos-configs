@@ -29,6 +29,7 @@ in {
         discord
         nerdfonts
         bitwarden
+        neofetch
 	];
 
 	programs.neovim = import ./programs/nvim pkgs;
