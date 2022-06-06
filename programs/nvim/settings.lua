@@ -25,6 +25,7 @@ opt.mouse = "a"
 opt.termguicolors = true
 opt.cursorline = true
 opt.relativenumber = true
+opt.number = true
 opt.scrolloff = 12
 
 opt.viminfo = ""

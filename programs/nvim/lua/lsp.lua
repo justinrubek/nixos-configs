@@ -1,4 +1,22 @@
 -- Configure language servers
+local lsp_defaults = {
+    flags = {
+        debounce_text_changes = 150,
+    },
+    capabilities = require('cmp_nvim_lsp').update_capabilities(
+        vim.lsp.protocol.make_client_capabilities()
+    ),
+    on_attach = function(client, bufnr)
+        vim.api.nvim_exec_autocmds('User', { pattern = 'LspAttached' })
+    end
+}
+
+local lspconfig = require('lspconfig');
+lspconfig.util.default_config = vim.tbl_deep_extend(
+    'force',
+    lspconfig.util.default_config,
+    lsp_defaults
+)
 require("nvim-lsp-installer").setup({
     automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
     ui = {
@@ -9,6 +27,14 @@ require("nvim-lsp-installer").setup({
         }
     }
 })
+local servers = { 'pylsp', 'rust_analyzer', 'tsserver' }
+for _, lsp in pairs(servers) do
+    require('lspconfig')[lsp].setup {
+        on_attach = function(client, bufnr)
+            lspconfig.util.default_config.on_attach(client, bufnr)
+        end
+    }
+end
 
 local luasnip = require('luasnip')
 local cmp = require('cmp')
@@ -28,7 +54,7 @@ cmp.setup({
         end,
     },
     sources = cmp.config.sources({
-        { name = 'copilot', keyword_length = 3 },
+        -- { name = 'copilot', keyword_length = 3 },
         { name = 'nvim_lsp', keyword_length = 3 },
         { name = 'luasnip', keyword_length = 2 },
         { name = 'treesitter', keyword_length = 2 },
@@ -80,4 +106,3 @@ cmp.setup({
     }),
 })
 
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())

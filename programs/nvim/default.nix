@@ -37,12 +37,12 @@ in
   withPython3 = true;
   
   extraConfig = ''
+    luafile ${PWD}/lua/lsp.lua
     lua << EOF
     vim.defer_fn(function()
       vim.cmd [[
         luafile ${PWD}/settings.lua
         luafile ${PWD}/lua/copilot.lua
-        luafile ${PWD}/lua/lsp.lua
         luafile ${PWD}/lua/treesitter.lua
         luafile ${PWD}/lua/bufferline.lua
         luafile ${PWD}/lua/which-key.lua
@@ -59,6 +59,7 @@ in
     nvim-lastplace
 
     # lsp
+    friendly-snippets
     luasnip
     nvim-lsp-installer
     nvim-lspconfig
