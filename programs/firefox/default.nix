@@ -13,6 +13,7 @@ in
     darkreader
     h264ify
     df-youtube
+    bitwarden
   ];
 
   profiles.${username} = {

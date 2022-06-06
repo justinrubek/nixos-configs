@@ -28,6 +28,7 @@ in {
         cargo rust-analyzer
         discord
         nerdfonts
+        bitwarden
 	];
 
 	programs.neovim = import ./programs/nvim pkgs;
