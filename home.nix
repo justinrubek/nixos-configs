@@ -1,4 +1,4 @@
-{ pkgs, username, ... }: 
+{ pkgs, username, lib, ... }: 
 let
   shellAliases = {
       vi = "nvim";
@@ -39,6 +39,18 @@ in {
 		userName = "Justin Rubek";
 		userEmail = "justin@koloni.me";
 	};
+
+    programs.starship = {
+        enable = false;
+        enableBashIntegration = true;
+        settings = {
+            add_newline = true;
+            character = {
+                success_symbol = "[➜](bold green)";
+                failure_symbol = "[:(](bold red)";
+            };
+        };
+    };
 
 	programs.bash = {
 	  enable = true;
