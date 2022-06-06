@@ -82,6 +82,8 @@ in
 
     # Aesthetic
     nvim-treesitter
+    todo-comments-nvim
+    vim-cursorword
 
     # tpope
     vim-abolish
