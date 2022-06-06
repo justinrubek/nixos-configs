@@ -27,6 +27,7 @@ in {
         gnumake gcc
         cargo rust-analyzer
         discord
+        brave
         nerdfonts
         bitwarden
         neofetch
