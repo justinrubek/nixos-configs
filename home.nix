@@ -13,6 +13,7 @@ in {
     home.username = "justin";
     home.homeDirectory = "/home/justin";
     home.sessionVariables = shellVariables;
+    systemd.user.sessionVariables = shellVariables;
     xdg.enable = true;
     fonts.fontconfig.enable = true;
 
@@ -44,14 +45,33 @@ in {
 	};
 
     programs.starship = {
-        enable = false;
+        enable = true;
         enableBashIntegration = true;
         settings = {
             add_newline = true;
             character = {
                 success_symbol = "[➜](bold green)";
-                failure_symbol = "[:(](bold red)";
+                error_symbol = "[](bold red)";
+                vicmd_symbol = "[❯](bold green)";
             };
+            directory = {
+                truncate_to_repo = false;
+            };
+            aws.symbol = "  ";
+            buf.symbol = " ";
+            c.symbol = " ";
+            directory.read_only = " ";
+            docker_context.symbol = " ";
+            git_branch.symbol = " ";
+            haskell.symbol = " ";
+            java.symbol = " ";
+            julia.symbol = " ";
+            memory_usage.symbol = " ";
+            nix_shell.symbol = " ";
+            nodejs.symbol = " ";
+            package.symbol = " ";
+            python.symbol = " ";
+            rust.symbol = " ";
         };
     };
 
@@ -85,6 +105,15 @@ in {
                     repo = "zsh-autosuggestions";
                     rev = "v0.6.0";
                     sha256 = "1h8h2mz9wpjpymgl2p7pc146c1jgb3dggpvzwm9ln3in336wl95c";
+                };
+            }
+            {
+                name = "fast-syntax-highlighting";
+                src = pkgs.fetchFromGitHub {
+                    owner = "zdharma";
+                    repo = "fast-syntax-highlighting";
+                    rev = "817916dfa907d179f0d46d8de355e883cf67bd97";
+                    sha256 = "0m102makrfz1ibxq8rx77nngjyhdqrm8hsrr9342zzhq1nf4wxxc";
                 };
             }
         ];
