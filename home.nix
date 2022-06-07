@@ -54,6 +54,13 @@ in {
         };
     };
 
+    programs.readline = {
+        enable = true;
+        extraConfig = ''
+            set editing-mode vi
+        '';
+    };
+
 	programs.bash = {
 	  enable = true;
 	  inherit shellAliases;
