@@ -18,6 +18,7 @@ in {
 
 	home.packages = with pkgs; [ 
 		git ripgrep fd gtop gping procs httpie curlie duf zip unzip
+        psmisc
         tectonic
         speedcrunch flameshot bitwarden
         ffmpeg youtube-dl obs-studio vlc
