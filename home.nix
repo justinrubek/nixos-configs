@@ -148,4 +148,8 @@ in {
 
     programs.mpv.enable = true;
 
+    services.kdeconnect = {
+        enable = true;
+        indicator = true;
+    };
 }

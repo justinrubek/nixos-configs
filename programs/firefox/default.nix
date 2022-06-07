@@ -14,6 +14,7 @@ in
     h264ify
     df-youtube
     bitwarden
+    plasma-integration
   ];
 
   profiles.${username} = {
