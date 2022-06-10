@@ -72,6 +72,7 @@ in {
             package.symbol = " ";
             python.symbol = " ";
             rust.symbol = " ";
+            terraform.symbol = " ";
         };
     };
 
@@ -151,5 +152,10 @@ in {
     services.kdeconnect = {
         enable = true;
         indicator = true;
+    };
+
+    services.syncthing = {
+        enable = true;
+        tray.enable = true;
     };
 }
