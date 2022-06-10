@@ -22,7 +22,7 @@ You will likely need to [configure it to use flakes](https://nixos.wiki/wiki/Fla
 
 ### home-manager
 
-You should be apply this configuration on any machine.
+You should be able to apply this configuration to any machine.
 In order to do so you must build the configuration and run the activation script.
 ```bash
 nix build .#workstationHome
