@@ -8,3 +8,6 @@ iso
 doi
 
 pkgs/_sources/.shake*
+
+# pre-commit-hooks.nix
+/.pre-commit-config.yaml
