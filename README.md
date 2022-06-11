@@ -19,6 +19,8 @@ I'd like to include more instructions on how to do so, and potentially some bett
 
 The main dependency needed is [nix](https://nixos.org/download.html).
 You will likely need to [configure it to use flakes](https://nixos.wiki/wiki/Flakes#Installing_flakes)
+This project also uses [pre-commit-hooks](https://github.com/cachix/pre-commit-hooks.nix).
+Enable them by obtaining a devShell: `nix develop`
 
 ### home-manager
 
@@ -46,7 +48,6 @@ Afterwards you can switch your configuration:
 nix build .#workstation
 sudo result/bin/switch-to-configuration switch
 ```
-
 ## inspiration/helping hands
 
 https://gvolpe.com/blog/nix-flakes/
