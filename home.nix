@@ -33,6 +33,8 @@ in {
         nerdfonts
         bitwarden
         neofetch
+        rustc
+        slack
 	];
 
 	programs.neovim = import ./programs/nvim pkgs;
@@ -59,7 +61,10 @@ in {
             directory = {
                 truncate_to_repo = false;
             };
-            aws.symbol = "  ";
+            aws = {
+                disabled = true;
+                symbol = "  ";
+            };
             buf.symbol = " ";
             c.symbol = " ";
             directory.read_only = " ";
