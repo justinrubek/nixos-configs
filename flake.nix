@@ -71,7 +71,7 @@
       };
 
       checks = {
-        pre-commit-check = pre-commit.lib.run {
+        pre-commit = pre-commit.lib.run {
           src = ./.;
           hooks = {
             alejandra.enable = true;
