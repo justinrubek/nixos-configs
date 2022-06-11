@@ -1,10 +1,11 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
   ];
 
@@ -69,7 +70,7 @@
   users.users.justin = {
     isNormalUser = true;
     description = "Justin";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
   };
 
   # Allow unfree packages
@@ -78,7 +79,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  wget
+    #  wget
     firefox
     kate
     vim
@@ -129,8 +130,8 @@
 
   virtualisation = {
     podman = {
-        enable = true;
-        dockerCompat = true;
+      enable = true;
+      dockerCompat = true;
     };
   };
 }

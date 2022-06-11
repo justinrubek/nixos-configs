@@ -1,5 +1,11 @@
-{ system, nixpkgs, nurpkgs, home-manager, overlays, ... }:
-let
+{
+  system,
+  nixpkgs,
+  nurpkgs,
+  home-manager,
+  overlays,
+  ...
+}: let
   username = "justin";
   homeDirectory = "/home/${username}";
   configHome = "${homeDirectory}/.config";
@@ -8,7 +14,7 @@ let
     inherit system;
     config.allowUnfree = true;
     config.xdg.configHome = configHome;
-    overlays = [ nurpkgs.overlay ] ++ overlays;
+    overlays = [nurpkgs.overlay] ++ overlays;
   };
 
   nur = import nurpkgs {

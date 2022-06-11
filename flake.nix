@@ -17,40 +17,52 @@
     };
 
     neovim-nightly-overlay = {
-        url = "github:nix-community/neovim-nightly-overlay";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nurpkgs, home-manager, ... }:
-    inputs.flake-utils.lib.eachDefaultSystem (system: 
-    let
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    nurpkgs,
+    home-manager,
+    ...
+  }:
+    inputs.flake-utils.lib.eachDefaultSystem (system: let
       overlays = [
         inputs.neovim-nightly-overlay.overlay
       ];
-    in
-    rec {
+
+      pkgs = import nixpkgs {inherit system;};
+    in rec {
       homeConfigurations = (
         import ./home-conf.nix {
-	        inherit system nixpkgs nurpkgs home-manager;
-            inherit overlays;
-	    }
+          inherit system nixpkgs nurpkgs home-manager;
+          inherit overlays;
+        }
       );
 
       nixosConfigurations = {
         workstation = nixpkgs.lib.nixosSystem {
-	        inherit system;
-	        specialArgs = { inherit inputs; };
-	        modules = [
-                ./configuration.nix
-                ./machine/manusya
-            ];
+          inherit system;
+          specialArgs = {inherit inputs;};
+          modules = [
+            ./configuration.nix
+            ./machine/manusya
+          ];
         };
       };
 
       packages = {
-	    workstation = nixosConfigurations.workstation.config.system.build.toplevel;
-	    workstationHome = homeConfigurations.main.activationPackage;
+        workstation = nixosConfigurations.workstation.config.system.build.toplevel;
+        workstationHome = homeConfigurations.main.activationPackage;
+      };
+
+      devShells = {
+        default = pkgs.mkShell {
+          buildInputs = with pkgs; [alejandra];
+        };
       };
     });
 }

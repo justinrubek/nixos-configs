@@ -1,32 +1,30 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   PWD = builtins.toString ./.;
   nvim-lsp-installer = pkgs.vimUtils.buildVimPlugin {
-      name = "nvim-lsp-installer";
-      src = pkgs.fetchFromGitHub {
-        owner = "justinrubek";
-        repo = "nvim-lsp-installer";
-        rev = "4d35f4c";
-        sha256 = "sha256-GMrNOCVcd0cM0jNaeuJhGQumuFaNeZT9Z7+5K5/y7jo=";
-      };
+    name = "nvim-lsp-installer";
+    src = pkgs.fetchFromGitHub {
+      owner = "justinrubek";
+      repo = "nvim-lsp-installer";
+      rev = "4d35f4c";
+      sha256 = "sha256-GMrNOCVcd0cM0jNaeuJhGQumuFaNeZT9Z7+5K5/y7jo=";
+    };
   };
   cmp-copilot = pkgs.vimUtils.buildVimPlugin {
-      name = "cmp-copilot";
-      src = pkgs.fetchFromGitHub {
-        owner = "hrsh7th";
-        repo = "cmp-copilot";
-        rev = "1f3f31c";
-        sha256 = "sha256-2j3Y2vvBHXLD+fPH7fbvjKadd6X/uuHI0ajkjTJR35I=";
-      };
+    name = "cmp-copilot";
+    src = pkgs.fetchFromGitHub {
+      owner = "hrsh7th";
+      repo = "cmp-copilot";
+      rev = "1f3f31c";
+      sha256 = "sha256-2j3Y2vvBHXLD+fPH7fbvjKadd6X/uuHI0ajkjTJR35I=";
+    };
   };
-in
-{
+in {
   enable = true;
   vimAlias = true;
 
   withNodeJs = true;
   withPython3 = true;
-  
+
   extraConfig = ''
     luafile ${PWD}/lua/lsp.lua
     lua << EOF
@@ -42,7 +40,7 @@ in
       end, 70)
     EOF
   '';
-  
+
   plugins = with pkgs.vimPlugins; [
     plenary-nvim
     indentLine
@@ -79,7 +77,6 @@ in
 
     # folke
     which-key-nvim
-    
 
     copilot-vim
   ];

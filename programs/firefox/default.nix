@@ -1,8 +1,10 @@
-{ pkgs, username, ... }:
-let
-  PWD = builtins.toString ./.;
-in
 {
+  pkgs,
+  username,
+  ...
+}: let
+  PWD = builtins.toString ./.;
+in {
   enable = true;
 
   extensions = with pkgs.nur.repos.rycee.firefox-addons; [
@@ -20,18 +22,18 @@ in
   profiles.${username} = {
     # TODO: Add all settings for about:config
     settings = {
-        "browser.send_pings" = false;
-        "browser.urlbar.speculativeConnect.enabled" = false;
+      "browser.send_pings" = false;
+      "browser.urlbar.speculativeConnect.enabled" = false;
 
-        "pdfjs.enableScripting" = false;
+      "pdfjs.enableScripting" = false;
 
-        "media.autoplay.enabled" = false;
+      "media.autoplay.enabled" = false;
 
-        "network.http.sendRefererHeader" = 0;
+      "network.http.sendRefererHeader" = 0;
 
-        "privacy.firstparty.isolate" = true;
+      "privacy.firstparty.isolate" = true;
 
-        "security.ssl.require_safe_negotiation" = true;
+      "security.ssl.require_safe_negotiation" = true;
     };
 
     # TODO: Styling
