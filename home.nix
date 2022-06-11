@@ -18,7 +18,7 @@ in {
     fonts.fontconfig.enable = true;
 
 	home.packages = with pkgs; [ 
-		git ripgrep fd gtop gping procs httpie curlie duf zip unzip
+		ripgrep fd gtop gping procs httpie curlie duf zip unzip
         psmisc
         tectonic
         speedcrunch flameshot bitwarden
@@ -39,9 +39,11 @@ in {
 	programs.firefox = import ./programs/firefox { inherit pkgs username; };
 
 	programs.git = {
-		enable = true;
-		userName = "Justin Rubek";
-		userEmail = "justin@koloni.me";
+        enable = true;
+        package = pkgs.gitFull;
+        userName = "Justin Rubek";
+        userEmail = "justin@koloni.me";
+        delta.enable = true;
 	};
 
     programs.starship = {
