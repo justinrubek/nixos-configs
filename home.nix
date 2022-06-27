@@ -56,6 +56,9 @@ in {
     neofetch
     rustc
     slack
+    lagrange
+    gimp
+    teamspeak_client
   ];
 
   programs.neovim = import ./programs/nvim pkgs;
@@ -186,4 +189,5 @@ in {
     enable = true;
     tray.enable = true;
   };
+  programs.pandoc.enable = true;
 }

@@ -84,6 +84,7 @@
     kate
     vim
     git
+    alsa-lib
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -134,4 +135,5 @@
       dockerCompat = true;
     };
   };
+  services.flatpak.enable = true;
 }

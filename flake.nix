@@ -39,7 +39,13 @@
 
       pkgs = import nixpkgs {inherit system;};
 
-      pre-commit = import pre-commit-hooks {inherit system;};
+      pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          alejandra.enable = true;
+          terraform-format.enable = true;
+        };
+      };
     in rec {
       homeConfigurations = (
         import ./home-conf.nix {
@@ -67,16 +73,12 @@
       devShells = {
         default = pkgs.mkShell {
           buildInputs = with pkgs; [alejandra];
+          inherit (pre-commit-check) shellHook;
         };
       };
 
       checks = {
-        pre-commit = pre-commit.lib.run {
-          src = ./.;
-          hooks = {
-            alejandra.enable = true;
-          };
-        };
+        pre-commit = pre-commit-check;
       };
     });
 }

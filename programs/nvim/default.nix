@@ -18,6 +18,16 @@
       sha256 = "sha256-2j3Y2vvBHXLD+fPH7fbvjKadd6X/uuHI0ajkjTJR35I=";
     };
   };
+
+  github-copilot = pkgs.vimUtils.buildVimPlugin {
+    name = "copilot-vim";
+    src = pkgs.fetchFromGitHub {
+      owner = "github";
+      repo = "copilot.vim";
+      rev = "c2e75a3";
+      sha256 = "sha256-V13La54aIb3hQNDE7BmOIIZWy7In5cG6kE0fti/wxVQ=";
+    };
+  };
 in {
   enable = true;
   vimAlias = true;
@@ -78,6 +88,6 @@ in {
     # folke
     which-key-nvim
 
-    copilot-vim
+    # github-copilot
   ];
 }
