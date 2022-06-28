@@ -40,10 +40,11 @@
 
   # nvidia settings
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
 
     nvidiaPersistenced = true;
     modesetting.enable = true;
   };
+  hardware.opengl.enable = true;
   services.xserver.videoDrivers = ["nvidia" "intel"];
 }

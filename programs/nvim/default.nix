@@ -28,6 +28,18 @@
       sha256 = "sha256-V13La54aIb3hQNDE7BmOIIZWy7In5cG6kE0fti/wxVQ=";
     };
   };
+
+  nvim-dap-python = pkgs.vimUtils.buildVimPlugin {
+    name = "nvim-dap-python";
+    src = pkgs.fetchFromGitHub {
+      owner = "mfussenegger";
+      repo = "nvim-dap-python";
+      rev = "2911f31";
+      sha256 = "sha256-7xkzbaTs7QPTGuTGWstVqR4B/29Uvl0JMY4W+uX38go=";
+    };
+  };
+
+  python_debug = pkgs.python39.withPackages (pypkgs: with pypkgs; [debugpy]);
 in {
   enable = true;
   vimAlias = true;
@@ -48,6 +60,11 @@ in {
         luafile ${PWD}/lua/keymaps.lua
       ]]
       end, 70)
+
+
+    local dap_python = require("dap-python")
+    dap_python.setup("${python_debug}/bin/python")
+    dap_python.test_runner = "pytest"
     EOF
   '';
 
@@ -69,6 +86,10 @@ in {
     cmp-cmdline
     nvim-cmp
 
+    # debugging
+    nvim-dap
+    nvim-dap-python
+
     # navigation
     telescope-nvim
     bufferline-nvim
@@ -88,6 +109,8 @@ in {
     # folke
     which-key-nvim
 
-    # github-copilot
+    github-copilot
   ];
+
+  extraPackages = with pkgs; [python39Packages.debugpy];
 }
