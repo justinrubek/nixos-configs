@@ -43,7 +43,6 @@
         src = ./.;
         hooks = {
           alejandra.enable = true;
-          terraform-format.enable = true;
         };
       };
     in rec {
