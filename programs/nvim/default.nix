@@ -58,6 +58,7 @@ in {
         luafile ${PWD}/lua/bufferline.lua
         luafile ${PWD}/lua/which-key.lua
         luafile ${PWD}/lua/keymaps.lua
+        luafile ${PWD}/lua/colorscheme.lua
       ]]
       end, 70)
 
@@ -110,6 +111,9 @@ in {
     which-key-nvim
 
     github-copilot
+
+    # theme
+    sonokai
   ];
 
   extraPackages = with pkgs; [python39Packages.debugpy];
