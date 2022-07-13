@@ -27,7 +27,7 @@ require("nvim-lsp-installer").setup({
         }
     }
 })
-local servers = { 'pylsp', 'rust_analyzer', 'tsserver' }
+local servers = { 'pylsp', 'rust_analyzer', 'tsserver', 'omnisharp' }
 for _, lsp in pairs(servers) do
     require('lspconfig')[lsp].setup {
         on_attach = function(client, bufnr)
