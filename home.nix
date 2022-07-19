@@ -59,6 +59,8 @@ in {
     lagrange
     gimp
     teamspeak_client
+    openscad
+    prusa-slicer
   ];
 
   programs.neovim = import ./programs/nvim pkgs;
