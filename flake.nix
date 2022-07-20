@@ -32,30 +32,44 @@
     pre-commit-hooks,
     ...
   }:
-    flake-utils.lib.eachDefaultSystem (system: let
-      overlays = [
-        inputs.neovim-nightly-overlay.overlay
-      ];
+    (
+      flake-utils.lib.eachDefaultSystem (system: let
+        overlays = [
+          inputs.neovim-nightly-overlay.overlay
+        ];
 
-      pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs {inherit system;};
 
-      pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
-        hooks = {
-          alejandra.enable = true;
+        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            alejandra.enable = true;
+          };
         };
-      };
-    in rec {
-      homeConfigurations = (
-        import ./home-conf.nix {
-          inherit system nixpkgs nurpkgs home-manager;
-          inherit overlays;
-        }
-      );
+      in rec {
+        homeConfigurations = (
+          import ./home-conf.nix {
+            inherit system nixpkgs nurpkgs home-manager;
+            inherit overlays;
+          }
+        );
 
+        devShells = {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [alejandra];
+            inherit (pre-commit-check) shellHook;
+          };
+        };
+
+        checks = {
+          pre-commit = pre-commit-check;
+        };
+      })
+    )
+    // {
       nixosConfigurations = {
-        workstation = nixpkgs.lib.nixosSystem {
-          inherit system;
+        manusya = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           specialArgs = {inherit inputs;};
           modules = [
             ./configuration.nix
@@ -63,21 +77,5 @@
           ];
         };
       };
-
-      packages = {
-        workstation = nixosConfigurations.workstation.config.system.build.toplevel;
-        workstationHome = homeConfigurations.main.activationPackage;
-      };
-
-      devShells = {
-        default = pkgs.mkShell {
-          buildInputs = with pkgs; [alejandra];
-          inherit (pre-commit-check) shellHook;
-        };
-      };
-
-      checks = {
-        pre-commit = pre-commit-check;
-      };
-    });
+    };
 }
