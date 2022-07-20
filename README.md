@@ -45,8 +45,7 @@ Follow the regular installer to create partitions.
 Then, place your `hardware-configuration.nix` into the machines directory and use that in place of `manusya`.
 Afterwards you can switch your configuration:
 ```bash
-nix build .#workstation
-sudo result/bin/switch-to-configuration switch
+sudo nixos-rebuild switch --flake .
 ```
 ## inspiration/helping hands
 
