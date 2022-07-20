@@ -135,5 +135,4 @@
       dockerCompat = true;
     };
   };
-  services.flatpak.enable = true;
 }
