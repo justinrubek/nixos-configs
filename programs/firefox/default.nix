@@ -17,6 +17,7 @@ in {
     df-youtube
     bitwarden
     plasma-integration
+    sidebery
   ];
 
   profiles.${username} = {
@@ -86,6 +87,9 @@ in {
         #scrollbutton-up,#scrollbutton-down {
             padding-top: 7px !important;
             padding-bottom: 6px !important;
+        }
+        #TabsToolbar {
+            visibility: collapse;
         }
     ";
   };
