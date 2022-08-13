@@ -22,10 +22,6 @@
     };
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nixvim.url = "github:pta2002/nixvim";
   };
 
@@ -48,14 +44,6 @@
         system,
         ...
       }: let
-        overlays = [
-          inputs.neovim-nightly-overlay.overlay
-        ];
-
-        pkgs = import nixpkgs {
-          inherit system;
-        };
-
         pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
