@@ -4,18 +4,23 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.05";
     unixpkgs.url = "nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "unixpkgs";
+    };
 
     nurpkgs = {
       url = github:nix-community/NUR;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "unixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
@@ -24,17 +29,25 @@
     nixvim.url = "github:pta2002/nixvim";
   };
 
-  outputs = inputs @ {
+  outputs = {
     self,
     nixpkgs,
     nurpkgs,
     home-manager,
     flake-utils,
+    flake-parts,
     pre-commit-hooks,
     ...
-  }:
-    (
-      flake-utils.lib.eachDefaultSystem (system: let
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit self;} {
+      perSystem = {
+        config,
+        self',
+        inputs',
+        pkgs,
+        system,
+        ...
+      }: let
         overlays = [
           inputs.neovim-nightly-overlay.overlay
         ];
@@ -60,13 +73,14 @@
         checks = {
           pre-commit = pre-commit-check;
         };
-      })
-    )
-    // {
-      lib = import ./lib inputs;
+      };
+      systems = flake-utils.lib.defaultSystems;
+      flake = {
+        lib = import ./lib inputs;
 
-      nixosConfigurations = import ./nixos/configurations inputs;
+        nixosConfigurations = import ./nixos/configurations inputs;
 
-      homeConfigurations = import ./home/configurations inputs;
+        homeConfigurations = import ./home/configurations inputs;
+      };
     };
 }
