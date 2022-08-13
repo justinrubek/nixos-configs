@@ -48,4 +48,5 @@ sudo nixos-rebuild switch --flake .
 ```
 ## inspiration/helping hands
 
+https://github.com/NobbZ/nixos-config
 https://gvolpe.com/blog/nix-flakes/
