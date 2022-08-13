@@ -37,8 +37,28 @@ in {
   enable = true;
   colorschemes.tokyonight.enable = true;
 
+  globals = {
+    mapleader = " ";
+  };
+
   options = {
+    cursorline = true;
+    relativenumber = true;
+    number = true;
+    scrolloff = 12;
+
+    smartcase = true;
+    ttimeoutlen = 5;
+    compatible = false;
+    autoread = true;
+    incsearch = true;
+    hidden = true;
+
+    smartindent = true;
+    autoindent = true;
     tabstop = 4;
+    shiftwidth = 4;
+    expandtab = true;
   };
 
   plugins = {

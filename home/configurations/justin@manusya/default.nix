@@ -73,8 +73,7 @@ in {
       start-work-script
     ];
 
-    programs.neovim = import ./programs/nvim pkgs;
-    # programs.nixvim = import ./programs/nixvim inputs pkgs;
+    programs.nixvim = import ./programs/nixvim inputs pkgs;
     programs.firefox = import ./programs/firefox {inherit pkgs username;};
 
     programs.git = {
