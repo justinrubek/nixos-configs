@@ -71,15 +71,8 @@
       })
     )
     // {
-      nixosConfigurations = {
-        manusya = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {inherit inputs;};
-          modules = [
-            ./configuration.nix
-            ./machine/manusya
-          ];
-        };
-      };
+      lib = import ./lib inputs;
+
+      nixosConfigurations = import ./nixos/configurations inputs;
     };
 }
