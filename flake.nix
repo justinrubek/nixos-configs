@@ -27,8 +27,6 @@
 
   outputs = {
     self,
-    nixpkgs,
-    nurpkgs,
     home-manager,
     flake-utils,
     flake-parts,
