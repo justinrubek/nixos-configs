@@ -13,8 +13,8 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager?ref=release-22.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "unixpkgs";
     };
 
     neovim-nightly-overlay = {
@@ -38,7 +38,9 @@
           inputs.neovim-nightly-overlay.overlay
         ];
 
-        pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs {
+          inherit system;
+        };
 
         pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;
@@ -47,22 +49,11 @@
           };
         };
       in rec {
-        homeConfigurations = (
-          import ./home-conf.nix {
-            inherit system nixpkgs nurpkgs home-manager;
-            inherit overlays;
-          }
-        );
-
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [alejandra];
+            buildInputs = with pkgs; [alejandra home-manager.packages.${system}.home-manager];
             inherit (pre-commit-check) shellHook;
           };
-        };
-
-        packages = {
-          workstationHome = homeConfigurations.main.activationPackage;
         };
 
         checks = {
@@ -74,5 +65,7 @@
       lib = import ./lib inputs;
 
       nixosConfigurations = import ./nixos/configurations inputs;
+
+      homeConfigurations = import ./home/configurations inputs;
     };
 }
