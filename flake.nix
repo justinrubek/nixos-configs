@@ -32,7 +32,6 @@
     home-manager,
     flake-utils,
     flake-parts,
-    pre-commit-hooks,
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit self;} {
@@ -44,12 +43,7 @@
         system,
         ...
       }: let
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            alejandra.enable = true;
-          };
-        };
+        pre-commit-check = import ./pre_commit.nix inputs system;
       in rec {
         devShells = {
           default = pkgs.mkShell {
