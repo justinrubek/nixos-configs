@@ -33,6 +33,14 @@
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit self;} {
+      flake = {
+        lib = import ./lib inputs;
+
+        nixosConfigurations = import ./nixos/configurations inputs;
+
+        homeConfigurations = import ./home/configurations inputs;
+      };
+      systems = flake-utils.lib.defaultSystems;
       perSystem = {
         config,
         self',
@@ -53,14 +61,6 @@
         checks = {
           pre-commit = pre-commit-check;
         };
-      };
-      systems = flake-utils.lib.defaultSystems;
-      flake = {
-        lib = import ./lib inputs;
-
-        nixosConfigurations = import ./nixos/configurations inputs;
-
-        homeConfigurations = import ./home/configurations inputs;
       };
     };
 }
