@@ -3,7 +3,7 @@
   nurpkgs,
   self,
   ...
-}: {
+} @ inputs: {
   pkgs,
   username,
   ...
@@ -74,6 +74,7 @@ in {
     ];
 
     programs.neovim = import ./programs/nvim pkgs;
+    # programs.nixvim = import ./programs/nixvim inputs pkgs;
     programs.firefox = import ./programs/firefox {inherit pkgs username;};
 
     programs.git = {

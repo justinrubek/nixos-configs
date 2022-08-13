@@ -2,6 +2,7 @@
   home-manager,
   unixpkgs,
   nurpkgs,
+  nixvim,
   self,
   ...
 } @ inputs: username: hostname: system: nixpkgs: let
@@ -27,6 +28,7 @@ in
           inherit username homeDirectory;
         };
       }
+      nixvim.homeManagerModules.nixvim
     ];
 
     extraSpecialArgs = {

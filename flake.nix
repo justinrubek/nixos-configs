@@ -21,6 +21,7 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim.url = "github:pta2002/nixvim";
   };
 
   outputs = inputs @ {
