@@ -13,6 +13,11 @@
     EDITOR = "vi";
     VISUAL = "vi";
   };
+
+  start-work-script = pkgs.writeShellScriptBin "glaredb-develop" ''
+    cd ~/work/glaredb/glaredb
+    nix develop -c zsh
+  '';
 in {
   home.username = "justin";
   home.homeDirectory = "/home/justin";
@@ -61,6 +66,9 @@ in {
     teamspeak_client
     openscad
     prusa-slicer
+    scrcpy
+    zoom-us
+    start-work-script
   ];
 
   programs.neovim = import ./programs/nvim pkgs;
@@ -70,7 +78,7 @@ in {
     enable = true;
     package = pkgs.gitFull;
     userName = "Justin Rubek";
-    userEmail = "justin@koloni.me";
+    userEmail = "25621857+justinrubek@users.noreply.github.com";
     delta.enable = true;
   };
 

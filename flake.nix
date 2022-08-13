@@ -61,6 +61,10 @@
           };
         };
 
+        packages = {
+          workstationHome = homeConfigurations.main.activationPackage;
+        };
+
         checks = {
           pre-commit = pre-commit-check;
         };

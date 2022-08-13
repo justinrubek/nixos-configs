@@ -18,6 +18,7 @@ in {
     bitwarden
     plasma-integration
     sidebery
+    multi-account-containers
   ];
 
   profiles.${username} = {

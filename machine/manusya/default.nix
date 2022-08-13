@@ -40,7 +40,7 @@
 
   # nvidia settings
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
 
     nvidiaPersistenced = true;
     modesetting.enable = true;
