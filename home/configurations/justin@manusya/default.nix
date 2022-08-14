@@ -17,11 +17,6 @@
     EDITOR = "vi";
     VISUAL = "vi";
   };
-
-  start-work-script = pkgs.writeShellScriptBin "glaredb-develop" ''
-    cd ~/work/glaredb/glaredb
-    nix develop -c zsh
-  '';
 in {
   config = {
     home.sessionVariables = shellVariables;
@@ -70,7 +65,6 @@ in {
       openscad
       scrcpy
       zoom-us
-      start-work-script
     ];
 
     programs.nixvim = import ./programs/nixvim inputs pkgs;
