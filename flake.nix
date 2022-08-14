@@ -27,7 +27,6 @@
 
   outputs = {
     self,
-    home-manager,
     flake-utils,
     flake-parts,
     ...
