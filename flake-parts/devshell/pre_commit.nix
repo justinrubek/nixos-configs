@@ -1,5 +1,4 @@
 {
-  self,
   pre-commit-hooks,
   ...
 } @ inputs: system:

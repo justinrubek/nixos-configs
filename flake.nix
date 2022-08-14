@@ -41,26 +41,8 @@
         homeConfigurations = import ./home/configurations inputs;
       };
       systems = flake-utils.lib.defaultSystems;
-      perSystem = {
-        config,
-        self',
-        inputs',
-        pkgs,
-        system,
-        ...
-      }: let
-        pre-commit-check = import ./pre_commit.nix inputs system;
-      in rec {
-        devShells = {
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [alejandra home-manager.packages.${system}.home-manager];
-            inherit (pre-commit-check) shellHook;
-          };
-        };
-
-        checks = {
-          pre-commit = pre-commit-check;
-        };
-      };
+      imports = [
+        ./flake-parts
+      ];
     };
 }
