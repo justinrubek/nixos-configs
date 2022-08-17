@@ -26,9 +26,9 @@ Enable them by obtaining a devShell: `nix develop`
 
 You should be able to apply this configuration to any machine.
 In order to do so you must build the configuration and run the activation script.
-```bash
-home-manager switch --flake .
-or```
+
+`home-manager switch --flake .`
+or
 `home-manager switch --flake github:justinrubek/home`
 
 #### features
