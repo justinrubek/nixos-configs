@@ -31,7 +31,8 @@ in
         }
         nixvim.homeManagerModules.nixvim
       ]
-      ++ __attrValues self.homeModules;
+      ++ __attrValues self.homeModules
+      ++ __attrValues self.modules;
 
     extraSpecialArgs = {
       username = username;

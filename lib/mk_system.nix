@@ -1,4 +1,8 @@
-{self, ...} @ inputs: name: nixpkgs:
+{
+  self,
+  nixvim,
+  ...
+} @ inputs: name: nixpkgs:
   nixpkgs.lib.nixosSystem (
     let
       inherit (builtins) attrValues;
@@ -15,7 +19,7 @@
           {
             boot.cleanTmpDir = true;
             networking.hostName = name;
-            # system.configurationRevsion = self.rev or "dirty";
+            system.configurationRevision = self.rev or "dirty";
             documentation.man = {
               enable = true;
               generateCaches = true;
@@ -27,7 +31,9 @@
           entryPoint
           bootloader
           hardware
+          nixvim.nixosModules.nixvim
         ]
-        ++ attrValues self.nixosModules;
+        ++ attrValues self.nixosModules
+        ++ attrValues self.modules;
     }
   )

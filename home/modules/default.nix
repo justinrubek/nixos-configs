@@ -9,7 +9,7 @@ inputs: {
   "profiles/design" = import ./profiles/design inputs;
   "profiles/graphical" = import ./profiles/graphical inputs;
 
-  "programs/neovim" = import ./programs/neovim inputs;
+  # "programs/neovim" = import ./programs/neovim inputs;
   "programs/firefox" = import ./programs/firefox inputs;
 
   # always runs for every configuration

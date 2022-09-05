@@ -41,6 +41,8 @@
 
         homeConfigurations = import ./home/configurations inputs;
         homeModules = import ./home/modules inputs;
+
+        modules = import ./modules inputs;
       };
       systems = flake-utils.lib.defaultSystems;
       imports = [
