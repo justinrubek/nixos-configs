@@ -6,7 +6,7 @@
 }: let
   cfg = config.profiles.browsing;
 
-  username = config.home.username;
+  inherit (config.home) username;
 in {
   options.profiles.browsing = {
     enable = lib.mkEnableOption "browsing profile";
@@ -15,7 +15,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.ufirefox = {
       enable = true;
-      username = username;
+      inherit username;
     };
 
     home.packages = with pkgs; [

@@ -5,7 +5,8 @@ _: {
   ...
 } @ inputs: let
   firefoxEnabled = config.programs.ufirefox.enable;
-  username = config.programs.ufirefox.username;
+
+  inherit (config.programs.ufirefox) username;
 in {
   options.programs.ufirefox = {
     enable = lib.mkEnableOption "Enable firefox";

@@ -35,6 +35,6 @@ in
       ++ __attrValues self.modules;
 
     extraSpecialArgs = {
-      username = username;
+      inherit username;
     };
   }

@@ -1,5 +1,4 @@
-{pkgs, ...}: username: let
-in {
+{pkgs, ...}: username: {
   enable = true;
 
   extensions = with pkgs.nur.repos.rycee.firefox-addons; [
