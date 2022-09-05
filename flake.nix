@@ -37,6 +37,7 @@
         lib = import ./lib inputs;
 
         nixosConfigurations = import ./nixos/configurations inputs;
+        nixosModules = import ./nixos/modules inputs;
 
         homeConfigurations = import ./home/configurations inputs;
         homeModules = import ./home/modules inputs;
