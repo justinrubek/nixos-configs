@@ -14,7 +14,7 @@ in {
     fonts.fontconfig.enable = true;
 
     profiles.base.enable = true;
-    activeProfiles = ["development"];
+    activeProfiles = ["development" "browsing"];
 
     home.packages = with pkgs; [
       ripgrep
@@ -59,12 +59,6 @@ in {
       zoom-us
       protontricks
     ];
-
-    # programs.firefox = import ./programs/firefox {inherit pkgs username;};
-    programs.ufirefox = {
-      enable = true;
-      username = username;
-    };
 
     programs.fzf.enable = true;
     programs.zoxide = {
