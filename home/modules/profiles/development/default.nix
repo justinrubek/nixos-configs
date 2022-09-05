@@ -44,5 +44,17 @@ in {
         enableZshIntegration = true;
       };
     };
+
+    home.packages = with pkgs; [
+      ripgrep
+      httpie
+      curlie
+      gnumake
+      gcc
+      cargo
+      rustc
+      rust-analyzer
+      openscad
+    ];
   };
 }

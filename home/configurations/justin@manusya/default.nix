@@ -14,21 +14,17 @@ in {
     fonts.fontconfig.enable = true;
 
     profiles.base.enable = true;
-    activeProfiles = ["development" "browsing"];
+    activeProfiles = ["development" "browsing" "gaming"];
 
     home.packages = with pkgs; [
-      ripgrep
       fd
       gtop
       gping
       procs
-      httpie
-      curlie
       duf
       zip
       unzip
       psmisc
-      tectonic
       speedcrunch
       flameshot
       bitwarden
@@ -38,26 +34,16 @@ in {
       vlc
       blender
       kdenlive
-      protontricks
       rofi
-      gnumake
-      gcc
-      cargo
-      rust-analyzer
-      discord
       brave
       nerdfonts
       bitwarden
       neofetch
-      rustc
       slack
       lagrange
       gimp
-      teamspeak_client
-      openscad
       scrcpy
       zoom-us
-      protontricks
     ];
 
     programs.fzf.enable = true;
