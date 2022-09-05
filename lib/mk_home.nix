@@ -20,16 +20,18 @@ in
   home-manager.lib.homeManagerConfiguration {
     inherit pkgs;
 
-    modules = [
-      entrypoint
-      {
-        home = {
-          stateVersion = "22.05";
-          inherit username homeDirectory;
-        };
-      }
-      nixvim.homeManagerModules.nixvim
-    ];
+    modules =
+      [
+        entrypoint
+        {
+          home = {
+            stateVersion = "22.05";
+            inherit username homeDirectory;
+          };
+        }
+        nixvim.homeManagerModules.nixvim
+      ]
+      ++ __attrValues self.homeModules;
 
     extraSpecialArgs = {
       username = username;

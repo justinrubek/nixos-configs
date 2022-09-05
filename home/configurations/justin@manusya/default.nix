@@ -14,8 +14,8 @@
   };
 
   shellVariables = {
-    EDITOR = "vi";
-    VISUAL = "vi";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 in {
   config = {
@@ -23,6 +23,8 @@ in {
     systemd.user.sessionVariables = shellVariables;
     xdg.enable = true;
     fonts.fontconfig.enable = true;
+
+    programs.univim.enable = true;
 
     home.packages = with pkgs; [
       ripgrep
@@ -65,6 +67,7 @@ in {
       openscad
       scrcpy
       zoom-us
+      protontricks
     ];
 
     programs.nixvim = import ./programs/nixvim inputs pkgs;

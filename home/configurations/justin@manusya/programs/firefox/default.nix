@@ -19,6 +19,8 @@ in {
     plasma-integration
     sidebery
     multi-account-containers
+    violentmonkey
+    tridactyl
   ];
 
   profiles.${username} = {
