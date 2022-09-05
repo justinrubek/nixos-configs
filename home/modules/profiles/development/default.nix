@@ -56,6 +56,7 @@ in {
       rust-analyzer
       openscad
       statix
+      cocogitto
     ];
   };
 }
