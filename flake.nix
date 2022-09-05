@@ -2,7 +2,8 @@
   description = "nixos configuration";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.05";
+    # nixpkgs.url = "nixpkgs/nixos-22.05";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     unixpkgs.url = "nixpkgs/nixos-unstable";
 
     home-manager = {

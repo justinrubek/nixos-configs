@@ -1,8 +1,4 @@
-{
-  unixpkgs,
-  self,
-  ...
-} @ inputs: pkgs: let
+{pkgs, ...} @ inputs: let
   nvim-lsp-installer = pkgs.vimUtils.buildVimPlugin {
     name = "nvim-lsp-installer";
     src = pkgs.fetchFromGitHub {

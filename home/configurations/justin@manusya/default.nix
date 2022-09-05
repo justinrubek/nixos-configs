@@ -24,6 +24,7 @@ in {
     xdg.enable = true;
     fonts.fontconfig.enable = true;
 
+    # custom vim config
     programs.univim.enable = true;
 
     home.packages = with pkgs; [
@@ -70,7 +71,6 @@ in {
       protontricks
     ];
 
-    programs.nixvim = import ./programs/nixvim inputs pkgs;
     programs.firefox = import ./programs/firefox {inherit pkgs username;};
 
     programs.git = {
