@@ -1,9 +1,4 @@
-{
-  pkgs,
-  username,
-  ...
-}: let
-  PWD = builtins.toString ./.;
+{pkgs, ...}: username: let
 in {
   enable = true;
 

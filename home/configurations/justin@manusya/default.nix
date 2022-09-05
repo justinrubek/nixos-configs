@@ -71,7 +71,11 @@ in {
       protontricks
     ];
 
-    programs.firefox = import ./programs/firefox {inherit pkgs username;};
+    # programs.firefox = import ./programs/firefox {inherit pkgs username;};
+    programs.ufirefox = {
+      enable = true;
+      username = username;
+    };
 
     programs.git = {
       enable = true;
