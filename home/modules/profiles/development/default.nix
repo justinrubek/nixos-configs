@@ -55,6 +55,7 @@ in {
       rustc
       rust-analyzer
       openscad
+      statix
     ];
   };
 }

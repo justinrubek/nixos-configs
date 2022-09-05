@@ -10,45 +10,11 @@
 }: let
 in {
   config = {
-    activeProfiles = ["development" "browsing" "gaming"];
+    activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
 
     home.packages = with pkgs; [
-      fd
-      gtop
-      gping
-      procs
-      duf
-      zip
-      unzip
-      psmisc
-      speedcrunch
-      flameshot
-      bitwarden
-      ffmpeg
-      youtube-dl
-      obs-studio
-      vlc
-      blender
-      kdenlive
       rofi
-      brave
-      nerdfonts
-      bitwarden
-      neofetch
-      slack
-      lagrange
-      gimp
-      scrcpy
-      zoom-us
     ];
-
-    programs.fzf.enable = true;
-    programs.zoxide = {
-      enable = true;
-      enableBashIntegration = true;
-    };
-
-    programs.mpv.enable = true;
 
     services.kdeconnect = {
       enable = true;

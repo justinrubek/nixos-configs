@@ -131,6 +131,25 @@ in {
           set -g mouse on
         '';
       };
+
+      zoxide = {
+        enable = true;
+        enableBashIntegration = true;
+      };
+
+      fzf.enable = true;
     };
+
+    home.packages = with pkgs; [
+      psmisc
+      fd
+      zip
+      unzip
+      neofetch
+      procs
+      duf
+      obs-studio
+      bitwarden
+    ];
   };
 }

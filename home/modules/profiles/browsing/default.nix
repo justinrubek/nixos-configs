@@ -17,5 +17,9 @@ in {
       enable = true;
       username = username;
     };
+
+    home.packages = with pkgs; [
+      brave
+    ];
   };
 }
