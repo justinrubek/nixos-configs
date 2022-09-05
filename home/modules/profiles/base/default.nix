@@ -24,6 +24,8 @@ in {
     home.sessionVariables = shellVariables;
     systemd.user.sessionVariables = shellVariables;
 
+    xdg.enable = true;
+
     programs = {
       univim.enable = true;
 

@@ -10,10 +10,6 @@
 }: let
 in {
   config = {
-    xdg.enable = true;
-    fonts.fontconfig.enable = true;
-
-    profiles.base.enable = true;
     activeProfiles = ["development" "browsing" "gaming"];
 
     home.packages = with pkgs; [
