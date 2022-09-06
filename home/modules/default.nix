@@ -12,6 +12,8 @@ inputs: {
   # "programs/neovim" = import ./programs/neovim inputs;
   "programs/firefox" = import ./programs/firefox inputs;
 
+  "windowing/xmonad" = import ./windowing/xmonad inputs;
+
   # always runs for every configuration
   "misc/home" = import ./misc/home inputs;
 }
