@@ -1,13 +1,4 @@
-{
-  unixpkgs,
-  nurpkgs,
-  self,
-  ...
-} @ inputs: {
-  pkgs,
-  username,
-  ...
-}: {
+_: {pkgs, ...}: {
   config = {
     activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
 
