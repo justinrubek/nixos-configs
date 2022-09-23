@@ -4,6 +4,9 @@ _: {pkgs, ...}: {
 
     home.packages = with pkgs; [
       rofi
+      (dwarf-fortress-packages.dwarf-fortress-full.override {
+        enableIntro = false;
+      })
     ];
 
     services.kdeconnect = {
