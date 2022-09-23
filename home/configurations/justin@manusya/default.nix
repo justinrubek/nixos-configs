@@ -19,5 +19,12 @@ _: {pkgs, ...}: {
       tray.enable = true;
     };
     programs.pandoc.enable = true;
+
+    programs.zellij = {
+      enable = true;
+      settings = {
+        default-shell = "zsh";
+      };
+    };
   };
 }

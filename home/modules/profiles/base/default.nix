@@ -14,6 +14,7 @@
   shellVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
+    SHELL = "${pkgs.zsh}/bin/zsh";
   };
 in {
   options.profiles.base = {
