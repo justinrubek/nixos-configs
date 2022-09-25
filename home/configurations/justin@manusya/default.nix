@@ -18,6 +18,7 @@ _: {pkgs, ...}: {
       enable = true;
       tray.enable = true;
     };
+
     programs.pandoc.enable = true;
 
     programs.zellij = {
@@ -26,5 +27,7 @@ _: {pkgs, ...}: {
         default-shell = "zsh";
       };
     };
+
+    programs.nushell.enable = true;
   };
 }
