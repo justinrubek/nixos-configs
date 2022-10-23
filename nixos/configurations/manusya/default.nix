@@ -84,7 +84,12 @@ in {
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  networking.firewall.allowedTCPPorts = [8080];
+  networking.firewall.allowedTCPPorts = [
+    8080
+    8081
+    # grocy
+    6100
+  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -108,4 +113,26 @@ in {
     enable = true;
     remotePlay.openFirewall = true;
   };
+
+  # experimenting
+  services.grocy = {
+    enable = true;
+
+    hostName = "grocy.localhost";
+    nginx.enableSSL = false;
+  };
+
+  # changing port forcibly
+  services.nginx.virtualHosts."grocy.localhost" = {
+    listen = [
+      {
+        addr = "0.0.0.0";
+        port = 6100;
+      }
+    ];
+  };
+
+  networking.nameservers = ["1.1.1.1" "9.9.9.9"];
+
+  hardware.ckb-next.enable = true;
 }
