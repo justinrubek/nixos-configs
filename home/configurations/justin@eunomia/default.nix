@@ -11,25 +11,11 @@ in {
       comma.packages.x86_64-linux.default
     ];
 
-    services.kdeconnect = {
-      enable = true;
-      indicator = true;
-    };
-
-    services.syncthing = {
-      enable = true;
-      tray.enable = true;
-    };
-
-    programs.pandoc.enable = true;
-
     programs.zellij = {
       enable = true;
       settings = {
         default-shell = "zsh";
       };
     };
-
-    programs.nushell.enable = true;
   };
 }
