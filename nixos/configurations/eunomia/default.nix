@@ -44,6 +44,7 @@ in {
       isNormalUser = true;
       description = "Justin";
       extraGroups = ["networkmanager" "wheel"];
+      shell = pkgs.zsh;
     };
   };
 
