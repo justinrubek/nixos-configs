@@ -18,7 +18,7 @@ in {
   # Linux kernel
   nixpkgs.config.allowBroken = true;
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_5_19;
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
     supportedFilesystems = ["zfs" "ext4"];
     zfs.enableUnstable = true;
   };
