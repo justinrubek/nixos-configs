@@ -16,6 +16,7 @@ in {
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Linux kernel
+  # TODO: remove allowBroken = true once zfs is fixed
   nixpkgs.config.allowBroken = true;
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
