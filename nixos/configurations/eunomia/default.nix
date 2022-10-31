@@ -15,6 +15,14 @@ in {
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  # Linux kernel
+  nixpkgs.config.allowBroken = true;
+  boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_5_19;
+    supportedFilesystems = ["zfs" "ext4"];
+    zfs.enableUnstable = true;
+  };
+
   # Enable networking
   networking.networkmanager.enable = true;
 
