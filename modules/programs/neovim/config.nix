@@ -124,7 +124,7 @@ in {
   ];
 
   extraPackages = with pkgs; [
-    nodejs
+    nodejs-16_x
     python310
   ];
 }
