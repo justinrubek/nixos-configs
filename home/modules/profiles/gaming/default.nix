@@ -14,7 +14,8 @@ in {
     home.packages = with pkgs; [
       protontricks
       teamspeak_client
-      discord
+      # see https://github.com/NixOS/nixpkgs/issues/78961
+      (discord.override {nss = pkgs.nss_latest;})
     ];
   };
 }
