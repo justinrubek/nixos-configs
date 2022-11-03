@@ -15,6 +15,15 @@ in {
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
+  # Linux kernel
+  # TODO: remove allowBroken = true once zfs is fixed
+  nixpkgs.config.allowBroken = true;
+  boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
+    supportedFilesystems = ["zfs" "ext4"];
+    zfs.enableUnstable = true;
+  };
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -29,16 +38,16 @@ in {
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # personal modules
   justinrubek = {
     windowing.plasma.enable = true;
 
     sound.enable = true;
 
-    development.containers.enable = true;
+    development.containers = {
+      enable = true;
+      useDocker = true;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -46,7 +55,8 @@ in {
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "docker"];
+      shell = pkgs.zsh;
     };
   };
 
@@ -56,27 +66,8 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  wget
-    firefox
-    kate
-    vim
-    git
-    alsa-lib
   ];
 
-  # programs.univim.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
     permitRootLogin = "no";
@@ -84,12 +75,6 @@ in {
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
-  networking.firewall.allowedTCPPorts = [
-    8080
-    8081
-    # grocy
-    6100
-  ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -100,7 +85,7 @@ in {
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
 
   nix = {
     package = pkgs.nixFlakes;
@@ -113,26 +98,6 @@ in {
     enable = true;
     remotePlay.openFirewall = true;
   };
-
-  # experimenting
-  services.grocy = {
-    enable = true;
-
-    hostName = "grocy.localhost";
-    nginx.enableSSL = false;
-  };
-
-  # changing port forcibly
-  services.nginx.virtualHosts."grocy.localhost" = {
-    listen = [
-      {
-        addr = "0.0.0.0";
-        port = 6100;
-      }
-    ];
-  };
-
-  networking.nameservers = ["1.1.1.1" "9.9.9.9"];
 
   hardware.ckb-next.enable = true;
 }

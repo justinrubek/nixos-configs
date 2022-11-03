@@ -24,6 +24,13 @@
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     nixvim.url = "github:pta2002/nixvim";
+
+    nixinate.url = "github:matthewcroughan/nixinate";
+
+    comma = {
+      url = "github:nix-community/comma";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
