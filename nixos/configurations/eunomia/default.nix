@@ -98,4 +98,6 @@ in {
     enable = true;
     remotePlay.openFirewall = true;
   };
+
+  hardware.ckb-next.enable = true;
 }
