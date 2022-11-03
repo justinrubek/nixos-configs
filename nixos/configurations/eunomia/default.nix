@@ -44,7 +44,10 @@ in {
 
     sound.enable = true;
 
-    development.containers.enable = true;
+    development.containers = {
+      enable = true;
+      useDocker = true;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -52,7 +55,7 @@ in {
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = ["networkmanager" "wheel" "docker"];
       shell = pkgs.zsh;
     };
   };
