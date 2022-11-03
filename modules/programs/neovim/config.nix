@@ -71,6 +71,9 @@ in {
       enable = true;
       ensureInstalled = "all";
     };
+    copilot = {
+      enable = true;
+    };
   };
 
   extraConfigVim = ''
@@ -119,8 +122,6 @@ in {
 
     # folke
     which-key-nvim
-
-    github-copilot
   ];
 
   extraPackages = with pkgs; [
