@@ -15,7 +15,10 @@ in {
       protontricks
       teamspeak_client
       # see https://github.com/NixOS/nixpkgs/issues/78961
-      (discord.override {nss = pkgs.nss_latest;})
+      (discord.override {
+        nss = pkgs.nss_latest;
+        withOpenASAR = true;
+      })
     ];
   };
 }
