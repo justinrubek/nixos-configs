@@ -70,24 +70,21 @@ in {
     treesitter = {
       enable = true;
       ensureInstalled = "all";
+      nixGrammars = true;
     };
     copilot = {
+      enable = true;
+    };
+    undotree = {
       enable = true;
     };
   };
 
   extraConfigVim = ''
     luafile ${PWD}/lua/lsp.lua
-    lua << EOF
-    vim.defer_fn(function()
-      vim.cmd [[
-        luafile ${PWD}/lua/copilot.lua
-        luafile ${PWD}/lua/which-key.lua
-        luafile ${PWD}/lua/keymaps.lua
-      ]]
-      end, 70)
-
-    EOF
+    luafile ${PWD}/lua/copilot.lua
+    luafile ${PWD}/lua/which-key.lua
+    luafile ${PWD}/lua/keymaps.lua
   '';
 
   extraPlugins = with pkgs.vimPlugins; [

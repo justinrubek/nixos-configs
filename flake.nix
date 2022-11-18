@@ -24,6 +24,7 @@
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     nixvim.url = "github:pta2002/nixvim";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     nixinate.url = "github:matthewcroughan/nixinate";
 

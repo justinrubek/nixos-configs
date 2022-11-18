@@ -1,4 +1,4 @@
-_: {
+{neovim-nightly-overlay, ...}: {
   config,
   lib,
   pkgs,
@@ -12,5 +12,8 @@ in {
 
   config = lib.mkIf univimEnabled {
     programs.nixvim = import ./config.nix inputs;
+    nixpkgs.overlays = [
+      neovim-nightly-overlay.overlay
+    ];
   };
 }
