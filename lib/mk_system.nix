@@ -31,7 +31,6 @@
           entryPoint
           bootloader
           hardware
-          nixvim.nixosModules.nixvim
         ]
         ++ attrValues self.nixosModules
         ++ attrValues self.modules;
