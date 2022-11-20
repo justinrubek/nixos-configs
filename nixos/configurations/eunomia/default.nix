@@ -19,7 +19,8 @@ in {
   # TODO: remove allowBroken = true once zfs is fixed
   nixpkgs.config.allowBroken = true;
   boot = {
-    kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
+    # kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
+    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
     supportedFilesystems = ["zfs" "ext4"];
     zfs.enableUnstable = true;
   };
