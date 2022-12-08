@@ -1,4 +1,6 @@
-{self, ...} @ inputs: {
-  manusya = self.lib.mkSystem "manusya" inputs.unixpkgs;
-  eunomia = self.lib.mkSystem "eunomia" inputs.unixpkgs;
+_: {
+  justinrubek.nixosConfigurations = {
+    manusya.system = "x86_64-linux";
+    eunomia.system = "x86_64-linux";
+  };
 }
