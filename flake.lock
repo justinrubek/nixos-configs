@@ -297,21 +297,6 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1667050928,
-        "narHash": "sha256-xOn0ZgjImIyeecEsrjxuvlW7IW5genTwvvnDQRFncB8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "fdebb81f45a1ba2c4afca5fd9f526e1653ad0949",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
         "lastModified": 1663491030,
         "narHash": "sha256-MVsfBhE9US5DvLtBAaTRjwYdv1tLO8xjahM8qLXTgTo=",
         "owner": "NixOS",
@@ -324,7 +309,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1645655918,
         "narHash": "sha256-ZfbEFRW7o237+A1P7eTKhXje435FCAoe0blj2n20Was=",
@@ -342,7 +327,7 @@
       "inputs": {
         "beautysh": "beautysh",
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nmdSrc": "nmdSrc"
       },
       "locked": {
@@ -420,7 +405,7 @@
     "pre-commit-hooks": {
       "inputs": {
         "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1656169028,
@@ -444,7 +429,9 @@
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixinate": "nixinate",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": [
+          "unixpkgs"
+        ],
         "nixvim": "nixvim",
         "nurpkgs": "nurpkgs",
         "pre-commit-hooks": "pre-commit-hooks",

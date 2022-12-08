@@ -24,11 +24,6 @@ in {
         hostname = builtins.elemAt splitName 2;
       in {
         options = {
-          nixpkgs = {
-            type = lib.types.unspecified;
-            default = inputs.nixpkgs;
-          };
-
           system = lib.mkOption {
             type = lib.types.enum ["x86_64-linux" "aarch64-linux"];
           };
