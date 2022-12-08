@@ -1,4 +1,29 @@
-{self, ...} @ inputs: {
-  "justin@manusya" = self.lib.mkHome "justin" "manusya" "x86_64-linux" inputs.nixpkgs;
-  "justin@eunomia" = self.lib.mkHome "justin" "eunomia" "x86_64-linux" inputs.nixpkgs;
+{inputs, ...}: let
+  extraModules = [
+    inputs.nixvim.homeManagerModules.nixvim
+  ];
+in {
+  justinrubek.homeConfigurations = {
+    "justin@manusya" = {
+      system = "x86_64-linux";
+      modules =
+        extraModules
+        ++ [
+          {
+            home.stateVersion = "22.05";
+          }
+        ];
+    };
+
+    "justin@eunomia" = {
+      system = "x86_64-linux";
+      modules =
+        extraModules
+        ++ [
+          {
+            home.stateVersion = "22.11";
+          }
+        ];
+    };
+  };
 }
