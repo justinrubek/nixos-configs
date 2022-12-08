@@ -11,10 +11,7 @@
       inputs.nixpkgs.follows = "unixpkgs";
     };
 
-    nurpkgs = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nurpkgs.url = "github:nix-community/NUR";
 
     flake-utils.url = "github:numtide/flake-utils";
     flake-parts = {
