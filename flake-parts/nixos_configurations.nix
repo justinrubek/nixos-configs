@@ -11,10 +11,10 @@
   # collect all nixosConfigurations so they can be exposed as flake outputs
   configs = builtins.mapAttrs (_: config: config.nixosConfig) cfg;
 
-  # collect the configurations under an attribute set so they can be used
-  # as flake outputs. Use the packageName and the system from the config
   # TODO: determine if these are useful and where to expose them from
   packages = builtins.attrValues (builtins.mapAttrs (_: config: let
+    # collect the configurations under an attribute set so they can be used
+    # as flake.packages outputs
     namespaced = {${config.system}.${config.packageName} = config.nixosPackage;};
   in
     namespaced)
@@ -35,7 +35,7 @@ in {
           modules = lib.mkOption {
             type = lib.types.listOf lib.types.unspecified;
             default = [];
-            description = "List of modules to include for the home-manager configuration.";
+            description = "List of modules to include for the nixos configuration.";
           };
 
           # outputs
@@ -47,25 +47,25 @@ in {
           nixosConfig = lib.mkOption {
             type = lib.types.unspecified;
             readOnly = true;
-            description = "The home-manager configuration.";
+            description = "The nixos configuration.";
           };
 
           packageName = lib.mkOption {
             type = lib.types.str;
             readOnly = true;
-            description = "The name of the exported package output that contains the system's build.toplevel.";
+            description = "The name of the exported package.";
           };
 
           nixosPackage = lib.mkOption {
             type = lib.types.package;
             readOnly = true;
-            description = "The home-manager activation package.";
+            description = "The package output that contains the system's build.toplevel.";
           };
 
           finalModules = lib.mkOption {
             type = lib.types.listOf lib.types.unspecified;
             readOnly = true;
-            description = "All modules that are included in the home-manager configuration.";
+            description = "All modules that are included in the nixos configuration.";
           };
 
           entryPoint = lib.mkOption {

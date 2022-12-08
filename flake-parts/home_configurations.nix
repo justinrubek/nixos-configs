@@ -11,10 +11,10 @@
   # collect all homeConfigurations so they can be exposed as flake outputs
   configs = builtins.mapAttrs (_: config: config.homeConfig) cfg;
 
-  # collect the configurations under an attribute set so they can be used
-  # as flake outputs. Use the packageName and the system from the config
   # TODO: determine if these are useful and where to expose them from
   packages = builtins.attrValues (builtins.mapAttrs (_: config: let
+    # collect the configurations under an attribute set so they can be used
+    # as flake.packages outputs
     namespaced = {${config.system}.${config.packageName} = config.homePackage;};
   in
     namespaced)
