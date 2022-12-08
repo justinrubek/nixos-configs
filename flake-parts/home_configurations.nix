@@ -10,6 +10,15 @@
 
   # collect all homeConfigurations so they can be exposed as flake outputs
   configs = builtins.mapAttrs (_: config: config.homeConfig) cfg;
+
+  # collect the configurations under an attribute set so they can be used
+  # as flake outputs. Use the packageName and the system from the config
+  # TODO: determine if these are useful and where to expose them from
+  packages = builtins.attrValues (builtins.mapAttrs (_: config: let
+    namespaced = {${config.system}.${config.packageName} = config.homePackage;};
+  in
+    namespaced)
+  cfg);
 in {
   options = {
     justinrubek.homeConfigurations = lib.mkOption {
@@ -74,6 +83,12 @@ in {
             readOnly = true;
             description = "The entry point module of the home-manager configuration.";
           };
+
+          packageName = lib.mkOption {
+            type = lib.types.str;
+            readOnly = true;
+            description = "The name of the exported package output that contains the home-manager activation package.";
+          };
         };
 
         config = {
@@ -112,6 +127,9 @@ in {
               inherit (config) username;
             };
           };
+
+          homePackage = config.homeConfig.activationPackage;
+          packageName = "home/configuration/${name}";
         };
       }));
     };

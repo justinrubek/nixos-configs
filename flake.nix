@@ -41,7 +41,7 @@
       flake = {
         lib = import ./lib inputs;
 
-        nixosConfigurations = import ./nixos/configurations inputs;
+        # nixosConfigurations = import ./nixos/configurations inputs;
         nixosModules = import ./nixos/modules inputs;
 
         # homeConfigurations = import ./home/configurations inputs;
@@ -52,8 +52,10 @@
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
         ./flake-parts
+        ./flake-parts/nixos_configurations.nix
         ./flake-parts/home_configurations.nix
 
+        ./nixos/configurations
         ./home/configurations
       ];
     };
