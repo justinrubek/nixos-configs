@@ -9,6 +9,8 @@ in {
         enableIntro = false;
       })
       comma.packages.x86_64-linux.default
+      alejandra
+      prismlauncher
     ];
 
     programs.zellij = {
