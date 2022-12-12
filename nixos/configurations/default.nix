@@ -1,4 +1,8 @@
-{inputs, ...}: let
+{
+  inputs,
+  config,
+  ...
+}: let
   modulesPath = "${inputs.nixpkgs}/nixos/modules";
 
   hetznerModules = [
@@ -21,6 +25,7 @@ in {
     bunky = {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
+      bootloader = config.justinrubek.nixosConfigurations.hetzner-base.bootloader;
     };
     hetzner-base = {
       system = "x86_64-linux";

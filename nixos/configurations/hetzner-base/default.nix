@@ -8,12 +8,6 @@
   ];
 
   # Linux kernel
-  boot = {
-    # kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
-    kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
-    supportedFilesystems = ["zfs" "ext4"];
-    zfs.enableUnstable = true;
-  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -51,10 +45,10 @@
   environment.systemPackages = with pkgs; [
   ];
 
-  services.openssh = {
-    enable = true;
-    permitRootLogin = "no";
-  };
+  # services.openssh = {
+  #   enable = true;
+  #   permitRootLogin = "no";
+  # };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

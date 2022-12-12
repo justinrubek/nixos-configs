@@ -78,8 +78,8 @@ in {
 
           bootloader = lib.mkOption {
             type = lib.types.unspecified;
-            readOnly = true;
             description = "The system's bootloader configuration.";
+            default = "${config.configDirectory}/bootloader.nix";
           };
 
           hardware = lib.mkOption {
