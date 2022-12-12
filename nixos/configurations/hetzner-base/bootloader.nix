@@ -48,6 +48,10 @@
     };
   };
 
+  swapDevices = [
+    {device = "/dev/disk/by-label/SWAP";}
+  ];
+
   boot = {
     loader.grub = {
       enable = true;
@@ -69,10 +73,6 @@
     kernel.sysctl = {
       "vm.swappiness" = 10;
     };
-
-    swapDevices = [
-      {device = "/dev/disk/by-label/SWAP";}
-    ];
 
     supportedFilesystems = ["zfs" "ext4"];
     zfs.enableUnstable = true;
