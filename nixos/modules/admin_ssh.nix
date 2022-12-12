@@ -30,8 +30,6 @@ in {
     # start an ssh server
     services.openssh = {
       enable = true;
-      enableFirewall = false;
-      passwordAuthentication = false;
     };
   };
 }
