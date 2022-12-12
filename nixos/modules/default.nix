@@ -10,5 +10,7 @@
 
     containers = import ./containers.nix inputs;
     nomad = import ./nomad inputs;
+
+    admin_ssh = import ./admin_ssh inputs;
   };
 }

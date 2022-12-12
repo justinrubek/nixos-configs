@@ -1,9 +1,30 @@
-_: {
+{inputs, ...}: let
+  modulesPath = "${inputs.nixpkgs}/nixos/modules";
+
+  hetznerModules = [
+    "${modulesPath}/profiles/minimal.nix"
+    "${modulesPath}/profiles/qemu-guest.nix"
+  ];
+
+  sshModule = [
+    {
+      justinrubek.administration = {
+        enable = true;
+      };
+    }
+  ];
+in {
   justinrubek.nixosConfigurations = {
     manusya.system = "x86_64-linux";
     eunomia.system = "x86_64-linux";
 
-    bunky.system = "x86_64-linux";
-    hetzner-base.system = "x86_64-linux";
+    bunky = {
+      system = "x86_64-linux";
+      modules = hetznerModules ++ sshModule;
+    };
+    hetzner-base = {
+      system = "x86_64-linux";
+      modules = hetznerModules ++ sshModule;
+    };
   };
 }
