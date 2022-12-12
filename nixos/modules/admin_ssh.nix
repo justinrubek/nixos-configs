@@ -12,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     # provide the `admin` user
-    user.users.admin = {
+    users.users.admin = {
       name = "admin";
       isNormalUser = true;
       extraGroups = ["wheel"];
