@@ -10,7 +10,7 @@
   # Linux kernel
   boot = {
     # kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
-    kernelPackages = pkgs.linuxKernel.packages.linux_latest;
+    kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
     supportedFilesystems = ["zfs" "ext4"];
     zfs.enableUnstable = true;
   };
