@@ -55,7 +55,7 @@ in {
       cargo
       rustc
       rust-analyzer
-      openscad
+      # openscad
       statix
       cocogitto
     ];

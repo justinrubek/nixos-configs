@@ -3,24 +3,14 @@
   pkgs,
   lib,
   ...
-}: let
-  upkgs = unixpkgs.legacyPackages.x86_64-linux;
-in {
+}: {
   imports = [
   ];
 
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Linux kernel
-  # TODO: remove allowBroken = true once zfs is fixed
-  nixpkgs.config.allowBroken = true;
   boot = {
     # kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+    kernelPackages = pkgs.linuxKernel.packages.linux_latest;
     supportedFilesystems = ["zfs" "ext4"];
     zfs.enableUnstable = true;
   };
@@ -41,10 +31,6 @@ in {
 
   # personal modules
   justinrubek = {
-    windowing.plasma.enable = true;
-
-    sound.enable = true;
-
     development.containers = {
       enable = true;
     };
@@ -92,11 +78,4 @@ in {
       experimental-features = nix-command flakes
     '';
   };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-  };
-
-  hardware.ckb-next.enable = true;
 }

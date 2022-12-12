@@ -1,2 +1,11 @@
-inputs: {
+{
+  inputs,
+  self,
+  ...
+}: {
+  imports = [
+  ];
+
+  flake.modules = {
+  };
 }

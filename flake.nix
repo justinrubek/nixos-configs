@@ -39,17 +39,16 @@
   } @ inputs:
     flake-parts.lib.mkFlake {inherit self;} {
       flake = {
-        nixosModules = import ./nixos/modules inputs;
-
         homeModules = import ./home/modules inputs;
-
-        modules = import ./modules inputs;
       };
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
         ./flake-parts
         ./flake-parts/nixos_configurations.nix
         ./flake-parts/home_configurations.nix
+
+        ./nixos/modules
+        ./modules
 
         ./nixos/configurations
         ./home/configurations

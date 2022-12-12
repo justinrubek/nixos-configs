@@ -32,16 +32,15 @@ in {
             type = lib.types.enum ["x86_64-linux" "aarch64-linux"];
           };
 
+          configDirectory = lib.mkOption {
+            type = lib.types.str;
+            default = "${self}/nixos/configurations/${name}";
+          };
+
           modules = lib.mkOption {
             type = lib.types.listOf lib.types.unspecified;
             default = [];
             description = "List of modules to include for the nixos configuration.";
-          };
-
-          # outputs
-          configDirectory = lib.mkOption {
-            type = lib.types.str;
-            readOnly = true;
           };
 
           nixosConfig = lib.mkOption {
@@ -91,7 +90,6 @@ in {
         };
 
         config = {
-          configDirectory = "${self}/nixos/configurations/${name}";
           entryPoint = import config.configDirectory (inputs // {inherit self;});
           bootloader = "${config.configDirectory}/bootloader.nix";
           hardware = "${config.configDirectory}/hardware.nix";
