@@ -9,35 +9,8 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  fileSystems."/" = {
-    device = "fpool/local/root";
-    fsType = "zfs";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/D3E4-CF9F";
-    fsType = "vfat";
-  };
-
-  fileSystems."/nix" = {
-    device = "fpool/local/nix";
-    fsType = "zfs";
-  };
-
-  fileSystems."/home" = {
-    device = "fpool/safe/home";
-    fsType = "zfs";
-  };
-
-  fileSystems."/persist" = {
-    device = "fpool/safe/persist";
-    fsType = "zfs";
-  };
-
   # Required by zfs to exist
   networking.hostId = "deadbeef";
-
-  swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
