@@ -13,7 +13,7 @@
   };
 
   networking = rec {
-    hostName = "bunky";
+    # hostName = "bunky";
     hostId = builtins.substring 0 8 (builtins.hashString "md5" hostName);
     useNetworkd = false;
     useDHCP = false;
