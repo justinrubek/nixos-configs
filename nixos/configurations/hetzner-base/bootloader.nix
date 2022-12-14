@@ -81,7 +81,7 @@
     tmpOnTmpfs = true;
 
     initrd.postDeviceCommands = lib.mkAfter ''
-      zfs rollback -r tank/footfs@empty
+      zfs rollback -r tank/rootfs@empty
     '';
   };
 }
