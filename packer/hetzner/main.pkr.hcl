@@ -4,15 +4,13 @@ variable "hcloud-token" {
     sensitive = true
 }
 
-variable "name" {
-}
-
 locals {
     build-id = "${uuidv4()}"
     build-labels = {
-        "name" = var.name
+        "name" = local.name
         "packer.io.build.time" = "{{ timestamp }}"
     }
+    name = "hetzner-base-nixos-{{ timestamp }}"
 }
 
 source "hcloud" "base" {
@@ -20,7 +18,7 @@ source "hcloud" "base" {
     image = "debian-11"
     rescue = "linux64"
     location = "nbg1"
-    snapshot_name = var.name
+    snapshot_name = "hetzner-base-nixos-{{ timestamp }}"
     snapshot_labels = local.build-labels
     ssh_username = "root"
     token = var.hcloud-token
@@ -40,5 +38,4 @@ build {
     post-processor "manifest" {
         custom_data = local.build-labels
     }
-
 }

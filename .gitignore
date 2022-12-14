@@ -1,5 +1,3 @@
-result
-.direnv
 doc/index.html
 
 # Result of bud commands
@@ -9,5 +7,13 @@ doi
 
 pkgs/_sources/.shake*
 
-# pre-commit-hooks.nix
-/.pre-commit-config.yaml
+result
+result*
+.direnv
+.pre-commit-config.yaml
+**/.terraform
+content*.tar.gz
+create_config_version.json
+generated_config.tf.json
+
+.env

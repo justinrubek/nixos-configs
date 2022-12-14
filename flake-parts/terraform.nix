@@ -47,10 +47,14 @@
         pushd $(git rev-parse --show-toplevel)
 
         # determine the path to the configuration
-        configurationPath=$(cat ${self'.packages.terraformConfigurationMatrix}/terraform-configuration-matrix.json | ${jq} -r '.configurations[] | select(.name == "'$configurationName'" ) | .path')
+        export configurationPath=$(cat ${self'.packages.terraformConfigurationMatrix}/terraform-configuration-matrix.json | ${jq} -r '.configurations[] | select(.name == "'$configurationName'" ) | .path')
 
         # copy the generated terraform configuration to the configuration path
+        config_file_path="$configurationPath/config.tf.json"
+        echo $config_file_path
         cp "$configurationPath/config.tf.json" ./terraform/configurations/$configurationName/config.tf.json
+        # make it writable since it is read-only in the nix store
+        chmod +w ./terraform/configurations/$configurationName/config.tf.json
 
         # execute the terraform command
         ${terraform-cli} -chdir=./terraform/configurations/$configurationName "$@"
