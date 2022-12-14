@@ -26,6 +26,11 @@
     nixinate.url = "github:matthewcroughan/nixinate";
     deploy-rs.url = "github:serokell/deploy-rs";
 
+    thoenix = {
+      url = "github:justinrubek/thoenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     comma = {
       url = "github:nix-community/comma";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,9 +49,14 @@
       };
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
+        inputs.thoenix.flakeModule
+        inputs.thoenix.customOutputModule
+
         ./flake-parts
         ./flake-parts/nixos_configurations.nix
         ./flake-parts/home_configurations.nix
+        ./flake-parts/terraform.nix
+        ./flake-parts/terraformConfiguration.nix
 
         ./nixos/modules
         ./modules
