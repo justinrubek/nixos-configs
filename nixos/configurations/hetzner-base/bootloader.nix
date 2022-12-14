@@ -2,6 +2,7 @@
   pkgs,
   lib,
   self,
+  config,
   ...
 }: {
   systemd.network = {
@@ -14,7 +15,7 @@
 
   networking = rec {
     # hostName = "bunky";
-    hostId = builtins.substring 0 8 (builtins.hashString "md5" hostName);
+    hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
     useNetworkd = false;
     useDHCP = false;
   };
