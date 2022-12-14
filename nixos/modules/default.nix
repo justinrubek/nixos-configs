@@ -14,5 +14,7 @@
     admin_ssh = import ./admin_ssh.nix inputs;
 
     "filesystem/zfs" = import ./filesystem/zfs inputs;
+
+    "cloudhost/hetzner" = import ./cloudhost/hetzner inputs;
   };
 }

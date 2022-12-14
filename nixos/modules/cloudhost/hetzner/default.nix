@@ -1,24 +1,19 @@
-{inputs, ...}: {
+inputs: {
   config,
   pkgs,
   lib,
   ...
 }: let
-  cfg = config.justinrubek.cloudhost.heztner;
-  
+  cfg = config.justinrubek.cloudhost.hetzner;
+
   # nixpkgs modules
   modulesPath = "${inputs.nixpkgs}/nixos/modules";
 in {
   options.justinrubek.cloudhost.hetzner = {
-    enable = lib.mkEnableOption "enable heztner cloud modules";
+    enable = lib.mkEnableOption "enable hetzner cloud modules";
   };
 
   config = lib.mkIf cfg.enable {
-    imports = [
-      "${modulesPath}/profiles/minimal.nix"
-      "${modulesPath}/profiles/qemu-guest.nix"
-    ];
-    
     boot = {
       loader.grub = {
         enable = true;
@@ -64,5 +59,5 @@ in {
       useNetworkd = false;
       useDHCP = false;
     };
-  }
+  };
 }
