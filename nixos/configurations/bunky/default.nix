@@ -8,15 +8,9 @@
   ];
 
   # Linux kernel
-  boot = {
-    # kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
-    kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
-    supportedFilesystems = ["zfs" "ext4"];
-    zfs.enableUnstable = true;
-  };
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  # networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -25,9 +19,6 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
   };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
 
   # personal modules
   justinrubek = {
@@ -54,10 +45,10 @@
   environment.systemPackages = with pkgs; [
   ];
 
-  services.openssh = {
-    enable = true;
-    permitRootLogin = "no";
-  };
+  # services.openssh = {
+  #   enable = true;
+  #   permitRootLogin = "no";
+  # };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

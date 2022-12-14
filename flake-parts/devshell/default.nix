@@ -16,7 +16,7 @@
   in rec {
     devShells = {
       default = pkgs.mkShell {
-        buildInputs = with pkgs; [alejandra inputs.home-manager.packages.${system}.home-manager hcloud packer];
+        buildInputs = with pkgs; [alejandra inputs.home-manager.packages.${system}.home-manager hcloud packer inputs'.deploy-rs.packages.deploy-rs];
         inherit (pre-commit-check) shellHook;
       };
     };

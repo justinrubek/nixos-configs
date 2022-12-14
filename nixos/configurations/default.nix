@@ -25,7 +25,6 @@ in {
     bunky = {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
-      bootloader = config.justinrubek.nixosConfigurations.hetzner-base.bootloader;
     };
     hetzner-base = {
       system = "x86_64-linux";

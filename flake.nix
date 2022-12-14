@@ -24,6 +24,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     nixinate.url = "github:matthewcroughan/nixinate";
+    deploy-rs.url = "github:serokell/deploy-rs";
 
     comma = {
       url = "github:nix-community/comma";
@@ -52,6 +53,8 @@
 
         ./nixos/configurations
         ./home/configurations
+
+        ./deploy
       ];
     };
 }
