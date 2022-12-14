@@ -6,7 +6,20 @@
   ...
 }: {
   imports = [
-    # (modulesPath + "/installer/scan/not-detected.nix")
+    "${modulesPath}/profiles/minimal.nix"
+    "${modulesPath}/profiles/qemu-guest.nix"
+  ];
+
+  justinrubek = {
+    filesystem.zfs.enable = true;
+
+    cloudhost.hetzner = {
+      enable = true;
+    };
+  };
+
+  swapDevices = [
+    {device = "/dev/disk/by-label/SWAP";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
