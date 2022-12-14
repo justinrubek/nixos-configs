@@ -11,15 +11,15 @@
     system,
     ...
   }: let
-    # iso = lib.nixosSystem {
-    #   inherit system;
-    #   modules = [
-    #     "${inputs.unixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma5.nix"
-    #   ];
-    # };
+    iso = inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+      modules = [
+        "${inputs.unixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-graphical-calamares-plasma5.nix"
+      ];
+    };
   in rec {
     packages = {
-      # iso = iso.config.system.build.isoImage;
+      iso = iso.config.system.build.isoImage;
     };
   };
 }
