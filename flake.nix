@@ -23,7 +23,6 @@
     nixvim.url = "github:pta2002/nixvim";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
-    nixinate.url = "github:matthewcroughan/nixinate";
     deploy-rs.url = "github:serokell/deploy-rs";
 
     thoenix = {
