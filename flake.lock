@@ -358,24 +358,6 @@
         "type": "github"
       }
     },
-    "nixinate": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_3"
-      },
-      "locked": {
-        "lastModified": 1666918008,
-        "narHash": "sha256-SqdXt8rPOj59mgIFwB+DvkzDbLWjrChw+UyVfMlS6Rg=",
-        "owner": "matthewcroughan",
-        "repo": "nixinate",
-        "rev": "118c71c5111ab218d0cca3e4c77303797344b409",
-        "type": "github"
-      },
-      "original": {
-        "owner": "matthewcroughan",
-        "repo": "nixinate",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1648219316,
@@ -446,22 +428,6 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1653060744,
-        "narHash": "sha256-kfRusllRumpt33J1hPV+CeCCylCXEU7e0gn2/cIM7cY=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "dfd82985c273aac6eced03625f454b334daae2e8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_4": {
-      "locked": {
         "lastModified": 1663491030,
         "narHash": "sha256-MVsfBhE9US5DvLtBAaTRjwYdv1tLO8xjahM8qLXTgTo=",
         "owner": "NixOS",
@@ -474,7 +440,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1645655918,
         "narHash": "sha256-ZfbEFRW7o237+A1P7eTKhXje435FCAoe0blj2n20Was=",
@@ -488,7 +454,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_6": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1636823747,
         "narHash": "sha256-oWo1nElRAOZqEf90Yek2ixdHyjD+gqtS/pAgwaQ9UhQ=",
@@ -507,7 +473,7 @@
       "inputs": {
         "beautysh": "beautysh",
         "flake-utils": "flake-utils_3",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_3",
         "nmdSrc": "nmdSrc"
       },
       "locked": {
@@ -585,7 +551,7 @@
     "pre-commit-hooks": {
       "inputs": {
         "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1656169028,
@@ -609,7 +575,6 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
-        "nixinate": "nixinate",
         "nixpkgs": [
           "unixpkgs"
         ],
@@ -625,7 +590,7 @@
         "bats-assert": "bats-assert",
         "bats-support": "bats-support",
         "flake-utils": "flake-utils_6",
-        "nixpkgs": "nixpkgs_6",
+        "nixpkgs": "nixpkgs_5",
         "terranix-examples": "terranix-examples"
       },
       "locked": {
