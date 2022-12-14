@@ -63,6 +63,8 @@
         ./nixos/configurations
         ./home/configurations
 
+        ./packages
+
         ./deploy
       ];
     };
