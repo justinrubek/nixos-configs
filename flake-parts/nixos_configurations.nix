@@ -98,7 +98,10 @@ in {
             [
               {
                 boot.cleanTmpDir = true;
-                networking.hostName = name;
+                networking = {
+                  hostName = name;
+                  hostId = builtins.substring 0 8 (builtins.hashString "md5" name);
+                };
                 system.configurationRevision = self.rev or "dirty";
                 documentation.man = {
                   enable = true;

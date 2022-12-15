@@ -34,9 +34,6 @@
     fsType = "zfs";
   };
 
-  # Required by zfs to exist
-  networking.hostId = "deadbeef";
-
   swapDevices = [];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
