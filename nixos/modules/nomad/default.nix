@@ -1,4 +1,4 @@
-{...}: {
+{self, ...}: {
   config,
   pkgs,
   lib,
@@ -14,6 +14,32 @@ in {
     services.nomad = {
       enable = true;
       enableDocker = true;
+
+      # use patched nomad for flake support
+      package = self.packages.${pkgs.system}.nomad;
+
+      extraPackages = [config.nix.package];
+
+      settings = {
+        bind_addr = "0.0.0.0";
+        datacenter = "dc1";
+
+        server = {
+          enabled = true;
+          bootstrap_expect = 1;
+        };
+
+        client = {
+          enabled = true;
+          cni_path = "${pkgs.cni-plugins}/bin";
+        };
+      };
+    };
+
+    # ensure that docker is present
+    justinrubek.development.containers = {
+      enable = true;
+      useDocker = true;
     };
   };
 }
