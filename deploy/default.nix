@@ -8,7 +8,7 @@ in {
   flake.deploy = {
     nodes = {
       bunky = {
-        hostname = "5.78.50.232";
+        hostname = "bunky";
         profiles.system = {
           sshUser = "admin";
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.bunky;
