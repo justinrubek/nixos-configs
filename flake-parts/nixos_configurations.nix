@@ -123,6 +123,9 @@ in {
           nixosConfig = inputs.nixpkgs.lib.nixosSystem {
             inherit (config) system;
             modules = config.finalModules;
+            specialArgs = {
+              flakeRootPath = ../.;
+            };
           };
 
           nixosPackage = config.nixosConfig.config.system.build.toplevel;
