@@ -1,0 +1,16 @@
+keys:
+  - &admin_justin age125w40f0s5ewk8qaw3xyeect49mg8dv24zrgewff3hn9u8vwv8alqyhem2v
+  - &server_eunomia age125w40f0s5ewk8qaw3xyeect49mg8dv24zrgewff3hn9u8vwv8alqyhem2v
+  - &server_bunky age136gtvs8f8r5tfd7yf4tf2j9stzddhreynpd6jr8xjc8h8dv9rsnqw0a70m
+creation_rules:
+  - path_regex: secrets/bunky/[^/]+\.yaml$
+    key_groups:
+    - age:
+      - *admin_justin
+      - *server_bunky
+  - path_regex: secrets/tailscale/[^/]+\.yaml$
+    key_groups:
+    - age:
+      - *admin_justin
+      - *server_bunky
+      - *server_eunomia
