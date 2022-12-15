@@ -632,11 +632,11 @@
         "terranix": "terranix"
       },
       "locked": {
-        "lastModified": 1670011840,
-        "narHash": "sha256-TwgPSl4c3Nj8lFvpO0h++29Q0Ei44VxQzPpRWryTt2o=",
+        "lastModified": 1671124493,
+        "narHash": "sha256-rl4YrGcYqxR2jYhcImb0kD057Xbj7My/aAARtiazr9w=",
         "owner": "justinrubek",
         "repo": "thoenix",
-        "rev": "4a90557b0993e318069a15a8a3d8e8bfa72ee95e",
+        "rev": "ba2962fbfbe318742bf2cbd0d3fdaeaf0b5da590",
         "type": "github"
       },
       "original": {
