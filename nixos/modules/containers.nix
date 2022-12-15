@@ -16,16 +16,27 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    virtualisation = {
-      podman = lib.mkIf (!cfg.useDocker) {
-        enable = true;
-        dockerCompat = true;
-      };
-
-      docker = lib.mkIf cfg.useDocker {
-        enable = true;
+  config = let
+    podmanConfig = lib.mkIf (!cfg.useDocker) {
+      virtualisation = {
+        podman = {
+          enable = true;
+          dockerCompat = true;
+        };
       };
     };
-  };
+
+    dockerConfig = lib.mkIf cfg.useDocker {
+      virtualisation = {
+        docker = lib.mkIf cfg.useDocker {
+          enable = true;
+          autoPrune.enable = true;
+        };
+      };
+
+      # give docker access to all wheels
+      users.groups.docker.members = config.users.groups.wheel.members;
+    };
+  in
+    lib.mkIf cfg.enable ({} // podmanConfig // dockerConfig);
 }

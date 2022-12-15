@@ -22,9 +22,7 @@
 
   # personal modules
   justinrubek = {
-    development.containers = {
-      enable = true;
-    };
+    nomad.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -32,7 +30,7 @@
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "docker"];
+      extraGroups = ["networkmanager" "wheel"];
       shell = pkgs.zsh;
     };
   };
