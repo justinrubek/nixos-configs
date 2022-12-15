@@ -116,6 +116,7 @@ in {
             ++ builtins.attrValues {
               inherit (config) entryPoint bootloader hardware;
             }
+            ++ [inputs.sops-nix.nixosModules.sops]
             # include this flake's modules
             ++ builtins.attrValues self.nixosModules
             ++ builtins.attrValues self.modules;
@@ -123,6 +124,9 @@ in {
           nixosConfig = inputs.nixpkgs.lib.nixosSystem {
             inherit (config) system;
             modules = config.finalModules;
+            specialArgs = {
+              flakeRootPath = ../.;
+            };
           };
 
           nixosPackage = config.nixosConfig.config.system.build.toplevel;
