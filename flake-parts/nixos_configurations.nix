@@ -116,6 +116,7 @@ in {
             ++ builtins.attrValues {
               inherit (config) entryPoint bootloader hardware;
             }
+            ++ [inputs.sops-nix.nixosModules.sops]
             # include this flake's modules
             ++ builtins.attrValues self.nixosModules
             ++ builtins.attrValues self.modules;
