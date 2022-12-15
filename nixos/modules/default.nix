@@ -20,6 +20,8 @@ in {
     containers = import ./containers.nix inputs;
     nomad = import ./nomad moduleInput;
 
+    tailscale = import ./tailscale moduleInput;
+
     admin_ssh = import ./admin_ssh.nix inputs;
 
     "filesystem/zfs" = import ./filesystem/zfs inputs;
