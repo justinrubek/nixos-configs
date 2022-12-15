@@ -24,6 +24,8 @@
           packer
           inputs'.deploy-rs.packages.deploy-rs
 
+          pkgs.age
+
           self'.packages.terraform-command
           self'.packages.push-configuration
         ];
