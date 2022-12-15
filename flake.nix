@@ -14,10 +14,7 @@
     nurpkgs.url = "github:nix-community/NUR";
 
     flake-utils.url = "github:numtide/flake-utils";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     nixvim.url = "github:pta2002/nixvim";

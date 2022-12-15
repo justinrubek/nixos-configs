@@ -5,6 +5,8 @@
   ...
 }: let
   cfg = config.justinrubek.administration;
+
+  inherit (config.networking) hostName;
 in {
   options.justinrubek.administration = {
     enable = lib.mkEnableOption "enable admin related services";
@@ -30,6 +32,13 @@ in {
     # start an ssh server
     services.openssh = {
       enable = true;
+
+      hostKeys = [
+        {
+          type = "ed25519";
+          path = "/etc/ssh/ssh_host_ed25519_key";
+        }
+      ];
     };
   };
 }
