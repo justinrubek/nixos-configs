@@ -18,7 +18,9 @@ in {
     "windowing/plasma" = import ./windowing/plasma inputs;
 
     containers = import ./containers.nix inputs;
+
     nomad = import ./nomad moduleInput;
+    vault = import ./vault moduleInput;
 
     tailscale = import ./tailscale moduleInput;
 

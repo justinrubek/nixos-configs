@@ -16,6 +16,7 @@
   in rec {
     packages = {
       nomad = pkgs.callPackage ./nomad {};
+      vault-bin = pkgs.callPackage ./vault-bin {};
     };
   };
 }

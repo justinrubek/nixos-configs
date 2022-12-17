@@ -41,5 +41,9 @@ in {
       enable = true;
       useDocker = true;
     };
+
+    networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
+      allowedTCPPorts = [4646];
+    };
   };
 }
