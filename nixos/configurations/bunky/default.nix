@@ -24,6 +24,8 @@
   justinrubek = {
     nomad.enable = true;
 
+    vault.enable = true;
+
     tailscale = {
       enable = true;
       autoconnect.enable = true;
