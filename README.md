@@ -1,52 +1,40 @@
 # home
 
-This is my personal workstation configuration expressed as a nix flake.
-It is currently a work in progress and may become quite specific to me,
-but I am leaving this open to allow others to gather insight on how to make a similar setup.
-The road to learning (and making use of) nix has been long and the documentation quite scarce, so I will appreciate any advice offered in the form of an issue/PR.
+This is my personal workstation and server configurations expressed as a nix flake.
 
-I originally wanted to make use of [digga](https://github.com/divnix/digga) but the project is fairly complex, out of date, and severely lacking in documentation. I will be keeping a close eye on that and potentially contributing to it or making a project in my own vision to accomplish my goals.
 
-## Getting started
+## features
 
-There are two types of configurations exported: one for NixOS and one for home-manager.
-Most of the configuration will live on the home-manager side, but it is useful for me to have both together.
-
-The first thing to remember is that the configuration in this repository is my personal one.
-Especially for the NixOS configuration where it even has options that are specify to my hardware.
-You will need to modify this somewhat to use it.
-I'd like to include more instructions on how to do so, and potentially some better abstractions to make the configurations more agnostic.
-
-The main dependency needed is [nix](https://nixos.org/download.html).
-You will likely need to [configure it to use flakes](https://nixos.wiki/wiki/Flakes#Installing_flakes)
-This project also uses [pre-commit-hooks](https://github.com/cachix/pre-commit-hooks.nix).
-Enable them by obtaining a devShell: `nix develop`
-
-### home-manager
-
-You should be able to apply this configuration to any machine.
-In order to do so you must build the configuration and run the activation script.
-
-`home-manager switch --flake .`
-or
-`home-manager switch --flake github:justinrubek/home`
-
-#### features
-
-- neovim configured with lsp and a number of productivity features/controls
+- packer images for NixOS on a cloud host
+- terraform configuration to provision cloud VMs from a base image and other infrastructure
+- [deploy-rs](https://github.com/serokell/deploy-rs) for managing nixos and home-manager configurations
+- patched [nomad](https://github.com/hashicorp/nomad) that can run nix flakes using the docker driver
+- neovim configured with lsp and a number of other plugins and personal preferences
 - firefox with extensions pre-installed
 - a number of cli and gui tools for daily use
+    - There is a concept of `profiles` in home-manager configurations that captures my commonly used ones
 
-### NixOS
 
-This configuration is meant to be applied to a fresh install of NixOS.
-Follow the regular installer to create partitions.
-Then, place your `hardware-configuration.nix` into the machines directory and use that in place of `manusya`.
-Afterwards you can switch your configuration:
-```bash
-sudo nixos-rebuild switch --flake .
-```
-## inspiration/helping hands
+Most custom configuration is exposed as nix modules and can be accessed by the flake outputs
+`nixosModules`, `homeModules`, and `modules` (for nixos/home agnostic modules).
 
-https://github.com/NobbZ/nixos-config
-https://gvolpe.com/blog/nix-flakes/
+
+## applying nixos/home configurations
+
+### manually
+
+`sudo nixos-rebuild switch --flake .`
+
+`home-manager switch --flake .`
+
+### deploy-rs
+
+Deployment configuration contained in `./deploy`
+
+## terraform
+
+[thoenix](https://github.com/justinrubek/thoenix) is included and a `tnix` script is in the devShell which can run terraform commands:
+
+`tnix hetzner init`
+
+`tnix hetzner plan`
