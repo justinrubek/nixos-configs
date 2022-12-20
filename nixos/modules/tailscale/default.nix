@@ -19,7 +19,7 @@ in {
     networking.nameservers = ["100.100.100.100" "1.1.1.1" "8.8.8.8"];
     networking.search = ["tailfef00.ts.net"];
 
-    sops.secrets."tailscale_key" = {
+    sops.secrets."tailscale_key" = lib.mkIf cfg.autoconnect.enable {
       sopsFile = "${flakeRootPath}/secrets/tailscale/server.yaml";
     };
 
