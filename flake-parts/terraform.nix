@@ -117,7 +117,7 @@
         trap __cleanup EXIT
 
         # place the configuration's directory into a tarball
-        nix build .#terraformConfiguration_$configurationName
+        nix build .#terraformConfiguration/$configurationName
         tar -zcvf $file_name -C ./result .
 
         # lookup the workspace id
