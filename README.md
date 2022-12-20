@@ -38,3 +38,13 @@ Deployment configuration contained in `./deploy`
 `tnix hetzner init`
 
 `tnix hetzner plan`
+
+## secrets
+
+Managed using [sops-nix](https://github.com/Mic92/sops-nix)
+
+New machines need to be added to `.sops.yaml` to access secrets.
+The machine's key can be determined using `ssh-to-age`:
+
+`ssh-keyscan ${ip} | ssh-to-age`
+

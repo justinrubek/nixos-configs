@@ -9,6 +9,12 @@
 in {
   options.justinrubek.vault = {
     enable = lib.mkEnableOption "configure vault";
+
+    node_id = lib.mkOption {
+      type = lib.types.str;
+      default = config.networking.hostName;
+      description = "The node id of the this vault instance.";
+    };
   };
 
   config = lib.mkIf cfg.enable {

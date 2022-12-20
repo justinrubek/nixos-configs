@@ -36,5 +36,27 @@ in {
           }
         ];
     };
+
+    "justin@pyxis" = {
+      system = "x86_64-linux";
+      modules =
+        extraModules
+        ++ [
+          {
+            home.stateVersion = "21.11";
+          }
+        ];
+    };
+
+    "justin@ceylon" = {
+      system = "x86_64-linux";
+      modules =
+        extraModules
+        ++ [
+          {
+            home.stateVersion = "21.11";
+          }
+        ];
+    };
   };
 }
