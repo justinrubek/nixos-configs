@@ -2,7 +2,7 @@ keys:
   - &admin_justin age1en3a406mje3x7nqpmrth4x9n23fz6mwztmyhmtn3fqyrkl25avgqfwghcd
   - &server_eunomia age1en3a406mje3x7nqpmrth4x9n23fz6mwztmyhmtn3fqyrkl25avgqfwghcd
   - &server_bunky age136gtvs8f8r5tfd7yf4tf2j9stzddhreynpd6jr8xjc8h8dv9rsnqw0a70m
-  - &server_ceylon age1p0tp0lym4pe40p67uq066nz2xx6qyrzx7qp5evvc26s5skv4adgq5zcdad
+  - &server_ceylon age1w6qv47z96hspylwrvv3y59y6wnfvxr6vnxxta5puffxrldzha9fqzxssrt 
   - &server_pyxis age1z4zvdvwfwdytqlkggtrf3y2tajwhfgjzq0922yx80pkktujpvyaqr6azgf
 creation_rules:
   - path_regex: secrets/bunky/[^/]+\.yaml$

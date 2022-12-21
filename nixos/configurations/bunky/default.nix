@@ -24,7 +24,14 @@
   justinrubek = {
     nomad.enable = true;
 
-    vault.enable = true;
+    vault = {
+      enable = true;
+
+      retry_join = [
+        "http://pyxis:8200"
+        "http://ceylon:8200"
+      ];
+    };
 
     tailscale = {
       enable = true;

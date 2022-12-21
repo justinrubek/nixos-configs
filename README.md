@@ -5,6 +5,8 @@ This is my personal workstation and server configurations expressed as a nix fla
 
 ## features
 
+In addition to the workstations, the servers are configured to provide the pieces of a HashiCorp stack (currently a work in progress).
+
 - packer images for NixOS on a cloud host
 - terraform configuration to provision cloud VMs from a base image and other infrastructure
 - [deploy-rs](https://github.com/serokell/deploy-rs) for managing nixos and home-manager configurations
@@ -48,3 +50,28 @@ The machine's key can be determined using `ssh-to-age`:
 
 `ssh-keyscan ${ip} | ssh-to-age`
 
+## bootstrapping cluster
+
+1. Provision the server using terraform
+
+`tnix hetzner apply`
+
+
+2. Active nix profiles on the newly provisioned servers
+
+`deploy -i`
+
+
+3. Initialize Vault and join all peers to cluster
+
+Ensure VAULT_ADDR is available for all vault cli commands (since this is happening over http): `export VAULT_ADDR=http://localhost:8200` 
+
+On a single machine, initialize Vault: `vault operator init`.
+Unseal Vault using the keys: `vault operator unseal`
+
+For each additional node, join the cluster and unseal using the same set of keys:
+```
+vault operator raft join http://${initial-node}:8200
+vault unseal
+# repeat unseal
+```
