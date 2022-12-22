@@ -35,6 +35,11 @@
 
     consul = {
       enable = true;
+
+      retry_join = [
+        "pyxis"
+        "ceylon"
+      ];
     };
 
     tailscale = {

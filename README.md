@@ -99,4 +99,6 @@ vault operator unseal
 ```
 4. Join Consul peers to cluster
 
-Repeat this step for each peer to be in the cluster. It's enough to just provide the hostname to consul, no protocol needed: `consul join bunky`
+Repeat this step for each peer to be in the cluster. It's enough to just provide the hostname to Consul, no protocol needed: `consul join bunky`
+
+Assuming that everything has gone correctly, Nomad should automatically bootstrap its cluster using Consul
