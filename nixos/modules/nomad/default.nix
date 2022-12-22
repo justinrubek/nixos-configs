@@ -12,6 +12,8 @@ in {
 
   config = let
     hostName = config.networking.hostName;
+
+    tailscaleInterface = config.services.tailscale.interfaceName;
   in
     lib.mkIf cfg.enable {
       services.nomad = {
@@ -27,10 +29,12 @@ in {
           bind_addr = "0.0.0.0";
           datacenter = "dc1";
 
-          advertise = {
-            http = hostName;
-            rpc = hostName;
-            serf = hostName;
+          advertise = let
+            address = "{{ GetInterfaceIP \"${tailscaleInterface}\" }}";
+          in {
+            http = address;
+            rpc = address;
+            serf = address;
           };
 
           server = {

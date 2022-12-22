@@ -14,16 +14,25 @@ in {
       default = config.networking.hostName;
       description = "The name of the node";
     };
+
+    retry_join = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "A list of nodes to join";
+    };
   };
 
   config = let
     hostName = config.networking.hostName;
+
+    tailscaleInterface = config.services.tailscale.interfaceName;
   in
     lib.mkIf cfg.enable {
       services.consul = {
         enable = true;
 
-        interface.bind = config.services.tailscale.interfaceName;
+        interface.bind = tailscaleInterface;
+        # interface.bind = "{{ GetInterfaceIP \"${tailscaleInterface}\" }}";
 
         webUi = true;
         extraConfig = {
@@ -32,9 +41,12 @@ in {
 
           # bind_addr = "0.0.0.0";
           client_addr = "0.0.0.0";
+          advertise_addr = "{{ GetInterfaceIP \"${tailscaleInterface}\" }}";
 
           server = true;
           bootstrap_expect = 3;
+
+          retry_join = cfg.retry_join;
         };
       };
 
