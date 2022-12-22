@@ -22,7 +22,7 @@
 
   # personal modules
   justinrubek = {
-    nomad.enable = false;
+    nomad.enable = true;
 
     vault = {
       enable = true;
@@ -31,6 +31,10 @@
         "http://bunky:8200"
         "http://pyxis:8200"
       ];
+    };
+
+    consul = {
+      enable = true;
     };
 
     tailscale = {

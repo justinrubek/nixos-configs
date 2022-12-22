@@ -1,9 +1,9 @@
 keys:
   - &admin_justin age1en3a406mje3x7nqpmrth4x9n23fz6mwztmyhmtn3fqyrkl25avgqfwghcd
   - &server_eunomia age1en3a406mje3x7nqpmrth4x9n23fz6mwztmyhmtn3fqyrkl25avgqfwghcd
-  - &server_bunky age136gtvs8f8r5tfd7yf4tf2j9stzddhreynpd6jr8xjc8h8dv9rsnqw0a70m
-  - &server_ceylon age1w6qv47z96hspylwrvv3y59y6wnfvxr6vnxxta5puffxrldzha9fqzxssrt 
-  - &server_pyxis age1z4zvdvwfwdytqlkggtrf3y2tajwhfgjzq0922yx80pkktujpvyaqr6azgf
+  - &server_bunky age1eg73s6n7kw0nu73cmlh7r7h3glc7umufv4q027nd9af757lkhflsxdyqp5
+  - &server_ceylon age1sdpel8lnp90e43a7nag7p44mkpuglf5mg0f0ccq4kr9pvxmdkfpqznvu2r
+  - &server_pyxis age1n52ec7jk26u40rx3c858s9udwp603s24af05h8jpc4h5zqr95uzs86t9w7 
 creation_rules:
   - path_regex: secrets/bunky/[^/]+\.yaml$
     key_groups:

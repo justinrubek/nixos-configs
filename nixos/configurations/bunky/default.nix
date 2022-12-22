@@ -33,6 +33,10 @@
       ];
     };
 
+    consul = {
+      enable = true;
+    };
+
     tailscale = {
       enable = true;
       autoconnect.enable = true;
