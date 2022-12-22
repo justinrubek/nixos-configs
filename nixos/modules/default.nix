@@ -21,6 +21,7 @@ in {
 
     nomad = import ./nomad moduleInput;
     vault = import ./vault moduleInput;
+    consul = import ./consul moduleInput;
 
     tailscale = import ./tailscale moduleInput;
 

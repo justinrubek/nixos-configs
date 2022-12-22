@@ -10,40 +10,60 @@ in {
     enable = lib.mkEnableOption "run nomad";
   };
 
-  config = lib.mkIf cfg.enable {
-    services.nomad = {
-      enable = true;
-      enableDocker = true;
+  config = let
+    hostName = config.networking.hostName;
+  in
+    lib.mkIf cfg.enable {
+      services.nomad = {
+        enable = true;
+        enableDocker = true;
 
-      # use patched nomad for flake support
-      package = self.packages.${pkgs.system}.nomad;
+        # use patched nomad for flake support
+        package = self.packages.${pkgs.system}.nomad;
 
-      extraPackages = [config.nix.package];
+        extraPackages = [config.nix.package];
 
-      settings = {
-        bind_addr = "0.0.0.0";
-        datacenter = "dc1";
+        settings = {
+          bind_addr = "0.0.0.0";
+          datacenter = "dc1";
 
-        server = {
-          enabled = true;
-          bootstrap_expect = 1;
-        };
+          advertise = {
+            http = hostName;
+            rpc = hostName;
+            serf = hostName;
+          };
 
-        client = {
-          enabled = true;
-          cni_path = "${pkgs.cni-plugins}/bin";
+          server = {
+            enabled = true;
+            bootstrap_expect = 3;
+          };
+
+          client = {
+            enabled = true;
+            network_interface = config.services.tailscale.interfaceName;
+            cni_path = "${pkgs.cni-plugins}/bin";
+          };
         };
       };
-    };
 
-    # ensure that docker is present
-    justinrubek.development.containers = {
-      enable = true;
-      useDocker = true;
-    };
+      # ensure that docker is present
+      justinrubek.development.containers = {
+        enable = true;
+        useDocker = true;
+      };
 
-    networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
-      allowedTCPPorts = [4646];
+      networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
+        # nomad ports
+        allowedTCPPorts = [4646 4647 4648];
+        allowedUDPPorts = [4648];
+
+        # ephemeral ports
+        allowedTCPPortRanges = [
+          {
+            from = 20000;
+            to = 32000;
+          }
+        ];
+      };
     };
-  };
 }

@@ -52,6 +52,20 @@ The machine's key can be determined using `ssh-to-age`:
 
 ## bootstrapping cluster
 
+0. Pre-setup
+
+In order to access the machines that are going to be provisioned an SSH key has to be provided to the `justinrubek.administration` module.
+This will be the key used for deploying NixOS configurations to the machines.
+Particularly, the setting must be configured for the base image so that the desired configuration will be applied to the correct host.
+Beyond that each host may have their own configuration which differs from this.
+
+A base image must exist so that terraform can provision the machines.
+Currently there is only a generator included for Hetzner Cloud: `cd packer/hetzner/ && HCLOUD_TOKEN=token packer build main.pkr.hcl`
+This will create a new server in rescue mode, switch it with NixOS, and create a snapshot.
+The image ID will need to be specified in the terraform configuration.
+Find it using `hcloud image list --type snapshot`, noting the `ID` field.
+
+
 1. Provision the server using terraform
 
 `tnix hetzner apply`
@@ -59,19 +73,30 @@ The machine's key can be determined using `ssh-to-age`:
 
 2. Active nix profiles on the newly provisioned servers
 
-`deploy -i`
+The base image doesn't have tailscale configured, so the addresses will have to be specified manually at this point.
+Change the deployment configuration so that each node that is newly created from the base image has an address from which it can be accessed via SSH.
+Once a machine is configured with tailscale this is not needed, but can still remain as is.
+
+Additionally, new servers should have their key added to `.sops.yaml` at this point.
+The files we need re-processed to ensure the newly added keys can access them: `sops updatekeys ${secretsFile}`.
+
+Finally, build and push the configuration to the servers: `deploy -i`
 
 
 3. Initialize Vault and join all peers to cluster
 
 Ensure VAULT_ADDR is available for all vault cli commands (since this is happening over http): `export VAULT_ADDR=http://localhost:8200` 
 
-On a single machine, initialize Vault: `vault operator init`.
+SSH into one of the machines and initialize Vault: `vault operator init`.
 Unseal Vault using the keys: `vault operator unseal`
 
 For each additional node, join the cluster and unseal using the same set of keys:
 ```
+export VAULT_ADDR=http://localhost:8200
 vault operator raft join http://${initial-node}:8200
-vault unseal
-# repeat unseal
+vault operator unseal
+# repeat unseal until done
 ```
+4. Join Consul peers to cluster
+
+Repeat this step for each peer to be in the cluster. It's enough to just provide the hostname to consul, no protocol needed: `consul join bunky`
