@@ -8,6 +8,10 @@ in {
     };
   };
 
+  ###
+  ### Configure Consul ACLs
+  ###
+
   data.consul_acl_policy.management.name = "global-management";
 
   resource.consul_acl_token.vault = {
@@ -27,5 +31,60 @@ in {
     token = "\${data.consul_acl_token_secret_id.vault.secret_id}";
     default_lease_ttl_seconds = 3600;
     max_lease_ttl_seconds = 3600;
+  };
+
+  ###
+  ### Configure consul policies
+  ###
+
+  resource.consul_acl_policy = {
+    intentions_read = {
+      name = "intentions-read";
+      rules = ''
+        service_prefix "" {
+          policy = "read"
+        }'';
+    };
+
+    app_key_read = {
+      name = "key-read";
+      rules = ''
+        key_prefix "app" {
+          policy = "list"
+        }'';
+    };
+  };
+
+  resource.vault_consul_secret_backend_role.app_team = {
+    name = "app-team";
+    backend = "\${vault_consul_secret_backend.consul.path}";
+    policies = [
+      "\${consul_acl_policy.intentions_read.name}"
+      "\${consul_acl_policy.app_key_read.name}"
+    ];
+  };
+
+  ###
+  ### Configure app team vault auth
+  ###
+
+  resource.vault_github_auth_backend.org.organization = "rubek-dev";
+
+  resource.vault_policy.app_team = {
+    name = "app-team";
+
+    policy = ''
+      path "consul/creds/app-team" {
+        capabilities = ["read"]
+      }
+    '';
+  };
+
+  resource.vault_github_team.app_team = {
+    backend = "\${vault_github_auth_backend.org.id}";
+    team = "app-team";
+    policies = [
+      "\${vault_policy.app_team.name}"
+    ];
   };
 }

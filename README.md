@@ -99,6 +99,20 @@ vault operator unseal
 ```
 4. Join Consul peers to cluster
 
-Repeat this step for each peer to be in the cluster. It's enough to just provide the hostname to Consul, no protocol needed: `consul join bunky`
+Repeat this step for each peer to be in the cluster.
+It's enough to just provide the hostname to Consul, no protocol needed: `consul join bunky`.
+Note: these have been given `retry_join` configuration, so this may not be needed.
 
-Assuming that everything has gone correctly, Nomad should automatically bootstrap its cluster using Consul
+Assuming that everything has gone correctly, Nomad should automatically bootstrap its cluster using Consul once this is done.
+
+5. Configure Vault and Consul
+
+Terraform configuration is provided to configure Vault: `tnix vault init && tnix vault apply`.
+
+Additionally, the `consul` configuration is provided to allow Vault to manage Consul ACLs: `tnix consul init && tnix consul apply`.
+
+See the following guides for information on how this was set up:
+
+https://developer.hashicorp.com/consul/tutorials/security/access-control-setup-production#bootstrap-the-acl-system
+
+https://www.hashicorp.com/blog/managing-hashicorp-consul-access-control-lists-with-terraform-and-vault

@@ -57,3 +57,9 @@ path "sys/health"
 {
   capabilities = ["read", "sudo"]
 }
+
+# Manage transit secrets engine
+path "consul/*"
+{
+  capabilities = ["read", "list"]
+}
