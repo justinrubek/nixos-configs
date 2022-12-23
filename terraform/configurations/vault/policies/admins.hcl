@@ -40,10 +40,10 @@ path "sys/mounts"
   capabilities = ["read", "list"]
 }
 
-# List, create, update, and delete key/value secrets at secret/
-path "secret/*"
+# List, create, update, and delete key/value secrets at kv-v2/
+path "kv-v2/*"
 {
-  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+  capabilities = ["read", "list"]
 }
 
 # Manage transit secrets engine
@@ -58,7 +58,7 @@ path "sys/health"
   capabilities = ["read", "sudo"]
 }
 
-# Manage transit secrets engine
+# Manage consul access
 path "consul/*"
 {
   capabilities = ["read", "list"]
