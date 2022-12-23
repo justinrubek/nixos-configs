@@ -25,7 +25,7 @@
       # p.template
       # p.tls
       # p.tfe
-      # p.vault
+      p.vault
     ];
     terraform = pkgs.terraform.withPlugins terraformPluginsPredicate;
 

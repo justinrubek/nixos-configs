@@ -30,6 +30,8 @@
 
           self'.packages.terraform-command
           self'.packages.push-configuration
+
+          self'.packages.vault-bin
         ];
         inherit (pre-commit-check) shellHook;
       };

@@ -14,6 +14,6 @@ result*
 **/.terraform
 content*.tar.gz
 create_config_version.json
-generated_config.tf.json
+**/config.tf.json
 
 .env
