@@ -54,7 +54,7 @@ The machine's key can be determined using `ssh-to-age`:
 
 #### tips
 
-`export VAULT_ADDR=http://bunky:8200`
+`export VAULT_ADDR=http://127.0.0.1:8200`
 
 `vault kv get --mount=kv-v2 secret/hello`
 
