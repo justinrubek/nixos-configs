@@ -40,6 +40,8 @@
         "pyxis"
         "ceylon"
       ];
+
+      acl.enable = true;
     };
 
     tailscale = {

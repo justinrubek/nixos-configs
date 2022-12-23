@@ -40,6 +40,8 @@
         "bunky"
         "ceylon"
       ];
+
+      acl.enable = true;
     };
 
     tailscale = {
