@@ -26,8 +26,10 @@
       # p.tls
       # p.tfe
       p.vault
+      p.sops
     ];
-    terraform = pkgs.terraform.withPlugins terraformPluginsPredicate;
+    # terraform = pkgs.terraform.withPlugins terraformPluginsPredicate;
+    terraform = pkgs.terraform;
 
     # alias the terraform command to execute within the proper directory
     terraform-command = let
