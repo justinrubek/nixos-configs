@@ -20,6 +20,12 @@ in {
       default = [];
       description = "A list of nodes to join";
     };
+
+    acl.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable ACLs";
+    };
   };
 
   config = let
@@ -47,6 +53,13 @@ in {
           bootstrap_expect = 3;
 
           retry_join = cfg.retry_join;
+
+          acl = lib.mkIf cfg.acl.enable {
+            enabled = true;
+            default_policy = "allow";
+            # default_policy = "deny";
+            enable_token_persistence = true;
+          };
         };
       };
 

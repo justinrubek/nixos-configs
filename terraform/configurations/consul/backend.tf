@@ -3,7 +3,7 @@ terraform {
     organization = "justinrubek"
 
     workspaces {
-      name = "vault"
+      name = "consul"
     }
   }
 
@@ -12,7 +12,6 @@ terraform {
       version = "3.11.0"
     }
     consul = {
-      version = "2.16.2"
     }
     sops = {
       source = "carlpett/sops"

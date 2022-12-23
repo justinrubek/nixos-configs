@@ -40,6 +40,8 @@
         "bunky"
         "pyxis"
       ];
+
+      acl.enable = true;
     };
 
     tailscale = {
