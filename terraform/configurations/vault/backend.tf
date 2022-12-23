@@ -11,6 +11,10 @@ terraform {
     vault = {
       version = "3.11.0"
     }
+    sops = {
+      source = "carlpett/sops"
+      version = "0.7.1"
+    }
   }
 
   required_version = ">= 1.0"

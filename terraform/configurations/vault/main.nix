@@ -1,7 +1,18 @@
 {...}: let
 in {
   # configure hcloud
-  provider.vault = {
+  provider = {
+    vault = {};
+
+    sops = {};
+  };
+
+  data.sops_file.vault_admin = {
+    source_file = "../../../secrets/vault/admin.yaml";
+  };
+
+  locals = {
+    vault_admin = ''''${data.sops_file.vault_admin.data["default_password"]}'';
   };
 
   resource.vault_policy = {
@@ -20,13 +31,13 @@ in {
     type = "userpass";
   };
 
-  resource.vault_generic_endpoint.justin = {
+  resource.vault_generic_endpoint.admin = {
     depends_on = ["vault_auth_backend.userpass"];
-    path = "auth/userpass/users/justin";
+    path = "auth/userpass/users/admin";
     ignore_absent_fields = true;
 
     data_json = ''      {
-            "password": "password",
+            "password": "''${local.vault_admin}",
             "policies": ["admins", "eaas-client"]
           }'';
   };

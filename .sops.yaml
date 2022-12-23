@@ -18,3 +18,8 @@ creation_rules:
       - *server_eunomia
       - *server_ceylon
       - *server_pyxis
+  - path_regex: secrets/vault/[^/]+\.yaml$
+    key_groups:
+    - age:
+      - *admin_justin
+
