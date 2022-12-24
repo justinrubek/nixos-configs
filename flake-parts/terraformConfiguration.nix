@@ -18,6 +18,7 @@
       enable = true;
 
       configDirectory = ../terraform/configurations;
+      extraArgs = {nomadJobs = self'.packages.nomadJobs;};
     };
   };
 }

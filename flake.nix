@@ -36,6 +36,11 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-nomad = {
+      url = "github:tristanpemble/nix-nomad";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -68,6 +73,8 @@
         ./packages
 
         ./deploy
+
+        ./nomad
       ];
     };
 }
