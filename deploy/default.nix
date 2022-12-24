@@ -26,6 +26,7 @@ in {
       bunky = mkDeployNode {hostname = "bunky";};
       pyxis = mkDeployNode {hostname = "pyxis";};
       ceylon = mkDeployNode {hostname = "ceylon";};
+      huginn = mkDeployNode {hostname = "huginn";};
     };
   };
 }
