@@ -1,12 +1,4 @@
-{
-  nomadJobs,
-  pkgs,
-  ...
-}: let
-  system = pkgs.system;
-
-  nomad_jobs = nomadJobs;
-in {
+{...}: {
   # configure hcloud
   provider = {
     vault = {};
