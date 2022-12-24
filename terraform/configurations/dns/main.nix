@@ -15,9 +15,11 @@
 
   resource.porkbun_dns_record.dummy_api = {
     domain = "rubek.cloud";
+    # TODO: wildcard?
     name = "dummy-api";
     type = "A";
 
+    # TODO: pull this in from the outputs of another configuration
     content = "5.78.58.3";
   };
 }

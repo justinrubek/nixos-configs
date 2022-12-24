@@ -17,6 +17,7 @@
         inherit system;
         config = [
           ./jobs/dummy-api.nix
+          ./jobs/dummy-api-nix.nix
         ];
       };
     };

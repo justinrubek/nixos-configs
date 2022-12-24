@@ -13,8 +13,12 @@ in {
   };
 
   resource.nomad_job.dummy_api = {
-    # jobspec = builtins.readFile "${nomad_jobs}/dummy_api.json";
     jobspec = ''''${file("${nomad_jobs}/dummy_api.json")}'';
+    json = true;
+  };
+
+  resource.nomad_job.dummy_api_nix = {
+    jobspec = ''''${file("${nomad_jobs}/dummy_api_nix.json")}'';
     json = true;
   };
 }
