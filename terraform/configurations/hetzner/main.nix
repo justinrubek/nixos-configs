@@ -45,4 +45,36 @@ in {
     inherit server_type location image;
     inherit public_net;
   };
+
+  resource.hcloud_firewall.load_balancer = {
+    name = "allow_http";
+
+    rule = [
+      {
+        direction = "in";
+        protocol = "tcp";
+        port = "80";
+        source_ips = [
+          "0.0.0.0/0"
+          "::/0"
+        ];
+      }
+      {
+        direction = "in";
+        protocol = "tcp";
+        port = "443";
+        source_ips = [
+          "0.0.0.0/0"
+          "::/0"
+        ];
+      }
+    ];
+  };
+
+  resource.hcloud_firewall_attachment.http_firewall = {
+    firewall_id = "\${hcloud_firewall.load_balancer.id}";
+    server_ids = [
+      "\${hcloud_server.huginn.id}"
+    ];
+  };
 }
