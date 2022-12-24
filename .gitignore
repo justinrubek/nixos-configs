@@ -17,3 +17,5 @@ create_config_version.json
 **/config.tf.json
 
 .env
+
+**/packer-manifest.json
