@@ -20,6 +20,9 @@ in {
         enable = true;
         enableDocker = true;
 
+        # required in order to access nix for pulling images with docker driver mods
+        dropPrivileges = false;
+
         # use patched nomad for flake support
         package = self.packages.${pkgs.system}.nomad;
 
