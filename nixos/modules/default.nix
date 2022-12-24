@@ -25,6 +25,8 @@ in {
 
     tailscale = import ./tailscale moduleInput;
 
+    haproxy = import ./haproxy moduleInput;
+
     admin_ssh = import ./admin_ssh.nix inputs;
 
     "filesystem/zfs" = import ./filesystem/zfs inputs;
