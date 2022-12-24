@@ -58,6 +58,8 @@ in {
       # openscad
       statix
       cocogitto
+
+      dig
     ];
   };
 }
