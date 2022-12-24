@@ -36,6 +36,10 @@ in {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
     };
+    huginn = {
+      system = "x86_64-linux";
+      modules = hetznerModules ++ sshModule;
+    };
 
     # other
     hetzner-base = {

@@ -38,4 +38,11 @@ in {
     inherit server_type location image;
     inherit public_net;
   };
+
+  resource.hcloud_server.huginn = {
+    name = "huginn";
+
+    inherit server_type location image;
+    inherit public_net;
+  };
 }
