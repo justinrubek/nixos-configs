@@ -16,10 +16,22 @@
 
         config = {
           nix_flake_ref = "github:justinrubek/axum-dummy-api#packages.x86_64-linux.api";
-          nix_flake_sha = "sha256-1q0j7qj7qj7qj7qj7qj7qj7qj7qj7qj7qj7qj7qj7qj7qj7qj7q";
+          nix_flake_sha = "sha256-ypid10gYPAeGneUy5l9S3MNxHBOKCXnlhH9no40XqVs=";
           entrypoint = ["bin/dummy_api"];
 
           ports = ["http"];
+
+          mount = [
+            {
+              type = "bind";
+              source = "/nix/store";
+              target = "/nix/store";
+              readonly = true;
+              bind_options = {
+                propagation = "rshared";
+              };
+            }
+          ];
         };
       };
 
@@ -36,15 +48,6 @@
               timeout = 5000000000;
             }
           ];
-        }
-      ];
-
-      mounts = [
-        {
-          type = "bind";
-          source = "/nix/store";
-          target = "/nix/store";
-          readonly = true;
         }
       ];
     };
