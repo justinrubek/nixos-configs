@@ -25,3 +25,9 @@ creation_rules:
     - age:
       - *admin_justin
 
+  - path_regex: secrets/porkbun/creds.yaml$
+    key_groups:
+    - age:
+      - *admin_justin
+      - *server_huginn
+

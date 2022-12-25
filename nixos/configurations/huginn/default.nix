@@ -29,6 +29,7 @@
 
     haproxy = {
       enable = true;
+      ssl.enable = true;
     };
   };
 
