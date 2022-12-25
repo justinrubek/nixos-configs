@@ -2,12 +2,15 @@
   config,
   pkgs,
   lib,
+  flakeRootPath,
   ...
 }: let
   cfg = config.justinrubek.haproxy;
 in {
   options.justinrubek.haproxy = {
     enable = lib.mkEnableOption "run haproxy";
+
+    ssl.enable = lib.mkEnableOption "fetch SSL certificates";
   };
 
   config = let
@@ -18,6 +21,7 @@ in {
     lib.mkIf cfg.enable {
       services.haproxy = {
         enable = true;
+
         config = ''
           global
             maxconn 256
@@ -37,6 +41,11 @@ in {
 
           frontend public
             bind 0.0.0.0:80
+            ${
+            if cfg.ssl.enable
+            then "bind 0.0.0.0:443 ssl crt /var/lib/acme/rubek.cloud/full.pem"
+            else ""
+          }
             default_backend app
 
           frontend stats
@@ -58,9 +67,36 @@ in {
         ];
       };
 
-      networking.firewall.allowedTCPPorts = [
-        80 # HTTP
-        443 # HTTPS
-      ];
+      networking.firewall.allowedTCPPorts =
+        [
+          80 # HTTP
+        ]
+        ++ lib.optionals cfg.ssl.enable [
+          443 # HTTPS
+        ];
+
+      sops.secrets."porkbun_api" = lib.mkIf cfg.ssl.enable {
+        sopsFile = "${flakeRootPath}/secrets/porkbun/creds.yaml";
+        owner = "acme";
+      };
+
+      security.acme = lib.mkIf cfg.ssl.enable {
+        acceptTerms = true;
+        defaults.email = "justintrubek@protonmail.com";
+        certs = {
+          "rubek.cloud" = {
+            domain = "*.rubek.cloud";
+            extraDomainNames = [
+              "rubek.cloud"
+              # "*.rubek.dev"
+              # "rubek.dev"
+            ];
+            dnsProvider = "porkbun";
+            credentialsFile = config.sops.secrets."porkbun_api".path;
+            dnsPropagationCheck = true;
+            group = "haproxy";
+          };
+        };
+      };
     };
 }
