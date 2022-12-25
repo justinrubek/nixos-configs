@@ -91,12 +91,12 @@ in {
             domain = "*.rubek.cloud";
             extraDomainNames = [
               "rubek.cloud"
-              # "*.rubek.dev"
-              # "rubek.dev"
+              "*.rubek.dev"
+              "rubek.dev"
             ];
             dnsProvider = "porkbun";
             credentialsFile = config.sops.secrets."porkbun_api".path;
-            dnsPropagationCheck = true;
+            dnsPropagationCheck = false;
             group = "haproxy";
           };
         };
