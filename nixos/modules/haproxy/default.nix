@@ -43,7 +43,10 @@ in {
             bind 0.0.0.0:80
             ${
             if cfg.ssl.enable
-            then "bind 0.0.0.0:443 ssl crt /var/lib/acme/rubek.cloud/full.pem"
+            then ''
+              bind 0.0.0.0:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
+              http-request redirect scheme https code 301 unless { ssl_fc }
+            ''
             else ""
           }
             default_backend app
@@ -57,7 +60,7 @@ in {
 
           backend app
             balance roundrobin
-            server-template dummy-api 1-10 _dummy-api._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
+            server-template rubek-dev-site 1-10 _rubek-dev-site._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
         '';
       };
 

@@ -21,4 +21,9 @@ in {
     jobspec = ''''${file("${nomad_jobs}/dummy_api_nix.json")}'';
     json = true;
   };
+
+  resource.nomad_job.rubek_site = {
+    jobspec = ''''${file("${nomad_jobs}/rubek_site.json")}'';
+    json = true;
+  };
 }
