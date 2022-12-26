@@ -18,7 +18,7 @@ in {
       # see https://github.com/NixOS/nixpkgs/issues/78961
       (pkgs.discord.override {
         nss = pkgs.nss_latest;
-        withOpenASAR = true;
+        # withOpenASAR = true;
       })
     ];
   };
