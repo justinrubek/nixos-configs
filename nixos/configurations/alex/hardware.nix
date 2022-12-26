@@ -26,6 +26,31 @@
     };
   };
 
+  services.nfs.server = {
+    enable = true;
+    statdPort = 4000;
+    lockdPort = 4001;
+    mountdPort = 4002;
+    exports = ''
+      /var/nfs/valheim *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
+    '';
+  };
+
+  networking.firewall.interfaces.${config.services.tailscale.interfaceName} = let
+    ports = [
+      # NFS
+      111
+      2049
+      4000
+      4001
+      4002
+      20048
+    ];
+  in {
+    allowedTCPPorts = ports;
+    allowedUDPPorts = ports;
+  };
+
   swapDevices = [
     {device = "/dev/disk/by-label/SWAP";}
   ];

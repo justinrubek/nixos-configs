@@ -19,6 +19,7 @@
           ./jobs/dummy-api.nix
           ./jobs/dummy-api-nix.nix
           ./jobs/rubek-site.nix
+          ./jobs/storage.nix
         ];
       };
     };
