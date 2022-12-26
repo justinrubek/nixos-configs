@@ -77,4 +77,25 @@ in {
       "\${hcloud_server.huginn.id}"
     ];
   };
+
+  ### NFS
+
+  resource.hcloud_server.alex = {
+    name = "alex";
+
+    inherit server_type location image;
+    inherit public_net;
+  };
+
+  resource.hcloud_volume.persist = {
+    name = "persist";
+    size = 50;
+    location = "hil";
+  };
+
+  resource.hcloud_volume_attachment.nfs = {
+    server_id = "\${hcloud_server.alex.id}";
+    volume_id = "\${hcloud_volume.persist.id}";
+    automount = false;
+  };
 }

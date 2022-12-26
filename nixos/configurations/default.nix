@@ -40,6 +40,10 @@ in {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
     };
+    alex = {
+      system = "x86_64-linux";
+      modules = hetznerModules ++ sshModule;
+    };
 
     # other
     hetzner-base = {
