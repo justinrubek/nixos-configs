@@ -69,5 +69,16 @@ in {
           }
         ];
     };
+
+    "justin@alex" = {
+      system = "x86_64-linux";
+      modules =
+        extraModules
+        ++ [
+          {
+            home.stateVersion = "21.11";
+          }
+        ];
+    };
   };
 }
