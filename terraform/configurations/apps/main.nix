@@ -81,8 +81,7 @@ in {
 
   resource.nomad_job.valheim = {
     depends_on = ["resource.nomad_volume.valheim_data" "resource.nomad_volume.valheim_config"];
-    jobspec = ''''${file("''${path.module}/jobs/valheim.nomad")}'';
-    # jobspec = ''''${file("${nomad_jobs}/valheim.json")}'';
-    # json = true;
+    jobspec = ''''${file("${nomad_jobs}/valheim.json")}'';
+    json = true;
   };
 }
