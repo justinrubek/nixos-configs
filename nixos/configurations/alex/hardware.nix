@@ -32,7 +32,8 @@
     lockdPort = 4001;
     mountdPort = 4002;
     exports = ''
-      /var/nfs/valheim *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
+      /var/nfs/valheim/data *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
+      /var/nfs/valheim/config *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
     '';
   };
 

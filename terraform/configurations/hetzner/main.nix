@@ -35,7 +35,8 @@ in {
   resource.hcloud_server.ceylon = {
     name = "ceylon";
 
-    inherit server_type location image;
+    server_type = "cpx31";
+    inherit location image;
     inherit public_net;
   };
 
