@@ -49,6 +49,10 @@ in {
             enabled = true;
             network_interface = config.services.tailscale.interfaceName;
             cni_path = "${pkgs.cni-plugins}/bin";
+
+            options = {
+              "docker.privileged.enabled" = "true";
+            };
           };
         };
       };
