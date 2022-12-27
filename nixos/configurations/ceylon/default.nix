@@ -77,6 +77,9 @@
   #   permitRootLogin = "no";
   # };
 
+  # rpc.statd fix
+  services.nfs.server.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
