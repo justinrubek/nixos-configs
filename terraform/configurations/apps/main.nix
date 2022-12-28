@@ -12,55 +12,27 @@ in {
     nomad = {};
   };
 
-  resource.nomad_volume.valheim_data = {
-    depends_on = ["resource.nomad_job.storage_controller" "resource.nomad_job.storage_node"];
-    type = "csi";
-    plugin_id = "org.democratic-csi.nfs";
-    volume_id = "valheim-data";
-    name = "valheim-data";
-    external_id = "valheim-data";
+  justinrubek.nomadVolumes = {
+    valheim_data = {
+      enable = true;
 
-    capability = {
-      access_mode = "single-node-writer";
-      attachment_mode = "file-system";
-    };
-
-    context = {
       server = "alex";
-      share = "/var/nfs/valheim/data";
-      node_attach_driver = "nfs";
-      provisioner_driver = "node-manual";
+      path = "/var/nfs/valheim/data";
+
+      extraArgs = {
+        depends_on = ["resource.nomad_job.storage_controller" "resource.nomad_job.storage_node"];
+      };
     };
 
-    mount_options = {
-      fs_type = "nfs";
-      mount_flags = ["nfsvers=3" "hard" "async"];
-    };
-  };
+    valheim_config = {
+      enable = true;
 
-  resource.nomad_volume.valheim_config = {
-    depends_on = ["resource.nomad_job.storage_controller" "resource.nomad_job.storage_node"];
-    type = "csi";
-    plugin_id = "org.democratic-csi.nfs";
-    volume_id = "valheim-config";
-    name = "valheim-config";
-    external_id = "valheim-config";
-
-    capability = {
-      access_mode = "single-node-writer";
-      attachment_mode = "file-system";
-    };
-
-    context = {
       server = "alex";
-      share = "/var/nfs/valheim/config";
-      node_attach_driver = "nfs";
-      provisioner_driver = "node-manual";
-    };
+      path = "/var/nfs/valheim/config";
 
-    mount_options = {
-      fs_type = "nfs";
-      mount_flags = ["nfsvers=3" "hard" "async"];
+      extraArgs = {
+        depends_on = ["resource.nomad_job.storage_controller" "resource.nomad_job.storage_node"];
+      };
     };
   };
 

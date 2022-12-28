@@ -10,5 +10,6 @@
 in {
   flake.terraformModules = {
     nomadjob = import ./nomadjob moduleInput;
+    nomadvolumes = import ./nomadvolumes moduleInput;
   };
 }

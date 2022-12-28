@@ -6,18 +6,18 @@
       count = 1;
 
       volume = {
-        "valheim-data" = {
+        "valheim_data" = {
           type = "csi";
-          source = "valheim-data";
+          source = "valheim_data";
           readOnly = false;
 
           attachmentMode = "file-system";
           accessMode = "single-node-writer";
         };
 
-        "valheim-config" = {
+        "valheim_config" = {
           type = "csi";
-          source = "valheim-config";
+          source = "valheim_config";
           readOnly = false;
 
           attachmentMode = "file-system";
@@ -45,12 +45,12 @@
 
         volumeMounts = [
           {
-            volume = "valheim-data";
+            volume = "valheim_data";
             destination = "/opt/valheim";
             readOnly = false;
           }
           {
-            volume = "valheim-config";
+            volume = "valheim_config";
             destination = "/config";
             readOnly = false;
           }
