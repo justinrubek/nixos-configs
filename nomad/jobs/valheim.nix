@@ -45,7 +45,7 @@
 
         volumeMounts = [
           {
-            volume = "valheim";
+            volume = "valheim-data";
             destination = "/opt/valheim";
             readOnly = false;
           }
@@ -59,7 +59,19 @@
         config = {
           image = "ghcr.io/lloesche/valheim-server";
         };
+
+        resources = {
+          cpu = 6000;
+          memory = 4096;
+        };
       };
+
+      services = [
+        {
+          name = "valheim-game";
+          port = "game1";
+        }
+      ];
     };
   };
 }

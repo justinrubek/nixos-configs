@@ -12,21 +12,6 @@ in {
     nomad = {};
   };
 
-  resource.nomad_job.rubek_site = {
-    jobspec = ''''${file("${nomad_jobs}/rubek_site.json")}'';
-    json = true;
-  };
-
-  resource.nomad_job.storage_controller = {
-    jobspec = ''''${file("${nomad_jobs}/storage_controller.json")}'';
-    json = true;
-  };
-
-  resource.nomad_job.storage_node = {
-    jobspec = ''''${file("${nomad_jobs}/storage_node.json")}'';
-    json = true;
-  };
-
   resource.nomad_volume.valheim_data = {
     depends_on = ["resource.nomad_job.storage_controller" "resource.nomad_job.storage_node"];
     type = "csi";
@@ -79,9 +64,28 @@ in {
     };
   };
 
-  resource.nomad_job.valheim = {
-    depends_on = ["resource.nomad_volume.valheim_data" "resource.nomad_volume.valheim_config"];
-    jobspec = ''''${file("${nomad_jobs}/valheim.json")}'';
-    json = true;
+  justinrubek.nomadJobs = {
+    valheim = {
+      enable = true;
+      jobspec = "${nomad_jobs}/valheim.json";
+      extraArgs = {
+        depends_on = ["resource.nomad_volume.valheim_data" "resource.nomad_volume.valheim_config"];
+      };
+    };
+
+    rubek_site = {
+      enable = true;
+      jobspec = "${nomad_jobs}/rubek_site.json";
+    };
+
+    storage_controller = {
+      enable = true;
+      jobspec = "${nomad_jobs}/storage_controller.json";
+    };
+
+    storage_node = {
+      enable = true;
+      jobspec = "${nomad_jobs}/storage_node.json";
+    };
   };
 }
