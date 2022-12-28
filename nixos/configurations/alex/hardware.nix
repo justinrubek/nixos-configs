@@ -34,6 +34,10 @@
     exports = ''
       /var/nfs/valheim/data *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
       /var/nfs/valheim/config *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
+
+      /var/nfs/jellyfin/cache *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
+      /var/nfs/jellyfin/config *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
+      /var/nfs/jellyfin/media *(rw,fsid=0,subtree_check,async,no_root_squash,crossmnt)
     '';
   };
 

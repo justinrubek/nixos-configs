@@ -21,6 +21,7 @@
           ./jobs/rubek-site.nix
           ./jobs/storage.nix
           ./jobs/valheim.nix
+          ./jobs/jellyfin.nix
         ];
       };
     };
