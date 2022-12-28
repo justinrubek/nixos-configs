@@ -47,6 +47,8 @@ in {
         config = {
           volumeResource =
             {
+              depends_on = ["resource.nomad_job.storage_controller" "resource.nomad_job.storage_node"];
+
               type = "csi";
               plugin_id = "org.democratic-csi.nfs";
               volume_id = name;

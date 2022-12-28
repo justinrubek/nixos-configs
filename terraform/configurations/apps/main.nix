@@ -18,10 +18,6 @@ in {
 
       server = "alex";
       path = "/var/nfs/valheim/data";
-
-      extraArgs = {
-        depends_on = ["resource.nomad_job.storage_controller" "resource.nomad_job.storage_node"];
-      };
     };
 
     valheim_config = {
@@ -29,10 +25,6 @@ in {
 
       server = "alex";
       path = "/var/nfs/valheim/config";
-
-      extraArgs = {
-        depends_on = ["resource.nomad_job.storage_controller" "resource.nomad_job.storage_node"];
-      };
     };
   };
 
