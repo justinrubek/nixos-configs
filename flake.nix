@@ -64,6 +64,8 @@
         ./flake-parts/terraform.nix
         ./flake-parts/terraformConfiguration.nix
 
+        ./terraform/modules
+
         ./nixos/modules
         ./modules
 

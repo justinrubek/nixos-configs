@@ -19,6 +19,8 @@
 
       configDirectory = ../terraform/configurations;
       extraArgs = {nomadJobs = self'.packages.nomadJobs;};
+
+      terranixModules = lib.mapAttrsToList (name: value: value) self.terraformModules;
     };
   };
 }
