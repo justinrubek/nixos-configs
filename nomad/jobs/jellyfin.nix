@@ -64,6 +64,7 @@
 
         config = {
           image = "jellyfin/jellyfin:latest";
+          # image = "jellyfin/jellyfin@sha256:73501b70b0e884e5815d8f03d22973513ae7cadbcd8dba95da60e1d7c82dac7b";
         };
 
         resources = {
@@ -76,6 +77,15 @@
         {
           name = "jellyfin";
           port = "http";
+          checks = [
+            {
+              type = "http";
+              name = "jellyfin alive";
+              path = "/web/index.html";
+              interval = 20000000000;
+              timeout = 5000000000;
+            }
+          ];
         }
       ];
     };

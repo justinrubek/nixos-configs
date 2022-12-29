@@ -63,6 +63,7 @@
         ./flake-parts/home_configurations.nix
         ./flake-parts/terraform.nix
         ./flake-parts/terraformConfiguration.nix
+        ./flake-parts/dockerImages.nix
 
         ./terraform/modules
 

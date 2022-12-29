@@ -47,6 +47,30 @@ in {
       server = "alex";
       path = "/var/nfs/jellyfin/media";
     };
+
+    ### paperless-ngx
+    ### https://github.com/paperless-ngx/paperless-ngx/blob/800e842ab304ce2fcb1c126d491dac0770ad66ff/Dockerfile#L255
+
+    paperless_consume = {
+      enable = true;
+
+      server = "alex";
+      path = "/var/nfs/paperless/consume";
+    };
+
+    paperless_data = {
+      enable = true;
+
+      server = "alex";
+      path = "/var/nfs/paperless/data";
+    };
+
+    paperless_media = {
+      enable = true;
+
+      server = "alex";
+      path = "/var/nfs/paperless/media";
+    };
   };
 
   justinrubek.nomadJobs = {
@@ -74,10 +98,18 @@ in {
     };
 
     jellyfin = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/jellyfin.json";
       extraArgs = {
         depends_on = ["resource.nomad_volume.jellyfin_cache" "resource.nomad_volume.jellyfin_config" "resource.nomad_volume.jellyfin_media"];
+      };
+    };
+
+    paperless = {
+      enable = true;
+      jobspec = "${nomad_jobs}/paperless.json";
+      extraArgs = {
+        depends_on = ["resource.nomad_volume.paperless_consume" "resource.nomad_volume.paperless_data" "resource.nomad_volume.paperless_media"];
       };
     };
   };
