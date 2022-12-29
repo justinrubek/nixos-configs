@@ -60,7 +60,7 @@ in {
 
           backend app
             balance roundrobin
-            server-template rubek-dev-site 1-10 _rubek-dev-site._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
+            server-template rubek-dev-site 1-3 _rubek-dev-site._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
         '';
       };
 
