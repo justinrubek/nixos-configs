@@ -29,7 +29,8 @@ in {
         extraPackages = [config.nix.package];
 
         settings = {
-          bind_addr = "0.0.0.0";
+          # bind_addr = "0.0.0.0";
+          bind_addr = ''{{ GetInterfaceIP "${tailscaleInterface}" }}'';
           datacenter = "dc1";
 
           advertise = let
@@ -48,6 +49,7 @@ in {
           client = {
             enabled = true;
             network_interface = config.services.tailscale.interfaceName;
+            # network_interface = "{{ GetAllInterfaces }}";
             cni_path = "${pkgs.cni-plugins}/bin";
 
             options = {

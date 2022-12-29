@@ -32,6 +32,9 @@
           self'.packages.push-configuration
 
           self'.packages.vault-bin
+
+          pkgs.skopeo
+          self'.packages."scripts/skopeo-push"
         ];
         inherit (pre-commit-check) shellHook;
       };
