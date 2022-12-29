@@ -53,10 +53,10 @@
           memory = 128;
         };
 
-        # lifecycle = {
-        #   hook = "prestart";
-        #   sidecar = true;
-        # };
+        lifecycle = {
+          hook = "prestart";
+          sidecar = true;
+        };
       };
 
       task.paperless = {
@@ -98,7 +98,7 @@
           USERMAP_UID = "1000";
           USERMAP_GID = "1000";
           PAPERLESS_TIME_ZONE = "America/Chicago";
-          # PAPERLESS_REDIS = "redis://\${NOMAD_ADDR_redis}";
+          PAPERLESS_REDIS = "redis://localhost:6379";
 
           PAPERLESS_SECRET_KEY = "REDACTED";
           PAPERLESS_OCR_LANGUAGES = "eng";
@@ -108,21 +108,21 @@
         };
       };
 
-      # services = [
-      #   {
-      #     name = "paperless";
-      #     port = "http";
-      #     checks = [
-      #       {
-      #         type = "http";
-      #         name = "paperless alive";
-      #         path = "/";
-      #         interval = 20000000000;
-      #         timeout = 5000000000;
-      #       }
-      #     ];
-      #   }
-      # ];
+      services = [
+        {
+          name = "paperless";
+          port = "http";
+          checks = [
+            {
+              type = "http";
+              name = "paperless alive";
+              path = "/";
+              interval = 20000000000;
+              timeout = 5000000000;
+            }
+          ];
+        }
+      ];
     };
   };
 }
