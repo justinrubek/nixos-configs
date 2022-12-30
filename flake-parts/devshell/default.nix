@@ -33,6 +33,8 @@
 
           self'.packages.vault-bin
 
+          self'.packages.nomad
+
           pkgs.skopeo
           self'.packages."scripts/skopeo-push"
         ];
