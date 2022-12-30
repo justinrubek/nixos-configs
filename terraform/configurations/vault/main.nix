@@ -25,6 +25,11 @@ in {
       name = "eaas-client";
       policy = builtins.readFile ./policies/eaas-client.hcl;
     };
+
+    nomad_cluster = {
+      name = "nomad-cluster";
+      policy = builtins.readFile ./policies/nomad-cluster.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {
