@@ -64,16 +64,16 @@ in {
       };
 
       # forward local port 53 to consul 8600 (note it looks up 127.0.0.53)
-      networking.firewall.extraCommands = ''
-        iptables --table nat --flush OUTPUT
-        ${
-          lib.flip (lib.concatMapStringsSep "\n") ["udp" "tcp"] (proto: ''
-            iptables --table nat --append OUTPUT \
-              --protocol ${proto} --destination 127.0.0.53 --destination-port 53 \
-              --jump REDIRECT --to-ports 8600
-          '')
-        }
-      '';
+      # networking.firewall.extraCommands = ''
+      #   iptables --table nat --flush OUTPUT
+      #   ${
+      #     lib.flip (lib.concatMapStringsSep "\n") ["udp" "tcp"] (proto: ''
+      #       iptables --table nat --append OUTPUT \
+      #         --protocol ${proto} --destination 127.0.0.53 --destination-port 53 \
+      #         --jump REDIRECT --to-ports 8600
+      #     '')
+      #   }
+      # '';
 
       networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
         allowedTCPPorts = [

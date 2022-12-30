@@ -54,6 +54,14 @@ in {
       };
     };
 
+    # services.resolved = {
+    #   enable = true;
+    #   extraConfig = ''
+    #     nameserver 1.1.1.1
+    #     nameserver 8.8.8.8
+    #   '';
+    # };
+
     networking = rec {
       useNetworkd = false;
       useDHCP = false;
