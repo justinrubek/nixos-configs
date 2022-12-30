@@ -594,37 +594,20 @@
       "inputs": {
         "beautysh": "beautysh",
         "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_4",
-        "nmdSrc": "nmdSrc"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1671840534,
-        "narHash": "sha256-ZKBg7cM1qJ4ic4O6PGS9ESPSazGQI1TXFsGiFXIL3tw=",
+        "lastModified": 1672336317,
+        "narHash": "sha256-3s8rur/JoJ6rlAk8OTK3ELL5v9sHqSKoSwksJWb5TH4=",
         "owner": "pta2002",
         "repo": "nixvim",
-        "rev": "5f67918bae3115e5d5ae17eeb9d414517762fc66",
+        "rev": "660c9319e1b05c5066f21bef0fc8a88ae504d6b5",
         "type": "github"
       },
       "original": {
         "owner": "pta2002",
         "repo": "nixvim",
         "type": "github"
-      }
-    },
-    "nmdSrc": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1666190571,
-        "narHash": "sha256-Z1hc7M9X6L+H83o9vOprijpzhTfOBjd0KmUTnpHAVjA=",
-        "owner": "rycee",
-        "repo": "nmd",
-        "rev": "b75d312b4f33bd3294cd8ae5c2ca8c6da2afc169",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "rycee",
-        "repo": "nmd",
-        "type": "gitlab"
       }
     },
     "nurpkgs": {
