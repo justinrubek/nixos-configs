@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  flakeRootPath,
   ...
 }: let
   cfg = config.justinrubek.nomad;
@@ -56,6 +57,12 @@ in {
               "docker.privileged.enabled" = "true";
             };
           };
+
+          vault = {
+            enabled = true;
+            address = "http://127.0.0.1:8200";
+            create_from_role = "nomad-cluster";
+          };
         };
       };
 
@@ -63,6 +70,18 @@ in {
       justinrubek.development.containers = {
         enable = true;
         useDocker = true;
+      };
+
+      sops.secrets.nomad_env = {
+        sopsFile = "${flakeRootPath}/secrets/nomad.yaml";
+        owner = config.systemd.services.serviceConfig.User or "root";
+        restartUnits = ["nomad.service"];
+      };
+
+      systemd.services.nomad = {
+        serviceConfig = {
+          EnvironmentFile = [config.sops.secrets."nomad_env".path];
+        };
       };
 
       networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {

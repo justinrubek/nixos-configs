@@ -26,9 +26,9 @@ in {
       policy = builtins.readFile ./policies/eaas-client.hcl;
     };
 
-    nomad_cluster = {
-      name = "nomad-cluster";
-      policy = builtins.readFile ./policies/nomad-cluster.hcl;
+    nomad_server = {
+      name = "nomad-server";
+      policy = builtins.readFile ./policies/nomad-server.hcl;
     };
   };
 
@@ -57,5 +57,36 @@ in {
       path = "transit";
       type = "transit";
     };
+
+    "database" = {
+      path = "database";
+      type = "database";
+    };
   };
+
+  # token auth backend
+  # https://developer.hashicorp.com/nomad/docs/integrations/vault-integration#vault-token-role-configuration
+  resource.vault_token_auth_backend_role.nomad_cluster = {
+    role_name = "nomad-cluster";
+
+    disallowed_policies = ["nomad-server"];
+    token_explicit_max_ttl = "0";
+    orphan = true;
+    token_period = "259200";
+    renewable = true;
+  };
+
+  # https://developer.hashicorp.com/nomad/tutorials/integrate-vault/vault-postgres?in=nomad%2Fintegrate-vault#configure-the-database-secrets-engine
+  # resource.vault_database_secret_backend_connection.postgres = {
+  #   backend = "database";
+  #   name = "postgres";
+  #   allowed_roles = ["accessdb"];
+
+  #   postgresql = {
+  # TODO: get service URL. How to deal with SRV records?
+  #     connection_url = "postgresql://{{username}}:{{password}}@postgres.service.consul/postgres?sslmode=disable";
+  #     username = "postgres";
+  #     password = "postgres123";
+  #   };
+  # };
 }

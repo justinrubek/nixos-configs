@@ -56,6 +56,10 @@ in {
           cluster_addr = "http://${hostName}:8201"
           ui = true
           disable_mlock = true
+
+          service_registration "consul" {
+            address = "127.0.0.1:8500"
+          }
         '';
 
         # TODO: use regular vault package after 1.12.3 is released

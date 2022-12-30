@@ -34,3 +34,11 @@ creation_rules:
       - *admin_justin
       - *server_huginn
 
+  - path_regex: secrets/nomad.yaml$
+    key_groups:
+    - age:
+      - *admin_justin
+      - *server_bunky
+      - *server_ceylon
+      - *server_pyxis
+
