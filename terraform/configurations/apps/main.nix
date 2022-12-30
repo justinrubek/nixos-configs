@@ -112,5 +112,10 @@ in {
         depends_on = ["resource.nomad_volume.paperless_consume" "resource.nomad_volume.paperless_data" "resource.nomad_volume.paperless_media"];
       };
     };
+
+    postgres = {
+      enable = true;
+      jobspec = "${nomad_jobs}/postgres.json";
+    };
   };
 }

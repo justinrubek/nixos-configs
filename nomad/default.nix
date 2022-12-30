@@ -23,6 +23,7 @@
           ./jobs/valheim.nix
           ./jobs/jellyfin.nix
           ./jobs/paperless.nix
+          ./jobs/postgres.nix
         ];
       };
     };
