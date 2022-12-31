@@ -32,11 +32,6 @@ in {
             type = lib.types.enum ["x86_64-linux" "aarch64-linux"];
           };
 
-          configDirectory = lib.mkOption {
-            type = lib.types.str;
-            default = "${self}/nixos/configurations/${name}";
-          };
-
           modules = lib.mkOption {
             type = lib.types.listOf lib.types.unspecified;
             default = [];
@@ -60,51 +55,12 @@ in {
             readOnly = true;
             description = "The package output that contains the system's build.toplevel.";
           };
-
-          finalModules = lib.mkOption {
-            type = lib.types.listOf lib.types.unspecified;
-            readOnly = true;
-            description = "All modules that are included in the nixos configuration.";
-          };
-
-          entryPoint = lib.mkOption {
-            type = lib.types.unspecified;
-            readOnly = true;
-            description = ''
-              The primary system configuration module.
-              This is intended to be used for the bulk of the system configuration.
-            '';
-          };
-
-          bootloader = lib.mkOption {
-            type = lib.types.unspecified;
-            description = "The system's bootloader configuration.";
-            default = "${config.configDirectory}/bootloader.nix";
-          };
-
-          hardware = lib.mkOption {
-            type = lib.types.unspecified;
-            readOnly = true;
-            description = "The system's hardware-specific configuration.";
-          };
         };
 
         config = {
-          entryPoint = import config.configDirectory (inputs // {inherit self;});
-          bootloader = "${config.configDirectory}/bootloader.nix";
-          hardware = "${config.configDirectory}/hardware.nix";
-
-          finalModules =
-            [
-            ]
-            ++ config.modules
-            ++ builtins.attrValues {
-              inherit (config) entryPoint bootloader hardware;
-            };
-
           nixosConfig = self.lib.nixosSystem {
             inherit (config) system;
-            modules = config.finalModules;
+            modules = config.modules;
             inherit name;
           };
 

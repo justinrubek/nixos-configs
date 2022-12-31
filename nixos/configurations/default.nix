@@ -1,10 +1,10 @@
-{
+input @ {
+  self,
   inputs,
   config,
   ...
 }: let
   modulesPath = "${inputs.nixpkgs}/nixos/modules";
-
   hetznerModules = [
     "${modulesPath}/profiles/minimal.nix"
     "${modulesPath}/profiles/qemu-guest.nix"
@@ -17,38 +17,75 @@
       };
     }
   ];
+
+  # TODO: Rework structure of the flake's nixosConfigurations to not need this everywhere
+  mkLegacyConfig = {
+    name,
+    modules ? [],
+    system,
+    ...
+  }: {
+    inherit system;
+
+    modules = let
+      configDir = "${self}/nixos/configurations/${name}";
+      entryPoint = import configDir (inputs // {inherit self;});
+      bootloader = "${configDir}/bootloader.nix";
+      hardware = "${configDir}/hardware.nix";
+    in
+      [
+        # import the expected modules
+        entryPoint
+        bootloader
+        hardware
+      ]
+      ++ modules;
+  };
 in {
   justinrubek.nixosConfigurations = {
     # physical machines
-    manusya.system = "x86_64-linux";
-    eunomia.system = "x86_64-linux";
+    manusya = mkLegacyConfig {
+      system = "x86_64-linux";
+      name = "manusya";
+    };
+
+    eunomia = mkLegacyConfig {
+      system = "x86_64-linux";
+      name = "eunomia";
+    };
 
     # cloud servers
-    bunky = {
+    bunky = mkLegacyConfig {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
+      name = "bunky";
     };
-    pyxis = {
+    pyxis = mkLegacyConfig {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
+      name = "pyxis";
     };
-    ceylon = {
+    ceylon = mkLegacyConfig {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
+      name = "ceylon";
     };
-    huginn = {
+    huginn = mkLegacyConfig {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
+      name = "huginn";
     };
-    alex = {
+    alex = mkLegacyConfig {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
+      name = "alex";
     };
 
     # other
-    hetzner-base = {
+    hetzner-base = mkLegacyConfig {
       system = "x86_64-linux";
       modules = hetznerModules ++ sshModule;
+      name = "hetzner-base";
     };
   };
 }
