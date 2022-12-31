@@ -96,37 +96,16 @@ in {
 
           finalModules =
             [
-              {
-                boot.cleanTmpDir = true;
-                networking = {
-                  hostName = name;
-                  hostId = builtins.substring 0 8 (builtins.hashString "md5" name);
-                };
-                system.configurationRevision = self.rev or "dirty";
-                documentation.man = {
-                  enable = true;
-                  generateCaches = true;
-                };
-
-                caches.enable = true;
-                nix.flakes.enable = true;
-              }
             ]
             ++ config.modules
             ++ builtins.attrValues {
               inherit (config) entryPoint bootloader hardware;
-            }
-            ++ [inputs.sops-nix.nixosModules.sops]
-            # include this flake's modules
-            ++ builtins.attrValues self.nixosModules
-            ++ builtins.attrValues self.modules;
+            };
 
-          nixosConfig = inputs.nixpkgs.lib.nixosSystem {
+          nixosConfig = self.lib.nixosSystem {
             inherit (config) system;
             modules = config.finalModules;
-            specialArgs = {
-              flakeRootPath = ../.;
-            };
+            inherit name;
           };
 
           nixosPackage = config.nixosConfig.config.system.build.toplevel;

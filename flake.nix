@@ -58,24 +58,27 @@
         inputs.thoenix.flakeModule
         inputs.thoenix.customOutputModule
 
-        ./flake-parts
-        ./flake-parts/nixos_configurations.nix
-        ./flake-parts/home_configurations.nix
-        ./flake-parts/terraform.nix
-        ./flake-parts/terraformConfiguration.nix
+        ./flake-parts/devshell
+        ./flake-parts/packages
         ./flake-parts/dockerImages.nix
-
-        ./terraform/modules
-
-        ./nixos/modules
-        ./modules
-
-        ./nixos/configurations
-        ./home/configurations
-
         ./packages
 
+        ./lib
+
+        ./modules
+
+        ./flake-parts/nixos_configurations.nix
+        ./nixos/configurations
+        ./nixos/modules
+
+        ./flake-parts/home_configurations.nix
+        ./home/configurations
+
         ./deploy
+
+        ./flake-parts/terraform.nix
+        ./flake-parts/terraformConfiguration.nix
+        ./terraform/modules
 
         ./nomad
       ];
