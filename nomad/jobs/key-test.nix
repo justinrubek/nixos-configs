@@ -12,10 +12,12 @@
 
         config = {
           nix_flake_ref = "github:nixos/nixpkgs#legacyPackages.x86_64-linux.hello";
-          nix_flake_sha = "sha256-o+TBFFNSdOu5L1CUetXGMSinghqqlWcI2Sj9GVoJmUY=";
+          nix_flake_sha = "sha256-2BbZN9OC+6KdEVMQnkLEnXi5f/XNGKAM37S2OBs8xeQ=";
           entrypoint = ["bin/hello"];
-
-          args = ["-g" "hello world!"];
+          args = ["-g" "hello \${MESSAGE}"];
+          # image = "alpine:3.15";
+          # command = "/bin/sh";
+          # args = [ "-c" "env" ];
 
           mount = [
             {
@@ -29,6 +31,20 @@
             }
           ];
         };
+
+        vault = {
+          policies = ["hello"];
+        };
+
+        templates = [
+          {
+            data = ''
+              MESSAGE="{{ with secret "kv-v2/data/hello" }}{{ .Data.data.foo }}{{ end }}"
+            '';
+            destination = "local/env";
+            env = true;
+          }
+        ];
       };
     };
   };

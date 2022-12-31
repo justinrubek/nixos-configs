@@ -30,6 +30,11 @@ in {
       name = "nomad-server";
       policy = builtins.readFile ./policies/nomad-server.hcl;
     };
+
+    hello = {
+      name = "hello";
+      policy = builtins.readFile ./policies/hello.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {

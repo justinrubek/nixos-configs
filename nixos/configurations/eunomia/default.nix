@@ -9,12 +9,6 @@ in {
   imports = [
   ];
 
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
   # Linux kernel
   # TODO: remove allowBroken = true once zfs is fixed
   nixpkgs.config.allowBroken = true;
@@ -24,9 +18,6 @@ in {
     supportedFilesystems = ["zfs" "ext4"];
     zfs.enableUnstable = true;
   };
-
-  # Enable networking
-  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -76,7 +67,21 @@ in {
     permitRootLogin = "no";
   };
 
+  # Enable networking
+  networking.networkmanager.enable = true;
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  # networking.useNetworkd = false;
+  # systemd.network = {
+  #   enable = true;
+  #   networks.default = {
+  #     matchConfig.Name = "en*";
+  #     networkConfig.DHCP = "yes";
+  #   };
+  # };
+
   # Open ports in the firewall.
+
   # networking.firewall.allowedTCPPorts = [ ... ];
   networking.firewall.allowedTCPPorts = [8000];
   # networking.firewall.allowedUDPPorts = [ ... ];
