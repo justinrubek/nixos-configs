@@ -75,7 +75,7 @@ in {
 
   justinrubek.nomadJobs = {
     valheim = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/valheim.json";
       extraArgs = {
         depends_on = ["resource.nomad_volume.valheim_data" "resource.nomad_volume.valheim_config"];
