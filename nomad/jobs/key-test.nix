@@ -15,9 +15,6 @@
           nix_flake_sha = "sha256-2BbZN9OC+6KdEVMQnkLEnXi5f/XNGKAM37S2OBs8xeQ=";
           entrypoint = ["bin/hello"];
           args = ["-g" "hello \${MESSAGE}"];
-          # image = "alpine:3.15";
-          # command = "/bin/sh";
-          # args = [ "-c" "env" ];
 
           mount = [
             {
