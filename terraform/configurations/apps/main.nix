@@ -114,7 +114,7 @@ in {
     };
 
     postgres = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/postgres.json";
     };
   };
