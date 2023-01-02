@@ -31,7 +31,8 @@
   PWD = ./.;
 in {
   enable = true;
-  colorschemes.tokyonight.enable = true;
+  # colorschemes.tokyonight.enable = true;
+  colorschemes.nord.enable = true;
 
   globals = {
     mapleader = " ";
