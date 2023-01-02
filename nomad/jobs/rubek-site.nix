@@ -16,7 +16,7 @@
 
         config = {
           nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server_script";
-          nix_flake_sha = "sha256-PVej1RGG02x7K70ejXNNOcBar0+QLYSYoWvZ6EcKAy0=";
+          nix_flake_sha = "sha256-tzBfT3LhL3WT2lTgDphCfNXCgqFLOm5BrrYL/IA1bG8=";
           entrypoint = ["bin/start_server"];
 
           ports = ["http"];
@@ -50,6 +50,12 @@
           ];
         }
       ];
+
+      update = {
+        canary = 1;
+        autoRevert = true;
+        autoPromote = true;
+      };
     };
   };
 }
