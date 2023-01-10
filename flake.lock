@@ -329,11 +329,11 @@
         "utils": "utils_3"
       },
       "locked": {
-        "lastModified": 1667410913,
-        "narHash": "sha256-5+S65dpXaIyMDeoPy823BzNH5HYY1wvZ6G+rzTnO8kY=",
+        "lastModified": 1673211936,
+        "narHash": "sha256-ba7jhl5BhLtpSooDHllgC0Y29vc0AiYWWsxQVtjlc7o=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "f520832a47dbc24d1e2c4e4b9a3dbe910777d1a2",
+        "rev": "684bdb386cec7d4f16e0da9f694c8ab50ad2cf2a",
         "type": "github"
       },
       "original": {
@@ -419,15 +419,15 @@
         "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
-        "lastModified": 1672126337,
-        "narHash": "sha256-IYQ/tEvYB/gHnAKrATWaUj1WCNj0iQ5N+CQDw6D1rZA=",
-        "owner": "justinrubek",
+        "lastModified": 1672531382,
+        "narHash": "sha256-zbvXzPBBbv5mYPwy/XB3NaBAx3yTYQWNYjz/c/ccH3w=",
+        "owner": "tristanpemble",
         "repo": "nix-nomad",
-        "rev": "70bd580130022cae87952c5aebfce7dd2ee5e683",
+        "rev": "ffbb8c97b2b665ec3a0dd393af79c0192a5546db",
         "type": "github"
       },
       "original": {
-        "owner": "justinrubek",
+        "owner": "tristanpemble",
         "repo": "nix-nomad",
         "type": "github"
       }
@@ -819,11 +819,11 @@
     },
     "utils_3": {
       "locked": {
-        "lastModified": 1667077288,
-        "narHash": "sha256-bdC8sFNDpT0HK74u9fUkpbf1MEzVYJ+ka7NXCdgBoaA=",
+        "lastModified": 1667395993,
+        "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "6ee9ebb6b1ee695d2cacc4faa053a7b9baa76817",
+        "rev": "5aed5285a952e0b949eb3ba02c12fa4fcfef535f",
         "type": "github"
       },
       "original": {
