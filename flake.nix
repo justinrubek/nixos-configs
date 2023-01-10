@@ -38,7 +38,7 @@
     };
 
     nix-nomad = {
-      url = "github:justinrubek/nix-nomad";
+      url = "github:tristanpemble/nix-nomad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
