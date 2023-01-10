@@ -3,6 +3,16 @@ in {
   config = {
     activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
 
+    programs.thunderbird = {
+      enable = true;
+
+      profiles = {
+        "justin" = {
+          isDefault = true;
+        };
+      };
+    };
+
     home.packages = with pkgs; [
       rofi
       (dwarf-fortress-packages.dwarf-fortress-full.override {

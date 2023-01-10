@@ -69,7 +69,7 @@ in {
       enable = true;
     };
     treesitter = {
-      enable = true;
+      enable = false;
       ensureInstalled = "all";
       nixGrammars = true;
     };

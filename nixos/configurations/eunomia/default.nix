@@ -84,6 +84,10 @@ in {
 
   # networking.firewall.allowedTCPPorts = [ ... ];
   networking.firewall.allowedTCPPorts = [8000];
+  networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
+    allowedTCPPorts = [3000 8000];
+  };
+
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
