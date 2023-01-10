@@ -16,7 +16,7 @@
 
         config = {
           nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server_script";
-          nix_flake_sha = "sha256-tzBfT3LhL3WT2lTgDphCfNXCgqFLOm5BrrYL/IA1bG8=";
+          nix_flake_sha = "sha256-4k7bCwofqsKTUR7FVjy3V4A8Q29vGxxzahS0Y6Et0xI=";
           entrypoint = ["bin/start_server"];
 
           ports = ["http"];
