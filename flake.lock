@@ -304,7 +304,7 @@
     },
     "gomod2nix": {
       "inputs": {
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "utils": "utils_4"
       },
       "locked": {
@@ -392,7 +392,9 @@
       "inputs": {
         "flake-compat": "flake-compat_3",
         "neovim-flake": "neovim-flake",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "unixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1672560816,
@@ -517,22 +519,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1672428209,
-        "narHash": "sha256-eejhqkDz2cb2vc5VeaWphJz8UXNuoNoM8/Op8eWv2tQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "293a28df6d7ff3dec1e61e37cc4ee6e6c0fb0847",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1653581809,
         "narHash": "sha256-Uvka0V5MTGbeOfWte25+tfRL3moECDh1VwokWSZUdoY=",
         "owner": "NixOS",
@@ -547,7 +533,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_3": {
       "locked": {
         "lastModified": 1663491030,
         "narHash": "sha256-MVsfBhE9US5DvLtBAaTRjwYdv1tLO8xjahM8qLXTgTo=",
@@ -561,7 +547,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_5": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1645655918,
         "narHash": "sha256-ZfbEFRW7o237+A1P7eTKhXje435FCAoe0blj2n20Was=",
@@ -575,7 +561,7 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_6": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1636823747,
         "narHash": "sha256-oWo1nElRAOZqEf90Yek2ixdHyjD+gqtS/pAgwaQ9UhQ=",
@@ -594,14 +580,14 @@
       "inputs": {
         "beautysh": "beautysh",
         "flake-utils": "flake-utils_4",
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1672434283,
-        "narHash": "sha256-AltegOzuCjlernfEGWQYmle1yGiDBaky+u35DhJvxqI=",
+        "lastModified": 1673606904,
+        "narHash": "sha256-vK4dCZEwsetub7FLu+IpD2Ro6pMzifPBPPQutfZcxsY=",
         "owner": "pta2002",
         "repo": "nixvim",
-        "rev": "125ed74a423429e5af6796334b68400c78ac26b7",
+        "rev": "b9a4f0ca19201cbc2e6c583f3f3a269fe1a6314f",
         "type": "github"
       },
       "original": {
@@ -655,7 +641,7 @@
     "pre-commit-hooks": {
       "inputs": {
         "flake-utils": "flake-utils_5",
-        "nixpkgs": "nixpkgs_5"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1656169028,
@@ -717,7 +703,7 @@
         "bats-assert": "bats-assert",
         "bats-support": "bats-support",
         "flake-utils": "flake-utils_7",
-        "nixpkgs": "nixpkgs_6",
+        "nixpkgs": "nixpkgs_5",
         "terranix-examples": "terranix-examples"
       },
       "locked": {

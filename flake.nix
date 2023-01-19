@@ -19,6 +19,7 @@
 
     nixvim.url = "github:pta2002/nixvim";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay.inputs.nixpkgs.follows = "unixpkgs";
 
     deploy-rs.url = "github:serokell/deploy-rs";
 

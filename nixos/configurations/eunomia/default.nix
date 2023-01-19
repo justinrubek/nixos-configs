@@ -38,6 +38,7 @@ in {
 
     development.containers = {
       enable = true;
+      useDocker = true;
     };
 
     tailscale.enable = true;
@@ -85,7 +86,12 @@ in {
   # networking.firewall.allowedTCPPorts = [ ... ];
   networking.firewall.allowedTCPPorts = [8000];
   networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
-    allowedTCPPorts = [3000 8000];
+    allowedTCPPorts = [
+      3000
+      8000
+      # grocy
+      6100
+    ];
   };
 
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -112,4 +118,20 @@ in {
   };
 
   hardware.ckb-next.enable = true;
+
+  services.grocy = {
+    enable = true;
+
+    hostName = "grocy.localhost";
+    nginx.enableSSL = false;
+  };
+  # changing grocy port forcibly
+  services.nginx.virtualHosts."grocy.localhost" = {
+    listen = [
+      {
+        addr = "0.0.0.0";
+        port = 6100;
+      }
+    ];
+  };
 }

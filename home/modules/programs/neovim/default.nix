@@ -12,8 +12,5 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs.nixvim = import ./config.nix inputs;
-    nixpkgs.overlays = [
-      neovim-nightly-overlay.overlay
-    ];
   };
 }

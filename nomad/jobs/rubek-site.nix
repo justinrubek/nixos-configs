@@ -16,8 +16,9 @@
 
         config = {
           nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server_script";
-          nix_flake_sha = "sha256-4k7bCwofqsKTUR7FVjy3V4A8Q29vGxxzahS0Y6Et0xI=";
+          nix_flake_sha = "sha256-g/zqA5+ac+4GgcQfKvR7QM5MTs9TDju4qsDeELFLCUg=";
           entrypoint = ["bin/start_server"];
+          # image = "justinrubek/rubek.dev:0.1.3";
 
           ports = ["http"];
 
@@ -33,6 +34,26 @@
             }
           ];
         };
+
+        # vault = {
+        #   policies = ["calendar-client"];
+        # };
+
+        # templates = [
+        #   {
+        #     data = let
+        #       envSecret = name: ''{{ with secret "kv-v2/data/calendar/rubek-site" }}{{ .Data.data.${name} }}{{ end }}'';
+        #     in ''
+        #       CALDAV_USERNAME=${envSecret "username"}
+        #       CALDAV_PASSWORD=${envSecret "password"}
+        #       CALDAV_URL=${envSecret "url"}
+        #       AVAILABLE_CALENDAR=${envSecret "available_calendar"}
+        #       BOOKED_CALENDAR=${envSecret "booked_calendar"}
+        #     '';
+        #     destination = "secrets/env";
+        #     env = true;
+        #   }
+        # ];
       };
 
       services = [

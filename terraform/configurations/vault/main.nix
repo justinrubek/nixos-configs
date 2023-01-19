@@ -35,6 +35,11 @@ in {
       name = "hello";
       policy = builtins.readFile ./policies/hello.hcl;
     };
+
+    calendar_client = {
+      name = "calendar-client";
+      policy = builtins.readFile ./policies/calendar-client.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {

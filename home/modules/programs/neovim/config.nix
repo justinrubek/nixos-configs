@@ -31,6 +31,7 @@
   PWD = ./.;
 in {
   enable = true;
+
   # colorschemes.tokyonight.enable = true;
   colorschemes.nord.enable = true;
 
@@ -69,9 +70,39 @@ in {
       enable = true;
     };
     treesitter = {
-      enable = false;
-      ensureInstalled = "all";
-      nixGrammars = true;
+      enable = true;
+      ensureInstalled = [
+        "astro"
+        "bash"
+        "c"
+        "css"
+        "dockerfile"
+        "gitcommit"
+        "gitignore"
+        "git_rebase"
+        "go"
+        "gomod"
+        "hcl"
+        "html"
+        "javascript"
+        "json"
+        "latex"
+        "lua"
+        "nix"
+        "proto"
+        "python"
+        "regex"
+        "rust"
+        "sql"
+        "svelte"
+        "toml"
+        "tsx"
+        "typescript"
+        "yaml"
+      ];
+      # https://github.com/pta2002/nixvim/issues/102
+      # nixGrammars = true;
+      nixGrammars = false;
     };
     copilot = {
       enable = true;
