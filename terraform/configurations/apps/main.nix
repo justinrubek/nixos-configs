@@ -87,6 +87,16 @@ in {
       jobspec = "${nomad_jobs}/rubek_site.json";
     };
 
+    rubek_site_nix = {
+      enable = true;
+      jobspec = "${nomad_jobs}/rubek_site_nix.json";
+    };
+
+    dummy_api_nix = {
+      enable = true;
+      jobspec = "${nomad_jobs}/dummy_api_nix.json";
+    };
+
     storage_controller = {
       enable = true;
       jobspec = "${nomad_jobs}/storage_controller.json";

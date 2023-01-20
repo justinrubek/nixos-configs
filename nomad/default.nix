@@ -19,6 +19,7 @@
           ./jobs/dummy-api.nix
           ./jobs/dummy-api-nix.nix
           ./jobs/rubek-site.nix
+          ./jobs/rubek-site-nix.nix
           ./jobs/storage.nix
           ./jobs/valheim.nix
           ./jobs/jellyfin.nix
