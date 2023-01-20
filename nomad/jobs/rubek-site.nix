@@ -15,45 +15,45 @@
         driver = "docker";
 
         config = {
-          nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server_script";
-          nix_flake_sha = "sha256-g/zqA5+ac+4GgcQfKvR7QM5MTs9TDju4qsDeELFLCUg=";
-          entrypoint = ["bin/start_server"];
-          # image = "justinrubek/rubek.dev:0.1.3";
+          # nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server_script";
+          # nix_flake_sha = "sha256-g/zqA5+ac+4GgcQfKvR7QM5MTs9TDju4qsDeELFLCUg=";
+          # entrypoint = ["bin/start_server"];
+          image = "justinrubek/rubek.dev:0.1.5";
 
           ports = ["http"];
 
-          mount = [
-            {
-              type = "bind";
-              source = "/nix/store";
-              target = "/nix/store";
-              readonly = true;
-              bind_options = {
-                propagation = "rshared";
-              };
-            }
-          ];
+          # mount = [
+          #   {
+          #     type = "bind";
+          #     source = "/nix/store";
+          #     target = "/nix/store";
+          #     readonly = true;
+          #     bind_options = {
+          #       propagation = "rshared";
+          #     };
+          #   }
+          # ];
         };
 
-        # vault = {
-        #   policies = ["calendar-client"];
-        # };
+        vault = {
+          policies = ["calendar-client"];
+        };
 
-        # templates = [
-        #   {
-        #     data = let
-        #       envSecret = name: ''{{ with secret "kv-v2/data/calendar/rubek-site" }}{{ .Data.data.${name} }}{{ end }}'';
-        #     in ''
-        #       CALDAV_USERNAME=${envSecret "username"}
-        #       CALDAV_PASSWORD=${envSecret "password"}
-        #       CALDAV_URL=${envSecret "url"}
-        #       AVAILABLE_CALENDAR=${envSecret "available_calendar"}
-        #       BOOKED_CALENDAR=${envSecret "booked_calendar"}
-        #     '';
-        #     destination = "secrets/env";
-        #     env = true;
-        #   }
-        # ];
+        templates = [
+          {
+            data = let
+              envSecret = name: ''{{ with secret "kv-v2/data/calendar/rubek-site" }}{{ .Data.data.${name} }}{{ end }}'';
+            in ''
+              CALDAV_USERNAME=${envSecret "username"}
+              CALDAV_PASSWORD=${envSecret "password"}
+              CALDAV_URL=${envSecret "url"}
+              AVAILABLE_CALENDAR=${envSecret "available_calendar"}
+              BOOKED_CALENDAR=${envSecret "booked_calendar"}
+            '';
+            destination = "secrets/env";
+            env = true;
+          }
+        ];
       };
 
       services = [
