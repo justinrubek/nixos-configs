@@ -172,7 +172,7 @@ new file mode 100644
 index 000000000..426cc51fd
 --- /dev/null
 +++ b/drivers/docker/nix.go
-@@ -0,0 +1,109 @@
+@@ -0,0 +1,110 @@
 +package docker
 +
 +import (
@@ -249,6 +249,7 @@ index 000000000..426cc51fd
 +		Args: []string{
 +			executable,
 +			"build",
++			"--fallback",
 +			"--no-link",
 +			flakeRef,
 +		},
