@@ -16,7 +16,7 @@
 
         config = {
           nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server/script";
-          nix_flake_sha = "sha256-g9dZ9Ub0iqEm2EZuRpfddIdr1OIdhP0gUDUsHN5rskk=";
+          nix_flake_sha = "sha256-hAX/bmafN+Yn0n6y1lGGQOfkNfIHrb7g8IBJqcoT/y8=";
           entrypoint = ["bin/start_server"];
           # image = "justinrubek/rubek.dev:0.1.5";
 

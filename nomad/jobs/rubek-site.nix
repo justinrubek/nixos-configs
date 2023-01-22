@@ -18,7 +18,7 @@
           # nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server_script";
           # nix_flake_sha = "sha256-g/zqA5+ac+4GgcQfKvR7QM5MTs9TDju4qsDeELFLCUg=";
           # entrypoint = ["bin/start_server"];
-          image = "justinrubek/rubek.dev:0.1.5";
+          image = "justinrubek/rubek.dev:0.2.7";
 
           ports = ["http"];
 

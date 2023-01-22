@@ -88,7 +88,7 @@ in {
     };
 
     rubek_site_nix = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/rubek_site_nix.json";
     };
 
