@@ -71,38 +71,8 @@ in {
     };
     treesitter = {
       enable = true;
-      ensureInstalled = [
-        "astro"
-        "bash"
-        "c"
-        "css"
-        "dockerfile"
-        "gitcommit"
-        "gitignore"
-        "git_rebase"
-        "go"
-        "gomod"
-        "hcl"
-        "html"
-        "javascript"
-        "json"
-        "latex"
-        "lua"
-        "nix"
-        "proto"
-        "python"
-        "regex"
-        "rust"
-        "sql"
-        "svelte"
-        "toml"
-        "tsx"
-        "typescript"
-        "yaml"
-      ];
-      # https://github.com/pta2002/nixvim/issues/102
-      # nixGrammars = true;
-      nixGrammars = false;
+      ensureInstalled = "all";
+      nixGrammars = true;
     };
     copilot = {
       enable = true;
