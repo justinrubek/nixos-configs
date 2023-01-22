@@ -116,6 +116,9 @@ in {
               }
             ]
             ++ config.modules
+            ++ [
+              inputs.hyprland.homeManagerModules.default
+            ]
             # include this flake's modules
             ++ builtins.attrValues self.homeModules
             ++ builtins.attrValues self.modules;

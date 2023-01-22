@@ -33,7 +33,10 @@ input @ {
       }
     ]
     ++ modules
-    ++ [inputs.sops-nix.nixosModules.sops]
+    ++ [
+      inputs.hyprland.nixosModules.default
+      inputs.sops-nix.nixosModules.sops
+    ]
     # include this flake's modules
     ++ builtins.attrValues self.nixosModules
     ++ builtins.attrValues self.modules;

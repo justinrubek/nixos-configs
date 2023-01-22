@@ -14,6 +14,7 @@ in {
     flake = import ./flake.nix inputs;
     sound = import ./sound.nix inputs;
 
+    "windowing/hyprland" = import ./windowing/hyprland inputs;
     "windowing/xmonad" = import ./windowing/xmonad inputs;
     "windowing/plasma" = import ./windowing/plasma inputs;
 
