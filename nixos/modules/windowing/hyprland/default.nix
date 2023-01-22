@@ -1,0 +1,24 @@
+inputs @ {...}: {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  cfg = config.justinrubek.windowing.hyprland;
+in {
+  options.justinrubek.windowing.hyprland = {
+    enable = lib.mkEnableOption "enable hyprland";
+  };
+
+  config = lib.mkIf cfg.enable {
+    services.xserver.displayManager.sddm.enable = true;
+    programs.hyprland.enable = true;
+    services.xserver.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
+
+    # Configure keymap in X11
+    services.xserver = {
+      layout = "us";
+      xkbVariant = "";
+    };
+  };
+}

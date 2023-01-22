@@ -32,7 +32,8 @@ in {
 
   # personal modules
   justinrubek = {
-    windowing.plasma.enable = true;
+    # windowing.plasma.enable = true;
+    windowing.hyprland.enable = true;
 
     sound.enable = true;
 

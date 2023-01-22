@@ -13,6 +13,7 @@ inputs: {
   "programs/firefox" = import ./programs/firefox inputs;
 
   "windowing/xmonad" = import ./windowing/xmonad inputs;
+  "windowing/hyprland" = import ./windowing/hyprland inputs;
 
   # always runs for every configuration
   "misc/home" = import ./misc/home inputs;

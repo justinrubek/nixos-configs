@@ -13,6 +13,10 @@ in {
       };
     };
 
+    justinrubek = {
+      windowing.hyprland.enable = true;
+    };
+
     home.packages = with pkgs; [
       rofi
       (dwarf-fortress-packages.dwarf-fortress-full.override {

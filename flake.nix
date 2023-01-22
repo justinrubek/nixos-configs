@@ -42,6 +42,8 @@
       url = "github:tristanpemble/nix-nomad";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/hyprland";
   };
 
   outputs = {
