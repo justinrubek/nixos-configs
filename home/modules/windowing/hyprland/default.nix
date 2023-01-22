@@ -16,8 +16,9 @@ _: {
   };
 
   apps = {
-    terminal = "kitty";
+    terminal = "alacritty";
     launcher = "wofi --show drun";
+    emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   };
 in {
   options.justinrubek.windowing.hyprland = {
@@ -26,16 +27,22 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = [
+      pkgs.wlogout
+      pkgs.wf-recorder
+      pkgs.wl-clipboard
+      pkgs.wlr-randr
       pkgs.xorg.xprop
-      pkgs.kitty
       pkgs.wofi
       pkgs.alacritty
+      pkgs.playerctl
+      pkgs.wireplumber
     ];
 
     wayland.windowManager.hyprland.enable = true;
 
     wayland.windowManager.hyprland.extraConfig = ''
       $mod = SUPER
+      $modalt = SUPER_ALT
 
       # TODO: monitor configuration
 
@@ -100,25 +107,80 @@ in {
         col.group_border = rgb(${colors.surface0})
       }
 
-      # TODO: disable idle when watching video
+      # disable idle when watching video
+      windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
       # launch terminal
       bind = $mod, Return, exec, ${apps.terminal}
-      bind = $mod, Q, exec, alacritty
-      bind = $mod, M, exit,
-      bind = $mod, R, exec, ${apps.launcher}
+      bind = $mod, Space, exec, ${apps.launcher}
 
-      # workspace navigation
-      bind = $mod, 1, workspace, 1
-      bind = $mod, 2, workspace, 2
-      bind = $mod, 3, workspace, 3
-      bind = $mod, 4, workspace, 4
-      bind = $mod, 5, workspace, 5
-      bind = $mod, 6, workspace, 6
-      bind = $mod, 7, workspace, 7
-      bind = $mod, 8, workspace, 8
-      bind = $mod, 9, workspace, 9
-      bind = $mod, 0, workspace, 10
+      # mouse manipulation
+      # https://wiki.hyprland.org/Configuring/Binds/#mouse-binds
+      bindm = $mod, mouse:272, movewindow
+      bindm = $mod, mouse:273, resizewindow
+
+      # windowing commands
+      ## compositor
+      bind = $modalt, M, exit,
+      bind = $mod, Q, killactive,
+      bind = $mod, F, fullscreen,
+      bind = $mod, R, togglesplit,
+      bind = $mod, T, togglefloating,
+      bind = $mod, P, pseudo
+      ## focus navigation
+      bind = $mod, h, movefocus, l
+      bind = $mod, l, movefocus, r
+      bind = $mod, k, movefocus, u
+      bind = $mod, j, movefocus, d
+      ## grouped windows
+      bind = $mod, G, togglegroup,
+      bind = $mod SHIFT, N, changegroupactive, f
+      bind = $mod SHIFT, P, changegroupactive, b
+      ## logout
+      bind = $mod, Escape, exec, wlogout -p layer-shell
+      ## emoji picker
+      bind = $mod, E, exec, ${apps.emoji}
+
+      # media
+      bindl = , XF86AudioPlay, exec, playerctl play-pause
+      bindl = , XF86AudioStop, exec, playerctl stop
+      bindl = , XF86AudioNext, exec, playerctl next
+      bindl = , XF86AudioPrev, exec, playerctl previous
+      bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
+      bindle = , XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+      bindl = , XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+      bindl = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+
+      # workspaces
+      # binds mod + [shift] {1..10} to [move to] workspace {1..10}
+      ${
+        builtins.concatStringsSep "\n" (builtins.genList (
+          x: let
+            ws = let
+              c = (x + 1) / 10;
+            in
+              builtins.toString (x + 1 - (c * 10));
+
+            wsStr = toString (x + 1);
+          in ''
+            bind = $mod, ${ws}, workspace, ${wsStr}
+            bind = $mod SHIFT, ${ws}, movetoworkspace, ${wsStr}
+          ''
+        )
+        10)
+      }
+
+      # special workspace
+      bind = $mod SHIFT, grave, movetoworkspace, special
+      bind = $mod, grave, togglespecialworkspace
+
+      # cycle through workspaces
+      bind = $mod, bracketleft, workspace, m-1
+      bind = $mod, bracketright, workspace, m+1
+
+      # cycle through monitors
+      bind = $mod SHIFT, bracketleft, focusmonitor, l
+      bind = $mod SHIFT, bracketright, focusmonitor, r
     '';
   };
 }
