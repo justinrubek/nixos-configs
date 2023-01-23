@@ -20,6 +20,8 @@ in {
 
         swaylock.enable = true;
       };
+
+      programs.eww.enable = true;
     };
 
     home.packages = with pkgs; [
