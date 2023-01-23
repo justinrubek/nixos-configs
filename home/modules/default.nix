@@ -12,6 +12,7 @@ inputs: {
   "programs/neovim" = import ./programs/neovim inputs;
   "programs/firefox" = import ./programs/firefox inputs;
 
+  "wayland/common" = import ./wayland/common inputs;
   "wayland/swaylock" = import ./wayland/swaylock inputs;
 
   "windowing/xmonad" = import ./windowing/xmonad inputs;

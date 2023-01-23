@@ -15,7 +15,11 @@ in {
 
     justinrubek = {
       windowing.hyprland.enable = true;
-      wayland.swaylock.enable = true;
+      wayland = {
+        common.enable = true;
+
+        swaylock.enable = true;
+      };
     };
 
     home.packages = with pkgs; [
