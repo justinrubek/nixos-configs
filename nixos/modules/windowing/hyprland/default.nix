@@ -11,7 +11,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    services.xserver.displayManager.sddm.enable = true;
     programs.hyprland.enable = true;
     services.xserver.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
 
