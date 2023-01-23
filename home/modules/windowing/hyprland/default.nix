@@ -27,10 +27,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      pkgs.wlogout
       pkgs.wf-recorder
-      pkgs.wl-clipboard
-      pkgs.wlr-randr
       pkgs.xorg.xprop
       pkgs.wofi
       pkgs.alacritty
