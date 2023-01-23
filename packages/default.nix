@@ -17,6 +17,8 @@
     packages = {
       nomad = pkgs.callPackage ./nomad {};
       vault-bin = pkgs.callPackage ./vault-bin {};
+
+      material-symbols = pkgs.callPackage ./material-symbols.nix {};
     };
   };
 }

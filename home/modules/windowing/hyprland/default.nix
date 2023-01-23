@@ -45,7 +45,8 @@ in {
 
             # TODO: monitor configuration
 
-            # TODO: bar launch
+            # bar launch
+            exec-once = eww open bar
 
             misc {
               # enable variable frame rate

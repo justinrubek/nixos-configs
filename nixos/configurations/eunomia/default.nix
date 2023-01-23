@@ -36,6 +36,8 @@ in {
     # windowing.plasma.enable = true;
     windowing.hyprland.enable = true;
 
+    graphical.fonts.enable = true;
+
     sound.enable = true;
 
     development.containers = {
