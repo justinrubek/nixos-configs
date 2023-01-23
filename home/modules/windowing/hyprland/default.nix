@@ -40,6 +40,8 @@ in {
 
     wayland.windowManager.hyprland.enable = true;
 
+    xdg.configFile."wlogout/layout".source = ./wlogout.conf;
+
     wayland.windowManager.hyprland.extraConfig = ''
             $mod = SUPER
             $modalt = SUPER_ALT
