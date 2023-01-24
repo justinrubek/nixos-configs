@@ -8,7 +8,7 @@
       :space-evenly false
       (label
         :class "time"
-        :text "${time.hour}:${time.minute}")
+        :text "${time.hour}:${time.minute}:${time.second}")
       (box
         :class "date-box"
         :space-evenly false
