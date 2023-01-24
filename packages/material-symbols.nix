@@ -30,7 +30,6 @@ stdenvNoCC.mkDerivation {
     description = "Material Symbols icons by Google";
     homepage = "https://fonts.google.com/icons";
     license = lib.licenses.asl20;
-    maintainers = with maintainers; [fufexan];
     platforms = platforms.all;
   };
 }
