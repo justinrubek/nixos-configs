@@ -5,7 +5,7 @@
 (defvar time_rev false)
 (defvar vol_reveal false)
 
-(defpoll time :interval "5s" `date +'{"date": "%d/%m", "hour": "%H", "minute": "%M", "day": "%A"}'`)
+(defpoll time :interval "1s" `date +'{"date": "%y/%m/%d", "hour": "%H", "minute": "%M", "second": "%S", "day": "%A"}'`)
 
 (deflisten airplane "scripts/airplane")
 (deflisten battery "scripts/battery")

@@ -15,7 +15,13 @@
           :text ":")
         (label
           :text {time.minute}
-          :class "minute"))
+          :class "minute")
+        (label
+          :text ":")
+        (label
+          :text {time.second}
+          :class "second")
+        )
       (revealer
         :reveal date_rev
         (button
