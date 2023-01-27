@@ -174,6 +174,12 @@ in {
         10)
       }
 
+      # workspace assignments
+      ## Discord on workspace 2
+      windowrulev2 = workspace 2, title:^(Discord)$
+      ## teamspeak on workspace 3
+      windowrulev2 = workspace 3, class:^(ts3client)$
+
       # special workspace
       bind = $mod SHIFT, grave, movetoworkspace, special
       bind = $mod, grave, togglespecialworkspace
