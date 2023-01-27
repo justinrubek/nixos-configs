@@ -17,7 +17,7 @@ _: {
 
   apps = {
     terminal = "alacritty";
-    launcher = "wofi --show drun";
+    launcher = "wofi --show drun --style ${./wofi-style.css}";
     emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   };
 in {
