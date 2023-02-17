@@ -28,7 +28,6 @@
           pkgs.ssh-to-age
           pkgs.sops
 
-          self'.packages.terraform-command
           self'.packages.push-configuration
           inputs'.thoenix.packages.cli
           self'.packages.terraform
