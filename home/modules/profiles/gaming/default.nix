@@ -20,6 +20,8 @@ in {
         nss = pkgs.nss_latest;
         # withOpenASAR = true;
       })
+      pkgs.airshipper
+      pkgs.runelite
     ];
   };
 }
