@@ -30,6 +30,8 @@
 
           self'.packages.terraform-command
           self'.packages.push-configuration
+          inputs'.thoenix.packages.cli
+          self'.packages.terraform
 
           self'.packages.vault-bin
 

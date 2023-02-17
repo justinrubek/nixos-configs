@@ -31,42 +31,7 @@
     # terraform = pkgs.terraform.withPlugins terraformPluginsPredicate;
     terraform = pkgs.terraform;
 
-    # alias the terraform command to execute within the proper directory
-    terraform-command = let
-      jq = "${pkgs.jq}/bin/jq";
-      terraform-cli = "${self'.packages.terraform}/bin/terraform";
-    in
-      pkgs.writeShellScriptBin "tnix" ''
-        set -euo pipefail
-        # accept the configuration name as the first argument
-        # use it to add a -chdir=''${configurationPath} argument to the terraform command
-
-        # get the configuration name
-        configurationName="$1"
-        shift
-
-        # navigate to the top-level directory before executing the terraform command
-        pushd $(git rev-parse --show-toplevel)
-
-        # determine the path to the configuration
-        # export configurationPath=$(cat ${self'.packages.terraformConfigurationMatrix}/terraform-configuration-matrix.json | ${jq} -r '.configurations[] | select(.name == "'$configurationName'" ) | .path')
-        nix build .#terraformConfiguration/''${configurationName} --out-link /tmp/terraform-configuration
-
-        # copy the generated terraform configuration to the configuration path
-        cp /tmp/terraform-configuration/config.tf.json ./terraform/configurations/$configurationName/config.tf.json
-
-        # make it writable since it is read-only in the nix store
-        chmod +w ./terraform/configurations/$configurationName/config.tf.json
-
-        # execute the terraform command
-        ${terraform-cli} -chdir=./terraform/configurations/$configurationName "$@"
-
-        # return to the original directory
-        popd
-      '';
-
     # push the current configuration to terraform cloud
-    # this is useful for doing API-driven terraform runs
     # https://developer.hashicorp.com/terraform/cloud-docs/run/api#pushing-a-new-configuration-version
     push-configuration = let
       jq = "${pkgs.jq}/bin/jq";
@@ -151,7 +116,7 @@
     packages = {
       # expose terraform with the pinned providers
       inherit terraform;
-      inherit terraform-command push-configuration;
+      inherit push-configuration;
     };
 
     apps = let
