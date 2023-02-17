@@ -138,8 +138,8 @@ in {
       bind = $mod, j, movefocus, d
       ## grouped windows
       bind = $mod, G, togglegroup,
-      bind = $mod SHIFT, N, changegroupactive, f
-      bind = $mod SHIFT, P, changegroupactive, b
+      bind = $mod SHIFT, L, changegroupactive, f
+      bind = $mod SHIFT, H, changegroupactive, b
       ## logout
       bind = $mod, Escape, exec, wlogout -p layer-shell
       ## emoji picker
