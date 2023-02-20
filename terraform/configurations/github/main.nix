@@ -29,4 +29,12 @@ in {
 
     delete_branch_on_merge = true;
   };
+
+  resource.github_branch_protection."lockpad-main" = {
+    repository_id = "\${github_repository.lockpad.id}";
+
+    pattern = "main";
+
+    allows_deletions = false;
+  };
 }
