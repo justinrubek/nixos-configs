@@ -27,6 +27,7 @@
       # p.tfe
       p.vault
       p.sops
+      p.github
     ];
     # terraform = pkgs.terraform.withPlugins terraformPluginsPredicate;
     terraform = pkgs.terraform;
