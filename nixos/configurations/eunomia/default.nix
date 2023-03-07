@@ -139,6 +139,8 @@ in {
     ];
   };
 
+  services.flatpak.enable = true;
+
   # allow swaylock to verify login
   security.pam.services.swaylock.text = "auth include login";
 }

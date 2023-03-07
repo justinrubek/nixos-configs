@@ -1114,11 +1114,11 @@
         "terranix": "terranix"
       },
       "locked": {
-        "lastModified": 1676624861,
-        "narHash": "sha256-JSY+TUw6PXMNVDLK5QoROyHGD7kZjkzP6SiLBJo3/Rc=",
+        "lastModified": 1677110077,
+        "narHash": "sha256-TJM09lGe2V3ekjZ0Bv5JQVEm5lA/54dJSeBFc9endwY=",
         "owner": "justinrubek",
         "repo": "thoenix",
-        "rev": "1b8b2a73e830f15d90a83c9bd1dd7f58e7ed3509",
+        "rev": "fea185bd68e774016c19e8501e1ec889b424bd1c",
         "type": "github"
       },
       "original": {
@@ -1129,11 +1129,11 @@
     },
     "unixpkgs": {
       "locked": {
-        "lastModified": 1672350804,
-        "narHash": "sha256-jo6zkiCabUBn3ObuKXHGqqORUMH27gYDIFFfLq5P4wg=",
+        "lastModified": 1677407201,
+        "narHash": "sha256-3blwdI9o1BAprkvlByHvtEm5HAIRn/XPjtcfiunpY7s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "677ed08a50931e38382dbef01cba08a8f7eac8f6",
+        "rev": "7f5639fa3b68054ca0b062866dc62b22c3f11505",
         "type": "github"
       },
       "original": {

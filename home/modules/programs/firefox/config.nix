@@ -13,7 +13,7 @@
     plasma-integration
     sidebery
     multi-account-containers
-    violentmonkey
+    # violentmonkey
     tridactyl
   ];
 
