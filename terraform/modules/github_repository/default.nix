@@ -17,11 +17,6 @@ in {
         ...
       }: {
         options = {
-          name = lib.mkOption {
-            description = "Name of the repository.";
-            type = lib.types.str;
-          };
-
           description = lib.mkOption {
             description = "Description of the repository.";
             type = lib.types.str;
@@ -30,6 +25,7 @@ in {
           visibility = lib.mkOption {
             description = "Visibility of the repository.";
             type = lib.types.enum ["public" "private"];
+            default = "public";
           };
 
           has_issues = lib.mkOption {
@@ -98,7 +94,12 @@ in {
             type = lib.types.nullOr (lib.types.listOf lib.types.str);
           };
 
-          # allow for a list of brnaches to be specified
+          name = lib.mkOption {
+            description = "Name of the repository.";
+            type = lib.types.str;
+            readOnly = true;
+          };
+
           prevent_deletion = lib.mkOption {
             description = "A list of branches to prevent deletion of.";
             type = lib.types.listOf lib.types.str;
@@ -119,8 +120,10 @@ in {
         };
 
         config = {
+          name = name;
+
           repositoryResource = {
-            name = config.name;
+            name = name;
             description = config.description;
             visibility = config.visibility;
             has_issues = config.has_issues;

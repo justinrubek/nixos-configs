@@ -8,8 +8,8 @@ terraform {
   }
 
   required_providers {
-    nomad = {
-      version = "1.4.19"
+    github = {
+      version = "5.18.0"
     }
   }
 
