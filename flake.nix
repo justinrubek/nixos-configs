@@ -49,6 +49,8 @@
     };
 
     hyprland.url = "github:hyprwm/hyprland";
+
+    openwrt-imagebuilder.url = "github:astro/nix-openwrt-imagebuilder";
   };
 
   outputs = {
@@ -89,6 +91,8 @@
         ./terraform/modules
 
         ./nomad
+
+        ./flake-parts/router.nix
       ];
     };
 }
