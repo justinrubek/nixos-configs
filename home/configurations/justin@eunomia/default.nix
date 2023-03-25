@@ -40,5 +40,7 @@ in {
         default-shell = "zsh";
       };
     };
+
+    xdg.configFile."pgcli/config".source = ./pgcli.config;
   };
 }
