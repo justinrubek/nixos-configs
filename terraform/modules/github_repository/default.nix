@@ -100,6 +100,12 @@ in {
             readOnly = true;
           };
 
+          terraformName = lib.mkOption {
+            description = "Name of the repository terraform resource.";
+            type = lib.types.str;
+            readOnly = true;
+          };
+
           prevent_deletion = lib.mkOption {
             description = "A list of branches to prevent deletion of.";
             type = lib.types.listOf lib.types.str;
@@ -121,6 +127,7 @@ in {
 
         config = {
           name = name;
+          terraformName = builtins.replaceStrings ["."] ["-"] name;
 
           repositoryResource = {
             name = name;
@@ -140,9 +147,9 @@ in {
           };
 
           branchProtection = builtins.map (branch: {
-            name = "${config.name}-${branch}";
+            name = "${config.terraformName}-${branch}";
             value = {
-              repository_id = "\${github_repository.${config.name}.id}";
+              repository_id = "\${github_repository.${config.terraformName}.id}";
               pattern = branch;
               allows_deletions = false;
             };
@@ -154,7 +161,12 @@ in {
   };
 
   config = let
-    repositories = builtins.mapAttrs (name: config: config.repositoryResource) cfg;
+    # repositories = builtins.mapAttrs (name: config: config.repositoryResource) cfg;
+    repositories = lib.mapAttrs' (name: config: {
+      name = config.terraformName;
+      value = config.repositoryResource;
+    })
+    cfg;
 
     branchProtections = let
       branchProtection = builtins.mapAttrs (name: config: config.branchProtection) cfg;
