@@ -64,5 +64,19 @@
 
       inherit prevent_deletion;
     };
+
+    nix-sqlx-example = {
+      description = "Example of using sqlx in a nix flake, with pre-commit hooks";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["sqlx" "pre-commit" "example"];
+
+      inherit prevent_deletion;
+    };
+
+    "rubek.dev" = {
+      description = "My personal website";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["website" "astro" "svelte" "tailwind" "github-actions" "yarn" "dream2nix" "crane" "typescript"];
+
+      inherit prevent_deletion;
+    };
   };
 }
