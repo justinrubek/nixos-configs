@@ -46,6 +46,8 @@ in {
     };
 
     tailscale.enable = true;
+
+    mediahost.enable = false;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -66,6 +68,7 @@ in {
   environment.systemPackages = [
     pkgs.tailscale
     pkgs.mullvad-vpn
+    pkgs.deluge
   ];
 
   services.openssh = {
