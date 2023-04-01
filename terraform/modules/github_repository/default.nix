@@ -112,6 +112,29 @@ in {
             default = ["main"];
           };
 
+          secrets = lib.mkOption {
+            description = "Secrets to create.";
+            default = {};
+            type = lib.types.attrsOf (lib.types.submodule ({
+              name,
+              config,
+              ...
+            }: {
+              options = {
+                value = lib.mkOption {
+                  description = "Value of the secret.";
+                  type = lib.types.str;
+                };
+
+                encrypted = lib.mkOption {
+                  description = "Whether or not the value is encrypted with GitHub's public key in base64.";
+                  type = lib.types.bool;
+                  default = false;
+                };
+              };
+            }));
+          };
+
           repositoryResource = lib.mkOption {
             type = lib.types.unspecified;
             readOnly = true;
@@ -122,6 +145,12 @@ in {
             type = lib.types.listOf lib.types.unspecified;
             readOnly = true;
             description = "The branch protection configuration";
+          };
+
+          secretResources = lib.mkOption {
+            type = lib.types.listOf lib.types.unspecified;
+            readOnly = true;
+            description = "The repository secret configuration terraform values";
           };
         };
 
@@ -155,6 +184,21 @@ in {
             };
           })
           config.prevent_deletion;
+
+          secretResources = let
+            terraformName = config.terraformName;
+            repoName = name;
+          in
+            lib.mapAttrsToList (name: config: {
+              name = "${terraformName}-${name}";
+              value = {
+                repository = repoName;
+                secret_name = name;
+                plaintext_value = lib.mkIf (!config.encrypted) config.value;
+                encrypted_value = lib.mkIf config.encrypted config.value;
+              };
+            })
+            config.secrets;
         };
       }));
     };
@@ -176,8 +220,18 @@ in {
       allValues = builtins.foldl' (acc: value: acc ++ value) [] values;
     in
       builtins.listToAttrs allValues;
+
+    secrets = let
+      secretResources = builtins.mapAttrs (name: config: config.secretResources) cfg;
+
+      values = builtins.attrValues secretResources;
+
+      allValues = builtins.foldl' (acc: value: acc ++ value) [] values;
+    in
+      builtins.listToAttrs allValues;
   in {
     resource.github_repository = repositories;
     resource.github_branch_protection = branchProtections;
+    resource.github_actions_secret = secrets;
   };
 }
