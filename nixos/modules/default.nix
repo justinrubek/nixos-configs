@@ -2,11 +2,8 @@
   inputs,
   self,
   ...
-}: let
+} @ moduleInput: let
   # TODO: Rewrite modules to have better inputs
-  moduleInput = {
-    inherit inputs self;
-  };
 in {
   flake.nixosModules = {
     cachix = import ./cachix inputs;
@@ -35,5 +32,7 @@ in {
     "filesystem/zfs" = import ./filesystem/zfs inputs;
 
     "cloudhost/hetzner" = import ./cloudhost/hetzner inputs;
+
+    "media" = import ./media moduleInput;
   };
 }
