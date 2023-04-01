@@ -185,6 +185,9 @@ in {
           })
           config.prevent_deletion;
 
+          # map the nix modules to the format that terraform expects
+          # the mapped `name` is used to create a unique name for the resource
+          # the mapped `value` contains the values as they will be given to the resource
           secretResources = let
             terraformName = config.terraformName;
             repoName = name;
@@ -221,6 +224,7 @@ in {
     in
       builtins.listToAttrs allValues;
 
+    # This maps the nameValuePairs into an attribute set that can be used in the terraform resource
     secrets = let
       secretResources = builtins.mapAttrs (name: config: config.secretResources) cfg;
 

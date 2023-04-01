@@ -5,6 +5,16 @@
 }: {
   provider = {
     github = {};
+    vault = {};
+  };
+
+  # TODO: retrieve kvv2_path from the vault configuration
+
+  data.vault_kv_secret_v2 = {
+    crates_io = {
+      mount = "kv-v2";
+      name = "github-env/crates-io";
+    };
   };
 
   justinrubek.githubRepositories = let
@@ -49,6 +59,10 @@
       description = "Simplistic login system";
 
       inherit prevent_deletion;
+
+      secrets = {
+        CRATES_IO_TOKEN = {value = "\${data.vault_kv_secret_v2.crates_io.data.token}";};
+      };
     };
 
     templates = {
