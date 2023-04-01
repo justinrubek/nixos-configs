@@ -65,6 +65,7 @@ in {
   # $ nix search wget
   environment.systemPackages = [
     pkgs.tailscale
+    pkgs.mullvad-vpn
   ];
 
   services.openssh = {
@@ -143,4 +144,9 @@ in {
 
   # allow swaylock to verify login
   security.pam.services.swaylock.text = "auth include login";
+
+  services.mullvad-vpn = {
+    enable = true;
+    # openFirewall = true;
+  };
 }
