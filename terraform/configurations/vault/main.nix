@@ -1,4 +1,5 @@
 {...}: let
+  kv_v2_path = "kv-v2";
 in {
   # configure hcloud
   provider = {
@@ -40,6 +41,11 @@ in {
       name = "calendar-client";
       policy = builtins.readFile ./policies/calendar-client.hcl;
     };
+
+    github_actions = {
+      name = "github-actions-secrets";
+      policy = builtins.readFile ./policies/github-actions-secrets.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {
@@ -58,9 +64,9 @@ in {
   };
 
   resource.vault_mount = {
-    "kv-v2" = {
-      path = "kv-v2";
-      type = "kv-v2";
+    ${kv_v2_path} = {
+      path = kv_v2_path;
+      type = kv_v2_path;
     };
 
     "transit" = {
@@ -99,4 +105,11 @@ in {
   #     password = "postgres123";
   #   };
   # };
+
+  # terraform configuration outputs
+  output = {
+    kv_v2_path = {
+      value = kv_v2_path;
+    };
+  };
 }
