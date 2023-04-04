@@ -85,7 +85,13 @@ in {
 
       security.acme = lib.mkIf cfg.ssl.enable {
         acceptTerms = true;
-        defaults.email = "justintrubek@protonmail.com";
+        defaults = {
+          email = "justintrubek@protonmail.com";
+
+          reloadServices = [
+            "haproxy.service"
+          ];
+        };
         certs = {
           "rubek.cloud" = {
             domain = "*.rubek.cloud";
