@@ -38,7 +38,7 @@ in {
 
       # deluge for torrenting
       services.deluge = {
-        enable = true;
+        enable = false;
         user = "${user}";
         dataDir = "/home/${user}/deluge";
 
@@ -46,6 +46,18 @@ in {
           enable = true;
           port = 8112;
         };
+      };
+
+      # open service ports to the tailnet
+      networking.firewall.interfaces.${config.services.tailscale.interfaceName} = let
+        ports = {
+          jellyfin = [8096];
+        };
+
+        allPorts = lib.flatten (lib.attrValues ports);
+      in {
+        allowedTCPPorts = allPorts;
+        allowedUDPPorts = allPorts;
       };
     };
 }
