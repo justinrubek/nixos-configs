@@ -92,5 +92,12 @@
 
       inherit prevent_deletion;
     };
+
+    wasm-bindgen-service-worker = {
+      description = "A web service worker implementation using wasm_bindgen. This is a proof of concept using rust to initialize and manage a service worker";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["wasm-bindgen" "service-worker" "wasm" "web" "worker" "poc"];
+
+      inherit prevent_deletion;
+    };
   };
 }
