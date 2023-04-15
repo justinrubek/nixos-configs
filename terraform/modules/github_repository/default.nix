@@ -112,6 +112,12 @@ in {
             default = ["main"];
           };
 
+          vulnerability_alerts = lib.mkOption {
+            description = "Whether vulnerability alerts are enabled.";
+            type = lib.types.bool;
+            default = true;
+          };
+
           secrets = lib.mkOption {
             description = "Secrets to create.";
             default = {};
@@ -173,6 +179,7 @@ in {
             allow_auto_merge = config.allow_auto_merge;
             delete_branch_on_merge = config.delete_branch_on_merge;
             topics = config.topics;
+            vulnerability_alerts = config.vulnerability_alerts;
           };
 
           branchProtection = builtins.map (branch: {
