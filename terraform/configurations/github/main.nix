@@ -48,6 +48,13 @@
       inherit prevent_deletion;
     };
 
+    calendar-scheduler = {
+      description = "CalDav utility library and axum API for scheduling based on availability stored in a calendar";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["caldav" "calendar" "scheduler"];
+
+      inherit prevent_deletion;
+    };
+
     inkmlrs = {
       description = "Create and render InkML documents";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["inkml"];
