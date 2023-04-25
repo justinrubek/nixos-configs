@@ -1,23 +1,23 @@
 {pkgs, ...}: username: {
   enable = true;
 
-  extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-    decentraleyes
-    ublock-origin
-    clearurls
-    sponsorblock
-    darkreader
-    h264ify
-    df-youtube
-    bitwarden
-    plasma-integration
-    sidebery
-    multi-account-containers
-    # violentmonkey
-    tridactyl
-  ];
-
   profiles.${username} = {
+    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      decentraleyes
+      ublock-origin
+      clearurls
+      sponsorblock
+      darkreader
+      h264ify
+      df-youtube
+      bitwarden
+      plasma-integration
+      sidebery
+      multi-account-containers
+      # violentmonkey
+      tridactyl
+    ];
+
     # TODO: Add all settings for about:config
     settings = {
       "browser.send_pings" = false;

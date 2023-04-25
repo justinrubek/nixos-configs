@@ -14,7 +14,7 @@
     nurpkgs.url = "github:nix-community/NUR";
 
     eww = {
-      url = "github:elkowar/eww";
+      url = "github:justinrubek/eww";
       inputs.nixpkgs.follows = "unixpkgs";
     };
 

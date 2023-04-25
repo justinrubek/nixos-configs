@@ -33,6 +33,7 @@ in {
       pkgs.alacritty
       pkgs.playerctl
       pkgs.wireplumber
+      pkgs.wl-clipboard
     ];
 
     wayland.windowManager.hyprland.enable = true;

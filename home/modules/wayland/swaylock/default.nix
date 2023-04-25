@@ -17,11 +17,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
-      pkgs.swaylock-effects
-    ];
-
     programs.swaylock = {
+      package = pkgs.swaylock-effects;
+
       settings = {
         clock = true;
         effect-blur = "30x3";
