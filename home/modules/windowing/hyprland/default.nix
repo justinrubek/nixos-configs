@@ -55,7 +55,7 @@ in {
 
       misc {
         # enable variable frame rate
-        no_vfr = 0
+        vfr = 1
 
         # no need for auto-reload on nix
         disable_autoreload = 1
@@ -79,6 +79,11 @@ in {
 
         col.active_border = rgb(${colors.blue}) rgb(${colors.mauve}) 270deg
         col.inactive_border = rgb(${colors.crust}) rgb(${colors.lavender}) 270deg
+
+        col.group_border_active = rgb(${colors.pink})
+        col.group_border = rgb(${colors.surface0})
+
+        layout = dwindle
       }
 
       decoration {
@@ -107,9 +112,6 @@ in {
       dwindle {
         pseudotile = 1
         preserve_split = 1
-
-        col.group_border_active = rgb(${colors.pink})
-        col.group_border = rgb(${colors.surface0})
       }
 
       # disable idle when watching video
