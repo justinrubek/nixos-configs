@@ -14,7 +14,9 @@ in {
   nixpkgs.config.allowBroken = true;
   boot = {
     # kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+    # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
+    # kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
     supportedFilesystems = ["zfs" "ext4"];
     zfs.enableUnstable = true;
   };
@@ -29,11 +31,15 @@ in {
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager = {
+    sddm.enable = true;
+
+    defaultSession = "hyprland";
+  };
 
   # personal modules
   justinrubek = {
-    # windowing.plasma.enable = true;
+    windowing.plasma.enable = true;
     windowing.hyprland.enable = true;
 
     graphical.fonts.enable = true;
@@ -60,6 +66,8 @@ in {
     };
   };
 
+  programs.zsh.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -73,7 +81,7 @@ in {
 
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
+    settings.PermitRootLogin = "no";
   };
 
   # Enable networking

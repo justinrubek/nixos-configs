@@ -17,7 +17,7 @@ input @ {
   finalModules =
     [
       {
-        boot.cleanTmpDir = true;
+        boot.tmp.cleanOnBoot = true;
         networking = {
           hostName = name;
           hostId = builtins.substring 0 8 (builtins.hashString "md5" name);
