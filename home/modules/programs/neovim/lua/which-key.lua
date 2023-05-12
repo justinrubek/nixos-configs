@@ -27,6 +27,9 @@ local setup = function()
             ["s"] = { require("telescope.builtin").live_grep, "search" },
         },
 
+        -- quick-binding for find_files
+        ["F"] = { require("telescope.builtin").find_files, "find file" },
+
         b = {
             name = "buffers",
             f = { "<cmd>Telescope buffers<cr>", "find" },
