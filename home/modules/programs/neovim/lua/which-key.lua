@@ -1,6 +1,8 @@
 local setup = function()
     local plugin = require("which-key")
 
+
+    -- Keybindings on the leader key
     local opts = {
         mode = "n",
         prefix = "<leader>",
@@ -9,7 +11,6 @@ local setup = function()
         noremap = true,
         nowait = true,
     }
-
     local vopts = {
         mode = "v",
         prefix = "<leader>",
@@ -21,7 +22,10 @@ local setup = function()
 
     -- Mappings: object keys become labeled option prompts to run the given functions
     local mappings = {
-        ["f"] = { require("telescope.builtin").find_files, "find file" },
+        f = {
+            ["f"] = { require("telescope.builtin").find_files, "find file" },
+            ["s"] = { require("telescope.builtin").live_grep, "search" },
+        },
 
         b = {
             name = "buffers",
@@ -40,11 +44,24 @@ local setup = function()
                 d = { "", "TODO" },
             },
         },
+
+        t = {
+            name = "toggle",
+            t = { "<cmd>NvimTreeToggle<cr>", "file tree" },
+        },
+
+        c = {
+            name = "code",
+            a = {  "<cmd>Lspsaga code_action<cr>", "code_action" },
+            f = { "<cmd>Lspsaga lsp_finder<cr>", "lsp_finder" },
+        },
+
     }
 
     local vmappings = {
     }
 
+    -- Register the mappings for each mode
     plugin.register(mappings, opts)
     plugin.register(vmappings, vopts)
 end
