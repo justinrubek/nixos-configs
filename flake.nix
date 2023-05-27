@@ -52,6 +52,10 @@
     };
 
     hyprland.url = "github:hyprwm/hyprland";
+
+    conduit = {
+      url = "github:justinrubek/conduit";
+    };
   };
 
   outputs = {
@@ -72,6 +76,7 @@
         ./flake-parts/devshell
         ./flake-parts/packages
         ./flake-parts/dockerImages.nix
+        ./flake-parts/ci.nix
         ./packages
 
         ./lib

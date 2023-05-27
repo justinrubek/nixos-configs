@@ -1,0 +1,34 @@
+name: tag
+on:
+  workflow_dispatch:
+
+jobs:
+  publish-conduit-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@v2
+        with:
+          logger: pretty
+          log-directives: nix_installer=trace
+          backtrace: full
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          extra-conf: |
+            extra-substituters = https://cache.garnix.io
+            extra-trusted-public-keys = cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g=
+
+      - name: build image
+        run: nix build .#image/conduit
+
+      - name: login to registry
+        env:
+          USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
+        run: echo $PASSWORD | nix develop .#ci -c skopeo login docker.io -u $USERNAME --password-stdin
+
+      - name: push to docker
+        env:
+          VERSION: ${{ github.sha }}
+        run: nix develop .#ci -c skopeo copy docker-archive:result docker://justinrubek/conduit:$VERSION --insecure-policy

@@ -53,6 +53,8 @@
 
         config.Cmd = ["/usr/local/bin/paperless_cmd.sh"];
       };
+
+      "image/conduit" = inputs'.conduit.packages."image/conduit";
     };
   };
 }
