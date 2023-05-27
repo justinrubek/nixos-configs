@@ -102,6 +102,21 @@
       };
     };
 
+    nutmeg = {
+      description = "A game proof of concept. This is an unfinished game originally intended for bevy jam 2";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["game" "bevy" "jam" "bevy-jam"];
+
+      inherit prevent_deletion;
+
+      pages = {
+        source = {
+          branch = "gh-pages";
+          path = "/";
+        };
+      };
+      homepage_url = "https://justinrubek.github.io/nutmeg/";
+    };
+
     templates = {
       description = "Quick start project templates. My common boilerplate goes here";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["templates"];
