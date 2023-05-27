@@ -1,0 +1,21 @@
+# vim: syntax=bash
+
+# loads environment variables from a directory (.direnv/env)
+# each file in the directory is loaded as an environment variable
+# the file name is the variable name and the file contents are the value
+# the file is watched for changes and the environment variable is updated in your shell
+use_env_dir() {
+  local env_dir
+  env_dir="${1:-$(direnv_layout_dir)/env}"
+
+  if [[ -d $env_dir ]]; then
+    for f in "$env_dir"/*; do
+      if [[ -f $f ]]; then
+        watch_file "$f"
+        export "$(basename "$f")=$(cat "$f")"
+      fi
+    done
+  fi
+}
+
+use_env_dir
