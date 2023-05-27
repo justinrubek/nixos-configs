@@ -41,9 +41,24 @@
       inherit prevent_deletion;
     };
 
+    ayysee = {
+      description = "A custom programming language for Stationeers integrated circuits";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["stationeers" "language" "compiler"];
+
+      inherit prevent_deletion;
+
+      pages = {
+        source = {
+          branch = "gh-pages";
+          path = "/";
+        };
+      };
+      homepage_url = "https://justinrubek.github.io/ayysee/";
+    };
+
     bomper = {
       description = "bump version strings in your files";
-      topics = (mkTopic ["rust" "flake"]);
+      topics = mkTopic ["rust" "flake"];
 
       inherit prevent_deletion;
     };
@@ -81,7 +96,7 @@
 
     thoenix = {
       description = "Manage terraform configurations using terranix";
-      topics = (mkTopic ["nix" "rust" "flake" "terraform"]);
+      topics = mkTopic ["nix" "rust" "flake" "terraform"];
 
       inherit prevent_deletion;
     };
@@ -98,6 +113,8 @@
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["website" "astro" "svelte" "tailwind" "github-actions" "yarn" "dream2nix" "crane" "typescript"];
 
       inherit prevent_deletion;
+
+      homepage_url = "https://rubek.dev";
     };
 
     wasm-bindgen-service-worker = {
