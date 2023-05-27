@@ -51,6 +51,7 @@ local setup = function()
         t = {
             name = "toggle",
             t = { "<cmd>NvimTreeToggle<cr>", "file tree" },
+            e = { "<cmd>TroubleToggle<cr>", "trouble" },
         },
 
         c = {
@@ -58,7 +59,6 @@ local setup = function()
             a = {  "<cmd>Lspsaga code_action<cr>", "code_action" },
             f = { "<cmd>Lspsaga lsp_finder<cr>", "lsp_finder" },
         },
-
     }
 
     local vmappings = {

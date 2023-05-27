@@ -95,23 +95,27 @@ in {
     lspkind = {
       enable = true;
       mode = "symbol_text";
-      cmp.ellipsisChar = "…";
-      cmp.menu = {
-        buffer = "[Buffer]";
-        nvim_lsp = "[LSP]";
-        luasnip = "[LuaSnip]";
-        nvim_lua = "[Lua]";
-        latex_symbols = "[Latex]";
-      };
-      cmp.after = ''
-        function(entry, vim_item, kind)
-            local strings = vim.split(kind.kind, "%s", { trimempty = true })
-            kind.kind = " " .. strings[1] .. " "
-            kind.menu = "   " .. strings[2]
+      cmp = {
+        ellipsisChar = "…";
+        menu = {
+          buffer = "[Buffer]";
+          nvim_lsp = "[LSP]";
+          luasnip = "[LuaSnip]";
+          nvim_lua = "[Lua]";
+          latex_symbols = "[Latex]";
+          path = "[Path]";
+          treesitter = "[Treesitter]";
+        };
+        after = ''
+          function(entry, vim_item, kind)
+              -- local strings = vim.split(kind.kind, "%s", { trimempty = true })
+              -- kind.kind = " " .. strings[1] .. " "
+              -- kind.menu = "   " .. strings[2]
 
-            return kind
-        end
-      '';
+              return kind
+          end
+        '';
+      };
     };
     lsp = {
       enable = true;
@@ -156,7 +160,26 @@ in {
 
     nvim-cmp = {
       enable = true;
-      sources = [{name = "nvim_lsp";}];
+      sources = [
+        {name = "nvim_lsp";}
+        {
+          name = "nvim_lsp";
+          keywordLength = 3;
+        }
+        {
+          name = "luasnip";
+          keywordLength = 2;
+        }
+        {
+          name = "treesitter";
+          keywordLength = 2;
+        }
+        {name = "path";}
+        {
+          name = "buffer";
+          keywordLength = 3;
+        }
+      ];
       mappingPresets = ["insert"];
       mapping = {
         "<CR>" = "cmp.mapping.confirm({ select = true })";
