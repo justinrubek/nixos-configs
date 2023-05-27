@@ -15,6 +15,11 @@
       mount = "kv-v2";
       name = "github-env/crates-io";
     };
+
+    docker_io = {
+      mount = "kv-v2";
+      name = "github-env/docker-io";
+    };
   };
 
   justinrubek.githubRepositories = let
@@ -145,6 +150,11 @@
       inherit prevent_deletion;
 
       homepage_url = "https://rubek.dev";
+
+      secrets = {
+        DOCKER_HUB_TOKEN = {value = "\${data.vault_kv_secret_v2.docker_io.data.token}";};
+        DOCKER_HUB_USERNAME = {value = "\${data.vault_kv_secret_v2.docker_io.data.username}";};
+      };
     };
 
     wasm-bindgen-service-worker = {
