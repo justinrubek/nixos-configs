@@ -70,6 +70,21 @@
       inherit prevent_deletion;
     };
 
+    cheesecalc = {
+      description = "Calculates ratios used for my mac and cheese";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["cooking" "recipe" "wasm"];
+
+      inherit prevent_deletion;
+
+      pages = {
+        source = {
+          branch = "gh-pages";
+          path = "/";
+        };
+      };
+      homepage_url = "https://justinrubek.github.io/cheesecalc/";
+    };
+
     inkmlrs = {
       description = "Create and render InkML documents";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["inkml"];
