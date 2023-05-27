@@ -118,6 +118,35 @@ in {
             default = true;
           };
 
+          homepage_url = lib.mkOption {
+            description = "The URL of a page describing the project.";
+            type = lib.types.nullOr lib.types.str;
+            default = null;
+          };
+
+          pages = lib.mkOption {
+            description = "GitHub Pages configuration.";
+            default = null;
+            type = lib.types.nullOr (lib.types.submodule ({
+              branch,
+              path,
+              ...
+            }: {
+              options = {
+                source.branch = lib.mkOption {
+                  description = "The branch to publish.";
+                  type = lib.types.str;
+                };
+
+                source.path = lib.mkOption {
+                  description = "The path to publish.";
+                  type = lib.types.str;
+                  default = "/";
+                };
+              };
+            }));
+          };
+
           secrets = lib.mkOption {
             description = "Secrets to create.";
             default = {};
@@ -180,17 +209,20 @@ in {
             delete_branch_on_merge = config.delete_branch_on_merge;
             topics = config.topics;
             vulnerability_alerts = config.vulnerability_alerts;
+            homepage_url = config.homepage_url;
+            pages = config.pages;
           };
 
-          branchProtection = builtins.map (branch: {
-            name = "${config.terraformName}-${branch}";
-            value = {
-              repository_id = "\${github_repository.${config.terraformName}.id}";
-              pattern = branch;
-              allows_deletions = false;
-            };
-          })
-          config.prevent_deletion;
+          branchProtection =
+            builtins.map (branch: {
+              name = "${config.terraformName}-${branch}";
+              value = {
+                repository_id = "\${github_repository.${config.terraformName}.id}";
+                pattern = branch;
+                allows_deletions = false;
+              };
+            })
+            config.prevent_deletion;
 
           # map the nix modules to the format that terraform expects
           # the mapped `name` is used to create a unique name for the resource
@@ -216,11 +248,12 @@ in {
 
   config = let
     # repositories = builtins.mapAttrs (name: config: config.repositoryResource) cfg;
-    repositories = lib.mapAttrs' (name: config: {
-      name = config.terraformName;
-      value = config.repositoryResource;
-    })
-    cfg;
+    repositories =
+      lib.mapAttrs' (name: config: {
+        name = config.terraformName;
+        value = config.repositoryResource;
+      })
+      cfg;
 
     branchProtections = let
       branchProtection = builtins.mapAttrs (name: config: config.branchProtection) cfg;
