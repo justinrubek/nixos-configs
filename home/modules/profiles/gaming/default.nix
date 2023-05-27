@@ -22,6 +22,7 @@ in {
       })
       pkgs.airshipper
       pkgs.runelite
+      pkgs.teamspeak5_client
     ];
   };
 }

@@ -32,6 +32,8 @@ in {
       comma.packages.x86_64-linux.default
       alejandra
       prismlauncher
+
+      pkgs.microsoft-edge
     ];
 
     programs.zellij = {
