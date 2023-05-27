@@ -107,6 +107,18 @@
       };
     };
 
+    nixos-configs = {
+      description = "My 'dotfiles'. A collection of nixos configurations and other declarative infrastructure for my personal computing infrastructure";
+      topics = (mkTopic ["nix" "flake"]) ++ ["dotfiles" "nixos"];
+
+      inherit prevent_deletion;
+
+      secrets = {
+        DOCKER_HUB_TOKEN = {value = "\${data.vault_kv_secret_v2.docker_io.data.token}";};
+        DOCKER_HUB_USERNAME = {value = "\${data.vault_kv_secret_v2.docker_io.data.username}";};
+      };
+    };
+
     nutmeg = {
       description = "A game proof of concept. This is an unfinished game originally intended for bevy jam 2";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["game" "bevy" "jam" "bevy-jam"];
