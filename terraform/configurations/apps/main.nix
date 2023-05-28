@@ -71,6 +71,15 @@ in {
       server = "alex";
       path = "/var/nfs/paperless/media";
     };
+
+    ### conduit matrix homeserver
+
+    conduit_data = {
+      enable = true;
+
+      server = "alex";
+      path = "/var/nfs/conduit/data";
+    };
   };
 
   justinrubek.nomadJobs = {
@@ -126,6 +135,14 @@ in {
     postgres = {
       enable = false;
       jobspec = "${nomad_jobs}/postgres.json";
+    };
+
+    conduit = {
+      enable = true;
+      jobspec = "${nomad_jobs}/conduit.json";
+      extraArgs = {
+        depends_on = ["resource.nomad_volume.conduit_data"];
+      };
     };
   };
 }

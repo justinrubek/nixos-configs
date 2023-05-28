@@ -26,6 +26,7 @@
           ./jobs/paperless.nix
           ./jobs/postgres.nix
           ./jobs/key-test.nix
+          ./jobs/conduit.nix
         ];
       };
     };
