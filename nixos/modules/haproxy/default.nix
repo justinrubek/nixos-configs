@@ -44,11 +44,20 @@ in {
             ${
             if cfg.ssl.enable
             then ''
+              # require SSL for all requests using the wildcard certificate
               bind 0.0.0.0:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
               http-request redirect scheme https code 301 unless { ssl_fc }
             ''
             else ""
           }
+
+            acl path_known path_beg /.well-known
+            use_backend well-known if path_known
+
+            acl host_matrix hdr(host) -i matrix.rubek.cloud
+            use_backend matrix if host_matrix
+
+            # all other requests go to the main backend
             default_backend app
 
           frontend stats
@@ -61,6 +70,17 @@ in {
           backend app
             balance roundrobin
             server-template rubek-dev-site 1-3 _rubek-dev-site._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
+
+          backend well-known
+            acl path_matrix_server path_beg /.well-known/matrix/server
+            http-request return status 200 content-type application/json string '{ "m.server": "matrix.rubek.cloud" }' if path_matrix_server
+
+            acl path_matrix_client path_beg /.well-known/matrix/client
+            http-request return status 200 content-type application/json string '{ "m.homeserver": { "base_url": "https://matrix.rubek.cloud" } }' if path_matrix_client
+
+          backend matrix
+            balance roundrobin
+            server-template matrix-conduit 1-3 _matrix-conduit._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
         '';
       };
 

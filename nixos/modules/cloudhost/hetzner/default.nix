@@ -39,7 +39,7 @@ in {
       supportedFilesystems = ["zfs" "ext4"];
       zfs.enableUnstable = true;
 
-      tmpOnTmpfs = true;
+      tmp.useTmpfs = true;
 
       initrd.postDeviceCommands = lib.mkAfter ''
         zfs rollback -r tank/footfs@empty
