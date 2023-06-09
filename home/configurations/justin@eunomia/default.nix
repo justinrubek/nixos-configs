@@ -34,6 +34,7 @@ in {
       prismlauncher
 
       pkgs.microsoft-edge
+      pkgs.libreoffice
     ];
 
     programs.zellij = {

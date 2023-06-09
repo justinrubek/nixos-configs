@@ -48,4 +48,7 @@
 
   hardware.opengl.enable = true;
   services.xserver.videoDrivers = ["amdgpu"];
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 }
