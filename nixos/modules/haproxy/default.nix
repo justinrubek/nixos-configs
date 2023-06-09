@@ -41,12 +41,14 @@ in {
 
           frontend public
             bind 0.0.0.0:80
+            bind [::]:80
             ${
             if cfg.ssl.enable
             then ''
               # require SSL for all requests using the wildcard certificate
-              bind 0.0.0.0:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
-              http-request redirect scheme https code 301 unless { ssl_fc }
+                bind 0.0.0.0:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
+                bind [::]:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
+                http-request redirect scheme https code 301 unless { ssl_fc }
             ''
             else ""
           }
@@ -73,7 +75,7 @@ in {
 
           backend well-known
             acl path_matrix_server path_beg /.well-known/matrix/server
-            http-request return status 200 content-type application/json string '{ "m.server": "matrix.rubek.cloud" }' if path_matrix_server
+            http-request return status 200 content-type application/json string '{ "m.server": "matrix.rubek.cloud:443" }' if path_matrix_server
 
             acl path_matrix_client path_beg /.well-known/matrix/client
             http-request return status 200 content-type application/json string '{ "m.homeserver": { "base_url": "https://matrix.rubek.cloud" } }' if path_matrix_client
