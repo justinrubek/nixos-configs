@@ -100,4 +100,26 @@ in {
     volume_id = "\${hcloud_volume.persist.id}";
     automount = false;
   };
+
+  output = {
+    host_addresses = {
+      value = {
+        bunky = "\${hcloud_server.bunky.ipv4_address}";
+        pyxis = "\${hcloud_server.pyxis.ipv4_address}";
+        ceylon = "\${hcloud_server.ceylon.ipv4_address}";
+        huginn = "\${hcloud_server.huginn.ipv4_address}";
+        alex = "\${hcloud_server.alex.ipv4_address}";
+      };
+    };
+
+    host_addresses_ipv6 = {
+      value = {
+        bunky = "\${hcloud_server.bunky.ipv6_address}";
+        pyxis = "\${hcloud_server.pyxis.ipv6_address}";
+        ceylon = "\${hcloud_server.ceylon.ipv6_address}";
+        huginn = "\${hcloud_server.huginn.ipv6_address}";
+        alex = "\${hcloud_server.alex.ipv6_address}";
+      };
+    };
+  };
 }
