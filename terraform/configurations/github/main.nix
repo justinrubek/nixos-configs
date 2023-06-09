@@ -90,6 +90,13 @@
       homepage_url = "https://justinrubek.github.io/cheesecalc/";
     };
 
+    gpt-toolkit = {
+      description = "A collection of tools for working with LLMs. This is a work in progress as I need more tools for my own use cases";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["openai" "gpt" "llm"];
+
+      inherit prevent_deletion;
+    };
+
     inkmlrs = {
       description = "Create and render InkML documents";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["inkml"];
@@ -172,6 +179,13 @@
     wasm-bindgen-service-worker = {
       description = "A web service worker implementation using wasm_bindgen. This is a proof of concept using rust to initialize and manage a service worker";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["wasm-bindgen" "service-worker" "wasm" "web" "worker" "poc"];
+
+      inherit prevent_deletion;
+    };
+
+    wayland-playground = {
+      description = "My space for experimenting with wayland";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["wayland" "smithay" "smithay-client-toolkit"];
 
       inherit prevent_deletion;
     };
