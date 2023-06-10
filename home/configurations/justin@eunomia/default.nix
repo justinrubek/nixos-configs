@@ -1,4 +1,4 @@
-{comma, ...}: {pkgs, ...}: let
+{comma, ...} @ inputs: {pkgs, ...}: let
 in {
   config = {
     activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
@@ -35,6 +35,8 @@ in {
 
       pkgs.microsoft-edge
       pkgs.libreoffice
+
+      inputs.gpt-toolkit.packages.${pkgs.system}.gpt-toolkit
     ];
 
     programs.zellij = {

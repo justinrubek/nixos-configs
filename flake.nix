@@ -56,6 +56,10 @@
     conduit = {
       url = "github:justinrubek/conduit";
     };
+
+    gpt-toolkit = {
+      url = "github:justinrubek/gpt-toolkit";
+    };
   };
 
   outputs = {
