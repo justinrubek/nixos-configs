@@ -90,6 +90,20 @@
       homepage_url = "https://justinrubek.github.io/cheesecalc/";
     };
 
+    factorio-server = {
+      description = "Factorio server container image";
+      topics = (mkTopic ["nix" "flake"]) ++ ["factorio" "game" "game-server"];
+
+      inherit prevent_deletion;
+
+      secrets = {
+        DOCKER_HUB_TOKEN = {value = "\${data.vault_kv_secret_v2.docker_io.data.token}";};
+        DOCKER_HUB_USERNAME = {value = "\${data.vault_kv_secret_v2.docker_io.data.username}";};
+      };
+
+      homepage_url = "https://hub.docker.com/repository/docker/justinrubek/factorio-server/";
+    };
+
     gpt-toolkit = {
       description = "A collection of tools for working with LLMs. This is a work in progress as I need more tools for my own use cases";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["openai" "gpt" "llm"];
