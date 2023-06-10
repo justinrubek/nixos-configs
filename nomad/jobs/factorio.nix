@@ -53,7 +53,7 @@
             "--config"
             "/etc/factorio.conf"
             "--start-server"
-            "/opt/factorio/saves/new-save.zip"
+            "/opt/factorio/saves/keghan-fixtrains.zip"
             "--server-settings"
             "/etc/server-settings.json"
           ];
