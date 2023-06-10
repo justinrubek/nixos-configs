@@ -41,6 +41,9 @@
           SERVER_NAME = "Valheim Server";
           WORLD_NAME = "testworld";
           SERVER_PASSWORD = "password";
+
+          VALHEIM_PLUS = "true";
+          VPCFG_Server_enabled = "true";
         };
 
         volumeMounts = [
