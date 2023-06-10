@@ -80,6 +80,13 @@ in {
       server = "alex";
       path = "/var/nfs/conduit/data";
     };
+
+    factorio_data = {
+      enable = true;
+
+      server = "alex";
+      path = "/var/nfs/factorio/data";
+    };
   };
 
   justinrubek.nomadJobs = {
@@ -142,6 +149,14 @@ in {
       jobspec = "${nomad_jobs}/conduit.json";
       extraArgs = {
         depends_on = ["resource.nomad_volume.conduit_data"];
+      };
+    };
+
+    factorio = {
+      enable = true;
+      jobspec = "${nomad_jobs}/factorio.json";
+      extraArgs = {
+        depends_on = ["resource.nomad_volume.factorio_data"];
       };
     };
   };
