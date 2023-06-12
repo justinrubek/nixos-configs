@@ -132,7 +132,7 @@ in {
     };
 
     paperless = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/paperless.json";
       extraArgs = {
         depends_on = ["resource.nomad_volume.paperless_consume" "resource.nomad_volume.paperless_data" "resource.nomad_volume.paperless_media"];

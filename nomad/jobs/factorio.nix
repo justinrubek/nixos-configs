@@ -87,11 +87,22 @@
               write-data=/opt/factorio
             '';
           }
+          {
+            destination = "local/server-adminlist.json";
+            data = let
+              server-adminlist = [
+                "justinkingr"
+                "sinnyen"
+              ];
+              json = builtins.toJSON server-adminlist;
+            in
+              json;
+          }
         ];
 
         resources = {
           cpu = 6000;
-          memory = 4096;
+          memory = 4096 + 2048;
         };
       };
 
