@@ -44,6 +44,7 @@
           volumes = [
             "local/server-settings.json:/etc/server-settings.json"
             "local/factorio.conf:/etc/factorio.conf"
+            "local/server-adminlist.json:/etc/server-adminlist.json"
           ];
 
           # Run /bin/factorio with the following arguments
@@ -52,10 +53,13 @@
           args = [
             "--config"
             "/etc/factorio.conf"
-            "--start-server"
-            "/opt/factorio/saves/keghan-fixtrains.zip"
+            # "--start-server"
+            # "/opt/factorio/saves/keghan-fixtrains.zip"
+            "--start-server-load-latest"
             "--server-settings"
             "/etc/server-settings.json"
+            "--server-adminlist"
+            "/etc/server-adminlist.json"
           ];
         };
 
