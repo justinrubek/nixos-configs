@@ -46,6 +46,11 @@ in {
       name = "github-actions-secrets";
       policy = builtins.readFile ./policies/github-actions-secrets.hcl;
     };
+
+    factorio_server = {
+      name = "factorio-server";
+      policy = builtins.readFile ./policies/factorio-server.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {

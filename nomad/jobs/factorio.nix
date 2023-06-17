@@ -39,18 +39,26 @@
         ];
 
         config = {
-          image = "docker.io/justinrubek/factorio-server:c4aae5d13abfe240783b247f5c1647c9e7617755";
+          image = "docker.io/justinrubek/factorio-server:aa661c0eb49ad181e65fdd7529cc4dc791564e88";
 
           volumes = [
             "local/server-settings.json:/etc/server-settings.json"
             "local/factorio.conf:/etc/factorio.conf"
             "local/server-adminlist.json:/etc/server-adminlist.json"
+            "local/mods.ron:/etc/mods.ron"
           ];
 
           # Run /bin/factorio with the following arguments
           # - the save to use `/opt/factorio/saves/new-save.zip`
-          command = "factorio";
+          command = "factorio-server";
           args = [
+            "server"
+            "start"
+            "--mod-directory"
+            "/opt/factorio/mods"
+            "--mod-list"
+            "/etc/mods.ron"
+            "--"
             "--config"
             "/etc/factorio.conf"
             # "--start-server"
@@ -63,7 +71,21 @@
           ];
         };
 
+        vault = {
+          policies = ["factorio-server"];
+        };
+
         templates = [
+          {
+            data = let
+              envSecret = name: ''{{ with secret "kv-v2/data/factorio" }}{{ .Data.data.${name} }}{{ end }}'';
+            in ''
+              FACTORIO_USERNAME=${envSecret "username"}
+              FACTORIO_TOKEN=${envSecret "token"}
+            '';
+            destination = "secrets/env";
+            env = true;
+          }
           {
             destination = "local/server-settings.json";
             data = let
@@ -102,8 +124,47 @@
             in
               json;
           }
+          {
+            destination = "local/mods.ron";
+            data = ''
+              [
+                  (name: "aai-containers", version: "0.2.11"),
+                  (name: "aai-industry", version: "0.5.19"),
+                  (name: "aai-signal-transmission", version: "0.4.7"),
+                  (name: "alien-biomes", version: "0.6.8"),
+                  (name: "flib", version: "0.12.4"),
+                  (name: "FluidMustFlow", version: "1.3.1"),
+                  (name: "FluidMustFlowSE", version: "0.0.1"),
+                  (name: "FNEI", version: "0.4.1"),
+                  (name: "grappling-gun", version: "0.3.3"),
+                  (name: "helmod", version: "0.12.14"),
+                  (name: "informatron", version: "0.3.2"),
+                  (name: "jetpack", version: "0.3.11"),
+                  (name: "Krastorio2", version: "1.3.15"),
+                  (name: "Krastorio2Assets", version: "1.2.1"),
+                  (name: "LogisticTrainNetwork", version: "1.18.3"),
+                  (name: "Mechanicus", version: "1.0.7"),
+                  (name: "miniloader", version: "1.15.6"),
+                  (name: "RateCalculator", version: "2.4.6"),
+                  (name: "robot_attrition", version: "0.5.13"),
+                  (name: "se-ltn-glue", version: "0.6.0"),
+                  (name: "shield-projector", version: "0.1.6"),
+                  (name: "simhelper", version: "1.1.4"),
+                  (name: "space-exploration-graphics", version: "0.6.14"),
+                  (name: "space-exploration-graphics-2", version: "0.6.1"),
+                  (name: "space-exploration-graphics-3", version: "0.6.2"),
+                  (name: "space-exploration-graphics-4", version: "0.6.2"),
+                  (name: "space-exploration-graphics-5", version: "0.6.1"),
+                  (name: "space-exploration-menu-simulations", version: "0.6.8"),
+                  (name: "space-exploration-postprocess", version: "0.6.24"),
+                  (name: "space-exploration", version: "0.6.101"),
+                  (name: "Todo-List", version: "19.2.0"),
+                  (name: "YARM", version: "0.8.207"),
+                  (name: "cybersyn", version: "1.2.16"),
+              ]
+            '';
+          }
         ];
-
         resources = {
           cpu = 6000;
           memory = 4096 + 2048;
