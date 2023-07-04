@@ -46,6 +46,17 @@
       inherit prevent_deletion;
     };
 
+    async-watcher = {
+      description = "A file notification library for tokio";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["async" "file-watcher"];
+
+      inherit prevent_deletion;
+
+      secrets = {
+        CRATES_IO_TOKEN = {value = "\${data.vault_kv_secret_v2.crates_io.data.token}";};
+      };
+    };
+
     ayysee = {
       description = "A custom programming language for Stationeers integrated circuits";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["stationeers" "language" "compiler"];
