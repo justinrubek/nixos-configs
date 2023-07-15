@@ -78,10 +78,10 @@ in {
 
     comment-nvim.enable = true;
 
-    copilot = {
+    copilot-lua = {
       enable = true;
     };
-    cmp-copilot.enable = true;
+    # cmp-copilot.enable = true;
 
     undotree = {
       enable = true;
@@ -249,7 +249,7 @@ in {
   ];
 
   extraPackages = [
-    pkgs.nodejs-16_x
+    pkgs.nodejs
     pkgs.python310
   ];
 }
