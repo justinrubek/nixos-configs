@@ -91,9 +91,16 @@ in {
           };
         };
 
-        config = {
+        config = let
+          pkgs = inputs.nixpkgs.legacyPackages.${config.system};
+
+          homeDirectory =
+            if !pkgs.stdenv.isDarwin
+            then "/home/${config.username}"
+            else "/Users/${config.username}";
+        in {
           entryPoint = import "${self}/home/configurations/${config.username}@${config.hostname}" (inputs // {inherit self;});
-          homeDirectory = "/home/${config.username}";
+          inherit homeDirectory;
 
           finalModules =
             [
@@ -107,7 +114,7 @@ in {
                 nixpkgs = {
                   # https://github.com/nix-community/home-manager/issues/2942#issuecomment-1119760100
                   # config.allowUnfree = true;
-                  config.allowUnfreePredicate = (name: true);
+                  config.allowUnfreePredicate = name: true;
                   config.xdg.configHome = "${config.homeDirectory}/.config";
                   overlays = [
                     inputs.nurpkgs.overlay
@@ -124,10 +131,11 @@ in {
             ++ builtins.attrValues self.modules;
 
           homeConfig = inputs.home-manager.lib.homeManagerConfiguration {
-            pkgs = inputs.nixpkgs.legacyPackages.${config.system};
+            inherit pkgs;
             modules = config.finalModules;
             extraSpecialArgs = {
               inherit (config) username;
+              inherit homeDirectory;
             };
           };
 
