@@ -105,8 +105,6 @@ in {
     allowedTCPPorts = [
       3000
       8000
-      # grocy
-      6100
     ];
   };
 
@@ -134,22 +132,6 @@ in {
   };
 
   hardware.ckb-next.enable = true;
-
-  services.grocy = {
-    enable = true;
-
-    hostName = "grocy.localhost";
-    nginx.enableSSL = false;
-  };
-  # changing grocy port forcibly
-  services.nginx.virtualHosts."grocy.localhost" = {
-    listen = [
-      {
-        addr = "0.0.0.0";
-        port = 6100;
-      }
-    ];
-  };
 
   services.flatpak.enable = true;
 
