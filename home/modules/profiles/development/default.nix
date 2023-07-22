@@ -37,6 +37,8 @@ in {
           pl = "pull";
           graph = "log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold cyan)%h%C(reset) - %C(green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all";
         };
+
+        lfs.enable = true;
       };
 
       broot = {

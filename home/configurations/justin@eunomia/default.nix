@@ -37,6 +37,8 @@ in {
       pkgs.libreoffice
 
       inputs.gpt-toolkit.packages.${pkgs.system}.gpt-toolkit
+
+      pkgs.wezterm
     ];
 
     programs.zellij = {
