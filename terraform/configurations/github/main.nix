@@ -115,9 +115,9 @@
       homepage_url = "https://hub.docker.com/repository/docker/justinrubek/factorio-server/";
     };
 
-    gpt-toolkit = {
-      description = "A collection of tools for working with LLMs. This is a work in progress as I need more tools for my own use cases";
-      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["openai" "gpt" "llm"];
+    generation-toolkit = {
+      description = "A collection of tools for working with generative models. This is a work in progress as I need more tools for my own use cases";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["openai" "gpt" "llm" "stable-diffusion" "image-generation" "text2image" "diffusion" "libtorch"];
 
       inherit prevent_deletion;
     };
