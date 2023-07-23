@@ -21,6 +21,8 @@ in {
         pkgs.noto-fonts-emoji
 
         pkgs.roboto
+
+        pkgs.iosevka
       ];
 
       fontconfig.defaultFonts = {
