@@ -44,9 +44,9 @@ in {
       $mod = SUPER
       $modalt = SUPER_ALT
 
-      # TODO: monitor configuration
-      monitor = HDMI-A-1, 2560x1440, 0x0, auto
-      monitor = DP-1, 1920x1080, 2560x0, auto
+      # TODO: better monitor configuration
+      monitor = HDMI-A-1, 2560x1440@100, 0x0, auto
+      monitor = DP-1, 1920x1080@144, 2560x0, auto
       workspace = HDMI-A-1, 1
       workspace = DP-1, 10
 
