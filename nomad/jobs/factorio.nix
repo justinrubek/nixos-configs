@@ -39,7 +39,7 @@
         ];
 
         config = {
-          image = "docker.io/justinrubek/factorio-server:aa661c0eb49ad181e65fdd7529cc4dc791564e88";
+          image = "docker.io/justinrubek/factorio-server:1b2bc7b0b135bc7889b5abb186be8c35178409f4";
 
           volumes = [
             "local/server-settings.json:/etc/server-settings.json"
