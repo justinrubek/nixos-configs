@@ -78,7 +78,10 @@ in {
 
     comment-nvim.enable = true;
 
-    copilot-lua = {
+    # copilot-lua = {
+    #   enable = true;
+    # };
+    copilot-vim = {
       enable = true;
     };
     # cmp-copilot.enable = true;
