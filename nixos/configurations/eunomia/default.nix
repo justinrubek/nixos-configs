@@ -77,6 +77,9 @@ in {
     pkgs.tailscale
     pkgs.mullvad-vpn
     pkgs.deluge
+
+    pkgs.rocm-smi
+    pkgs.rocminfo
   ];
 
   services.openssh = {

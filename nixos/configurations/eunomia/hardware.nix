@@ -46,7 +46,13 @@
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    extraPackages = [
+      pkgs.rocm-opencl-icd
+      pkgs.rocm-opencl-runtime
+    ];
+  };
   services.xserver.videoDrivers = ["amdgpu"];
 
   hardware.bluetooth.enable = true;
