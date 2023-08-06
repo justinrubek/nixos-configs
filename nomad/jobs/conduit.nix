@@ -64,7 +64,7 @@
 
               max_request_size = 20_000_000
 
-              allow_registration = true
+              allow_registration = false
               allow_federation = true
 
               enable_lightning_bolt = true
