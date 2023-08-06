@@ -139,6 +139,13 @@
       };
     };
 
+    matrix-bot = {
+      description = "A work-in-progress matrix bot for my personal matrix server. I am using this to learn how to interact with matrix and to build a bot that can help me with my personal technology infrastructure";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["matrix" "chatbot"];
+
+      inherit prevent_deletion;
+    };
+
     nixos-configs = {
       description = "My 'dotfiles'. A collection of nixos configurations and other declarative infrastructure for my personal computing infrastructure";
       topics = (mkTopic ["nix" "flake"]) ++ ["dotfiles" "nixos"];
