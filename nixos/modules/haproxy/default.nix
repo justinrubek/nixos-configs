@@ -11,6 +11,15 @@ in {
     enable = lib.mkEnableOption "run haproxy";
 
     ssl.enable = lib.mkEnableOption "fetch SSL certificates";
+
+    nodes = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        "bunky"
+        "pyxis"
+        "ceylon"
+      ];
+    };
   };
 
   config = let
@@ -33,9 +42,12 @@ in {
             timeout server 50000ms
 
           resolvers consul
-            nameserver bunky bunky:8600
-            nameserver pyxis pyxis:8600
-            nameserver ceylon ceylon:8600
+            ${
+            lib.concatMapStringsSep "\n" (node: ''
+              nameserver ${node} ${node}:8600
+            '')
+            cfg.nodes
+          }
             accepted_payload_size 8192
             hold valid 5s
 
