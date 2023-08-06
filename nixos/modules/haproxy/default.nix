@@ -65,11 +65,12 @@ in {
             else ""
           }
 
-            acl path_known path_beg /.well-known
+            acl path_known path_beg /.well-known .matrix/.well-known
             use_backend well-known if path_known
 
             acl host_matrix hdr(host) -i matrix.rubek.cloud
-            use_backend matrix if host_matrix
+            acl path_matrix path_beg /_matrix
+            use_backend matrix if host_matrix or path_matrix
 
             # all other requests go to the main backend
             default_backend app
