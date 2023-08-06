@@ -88,10 +88,12 @@ in {
 
       decoration {
         rounding = 16
-        blur = 1
-        blur_size = 3
-        blur_passes = 3
-        blur_new_optimizations = 1
+        blur {
+          enabled = true
+          size = 3
+          passes = 3
+          new_optimizations = true
+        }
 
         drop_shadow = 1
         shadow_ignore_window = 1

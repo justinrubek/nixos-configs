@@ -132,6 +132,33 @@ in {
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
+    gamescopeSession = {
+      enable = true;
+      args = [
+        "-w 2560"
+        "-h 1440"
+      ];
+    };
+
+    package = pkgs.steam.override {
+      extraPkgs = pkgs: [
+        pkgs.xorg.libXcursor
+        pkgs.xorg.libXi
+        pkgs.xorg.libXinerama
+        pkgs.libpng
+        pkgs.libpulseaudio
+        pkgs.libvorbis
+        pkgs.stdenv.cc.cc.lib
+        pkgs.libkrb5
+        pkgs.keyutils
+      ];
+    };
+  };
+
+  # enable fix for steam issues with xdg-desktop-portal
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
   hardware.ckb-next.enable = true;
