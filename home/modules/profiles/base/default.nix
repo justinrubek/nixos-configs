@@ -149,7 +149,6 @@ in {
       neofetch
       procs
       duf
-      obs-studio
       bitwarden
     ];
   };

@@ -49,5 +49,7 @@ in {
     };
 
     xdg.configFile."pgcli/config".source = ./pgcli.config;
+
+    programs.obs-studio.enable = true;
   };
 }
