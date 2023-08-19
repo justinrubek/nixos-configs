@@ -12,6 +12,7 @@ inputs: {
   "programs/eww" = import ./programs/eww inputs;
   "programs/neovim" = import ./programs/neovim inputs;
   "programs/firefox" = import ./programs/firefox inputs;
+  "programs/pijul" = import ./programs/pijul inputs;
 
   "wayland/common" = import ./wayland/common inputs;
   "wayland/swaylock" = import ./wayland/swaylock inputs;
