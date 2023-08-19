@@ -60,6 +60,10 @@
     gpt-toolkit = {
       url = "github:justinrubek/gpt-toolkit";
     };
+
+    flake-builder = {
+      url = "github:justinrubek/flake-builder";
+    };
   };
 
   outputs = {

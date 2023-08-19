@@ -55,6 +55,19 @@
       };
 
       "image/conduit" = inputs'.conduit.packages."image/conduit";
+
+      "image/flake-builder" = pkgs.dockerTools.buildImage {
+        name = "flake-builder-github-app";
+        tag = inputs.flake-builder.rev;
+
+        copyToRoot = pkgs.buildEnv {
+          name = "image-root";
+          paths = [inputs'.flake-builder.packages.cli];
+          pathsToLink = ["/bin"];
+        };
+
+        config.Cmd = ["/bin/flake-builder-cli"];
+      };
     };
   };
 }
