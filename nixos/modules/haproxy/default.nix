@@ -72,6 +72,9 @@ in {
             acl path_matrix path_beg /_matrix
             use_backend matrix if host_matrix or path_matrix
 
+            acl host_github_app hdr(host) -i github-builder.rubek.cloud
+            use_backend github-app if host_github_app
+
             # all other requests go to the main backend
             default_backend app
 
@@ -96,6 +99,10 @@ in {
           backend matrix
             balance roundrobin
             server-template matrix-conduit 1-3 _matrix-conduit._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
+
+          backend github-app
+            balance roundrobin
+            server-template github-app 1-3 _flake-builder-github-app._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
         '';
       };
 
