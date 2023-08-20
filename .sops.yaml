@@ -42,3 +42,8 @@ creation_rules:
       - *server_ceylon
       - *server_pyxis
 
+  - path_regex: secrets/minio.yaml$
+    key_groups:
+    - age:
+      - *admin_justin
+      - *server_alex

@@ -20,6 +20,8 @@
     defaultLocale = "en_US.UTF-8";
   };
 
+  systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
+
   # personal modules
   justinrubek = {
     tailscale = {
