@@ -35,11 +35,21 @@ Deployment configuration contained in `./deploy`
 
 ## terraform
 
-[thoenix](https://github.com/justinrubek/thoenix) is included and a `tnix` script is in the devShell which can run terraform commands:
+[thoenix](https://github.com/justinrubek/thoenix) is included for running terraform commands
 
-`tnix hetzner init`
+`thoenix terraform hetzner init`
 
-`tnix hetzner plan`
+`thoenix terraform hetzner plan`
+
+
+### providers
+
+#### minio
+
+The provider expects the following variables to be set: `MINIO_ENDPOINT`, `MINIO_USER`, `MINIO_PASSWORD`.
+In order for this to work you'll need to set up an account manually to use.
+You can do this by navigating to the web console, creating an user, and then creating a service-account for this user and using the service-account details for user/password.
+
 
 ## secrets
 
@@ -49,6 +59,11 @@ New machines need to be added to `.sops.yaml` to access secrets.
 The machine's key can be determined using `ssh-to-age`:
 
 `ssh-keyscan ${ip} | ssh-to-age`
+
+#### adding a new secret
+
+Create an entry in `.sops.yaml` specifying the file (or use a pattern of some sort for multiple) and the keys that are allowed to access it.
+Then edit the file: `sops secrets/filename.yaml`
 
 ### vault
 
