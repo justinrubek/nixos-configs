@@ -159,5 +159,10 @@ in {
         depends_on = ["resource.nomad_volume.factorio_data"];
       };
     };
+
+    flake-builder = {
+      enable = true;
+      jobspec = "${nomad_jobs}/flake_builder.json";
+    };
   };
 }

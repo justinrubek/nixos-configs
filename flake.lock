@@ -694,11 +694,11 @@
         "pre-commit-hooks": "pre-commit-hooks_3"
       },
       "locked": {
-        "lastModified": 1692479472,
-        "narHash": "sha256-iKBg2GBeptpPIxcuLwtwuGfvwOmpgOkL1prJ2iyV+PA=",
+        "lastModified": 1692506823,
+        "narHash": "sha256-5eBNwd3iExjretoBF52jjNN7WI2dzX5b7IcTn36LJmw=",
         "owner": "justinrubek",
         "repo": "flake-builder",
-        "rev": "51ae14f8465d06cc4756e7cbe7d4057e08172964",
+        "rev": "86f449d54fd6791232ce361730f9420aef87c3ca",
         "type": "github"
       },
       "original": {

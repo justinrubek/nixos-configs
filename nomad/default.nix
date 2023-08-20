@@ -28,6 +28,7 @@
           ./jobs/key-test.nix
           ./jobs/conduit.nix
           ./jobs/factorio.nix
+          ./jobs/flake-builder.nix
         ];
       };
     };
