@@ -39,6 +39,8 @@ in {
       inputs.gpt-toolkit.packages.${pkgs.system}.gpt-toolkit
 
       pkgs.wezterm
+
+      pkgs.fluffychat
     ];
 
     programs.zellij = {
