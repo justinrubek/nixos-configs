@@ -10,7 +10,7 @@
 
   data.vault_kv_secret_v2.porkbun_key = {
     mount = "kv-v2";
-    name = "secret/porkbun/api_key";
+    name = "dns/porkbun";
   };
 
   resource.porkbun_dns_record.dummy_api = {
