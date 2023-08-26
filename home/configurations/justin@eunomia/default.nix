@@ -37,6 +37,7 @@ in {
       pkgs.libreoffice
 
       inputs.gpt-toolkit.packages.${pkgs.system}.gpt-toolkit
+      inputs.flake-builder.packages.${pkgs.system}.cli
 
       pkgs.wezterm
 
