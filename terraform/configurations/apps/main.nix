@@ -109,7 +109,7 @@ in {
     };
 
     dummy_api_nix = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/dummy_api_nix.json";
     };
 

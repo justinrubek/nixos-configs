@@ -30,8 +30,8 @@ in {
         extraPackages = [config.nix.package];
 
         settings = {
-          # bind_addr = "0.0.0.0";
-          bind_addr = ''{{ GetInterfaceIP "${tailscaleInterface}" }}'';
+          bind_addr = "0.0.0.0";
+          # bind_addr = ''{{ GetInterfaceIP "${tailscaleInterface}" }}'';
           datacenter = "dc1";
 
           advertise = let
