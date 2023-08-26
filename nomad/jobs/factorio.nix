@@ -78,7 +78,8 @@
         templates = [
           {
             data = let
-              envSecret = name: ''{{ with secret "kv-v2/data/factorio" }}{{ .Data.data.${name} }}{{ end }}'';
+              secretKey = "factorio";
+              envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
             in ''
               FACTORIO_USERNAME=${envSecret "username"}
               FACTORIO_TOKEN=${envSecret "token"}

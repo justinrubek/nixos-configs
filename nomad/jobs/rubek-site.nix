@@ -18,7 +18,7 @@
           # nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server_script";
           # nix_flake_sha = "sha256-g/zqA5+ac+4GgcQfKvR7QM5MTs9TDju4qsDeELFLCUg=";
           # entrypoint = ["bin/start_server"];
-          image = "justinrubek/rubek.dev:0.4.0";
+          image = "justinrubek/rubek.dev:0.4.1";
 
           ports = ["http"];
 
@@ -42,7 +42,8 @@
         templates = [
           {
             data = let
-              envSecret = name: ''{{ with secret "kv-v2/data/calendar/rubek-site" }}{{ .Data.data.${name} }}{{ end }}'';
+              secretKey = "calendar/rubek-site";
+              envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
             in ''
               CALDAV_USERNAME=${envSecret "username"}
               CALDAV_PASSWORD=${envSecret "password"}
