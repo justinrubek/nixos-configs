@@ -51,6 +51,16 @@ in {
       name = "factorio-server";
       policy = builtins.readFile ./policies/factorio-server.hcl;
     };
+
+    nix_cache_postgres = {
+      name = "nix-cache-postgres";
+      policy = builtins.readFile ./policies/nix-cache-postgres.hcl;
+    };
+
+    nix_cache_attic = {
+      name = "nix-cache-attic";
+      policy = builtins.readFile ./policies/nix-cache-attic.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {

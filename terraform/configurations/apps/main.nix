@@ -87,6 +87,13 @@ in {
       server = "alex";
       path = "/var/nfs/factorio/data";
     };
+
+    nix_cache_postgres = {
+      enable = true;
+
+      server = "alex";
+      path = "/var/nfs/nix-cache/postgres";
+    };
   };
 
   justinrubek.nomadJobs = {
@@ -163,6 +170,14 @@ in {
     flake-builder = {
       enable = true;
       jobspec = "${nomad_jobs}/flake_builder.json";
+    };
+
+    nix-cache = {
+      enable = true;
+      jobspec = "${nomad_jobs}/nix_cache.json";
+      extraArgs = {
+        depends_on = ["resource.nomad_volume.nix_cache_postgres"];
+      };
     };
   };
 }
