@@ -140,3 +140,15 @@ See the following guides for information on how this was set up:
 https://developer.hashicorp.com/consul/tutorials/security/access-control-setup-production#bootstrap-the-acl-system
 
 https://www.hashicorp.com/blog/managing-hashicorp-consul-access-control-lists-with-terraform-and-vault
+
+## services
+
+### nix-cache
+
+In order to manage caches, a token is needed.
+The best option currently seems to be running `atticadm` inside attic's container using its config like so:
+`atticadm -f /secrets/attic.toml make-token --sub "admin" --validity "2y" --pull "*" --push "*" --delete "*" --create-cach
+e "*" --configure-cache "*" --configure-cache-retention "*" --destroy-cache "*"`
+
+
+atticadm -f /local/attic.toml make-token --sub "admin" --validity "2y" --pull "main" --push "main" --delete "main" --create-cache "main" --configure-cache "main" --configure-cache-retention "main" --destroy-cache "main"
