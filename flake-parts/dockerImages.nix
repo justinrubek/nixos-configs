@@ -55,8 +55,6 @@
       };
 
       "image/conduit" = inputs'.conduit.packages."image/conduit";
-
-      "image/flake-builder" = inputs'.flake-builder.packages."image/flake-builder";
     };
   };
 }
