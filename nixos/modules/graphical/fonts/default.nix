@@ -12,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     fonts = {
-      fonts = [
+      packages = [
         self.packages.${pkgs.system}.material-symbols
 
         pkgs.lexend
