@@ -72,6 +72,9 @@ in {
             acl path_matrix path_beg /_matrix
             use_backend matrix if host_matrix or path_matrix
 
+            acl host_nix_cache hdr(host) -i nix-cache.rubek.cloud
+            use_backend nix-cache if host_nix_cache
+
             acl host_github_app hdr(host) -i github-builder.rubek.cloud
             use_backend github-app if host_github_app
 
@@ -103,6 +106,10 @@ in {
           backend github-app
             balance roundrobin
             server-template github-app 1-3 _flake-builder-github-app._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
+
+          backend nix-cache
+            balance roundrobin
+            server-template nix-cache 1-3 _nix-cache._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
         '';
       };
 
