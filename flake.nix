@@ -18,7 +18,6 @@
       inputs.nixpkgs.follows = "unixpkgs";
     };
 
-    flake-utils.url = "github:numtide/flake-utils";
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
@@ -64,7 +63,6 @@
 
   outputs = {
     self,
-    flake-utils,
     flake-parts,
     ...
   } @ inputs:
