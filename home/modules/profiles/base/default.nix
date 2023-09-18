@@ -36,6 +36,7 @@ in {
         enableAliases = true;
       };
       htop.enable = true;
+      btop.enable = true;
       bottom.enable = true;
       jq.enable = true;
 
