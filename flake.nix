@@ -3,19 +3,18 @@
 
   inputs = {
     # nixpkgs.url = "nixpkgs/nixos-22.05";
-    unixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs.follows = "unixpkgs";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "unixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nurpkgs.url = "github:nix-community/NUR";
 
     eww = {
       url = "github:justinrubek/eww";
-      inputs.nixpkgs.follows = "unixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     flake-parts.url = "github:hercules-ci/flake-parts";
@@ -23,10 +22,10 @@
 
     nixvim = {
       url = "github:pta2002/nixvim";
-      inputs.nixpkgs.follows = "unixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "unixpkgs";
+    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     deploy-rs.url = "github:serokell/deploy-rs";
 

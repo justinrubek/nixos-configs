@@ -1,4 +1,4 @@
-{unixpkgs, ...}: {
+{nixpkgs, ...}: {
   config,
   pkgs,
   lib,

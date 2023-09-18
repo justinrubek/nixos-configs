@@ -331,7 +331,7 @@
         "flake-utils": "flake-utils_3",
         "nix-filter": "nix-filter_2",
         "nixpkgs": [
-          "unixpkgs"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -1330,7 +1330,7 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
-          "unixpkgs"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -1445,7 +1445,7 @@
         "flake-compat": "flake-compat_11",
         "neovim-flake": "neovim-flake",
         "nixpkgs": [
-          "unixpkgs"
+          "nixpkgs"
         ]
       },
       "locked": {
@@ -1828,6 +1828,21 @@
         "type": "github"
       }
     },
+    "nixpkgs_10": {
+      "locked": {
+        "lastModified": 1636823747,
+        "narHash": "sha256-oWo1nElRAOZqEf90Yek2ixdHyjD+gqtS/pAgwaQ9UhQ=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "f6a2ed2082d9a51668c86ba27d0b5496f7a2ea93",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1671417167,
@@ -1925,6 +1940,21 @@
     },
     "nixpkgs_8": {
       "locked": {
+        "lastModified": 1694767346,
+        "narHash": "sha256-5uH27SiVFUwsTsqC5rs3kS7pBoNhtoy9QfTP9BmknGk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ace5093e36ab1e95cb9463863491bee90d5a4183",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_9": {
+      "locked": {
         "lastModified": 1645655918,
         "narHash": "sha256-ZfbEFRW7o237+A1P7eTKhXje435FCAoe0blj2n20Was=",
         "owner": "nixos",
@@ -1937,27 +1967,12 @@
         "type": "indirect"
       }
     },
-    "nixpkgs_9": {
-      "locked": {
-        "lastModified": 1636823747,
-        "narHash": "sha256-oWo1nElRAOZqEf90Yek2ixdHyjD+gqtS/pAgwaQ9UhQ=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "f6a2ed2082d9a51668c86ba27d0b5496f7a2ea93",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixvim": {
       "inputs": {
         "beautysh": "beautysh",
         "flake-utils": "flake-utils_14",
         "nixpkgs": [
-          "unixpkgs"
+          "nixpkgs"
         ],
         "pre-commit-hooks": "pre-commit-hooks_4"
       },
@@ -2114,7 +2129,7 @@
     "pre-commit-hooks_5": {
       "inputs": {
         "flake-utils": "flake-utils_16",
-        "nixpkgs": "nixpkgs_8"
+        "nixpkgs": "nixpkgs_9"
       },
       "locked": {
         "lastModified": 1656169028,
@@ -2167,15 +2182,12 @@
         "hyprland": "hyprland",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-nomad": "nix-nomad",
-        "nixpkgs": [
-          "unixpkgs"
-        ],
+        "nixpkgs": "nixpkgs_8",
         "nixvim": "nixvim",
         "nurpkgs": "nurpkgs",
         "pre-commit-hooks": "pre-commit-hooks_5",
         "sops-nix": "sops-nix",
-        "thoenix": "thoenix",
-        "unixpkgs": "unixpkgs"
+        "thoenix": "thoenix"
       }
     },
     "rust-analyzer-src": {
@@ -2609,7 +2621,7 @@
         "bats-assert": "bats-assert",
         "bats-support": "bats-support",
         "flake-utils": "flake-utils_20",
-        "nixpkgs": "nixpkgs_9",
+        "nixpkgs": "nixpkgs_10",
         "terranix-examples": "terranix-examples"
       },
       "locked": {
@@ -2666,21 +2678,6 @@
         "owner": "justinrubek",
         "repo": "thoenix",
         "type": "github"
-      }
-    },
-    "unixpkgs": {
-      "locked": {
-        "lastModified": 1693663421,
-        "narHash": "sha256-ImMIlWE/idjcZAfxKK8sQA7A1Gi/O58u5/CJA+mxvl8=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "e56990880811a451abd32515698c712788be5720",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "nixos-unstable",
-        "type": "indirect"
       }
     },
     "utils": {

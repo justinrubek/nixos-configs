@@ -1,11 +1,9 @@
-{unixpkgs, ...} @ inputs: {
+{nixpkgs, ...} @ inputs: {
   config,
   pkgs,
   lib,
   ...
-}: let
-  upkgs = unixpkgs.legacyPackages.x86_64-linux;
-in {
+}: {
   imports = [
   ];
 

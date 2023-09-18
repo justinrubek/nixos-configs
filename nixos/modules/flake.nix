@@ -1,4 +1,4 @@
-{unixpkgs, ...}: {
+{nixpkgs, ...}: {
   config,
   pkgs,
   lib,
@@ -8,7 +8,6 @@
 
   channelBase = "/etc/nixpkgs/channels";
   nixpkgsChannel = "${channelBase}/nixpkgs";
-  unixpkgsChannel = "${channelBase}/unixpkgs";
 in {
   options.nix.flakes.enable = lib.mkEnableOption "nix flakes";
 
@@ -16,19 +15,16 @@ in {
     nix = {
       settings.experimental-features = "nix-command flakes";
 
-      registry.unixpkgs.flake = unixpkgs;
-      registry.nixpkgs.flake = unixpkgs;
+      registry.nixpkgs.flake = nixpkgs;
 
       nixPath = [
-        "nixpkgs=${unixpkgs}"
-        "unixpkgs=${unixpkgs}"
+        "nixpkgs=${nixpkgs}"
       ];
     };
 
     /*
      systemd.tmpfiles.rules = [
-       "L+ ${nixpkgsChannel} - - - - ${unixpkgs}"
-       "L+ ${unixpkgsChannel} - - - - ${unixpkgs}"
+       "L+ ${nixpkgsChannel} - - - - ${nixpkgs}"
      ];
      */
   };
