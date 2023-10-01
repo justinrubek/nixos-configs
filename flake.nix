@@ -2,7 +2,6 @@
   description = "nixos configuration";
 
   inputs = {
-    # nixpkgs.url = "nixpkgs/nixos-22.05";
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -57,6 +56,11 @@
 
     gpt-toolkit = {
       url = "github:justinrubek/gpt-toolkit";
+    };
+
+    nixos-wsl = {
+      url = "github:nix-community/nixos-wsl";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
