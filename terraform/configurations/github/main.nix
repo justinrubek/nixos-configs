@@ -173,6 +173,17 @@
       homepage_url = "https://justinrubek.github.io/nutmeg/";
     };
 
+    project-runner = {
+      description = "A tool/library that detects and describes details about a project. This is a work in progress and is intended to be used as a library for other tools to build on top of and provide a consistent experience for interactions.";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["project" "runner" "prj"];
+
+      inherit prevent_deletion;
+
+      secrets = {
+        CRATES_IO_TOKEN = {value = "\${data.vault_kv_secret_v2.crates_io.data.token}";};
+      };
+    };
+
     templates = {
       description = "Quick start project templates. My common boilerplate goes here";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["templates"];
