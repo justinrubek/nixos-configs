@@ -50,9 +50,6 @@ in {
       workspace = HDMI-A-1, 1
       workspace = DP-1, 10
 
-      # bar launch
-      exec-once = eww open bar
-
       misc {
         # enable variable frame rate
         vfr = 1

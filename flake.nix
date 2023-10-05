@@ -11,11 +11,6 @@
 
     nurpkgs.url = "github:nix-community/NUR";
 
-    eww = {
-      url = "github:justinrubek/eww";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
@@ -60,6 +55,11 @@
 
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    project-runner = {
+      url = "github:justinrubek/project-runner";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

@@ -20,8 +20,6 @@ in {
 
         swaylock.enable = true;
       };
-
-      programs.eww.enable = true;
     };
 
     home.packages = with pkgs; [
@@ -41,6 +39,8 @@ in {
       pkgs.wezterm
 
       pkgs.fluffychat
+
+      inputs.project-runner.packages.${pkgs.system}.project-runner
     ];
 
     programs.zellij = {
