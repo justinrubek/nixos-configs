@@ -80,8 +80,9 @@
 
         ./flake-parts/devshell
         ./flake-parts/packages
-        ./flake-parts/dockerImages.nix
         ./flake-parts/ci.nix
+
+        ./containers
         ./packages
 
         ./lib
