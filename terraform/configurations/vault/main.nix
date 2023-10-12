@@ -61,6 +61,11 @@ in {
       name = "nix-cache-attic";
       policy = builtins.readFile ./policies/nix-cache-attic.hcl;
     };
+
+    lockpad_postgres = {
+      name = "lockpad-postgres";
+      policy = builtins.readFile ./policies/lockpad-postgres.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {
