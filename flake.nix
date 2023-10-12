@@ -62,6 +62,13 @@
       url = "github:justinrubek/project-runner";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lockpad = {
+      url = "github:justinrubek/lockpad";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs = {
