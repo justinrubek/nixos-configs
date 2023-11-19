@@ -160,7 +160,7 @@ in {
     };
 
     factorio = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/factorio.json";
       extraArgs = {
         depends_on = ["resource.nomad_volume.factorio_data"];
