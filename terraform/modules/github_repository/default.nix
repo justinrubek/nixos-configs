@@ -52,6 +52,12 @@ in {
             default = false;
           };
 
+          is_template = lib.mkOption {
+            description = "Whether the repository is a template.";
+            type = lib.types.bool;
+            default = false;
+          };
+
           has_downloads = lib.mkOption {
             description = "Whether the repository has downloads enabled.";
             type = lib.types.bool;
@@ -202,6 +208,7 @@ in {
             has_wiki = config.has_wiki;
             has_projects = config.has_projects;
             has_downloads = config.has_downloads;
+            is_template = config.is_template;
             allow_merge_commit = config.allow_merge_commit;
             allow_squash_merge = config.allow_squash_merge;
             allow_rebase_merge = config.allow_rebase_merge;
