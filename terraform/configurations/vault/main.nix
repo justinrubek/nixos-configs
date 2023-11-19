@@ -66,6 +66,11 @@ in {
       name = "lockpad-postgres";
       policy = builtins.readFile ./policies/lockpad-postgres.hcl;
     };
+
+    lockpad = {
+      name = "lockpad";
+      policy = builtins.readFile ./policies/lockpad.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {
