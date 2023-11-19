@@ -33,6 +33,7 @@
       flake = ["nix-flake" "flake"];
       rust = ["rust"];
       terraform = ["terraform"];
+      bevy = ["bevy" "bevyengine" "game"];
     };
 
     # Given a list of attr keys into `topics`, return a list of topic values.
@@ -70,6 +71,14 @@
         };
       };
       homepage_url = "https://justinrubek.github.io/ayysee/";
+    };
+
+    bevy-template = {
+      description = "A template for bevy games";
+      topics = (mkTopic ["nix" "rust" "flake" "bevy"]) ++ ["template"];
+      is_template = true;
+
+      prevent_deletion = []; # ensure main has no protection
     };
 
     bomper = {
