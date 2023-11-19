@@ -94,6 +94,13 @@ in {
       server = "alex";
       path = "/var/nfs/nix-cache/postgres";
     };
+
+    lockpad_postgres = {
+      enable = true;
+
+      server = "alex";
+      path = "/var/nfs/lockpad/postgres";
+    };
   };
 
   justinrubek.nomadJobs = {
@@ -177,6 +184,14 @@ in {
       jobspec = "${nomad_jobs}/nix_cache.json";
       extraArgs = {
         depends_on = ["resource.nomad_volume.nix_cache_postgres"];
+      };
+    };
+
+    lockpad = {
+      enable = true;
+      jobspec = "${nomad_jobs}/lockpad.json";
+      extraArgs = {
+        depends_on = ["resource.nomad_volume.lockpad_postgres"];
       };
     };
   };

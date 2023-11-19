@@ -30,6 +30,7 @@
           ./jobs/factorio.nix
           ./jobs/flake-builder.nix
           ./jobs/nix-cache.nix
+          ./jobs/lockpad.nix
         ];
       };
     };
