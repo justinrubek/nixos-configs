@@ -41,6 +41,14 @@ in {
       pkgs.fluffychat
 
       inputs.project-runner.packages.${pkgs.system}.project-runner
+
+      pkgs.tiled
+      pkgs.pavucontrol
+      pkgs.tokei
+
+      (pkgs.lutris.override {
+        extraLibraries = pkgs: [];
+      })
     ];
 
     programs.zellij = {

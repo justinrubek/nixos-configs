@@ -38,6 +38,8 @@
 
           pkgs.skopeo
           self'.packages."scripts/skopeo-push"
+
+          inputs'.lockpad.packages.cli
         ];
         inherit (pre-commit-check) shellHook;
       };
