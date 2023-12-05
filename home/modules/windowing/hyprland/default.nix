@@ -116,6 +116,19 @@ in {
       # disable idle when watching video
       windowrulev2 = idleinhibit fullscreen, class:^(firefox)$
 
+      # floating windows
+      windowrulev2 = float,title:(SpeedCrunch)
+      windowrulev2 = size 50% 50%,title:(SpeedCrunch)
+
+      # workspaced windows
+      windowrulev2 = workspace 9, class:(.*iscord.*)
+      windowrulev2 = workspace 9, title:(Teamspeak 3)
+
+      windowrulev2 = workspace 5 silent, class:(steam)
+      windowrulev2 = workspace special silent, class:(steam), title:(Sign in to Steam)
+      windowrulev2 = float, class:(steam), title:(Friends List)
+      windowrulev2 = size 400 600, class:(steam), title:(Friends List)
+
       # launch terminal
       bind = $mod, Return, exec, ${apps.terminal}
       bind = $mod, Space, exec, ${apps.launcher}
