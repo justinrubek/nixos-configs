@@ -30,7 +30,7 @@
       p.github
     ];
     # terraform = pkgs.terraform.withPlugins terraformPluginsPredicate;
-    terraform = pkgs.terraform;
+    terraform = pkgs.opentofu;
 
     # push the current configuration to terraform cloud
     # https://developer.hashicorp.com/terraform/cloud-docs/run/api#pushing-a-new-configuration-version

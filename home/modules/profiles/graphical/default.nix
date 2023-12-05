@@ -18,7 +18,6 @@ in {
       flameshot
       nerdfonts
       bitwarden
-      (element-desktop.override {electron = pkgs.electron_24;})
     ];
   };
 }

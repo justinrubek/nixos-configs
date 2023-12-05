@@ -76,8 +76,8 @@
     pkgs.mullvad-vpn
     pkgs.deluge
 
-    pkgs.rocm-smi
-    pkgs.rocminfo
+    pkgs.rocmPackages.rocm-smi
+    pkgs.rocmPackages.rocminfo
   ];
 
   services.openssh = {

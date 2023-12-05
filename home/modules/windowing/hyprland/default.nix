@@ -77,10 +77,12 @@ in {
         col.active_border = rgb(${colors.blue}) rgb(${colors.mauve}) 270deg
         col.inactive_border = rgb(${colors.crust}) rgb(${colors.lavender}) 270deg
 
-        col.group_border_active = rgb(${colors.pink})
-        col.group_border = rgb(${colors.surface0})
-
         layout = dwindle
+      }
+
+      group {
+        col.border_active = rgb(${colors.pink})
+        col.border_inactive = rgb(${colors.surface0})
       }
 
       decoration {
