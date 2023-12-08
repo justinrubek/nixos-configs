@@ -1,6 +1,7 @@
 terraform {
   cloud {
     organization = "justinrubek"
+    hostname = "app.terraform.io"
 
     workspaces {
       name = "vault"
@@ -9,9 +10,11 @@ terraform {
 
   required_providers {
     vault = {
+      source = "hashicorp/vault"
       version = "3.11.0"
     }
     consul = {
+      source = "hashicorp/consul"
       version = "2.16.2"
     }
     sops = {
@@ -20,5 +23,5 @@ terraform {
     }
   }
 
-  required_version = ">= 1.0"
+  required_version = "1.6.0"
 }

@@ -1,6 +1,7 @@
 terraform {
   cloud {
     organization = "justinrubek"
+    hostname = "app.terraform.io"
 
     workspaces {
       name = "minio"
@@ -14,5 +15,5 @@ terraform {
     }
   }
 
-  required_version = ">= 1.0"
+  required_version = "1.6.0"
 }
