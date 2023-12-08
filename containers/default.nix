@@ -55,8 +55,6 @@
       };
 
       "image/conduit" = inputs'.conduit.packages."image/conduit";
-
-      "image/postgres" = inputs'.lockpad.packages."postgres/docker";
     };
   };
 }
