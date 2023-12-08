@@ -22,7 +22,24 @@ in {
         configurationLimit = 20;
       };
 
-      initrd.systemd.enable = true;
+      initrd.systemd = {
+        enable = true;
+        # postDeviceCommands for systemd in stage-1
+        services.rollback = {
+          description = "Rollback to empty snapshot";
+          wantedBy = ["initrd.target"];
+          after = ["zfs-import.target"];
+          before = ["sysroot.mount"];
+          path = [pkgs.zfs];
+          unitConfig.DefaultDependencies = "no";
+          serviceConfig = {
+            Type = "oneshot";
+          };
+          script = ''
+            zfs rollback -r tank/footfs@empty
+          '';
+        };
+      };
       initrd.availableKernelModules = [
         "ahci"
         "xhci_pci"
@@ -40,10 +57,6 @@ in {
       zfs.enableUnstable = true;
 
       tmp.useTmpfs = true;
-
-      initrd.postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r tank/footfs@empty
-      '';
     };
 
     systemd.network = {
