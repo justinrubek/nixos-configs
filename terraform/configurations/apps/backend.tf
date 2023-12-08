@@ -1,6 +1,7 @@
 terraform {
   cloud {
     organization = "justinrubek"
+    hostname = "app.terraform.io"
 
     workspaces {
       name = "apps"
@@ -9,9 +10,10 @@ terraform {
 
   required_providers {
     nomad = {
+      source = "hashicorp/nomad"
       version = "1.4.19"
     }
   }
 
-  required_version = ">= 1.0"
+  required_version = "1.6.0"
 }

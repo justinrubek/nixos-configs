@@ -5392,11 +5392,11 @@
         "terranix": "terranix"
       },
       "locked": {
-        "lastModified": 1696555498,
-        "narHash": "sha256-PD1bJRPtFq0Hc9ig22dcmZgy17dm6l9w+EXTzHCJ8+s=",
+        "lastModified": 1701753013,
+        "narHash": "sha256-br+6QQ88vivmRPGVCWlizO9x44NLcYcbv3nGNn3dbmw=",
         "owner": "justinrubek",
         "repo": "thoenix",
-        "rev": "22ab04e80d22d28325f0b08bd2b408cbe11ff415",
+        "rev": "33e8c068321d299576e485d80dd5619dbb904788",
         "type": "github"
       },
       "original": {
