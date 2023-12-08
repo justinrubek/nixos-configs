@@ -46,7 +46,7 @@
 
     development.containers = {
       enable = true;
-      useDocker = true;
+      useDocker = false;
     };
 
     tailscale.enable = true;

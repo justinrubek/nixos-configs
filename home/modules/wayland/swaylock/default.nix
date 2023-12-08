@@ -45,7 +45,8 @@ in {
       timeouts = [
         {
           timeout = 900;
-          command = "${pkgs.systemd}/bin/loginctl lock-session";
+          command = "${pkgs.hyprland}/bin/hyprctl dispatch dpms off";
+          resumeCommand = "${pkgs.hyprland}/bin/hyprctl dispatch dpms on";
         }
       ];
     };
