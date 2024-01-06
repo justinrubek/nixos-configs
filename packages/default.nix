@@ -13,10 +13,11 @@
     self',
     ...
   }: let
+    hashicorp_pkgs = inputs.hashicorp_nixpkgs.legacyPackages.${system};
   in rec {
     packages = {
-      nomad = pkgs.callPackage ./nomad {};
-      vault-bin = pkgs.callPackage ./vault-bin {};
+      nomad = hashicorp_pkgs.callPackage ./nomad {};
+      vault-bin = hashicorp_pkgs.callPackage ./vault-bin {};
 
       material-symbols = pkgs.callPackage ./material-symbols.nix {};
     };

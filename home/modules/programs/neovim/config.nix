@@ -129,7 +129,11 @@ in {
         jsonls.enable = true;
         nil_ls.enable = true;
         # rnix-lsp.enable = true;
-        rust-analyzer.enable = true;
+        rust-analyzer = {
+          enable = true;
+          installCargo = false;
+          installRustc = false;
+        };
         pyright.enable = true;
         tailwindcss.enable = true;
         terraformls.enable = true;
@@ -146,7 +150,7 @@ in {
       currentLine = true;
     };
     lspsaga.enable = true;
-    null-ls = {
+    none-ls = {
       enable = true;
       sources = {
         formatting = {

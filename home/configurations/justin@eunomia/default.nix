@@ -34,7 +34,7 @@ in {
       pkgs.microsoft-edge
       pkgs.libreoffice
 
-      inputs.gpt-toolkit.packages.${pkgs.system}.gpt-toolkit
+      inputs.generation-toolkit.packages.${pkgs.system}.generation-toolkit
 
       pkgs.wezterm
 

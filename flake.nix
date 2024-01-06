@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    hashicorp_nixpkgs.url = "github:nixos/nixpkgs/f91ee3065de91a3531329a674a45ddcb3467a650";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -54,8 +55,8 @@
       url = "github:justinrubek/conduit";
     };
 
-    gpt-toolkit = {
-      url = "github:justinrubek/gpt-toolkit";
+    generation-toolkit = {
+      url = "github:justinrubek/generation-toolkit";
     };
 
     nixos-wsl = {
@@ -81,7 +82,7 @@
     flake-parts,
     ...
   } @ inputs:
-    flake-parts.lib.mkFlake {inherit self;} {
+    flake-parts.lib.mkFlake {inherit inputs;} {
       flake = {
         homeModules = import ./home/modules inputs;
       };
