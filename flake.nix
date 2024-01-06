@@ -23,9 +23,14 @@
 
     deploy-rs.url = "github:serokell/deploy-rs";
 
+    terranix = {
+      url = "github:justinrubek/terranix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     thoenix = {
       url = "github:justinrubek/thoenix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.terranix.follows = "terranix";
     };
 
     comma = {
