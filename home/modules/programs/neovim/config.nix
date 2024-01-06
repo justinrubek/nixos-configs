@@ -137,9 +137,9 @@ in {
         tsserver.enable = true;
       };
 
-      onAttach = ''
-        vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-      '';
+      # onAttach = ''
+      #   vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
+      # '';
     };
     lsp-lines = {
       enable = true;

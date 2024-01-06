@@ -51,9 +51,10 @@
 
     tailscale.enable = true;
 
-    mediahost.enable = false;
+    mediahost.enable = true;
   };
 
+  users.groups.mediahost = {};
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     justin = {
