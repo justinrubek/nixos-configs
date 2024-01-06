@@ -169,7 +169,7 @@
   security.pam.services.swaylock.text = "auth include login";
 
   services.mullvad-vpn = {
-    enable = true;
+    enable = false;
     # openFirewall = true;
   };
 
