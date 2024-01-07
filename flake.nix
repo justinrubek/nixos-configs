@@ -116,6 +116,10 @@
         ./terraform/modules
 
         ./nomad
+
+        ./flake-parts/pre-commit.nix
+        ./flake-parts/formatting.nix
+        inputs.pre-commit-hooks.flakeModule
       ];
     };
 }

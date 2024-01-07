@@ -12,9 +12,7 @@
     inputs',
     self',
     ...
-  }: let
-    pre-commit-check = import ./pre_commit.nix inputs system;
-  in rec {
+  }: {
     devShells = {
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
@@ -41,12 +39,11 @@
 
           inputs'.lockpad.packages.cli
         ];
-        inherit (pre-commit-check) shellHook;
-      };
-    };
 
-    checks = {
-      pre-commit = pre-commit-check;
+        shellHook = ''
+          ${config.pre-commit.installationScript}
+        '';
+      };
     };
   };
 }
