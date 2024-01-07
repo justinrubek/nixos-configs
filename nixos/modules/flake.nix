@@ -23,9 +23,9 @@ in {
     };
 
     /*
-     systemd.tmpfiles.rules = [
-       "L+ ${nixpkgsChannel} - - - - ${nixpkgs}"
-     ];
-     */
+    systemd.tmpfiles.rules = [
+      "L+ ${nixpkgsChannel} - - - - ${nixpkgs}"
+    ];
+    */
   };
 }
