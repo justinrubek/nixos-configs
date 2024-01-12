@@ -12,14 +12,16 @@
     inputs',
     self',
     ...
-  }: {
+  }: let
+    hashicorp-pkgs = inputs.hashicorp_nixpkgs.legacyPackages.${system};
+  in {
     devShells = {
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
           alejandra
           inputs.home-manager.packages.${system}.home-manager
           hcloud
-          packer
+          hashicorp-pkgs.packer
           inputs'.deploy-rs.packages.deploy-rs
 
           pkgs.age
