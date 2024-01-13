@@ -1,4 +1,4 @@
-_: {
+flake-inputs: {
   config,
   lib,
   pkgs,
@@ -19,6 +19,6 @@ in {
   };
 
   config = lib.mkIf firefoxEnabled {
-    programs.firefox = import ./config.nix inputs username;
+    programs.firefox = import ./config.nix flake-inputs inputs username;
   };
 }

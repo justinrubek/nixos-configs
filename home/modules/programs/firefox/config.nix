@@ -1,8 +1,8 @@
-{pkgs, ...}: username: {
+flake-inputs: {pkgs, ...}: username: {
   enable = true;
 
   profiles.${username} = {
-    extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+    extensions = with flake-inputs.firefox-addons.packages.${pkgs.system}; [
       decentraleyes
       ublock-origin
       clearurls
