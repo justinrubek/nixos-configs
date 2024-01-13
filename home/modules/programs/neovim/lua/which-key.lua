@@ -48,6 +48,11 @@ local setup = function()
             },
         },
 
+        s = {
+            name = "style",
+            f = { "<cmd>lua vim.lsp.buf.format()<cr>", "format" },
+        };
+
         t = {
             name = "toggle",
             t = { "<cmd>NvimTreeToggle<cr>", "file tree" },
@@ -59,6 +64,7 @@ local setup = function()
             a = {  "<cmd>Lspsaga code_action<cr>", "code_action" },
             f = { "<cmd>Lspsaga lsp_finder<cr>", "lsp_finder" },
         },
+
     }
 
     local vmappings = {
