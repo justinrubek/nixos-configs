@@ -22,6 +22,13 @@ in {
       };
     };
 
+    # TODO: restore when sourcehut is back
+    manual = {
+      html.enable = false;
+      json.enable = false;
+      manpages.enable = false;
+    };
+
     home.packages = with pkgs; [
       rofi
       (dwarf-fortress-packages.dwarf-fortress-full.override {
