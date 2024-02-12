@@ -4132,21 +4132,6 @@
         "type": "github"
       }
     },
-    "nurpkgs": {
-      "locked": {
-        "lastModified": 1704508433,
-        "narHash": "sha256-eIPCUWYRk2egfNJPXj4ZSfKbbGcvqN8QUnuwTUqzckQ=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "607e0e48c2bf0451acd29f85ffe0b4bdb07fc265",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "pgx": {
       "inputs": {
         "fenix": [
@@ -4597,7 +4582,6 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_11",
         "nixvim": "nixvim",
-        "nurpkgs": "nurpkgs",
         "pre-commit-hooks": "pre-commit-hooks_8",
         "project-runner": "project-runner",
         "sops-nix": "sops-nix",

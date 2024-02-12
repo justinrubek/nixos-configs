@@ -10,8 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nurpkgs.url = "github:nix-community/NUR";
-
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 

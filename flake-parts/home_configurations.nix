@@ -116,9 +116,6 @@ in {
                   # config.allowUnfree = true;
                   config.allowUnfreePredicate = name: true;
                   config.xdg.configHome = "${config.homeDirectory}/.config";
-                  overlays = [
-                    inputs.nurpkgs.overlay
-                  ];
                 };
               }
             ]
