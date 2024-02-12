@@ -87,7 +87,10 @@
   };
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    wifi.scanRandMacAddress = false;
+  };
   systemd.services.NetworkManager-wait-online.enable = false;
 
   # networking.useNetworkd = false;

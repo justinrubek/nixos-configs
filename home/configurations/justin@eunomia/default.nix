@@ -29,34 +29,63 @@ in {
       manpages.enable = false;
     };
 
-    home.packages = with pkgs; [
-      rofi
-      (dwarf-fortress-packages.dwarf-fortress-full.override {
-        enableIntro = false;
-      })
-      comma.packages.x86_64-linux.default
-      alejandra
-      prismlauncher
+    gtk = {
+      enable = true;
+      cursorTheme = {
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+        size = 22;
+      };
 
-      pkgs.microsoft-edge
-      pkgs.libreoffice
+      gtk3.extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+        gtk-enable-animations = true;
+      };
 
-      inputs.generation-toolkit.packages.${pkgs.system}.generation-toolkit
+      gtk4.extraConfig = {
+        gtk-application-prefer-dark-theme = true;
+        gtk-enable-animations = true;
+      };
+    };
 
-      pkgs.wezterm
+    home = {
+      pointerCursor = {
+        gtk.enable = true;
+        x11.enable = true;
+        package = pkgs.bibata-cursors;
+        name = "Bibata-Modern-Classic";
+        size = 22;
+      };
 
-      pkgs.fluffychat
+      packages = with pkgs; [
+        rofi
+        (dwarf-fortress-packages.dwarf-fortress-full.override {
+          enableIntro = false;
+        })
+        comma.packages.x86_64-linux.default
+        alejandra
+        prismlauncher
 
-      inputs.project-runner.packages.${pkgs.system}.project-runner
+        pkgs.microsoft-edge
+        pkgs.libreoffice
 
-      pkgs.tiled
-      pkgs.pavucontrol
-      pkgs.tokei
+        inputs.generation-toolkit.packages.${pkgs.system}.generation-toolkit
 
-      (pkgs.lutris.override {
-        extraLibraries = pkgs: [];
-      })
-    ];
+        pkgs.wezterm
+
+        pkgs.fluffychat
+
+        inputs.project-runner.packages.${pkgs.system}.project-runner
+
+        pkgs.tiled
+        pkgs.pavucontrol
+        pkgs.tokei
+
+        (pkgs.lutris.override {
+          extraLibraries = pkgs: [];
+        })
+      ];
+    };
 
     programs.zellij = {
       enable = true;
