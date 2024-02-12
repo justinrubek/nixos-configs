@@ -66,7 +66,6 @@ in {
         alejandra
         prismlauncher
 
-        pkgs.microsoft-edge
         pkgs.libreoffice
 
         inputs.generation-toolkit.packages.${pkgs.system}.generation-toolkit

@@ -112,9 +112,18 @@ in {
               }
               {
                 nixpkgs = {
-                  # https://github.com/nix-community/home-manager/issues/2942#issuecomment-1119760100
                   # config.allowUnfree = true;
-                  config.allowUnfreePredicate = name: true;
+                  config.allowUnfreePredicate = pkg:
+                    builtins.elem (lib.getName pkg) [
+                      "discord"
+                      "dwarf-fortress"
+                      "slack"
+                      "steam"
+                      "steam-original"
+                      "steam-run"
+                      "teamspeak-client"
+                      "teamspeak5-client"
+                    ];
                   config.xdg.configHome = "${config.homeDirectory}/.config";
                 };
               }
