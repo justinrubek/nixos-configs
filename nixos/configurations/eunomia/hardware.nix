@@ -52,6 +52,8 @@
       pkgs.rocm-opencl-icd
       pkgs.rocm-opencl-runtime
     ];
+    driSupport = true;
+    driSupport32Bit = true;
   };
   services.xserver.videoDrivers = ["amdgpu"];
 
