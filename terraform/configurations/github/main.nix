@@ -155,6 +155,16 @@
       inherit prevent_deletion;
     };
 
+    nix-postgres = {
+      description = "An opinionated postgresql";
+      topics = (mkTopic ["nix" "flake"]) ++ ["postgres" "postgresql"];
+
+      secrets = {
+        DOCKER_HUB_TOKEN = {value = "\${data.vault_kv_secret_v2.docker_io.data.token}";};
+        DOCKER_HUB_USERNAME = {value = "\${data.vault_kv_secret_v2.docker_io.data.username}";};
+      };
+    };
+
     nixos-configs = {
       description = "My 'dotfiles'. A collection of nixos configurations and other declarative infrastructure for my personal computing infrastructure";
       topics = (mkTopic ["nix" "flake"]) ++ ["dotfiles" "nixos"];
