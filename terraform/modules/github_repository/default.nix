@@ -227,6 +227,7 @@ in {
                 repository_id = "\${github_repository.${config.terraformName}.id}";
                 pattern = branch;
                 allows_deletions = false;
+                force_push_bypassers = ["/justinrubek"];
               };
             })
             config.prevent_deletion;
