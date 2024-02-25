@@ -78,6 +78,9 @@ in {
             acl host_github_app hdr(host) -i github-builder.rubek.cloud
             use_backend github-app if host_github_app
 
+            acl host_lockpad hdr(host) -i lockpad.rubek.cloud
+            use_backend lockpad if host_lockpad
+
             # all other requests go to the main backend
             default_backend app
 
@@ -110,6 +113,10 @@ in {
           backend nix-cache
             balance roundrobin
             server-template nix-cache 1-3 _nix-cache._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
+
+          backend lockpad
+            balance roundrobin
+            server-template lockpad 1-3 _lockpad._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
         '';
       };
 

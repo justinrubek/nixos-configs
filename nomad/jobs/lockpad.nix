@@ -30,7 +30,7 @@ in {
       networks = [
         {
           mode = "bridge";
-          port.http.to = 4000;
+          port.http.to = 5000;
           port.database.to = 5435;
         }
       ];
@@ -135,7 +135,7 @@ in {
               LOCKPAD_PUBLIC_KEY=${envSecret "public_key"}
               LOCKPAD_POSTGRES_URL=${postgresUrl}
             '';
-            destination = "local/env";
+            destination = "secrets/env";
             env = true;
           }
         ];
@@ -156,12 +156,6 @@ in {
           ];
         }
       ];
-
-      update = {
-        canary = 1;
-        autoRevert = true;
-        autoPromote = true;
-      };
     };
   };
 }
