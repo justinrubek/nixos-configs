@@ -1,6 +1,6 @@
 {...}: let
   lockpad-image = "docker.io/justinrubek/lockpad@sha256:5e6c952203247f3f47a07379449bdf8abab0bb9348fe9914749e1186cf7ff9ab";
-  postgres_image = "docker.io/justinrubek/postgres@sha256:d00c2e7a63d66d74188bfa3351870de5197a3442d53a155db6182a561387924a";
+  postgres_image = "ghcr.io/justinrubek/nix-postgres:ba335856114ebe5abd21db355e18aebe55b343ed";
 
   envKey = "lockpad/env";
   envSecret = name: ''{{ with secret "kv-v2/data/${envKey}" }}{{ .Data.data.${name} | toJSON }}{{ end }}'';
@@ -66,8 +66,6 @@ in {
               POSTGRES_DB=${postgresSecret "database"}
               POSTGRES_USER=postgres
               POSTGRES_PASSWORD=${postgresSecret "password"}
-              PGUSER=postgres
-              PGDATA=/data/postgres
             '';
             destination = "local/env";
             env = true;
