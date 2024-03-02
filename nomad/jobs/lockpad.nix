@@ -7,8 +7,7 @@
 
   postgresKey = "lockpad/postgres";
   postgresSecret = name: ''{{ with secret "kv-v2/data/${postgresKey}" }}{{ .Data.data.${name} }}{{ end }}'';
-  # postgresUrl = ''postgres://${postgresSecret "username"}:${postgresSecret "password"}@localhost:5435/${postgresSecret "database"}'';
-  postgresUrl = ''postgres://${postgresSecret "username"}:${postgresSecret "password"}@localhost:5435/postgres'';
+  postgresUrl = ''postgres://${postgresSecret "username"}:${postgresSecret "password"}@alex:5435/${postgresSecret "database"}'';
 in {
   job.lockpad = {
     datacenters = ["dc1"];
@@ -16,64 +15,12 @@ in {
     group.lockpad = {
       count = 1;
 
-      volume = {
-        "lockpad_postgres" = {
-          type = "csi";
-          source = "lockpad_postgres";
-          readOnly = false;
-
-          attachmentMode = "file-system";
-          accessMode = "single-node-writer";
-        };
-      };
-
       networks = [
         {
           mode = "bridge";
           port.http.to = 5000;
-          port.database.to = 5435;
         }
       ];
-
-      task.database = {
-        lifecycle = {
-          hook = "prestart";
-          sidecar = true;
-        };
-
-        driver = "docker";
-        config = {
-          image = postgres_image;
-
-          ports = ["database"];
-        };
-
-        volumeMounts = [
-          {
-            volume = "lockpad_postgres";
-            destination = "/data";
-            readOnly = false;
-          }
-        ];
-
-        vault = {
-          policies = ["lockpad-postgres"];
-        };
-
-        templates = [
-          {
-            data = ''
-              POSTGRES_DB=${postgresSecret "database"}
-              POSTGRES_USER=postgres
-              POSTGRES_PASSWORD=${postgresSecret "password"}
-              PGUSER=postgres
-              PGDATA=/data/postgres
-            '';
-            destination = "local/env";
-            env = true;
-          }
-        ];
-      };
 
       task.database_migration = {
         lifecycle = {
