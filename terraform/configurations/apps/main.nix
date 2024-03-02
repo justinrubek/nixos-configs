@@ -194,5 +194,10 @@ in {
         depends_on = ["resource.nomad_volume.lockpad_postgres"];
       };
     };
+
+    annapurna = {
+      enable = true;
+      jobspec = "${nomad_jobs}/annapurna.json";
+    };
   };
 }
