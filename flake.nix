@@ -57,6 +57,10 @@
       url = "github:justinrubek/generation-toolkit";
     };
 
+    nix-postgres = {
+      url = "github:justinrubek/nix-postgres";
+    };
+
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -34,5 +34,7 @@ in {
     "cloudhost/hetzner" = import ./cloudhost/hetzner inputs;
 
     "media" = import ./media moduleInput;
+
+    postgres = import ./data/postgres moduleInput;
   };
 }

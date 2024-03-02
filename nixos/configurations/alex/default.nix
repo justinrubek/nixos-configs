@@ -7,6 +7,25 @@
   imports = [
   ];
 
+  services.justinrubek.postgresql = {
+    enable = true;
+    package = inputs.nix-postgres.packages.${pkgs.system}."psql_15/bin";
+    port = 5435;
+
+    ensureDatabases = ["lockpad"];
+
+    identMap = ''
+      superuser_map justin postgres
+      superuser_map postgres postgres
+      superuser_map      /^(.*)$   \1
+    '';
+    authentication = ''
+      local all all peer map=superuser_map
+      host all all 100.64.0.0/10 scram-sha-256
+    '';
+    enableTCPIP = true;
+  };
+
   # Linux kernel
 
   # Enable networking
@@ -52,6 +71,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    inputs.nix-postgres.packages.${pkgs.system}."psql_15/bin"
   ];
 
   # services.openssh = {
@@ -62,6 +82,13 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
+
+  networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
+    allowedTCPPorts = [
+      config.services.postgresql.port
+    ];
+  };
+
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
