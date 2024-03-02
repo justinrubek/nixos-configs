@@ -65,13 +65,6 @@ in {
             else ""
           }
 
-            acl path_known path_beg /.well-known .matrix/.well-known
-            use_backend well-known if path_known
-
-            acl host_matrix hdr(host) -i matrix.rubek.cloud
-            acl path_matrix path_beg /_matrix
-            use_backend matrix if host_matrix or path_matrix
-
             acl host_nix_cache hdr(host) -i nix-cache.rubek.cloud
             use_backend nix-cache if host_nix_cache
 
@@ -80,6 +73,13 @@ in {
 
             acl host_lockpad hdr(host) -i lockpad.rubek.cloud
             use_backend lockpad if host_lockpad
+
+            acl path_known path_beg /.well-known .matrix/.well-known
+            use_backend well-known if path_known
+
+            acl host_matrix hdr(host) -i matrix.rubek.cloud
+            acl path_matrix path_beg /_matrix
+            use_backend matrix if host_matrix or path_matrix
 
             # all other requests go to the main backend
             default_backend app
