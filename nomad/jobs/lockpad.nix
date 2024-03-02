@@ -1,5 +1,5 @@
 {...}: let
-  lockpad-image = "docker.io/justinrubek/lockpad@sha256:5e6c952203247f3f47a07379449bdf8abab0bb9348fe9914749e1186cf7ff9ab";
+  lockpad-image = "ghcr.io/justinrubek/lockpad:5b4bd028db4f169069d6c4154c6ef3515f8982cb";
   postgres_image = "docker.io/justinrubek/postgres@sha256:d00c2e7a63d66d74188bfa3351870de5197a3442d53a155db6182a561387924a";
 
   envKey = "lockpad/env";
