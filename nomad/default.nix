@@ -31,6 +31,7 @@
           ./jobs/flake-builder.nix
           ./jobs/nix-cache.nix
           ./jobs/lockpad.nix
+          ./jobs/annapurna.nix
         ];
       };
     };
