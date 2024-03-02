@@ -74,6 +74,9 @@ in {
             acl host_lockpad hdr(host) -i lockpad.rubek.cloud
             use_backend lockpad if host_lockpad
 
+            acl host_annapurna hdr(host) -i annapurna.rubek.cloud
+            use_backend annapurna if host_annapurna
+
             acl path_known path_beg /.well-known .matrix/.well-known
             use_backend well-known if path_known
 
@@ -101,6 +104,10 @@ in {
 
             acl path_matrix_client path_beg /.well-known/matrix/client
             http-request return status 200 content-type application/json string '{ "m.homeserver": { "base_url": "https://matrix.rubek.cloud" } }' if path_matrix_client
+
+          backend annapurna
+            balance roundrobin
+            server-template annapurna 1-3 _annapurna._tcp.service.consul resolvers consul resolve-opts allow-dup-ip resolve-prefer ipv4 check
 
           backend matrix
             balance roundrobin
