@@ -71,6 +71,11 @@ in {
       name = "lockpad";
       policy = builtins.readFile ./policies/lockpad.hcl;
     };
+
+    annapurna = {
+      name = "annapurna";
+      policy = builtins.readFile ./policies/annapurna.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {
