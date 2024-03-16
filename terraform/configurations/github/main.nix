@@ -45,6 +45,8 @@
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["ascent"];
 
       inherit prevent_deletion;
+
+      homepage_url = "https://annapurna.rubek.cloud";
     };
 
     async-watcher = {
@@ -145,8 +147,6 @@
 
       secrets = {
         CRATES_IO_TOKEN = {value = "\${data.vault_kv_secret_v2.crates_io.data.token}";};
-        DOCKER_HUB_TOKEN = {value = "\${data.vault_kv_secret_v2.docker_io.data.token}";};
-        DOCKER_HUB_USERNAME = {value = "\${data.vault_kv_secret_v2.docker_io.data.username}";};
       };
     };
 
@@ -160,11 +160,6 @@
     nix-postgres = {
       description = "An opinionated postgresql";
       topics = (mkTopic ["nix" "flake"]) ++ ["postgres" "postgresql"];
-
-      secrets = {
-        DOCKER_HUB_TOKEN = {value = "\${data.vault_kv_secret_v2.docker_io.data.token}";};
-        DOCKER_HUB_USERNAME = {value = "\${data.vault_kv_secret_v2.docker_io.data.username}";};
-      };
     };
 
     nixos-configs = {
