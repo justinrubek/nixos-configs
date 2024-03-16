@@ -42,16 +42,12 @@ local setup = function()
         },
         l = {
             name = "lsp",
-            p = {
-                name = "peek",
-                d = { "", "TODO" },
-            },
-        },
-
-        s = {
-            name = "style",
+            a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "code action" },
+            d = { "<cmd>lua vim.lsp.buf.definition()<cr>", "definition" },
             f = { "<cmd>lua vim.lsp.buf.format()<cr>", "format" },
-        };
+            r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "rename" },
+            u = { "<cmd>lua vim.lsp.buf.references()<cr>", "references" },
+        },
 
         t = {
             name = "toggle",
