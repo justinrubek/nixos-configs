@@ -60,7 +60,7 @@
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "docker"];
+      extraGroups = ["networkmanager" "wheel" "docker" "input"];
       shell = pkgs.zsh;
     };
   };
@@ -210,4 +210,6 @@
     debug = true;
     dhcpNoBind = true;
   };
+
+  services.ratbagd.enable = true;
 }
