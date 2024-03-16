@@ -57,44 +57,15 @@ in {
       diagnostics = "nvim_lsp";
       separatorStyle = "slant";
     };
-    telescope = {
-      enable = true;
-    };
-
-    treesitter = {
-      enable = true;
-      ensureInstalled = "all";
-      nixGrammars = true;
-      moduleConfig = {
-        autotag = {
-          enable = true;
-          filetypes = ["html" "xml" "astro" "javascriptreact" "typescriptreact" "svelte"];
-        };
-        highlight = {
-          enable = true;
-        };
-      };
-    };
-
     comment-nvim.enable = true;
-
-    # copilot-lua = {
-    #   enable = true;
-    # };
-    copilot-vim = {
-      enable = true;
-    };
+    # copilot-lua.enable = true;
+    copilot-vim.enable = true;
     # cmp-copilot.enable = true;
-
-    undotree = {
-      enable = true;
-    };
-
-    nix.enable = true;
+    fugitive.enable = true;
     intellitab.enable = true;
+    nix.enable = true;
     nvim-tree.enable = true;
-    surround.enable = true;
-
+    lastplace.enable = true;
     lspkind = {
       enable = true;
       mode = "symbol_text";
@@ -162,9 +133,9 @@ in {
         };
       };
     };
-
-    trouble.enable = true;
-
+    lualine = {
+      enable = true;
+    };
     nvim-cmp = {
       enable = true;
       sources = [
@@ -207,14 +178,28 @@ in {
 
       snippet.expand = "luasnip";
     };
-
-    lualine = {
+    surround.enable = true;
+    telescope = {
       enable = true;
     };
-
-    lastplace.enable = true;
-
-    fugitive.enable = true;
+    treesitter = {
+      enable = true;
+      ensureInstalled = "all";
+      nixGrammars = true;
+      moduleConfig = {
+        autotag = {
+          enable = true;
+          filetypes = ["html" "xml" "astro" "javascriptreact" "typescriptreact" "svelte"];
+        };
+        highlight = {
+          enable = true;
+        };
+      };
+    };
+    trouble.enable = true;
+    undotree = {
+      enable = true;
+    };
   };
 
   # luafile ${PWD}/lua/lsp.lua
