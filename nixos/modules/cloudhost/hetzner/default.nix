@@ -54,7 +54,7 @@ in {
       };
 
       supportedFilesystems = ["zfs" "ext4"];
-      zfs.enableUnstable = true;
+      zfs.package = pkgs.zfs_unstable;
 
       tmp.useTmpfs = true;
     };
