@@ -57,10 +57,56 @@ in {
       diagnostics = "nvim_lsp";
       separatorStyle = "slant";
     };
+    cmp = {
+      enable = true;
+      settings = {
+        mapping = {
+          "<CR>" = "cmp.mapping.confirm({ select = true })";
+          "<S-Tab>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+          "<Tab>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
+        };
+        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+        sources = [
+          {name = "nvim_lsp";}
+          {
+            name = "nvim_lsp";
+            keywordLength = 3;
+          }
+          {
+            name = "luasnip";
+            keywordLength = 2;
+          }
+          {
+            name = "treesitter";
+            keywordLength = 2;
+          }
+          {name = "path";}
+          {
+            name = "buffer";
+            keywordLength = 3;
+          }
+        ];
+        window = {
+          completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
+            colOffset = -4;
+            sidePadding = 0;
+            border = "single";
+          };
+          documentation = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
+            border = "single";
+          };
+        };
+      };
+    };
     comment-nvim.enable = true;
     # copilot-lua.enable = true;
     copilot-vim.enable = true;
     # cmp-copilot.enable = true;
+    efmls-configs = {
+      enable = true;
+    };
     fugitive.enable = true;
     intellitab.enable = true;
     nix.enable = true;
@@ -99,7 +145,6 @@ in {
         html.enable = true;
         jsonls.enable = true;
         nil_ls.enable = true;
-        # rnix-lsp.enable = true;
         rust-analyzer = {
           enable = true;
           installCargo = false;
@@ -121,62 +166,16 @@ in {
       currentLine = true;
     };
     lspsaga.enable = true;
+    lualine = {
+      enable = true;
+    };
     none-ls = {
       enable = true;
       sources = {
         formatting = {
           alejandra.enable = true;
         };
-
-        diagnostics = {
-          shellcheck.enable = true;
-        };
       };
-    };
-    lualine = {
-      enable = true;
-    };
-    nvim-cmp = {
-      enable = true;
-      sources = [
-        {name = "nvim_lsp";}
-        {
-          name = "nvim_lsp";
-          keywordLength = 3;
-        }
-        {
-          name = "luasnip";
-          keywordLength = 2;
-        }
-        {
-          name = "treesitter";
-          keywordLength = 2;
-        }
-        {name = "path";}
-        {
-          name = "buffer";
-          keywordLength = 3;
-        }
-      ];
-      mappingPresets = ["insert"];
-      mapping = {
-        "<CR>" = "cmp.mapping.confirm({ select = true })";
-      };
-      formatting.fields = ["kind" "abbr" "menu"];
-
-      window.completion = {
-        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
-        colOffset = -4;
-        sidePadding = 0;
-        border = "single";
-      };
-
-      window.documentation = {
-        winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None";
-        border = "single";
-      };
-
-      snippet.expand = "luasnip";
     };
     surround.enable = true;
     telescope = {
