@@ -133,6 +133,13 @@
       inherit prevent_deletion;
     };
 
+    global-keybind = {
+      description = "Use evdev to send a specific input event to X windows when using Wayland";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["wayland" "x11" "evdev" "input" "keybind"];
+
+      inherit prevent_deletion;
+    };
+
     inkmlrs = {
       description = "Create and render InkML documents";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["inkml"];
