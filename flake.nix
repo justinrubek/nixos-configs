@@ -82,6 +82,11 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    global-keybind = {
+      url = "github:justinrubek/global-keybind";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

@@ -96,5 +96,12 @@ in {
     xdg.configFile."pgcli/config".source = ./pgcli.config;
 
     programs.obs-studio.enable = true;
+    global-keybind = {
+      enable = true;
+      device = "/dev/input/event5";
+      display = ":1";
+      key_to_press = 276;
+      key_to_send = "F12";
+    };
   };
 }

@@ -131,6 +131,7 @@ in {
             ++ config.modules
             ++ [
               inputs.hyprland.homeManagerModules.default
+              inputs.global-keybind.homeModules.global-keybind
             ]
             # include this flake's modules
             ++ builtins.attrValues self.homeModules

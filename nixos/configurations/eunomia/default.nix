@@ -60,7 +60,7 @@
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "docker" "input"];
+      extraGroups = ["networkmanager" "wheel" "docker" "input" "systemd-journal"];
       shell = pkgs.zsh;
     };
   };
