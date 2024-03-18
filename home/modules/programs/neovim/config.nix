@@ -17,6 +17,13 @@
 in {
   enable = true;
 
+  clipboard = {
+    register = "unnamedplus";
+    providers = {
+      wl-copy.enable = true;
+    };
+  };
+
   colorschemes.tokyonight.enable = true;
   # colorschemes.nord.enable = true;
 
@@ -47,8 +54,6 @@ in {
 
     undodir = "/home/${username}/.cache/nvim/undodir";
     undofile = true;
-
-    clipboard = "unnamedplus";
   };
 
   plugins = {
