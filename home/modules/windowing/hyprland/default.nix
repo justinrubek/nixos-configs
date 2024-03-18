@@ -210,10 +210,6 @@ in {
       # cycle through monitors
       bind = $mod SHIFT, bracketleft, focusmonitor, l
       bind = $mod SHIFT, bracketright, focusmonitor, r
-
-      # global keybinds
-      # teamspeak push to talk
-      bind = ,mouse:276, pass, ^(TeamSpeak 3)$
     '';
   };
 }
