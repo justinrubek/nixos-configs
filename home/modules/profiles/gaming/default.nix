@@ -21,7 +21,7 @@ in {
         # withOpenASAR = true;
       })
       pkgs.airshipper
-      pkgs.runelite
+      # pkgs.runelite
       pkgs.teamspeak5_client
     ];
   };
