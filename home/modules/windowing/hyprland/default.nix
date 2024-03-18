@@ -143,25 +143,25 @@ in {
       bindm = $mod, mouse:273, resizewindow
 
       # windowing commands
-      ## compositor
+      #  compositor
       bind = $modalt, M, exit,
       bind = $mod, Q, killactive,
       bind = $mod, F, fullscreen,
       bind = $mod, R, togglesplit,
       bind = $mod, T, togglefloating,
       bind = $mod, P, pseudo
-      ## focus navigation
+      #  focus navigation
       bind = $mod, h, movefocus, l
       bind = $mod, l, movefocus, r
       bind = $mod, k, movefocus, u
       bind = $mod, j, movefocus, d
-      ## grouped windows
+      #  grouped windows
       bind = $mod, G, togglegroup,
       bind = $mod SHIFT, L, changegroupactive, f
       bind = $mod SHIFT, H, changegroupactive, b
-      ## logout
+      #  logout
       bind = $mod, Escape, exec, wlogout -p layer-shell
-      ## emoji picker
+      #  emoji picker
       bind = $mod, E, exec, ${apps.emoji}
 
       # media
@@ -194,9 +194,9 @@ in {
       }
 
       # workspace assignments
-      ## Discord on workspace 2
+      #  Discord on workspace 2
       windowrulev2 = workspace 2, title:^(Discord)$
-      ## teamspeak on workspace 3
+      #  teamspeak on workspace 3
       windowrulev2 = workspace 3, class:^(ts3client)$
 
       # special workspace
