@@ -79,6 +79,9 @@
 
     pkgs.rocmPackages.rocm-smi
     pkgs.rocmPackages.rocminfo
+
+    # https://github.com/NixOS/nixpkgs/issues/271483#issuecomment-1838055011
+    pkgs.pkgsi686Linux.gperftools
   ];
 
   services.openssh = {
