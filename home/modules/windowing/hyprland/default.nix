@@ -34,6 +34,7 @@ in {
       pkgs.playerctl
       pkgs.wireplumber
       pkgs.wl-clipboard
+      pkgs.xwaylandvideobridge
     ];
     programs.wlogout = {
       enable = true;
@@ -67,6 +68,7 @@ in {
 
     wayland.windowManager.hyprland = {
       enable = true;
+      xwayland.enable = true;
       settings = {
         "$mod" = "SUPER";
         "$modalt" = "SUPER_ALT";
