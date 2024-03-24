@@ -38,7 +38,35 @@ in {
 
     wayland.windowManager.hyprland.enable = true;
 
-    xdg.configFile."wlogout/layout".source = ./wlogout.conf;
+    programs.wlogout = {
+      enable = true;
+      layout = [
+        {
+          label = "lock";
+          action = "swaylock";
+          text = "Lock";
+          keybind = "l";
+        }
+        {
+          label = "logout";
+          action = "${pkgs.wayland-logout}/bin/wayland-logout";
+          text = "Logout";
+          keybind = "e";
+        }
+        {
+          label = "shutdown";
+          action = "systemctl poweroff";
+          text = "Shutdown";
+          keybind = "s";
+        }
+        {
+          label = "reboot";
+          action = "systemctl reboot";
+          text = "Reboot";
+          keybind = "r";
+        }
+      ];
+    };
 
     wayland.windowManager.hyprland.extraConfig = ''
       $mod = SUPER
