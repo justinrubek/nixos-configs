@@ -130,7 +130,6 @@ in {
               ''
             )
             10);
-
         bindl = [
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioStop, exec, playerctl stop"
@@ -166,6 +165,9 @@ in {
           pseudotile = true;
           preserve_split = true;
         };
+        exec-once = [
+          "waybar"
+        ];
         general = {
           border_size = 2;
           gaps_in = 5;

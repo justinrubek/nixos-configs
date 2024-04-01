@@ -14,7 +14,10 @@ in {
     };
 
     justinrubek = {
-      windowing.hyprland.enable = true;
+      windowing = {
+        hyprland.enable = true;
+        waybar.enable = true;
+      };
       wayland = {
         common.enable = true;
 
