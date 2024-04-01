@@ -66,6 +66,12 @@
       url = "github:justinrubek/generation-toolkit";
     };
 
+    git-prune-branches = {
+      url = "github:justinrubek/git-prune-branches";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.fenix.follows = "fenix";
+    };
+
     nix-postgres = {
       url = "github:justinrubek/nix-postgres";
     };
