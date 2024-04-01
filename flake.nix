@@ -5,6 +5,11 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     hashicorp_nixpkgs.url = "github:nixos/nixpkgs/f91ee3065de91a3531329a674a45ddcb3467a650";
 
+    fenix = {
+      url = "github:nix-community/fenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,6 +35,7 @@
       url = "github:justinrubek/thoenix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.terranix.follows = "terranix";
+      inputs.fenix.follows = "fenix";
     };
 
     comma = {
@@ -72,12 +78,14 @@
     project-runner = {
       url = "github:justinrubek/project-runner";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.fenix.follows = "fenix";
     };
 
     lockpad = {
       url = "github:justinrubek/lockpad";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        fenix.follows = "fenix";
       };
     };
 
@@ -89,6 +97,13 @@
     global-keybind = {
       url = "github:justinrubek/global-keybind";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.fenix.follows = "fenix";
+    };
+
+    gitu = {
+      url = "github:altsem/gitu";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.fenix.follows = "fenix";
     };
   };
 
