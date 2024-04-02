@@ -133,6 +133,13 @@
       inherit prevent_deletion;
     };
 
+    git-prune-branches = {
+      description = "A command-line application that cleans local git branches from remote repositories";
+      topics = (mkTopic ["nix" "rust" "flake"]) ++ ["git" "gix" "gitoxide"];
+
+      inherit prevent_deletion;
+    };
+
     global-keybind = {
       description = "Use evdev to send a specific input event to X windows when using Wayland";
       topics = (mkTopic ["nix" "rust" "flake"]) ++ ["wayland" "x11" "evdev" "input" "keybind"];
