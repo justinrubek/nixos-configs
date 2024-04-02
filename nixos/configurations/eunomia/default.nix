@@ -213,6 +213,4 @@
     debug = true;
     dhcpNoBind = true;
   };
-
-  services.ratbagd.enable = true;
 }
