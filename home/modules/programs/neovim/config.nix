@@ -32,7 +32,7 @@ in {
     mapleader = " ";
   };
 
-  options = {
+  opts = {
     mouse = "a";
     shiftwidth = 4;
     tabstop = 4;
@@ -106,7 +106,7 @@ in {
         };
       };
     };
-    comment-nvim.enable = true;
+    comment.enable = true;
     # copilot-lua.enable = true;
     copilot-vim.enable = true;
     # cmp-copilot.enable = true;

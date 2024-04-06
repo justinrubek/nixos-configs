@@ -55,7 +55,7 @@ in {
       zsh = {
         enable = true;
         enableCompletion = true;
-        enableAutosuggestions = true;
+        autosuggestion.enable = true;
         enableVteIntegration = true;
         autocd = true;
         defaultKeymap = "viins";
