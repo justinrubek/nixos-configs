@@ -76,6 +76,11 @@ in {
       name = "annapurna";
       policy = builtins.readFile ./policies/annapurna.hcl;
     };
+
+    annapurna_postgres = {
+      name = "annapurna-postgres";
+      policy = builtins.readFile ./policies/annapurna-postgres.hcl;
+    };
   };
 
   resource.vault_auth_backend.userpass = {
