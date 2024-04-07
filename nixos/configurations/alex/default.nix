@@ -12,7 +12,13 @@
     package = inputs.nix-postgres.packages.${pkgs.system}."psql_15/bin";
     port = 5435;
 
-    ensureDatabases = ["lockpad"];
+    ensureDatabases = ["lockpad" "annapurna"];
+    ensureUsers = [
+      {
+        name = "annapurna";
+        ensureDBOwnership = true;
+      }
+    ];
 
     identMap = ''
       superuser_map justin postgres
