@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  username,
   ...
 } @ inputs: let
   # example quick source get for non-packaged plugins
@@ -56,7 +55,6 @@ in {
     incsearch = true;
     hidden = true;
 
-    undodir = "/home/${username}/.cache/nvim/undodir";
     undofile = true;
   };
 
