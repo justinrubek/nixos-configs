@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   username,
   ...
@@ -15,6 +16,10 @@
   # };
   PWD = ./.;
 in {
+  imports = [
+    ./which-key.nix
+  ];
+
   clipboard = {
     register = "unnamedplus";
     providers = {
@@ -205,10 +210,13 @@ in {
     };
   };
 
+  extraConfigLua = pkgs.lib.mkBefore ''
+    ${builtins.readFile ./lua/functions.lua}
+  '';
+
   # luafile ${PWD}/lua/lsp.lua
   extraConfigVim = ''
     luafile ${PWD}/lua/copilot.lua
-    luafile ${PWD}/lua/which-key.lua
     luafile ${PWD}/lua/keymaps.lua
   '';
 
