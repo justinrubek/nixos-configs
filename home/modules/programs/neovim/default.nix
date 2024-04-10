@@ -1,10 +1,14 @@
-{neovim-nightly-overlay, ...}: {
+{neovim-nightly-overlay, ...} @ inputs: {
   config,
   lib,
   pkgs,
   ...
-} @ inputs: let
+} @ module-inputs: let
   cfg = config.programs.univim;
+
+  nixvim = inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
+    module = import ./config.nix (module-inputs // {username = cfg.user;});
+  };
 in {
   options.programs.univim = {
     enable = lib.mkEnableOption "Enable neovim";
@@ -16,6 +20,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    programs.nixvim = import ./config.nix (inputs // {username = cfg.user;});
+    # programs.nixvim = import ./config.nix (module-inputs // {username = cfg.user;});
+    home.packages = [nixvim];
   };
 }
