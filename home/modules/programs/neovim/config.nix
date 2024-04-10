@@ -15,8 +15,6 @@
   # };
   PWD = ./.;
 in {
-  enable = true;
-
   clipboard = {
     register = "unnamedplus";
     providers = {
