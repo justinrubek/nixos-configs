@@ -107,13 +107,24 @@ in {
         };
       };
     };
+    cmp-nvim-lsp.enable = true;
+    cmp-buffer.enable = true;
+    cmp-path.enable = true;
+    cmp-vsnip.enable = true;
+    cmp-cmdline.enable = true;
     comment.enable = true;
     # copilot-lua.enable = true;
     copilot-vim.enable = true;
     # cmp-copilot.enable = true;
+    cursorline = {
+      enable = true;
+      cursorline.enable = false;
+      cursorword.enable = true;
+    };
     efmls-configs = {
       enable = true;
     };
+    friendly-snippets.enable = true;
     fugitive.enable = true;
     intellitab.enable = true;
     nix.enable = true;
@@ -176,6 +187,7 @@ in {
     lualine = {
       enable = true;
     };
+    luasnip.enable = true;
     none-ls = {
       enable = true;
       sources = {
@@ -188,6 +200,7 @@ in {
     telescope = {
       enable = true;
     };
+    todo-comments.enable = true;
     treesitter = {
       enable = true;
       ensureInstalled = "all";
@@ -219,33 +232,8 @@ in {
   '';
 
   extraPlugins = with pkgs.vimPlugins; [
-    plenary-nvim
     indentLine
-
-    # lsp
-    friendly-snippets
-    luasnip
-    # nvim-lsp-installer
-    # nvim-lspconfig
-    # lspkind-nvim
-    cmp-nvim-lsp
-    cmp-buffer
-    cmp-path
-    cmp-vsnip
-    cmp-cmdline
-
-    # File tree
-    nvim-web-devicons
-    nvim-tree-lua
-
-    # Aesthetic
-    todo-comments-nvim
-    vim-cursorword
-
-    # tpope
     vim-abolish
-
-    # folke
     which-key-nvim
   ];
 
