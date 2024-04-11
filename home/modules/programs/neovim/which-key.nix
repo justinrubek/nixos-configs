@@ -31,15 +31,49 @@
       };
       registrations = {
         f = {
+          name = "find";
           "f" = mkRequireBind {
             module = "telescope.builtin";
             cmd = "find_files";
             desc = "find file";
           };
+          "o" = mkRequireBind {
+            module = "telescope.builtin";
+            cmd = "oldfiles";
+            desc = "open recent file";
+          };
           "s" = mkRequireBind {
             module = "telescope.builtin";
             cmd = "live_grep";
             desc = "search";
+          };
+          "t" = mkRequireBind {
+            module = "telescope.builtin";
+            cmd = "treesitter";
+            desc = "treesitter";
+          };
+          l = {
+            name = "lsp";
+            "d" = mkRequireBind {
+              module = "telescope.builtin";
+              cmd = "lsp_definitions";
+              desc = "definitions";
+            };
+            "i" = mkRequireBind {
+              module = "telescope.builtin";
+              cmd = "lsp_implementations";
+              desc = "implementations";
+            };
+            "r" = mkRequireBind {
+              module = "telescope.builtin";
+              cmd = "lsp_references";
+              desc = "references";
+            };
+            "t" = mkRequireBind {
+              module = "telescope.builtin";
+              cmd = "lsp_type_definitions";
+              desc = "type definitions";
+            };
           };
         };
         # quick-binding for find_files
@@ -66,7 +100,7 @@
             desc = "checkout branch";
           };
           c = mkCmdBind {
-            cmd = "Telescope git_commits";
+            cmd = "Telescope git_bcommits";
             desc = "checkout commits";
           };
         };
@@ -131,6 +165,14 @@
         nowait = true;
       };
       registrations = {
+        g = {
+          name = "git";
+          "b" = mkRequireBind {
+            module = "telescope.builtin";
+            cmd = "git_bcommits_range";
+            desc = "buffer commits in selection";
+          };
+        };
         y = {
           name = "yank";
           y = [
