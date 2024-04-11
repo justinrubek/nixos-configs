@@ -241,4 +241,5 @@ in {
     pkgs.nodejs
     pkgs.python310
   ];
+  styleInit = true;
 }
