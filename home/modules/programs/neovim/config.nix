@@ -121,9 +121,7 @@ in {
       cursorline.enable = false;
       cursorword.enable = true;
     };
-    efmls-configs = {
-      enable = true;
-    };
+    efmls-configs.enable = true;
     friendly-snippets.enable = true;
     fugitive.enable = true;
     intellitab.enable = true;
@@ -184,9 +182,7 @@ in {
       currentLine = true;
     };
     lspsaga.enable = true;
-    lualine = {
-      enable = true;
-    };
+    lualine.enable = true;
     luasnip.enable = true;
     none-ls = {
       enable = true;
@@ -197,9 +193,7 @@ in {
       };
     };
     surround.enable = true;
-    telescope = {
-      enable = true;
-    };
+    telescope.enable = true;
     todo-comments.enable = true;
     treesitter = {
       enable = true;
@@ -216,9 +210,7 @@ in {
       };
     };
     trouble.enable = true;
-    undotree = {
-      enable = true;
-    };
+    undotree.enable = true;
   };
 
   extraConfigLua = pkgs.lib.mkBefore ''
