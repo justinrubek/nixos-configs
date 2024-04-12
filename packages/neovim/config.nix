@@ -120,6 +120,12 @@ in {
     efmls-configs.enable = true;
     friendly-snippets.enable = true;
     fugitive.enable = true;
+    indent-blankline = {
+      enable = true;
+      settings = {
+        indent.char = "¦";
+      };
+    };
     intellitab.enable = true;
     nix.enable = true;
     nvim-tree.enable = true;
@@ -220,7 +226,6 @@ in {
   '';
 
   extraPlugins = with pkgs.vimPlugins; [
-    indentLine
     vim-abolish
     which-key-nvim
   ];
