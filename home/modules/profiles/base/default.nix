@@ -28,8 +28,6 @@ in {
     xdg.enable = true;
 
     programs = {
-      univim.enable = true;
-
       bat.enable = true;
       lsd = {
         enable = true;
@@ -143,6 +141,7 @@ in {
     };
 
     home.packages = with pkgs; [
+      self.packages.${pkgs.system}.neovim
       psmisc
       fd
       zip
