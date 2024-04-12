@@ -5,6 +5,10 @@
   self,
   ...
 }: {
+  imports = [
+    ./neovim
+  ];
+
   perSystem = {
     config,
     pkgs,

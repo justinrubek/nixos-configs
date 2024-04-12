@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-} @ inputs: let
+{pkgs, ...} @ inputs: let
   # example quick source get for non-packaged plugins
   # nvim-lsp-installer = pkgs.vimUtils.buildVimPlugin {
   #   name = "nvim-lsp-installer";
