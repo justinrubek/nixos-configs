@@ -227,7 +227,6 @@ in {
 
   extraPlugins = with pkgs.vimPlugins; [
     vim-abolish
-    which-key-nvim
   ];
 
   extraPackages = [
