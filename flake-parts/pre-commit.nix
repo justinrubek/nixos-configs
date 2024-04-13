@@ -11,6 +11,7 @@
         src = ../.;
         hooks = {
           treefmt.enable = true;
+          statix.enable = true;
         };
 
         settings.treefmt.package = self'.packages.treefmt;
