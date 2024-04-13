@@ -9,7 +9,6 @@ inputs: {
   "profiles/design" = import ./profiles/design inputs;
   "profiles/graphical" = import ./profiles/graphical inputs;
 
-  "programs/firefox" = import ./programs/firefox inputs;
   "programs/pijul" = import ./programs/pijul inputs;
 
   "wayland/common" = import ./wayland/common inputs;
