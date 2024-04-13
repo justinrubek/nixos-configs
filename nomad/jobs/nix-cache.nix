@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.nix_cache = {
     datacenters = ["dc1"];
 

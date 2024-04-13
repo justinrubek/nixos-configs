@@ -2,8 +2,7 @@
   inputs,
   self,
   ...
-} @ module-input: let
-in {
+} @ module-input: {
   flake.terraformModules = {
     nomadjob = import ./nomadjob module-input;
     nomadvolumes = import ./nomadvolumes module-input;

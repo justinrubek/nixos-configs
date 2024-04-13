@@ -1,10 +1,4 @@
-{
-  nomadJobs,
-  pkgs,
-  ...
-}: let
-  system = pkgs.system;
-
+{nomadJobs, ...}: let
   nomad_jobs = nomadJobs;
 in {
   # configure hcloud

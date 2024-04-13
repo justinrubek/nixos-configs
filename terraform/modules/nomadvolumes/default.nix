@@ -52,7 +52,7 @@ in {
               type = "csi";
               plugin_id = "org.democratic-csi.nfs";
               volume_id = name;
-              name = name;
+              inherit name;
               external_id = name;
 
               capability = {

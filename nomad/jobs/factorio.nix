@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.factorio = {
     datacenters = ["dc1"];
 

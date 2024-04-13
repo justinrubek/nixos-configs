@@ -198,8 +198,7 @@ in {
   extraConfigLua = let
     names = builtins.attrNames bindings;
     generateRegistrations = name: let
-      registrations = bindings.${name}.registrations;
-      opts = bindings.${name}.opts;
+      inherit (bindings.${name}) registrations opts;
     in "require(\"which-key\").register(${helpers.toLuaObject registrations}, ${helpers.toLuaObject opts})";
   in
     builtins.concatStringsSep "\n" (builtins.map generateRegistrations names);

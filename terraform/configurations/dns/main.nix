@@ -1,4 +1,4 @@
-{...}: {
+_: {
   # configure hcloud
   provider = {
     vault = {};

@@ -1,4 +1,4 @@
-{...}: let
+_: let
   lockpad-image = "ghcr.io/justinrubek/lockpad:2a0fe04952ec76d05e0b50ba6c2a3fc60a620762";
   postgres_image = "docker.io/justinrubek/postgres@sha256:d00c2e7a63d66d74188bfa3351870de5197a3442d53a155db6182a561387924a";
 

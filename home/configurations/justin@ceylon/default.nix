@@ -1,5 +1,4 @@
-{comma, ...}: {pkgs, ...}: let
-in {
+{comma, ...}: {pkgs, ...}: {
   config = {
     activeProfiles = ["development"];
 

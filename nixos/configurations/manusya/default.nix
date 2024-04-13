@@ -7,15 +7,6 @@
   imports = [
   ];
 
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -25,10 +16,14 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services = {
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
+    };
+    printing.enable = true;
+    xserver.enable = true;
+  };
 
   # personal modules
   justinrubek = {
@@ -70,24 +65,6 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "no";
-  };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  networking.firewall.allowedTCPPorts = [
-    8080
-    8081
-  ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leavecatenate(variables, "bootdev", bootdev)
@@ -108,7 +85,15 @@
     remotePlay.openFirewall = true;
   };
 
-  networking.nameservers = ["1.1.1.1" "9.9.9.9"];
+  networking = {
+    networkmanager.enable = true;
+
+    nameservers = ["1.1.1.1" "9.9.9.9"];
+    firewall.allowedTCPPorts = [
+      8080
+      8081
+    ];
+  };
 
   hardware.ckb-next.enable = true;
 }

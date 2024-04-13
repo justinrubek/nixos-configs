@@ -59,8 +59,7 @@ in {
 
         config = {
           nixosConfig = self.lib.nixosSystem {
-            inherit (config) system;
-            modules = config.modules;
+            inherit (config) system modules;
             inherit name;
           };
 

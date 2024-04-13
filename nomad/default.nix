@@ -10,8 +10,7 @@
     pkgs,
     system,
     ...
-  }: let
-  in rec {
+  }: {
     packages = {
       nomadJobs = inputs.nix-nomad.lib.mkNomadJobs {
         inherit system;

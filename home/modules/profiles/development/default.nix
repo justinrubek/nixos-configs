@@ -73,6 +73,7 @@ in {
         rustc
         rust-analyzer
         # openscad
+        deadnix
         statix
         cocogitto
 

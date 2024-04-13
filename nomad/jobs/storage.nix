@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.storage_controller = {
     datacenters = ["dc1"];
 

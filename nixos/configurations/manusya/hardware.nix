@@ -31,15 +31,17 @@
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
   # nvidia settings
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+  hardware = {
+    cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    opengl.enable = true;
+    nvidia = {
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
 
-    nvidiaPersistenced = true;
-    modesetting.enable = true;
+      nvidiaPersistenced = true;
+      modesetting.enable = true;
+    };
   };
-  hardware.opengl.enable = true;
   services.xserver.videoDrivers = ["nvidia" "intel"];
 }

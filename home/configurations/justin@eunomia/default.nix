@@ -1,14 +1,22 @@
-{comma, ...} @ inputs: {pkgs, ...}: let
-in {
+{comma, ...} @ inputs: {pkgs, ...}: {
   config = {
     activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
 
-    programs.thunderbird = {
-      enable = true;
+    programs = {
+      obs-studio.enable = true;
+      thunderbird = {
+        enable = true;
 
-      profiles = {
-        "justin" = {
-          isDefault = true;
+        profiles = {
+          "justin" = {
+            isDefault = true;
+          };
+        };
+      };
+      zellij = {
+        enable = true;
+        settings = {
+          default-shell = "zsh";
         };
       };
     };
@@ -89,16 +97,8 @@ in {
       ];
     };
 
-    programs.zellij = {
-      enable = true;
-      settings = {
-        default-shell = "zsh";
-      };
-    };
-
     xdg.configFile."pgcli/config".source = ./pgcli.config;
 
-    programs.obs-studio.enable = true;
     global-keybind = {
       enable = true;
       device = "/dev/input/event5";

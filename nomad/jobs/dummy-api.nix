@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.dummy_api = {
     datacenters = ["dc1"];
 

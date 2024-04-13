@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.jellyfin = {
     datacenters = ["dc1"];
 

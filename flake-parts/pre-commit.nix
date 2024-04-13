@@ -3,8 +3,7 @@
   self,
   ...
 }: {
-  perSystem = {self', ...}: let
-  in {
+  perSystem = {self', ...}: {
     pre-commit = {
       check.enable = true;
 

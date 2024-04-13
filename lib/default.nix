@@ -1,10 +1,4 @@
-input @ {
-  self,
-  inputs,
-  config,
-  ...
-}: let
-in {
+input: {
   flake.lib = {
     nixosSystem = import ./nixos_system.nix input;
   };

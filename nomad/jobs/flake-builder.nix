@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.flake_builder = {
     datacenters = ["dc1"];
 

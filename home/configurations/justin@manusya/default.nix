@@ -19,15 +19,15 @@ _: {pkgs, ...}: {
       tray.enable = true;
     };
 
-    programs.pandoc.enable = true;
-
-    programs.zellij = {
-      enable = true;
-      settings = {
-        default-shell = "zsh";
+    programs = {
+      nushell.enable = true;
+      pandoc.enable = true;
+      zellij = {
+        enable = true;
+        settings = {
+          default-shell = "zsh";
+        };
       };
     };
-
-    programs.nushell.enable = true;
   };
 }

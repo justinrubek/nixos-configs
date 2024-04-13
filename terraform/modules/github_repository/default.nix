@@ -196,28 +196,12 @@ in {
         };
 
         config = {
-          name = name;
+          inherit name;
           terraformName = builtins.replaceStrings ["."] ["-"] name;
 
           repositoryResource = {
-            name = name;
-            description = config.description;
-            visibility = config.visibility;
-            has_issues = config.has_issues;
-            has_discussions = config.has_discussions;
-            has_wiki = config.has_wiki;
-            has_projects = config.has_projects;
-            has_downloads = config.has_downloads;
-            is_template = config.is_template;
-            allow_merge_commit = config.allow_merge_commit;
-            allow_squash_merge = config.allow_squash_merge;
-            allow_rebase_merge = config.allow_rebase_merge;
-            allow_auto_merge = config.allow_auto_merge;
-            delete_branch_on_merge = config.delete_branch_on_merge;
-            topics = config.topics;
-            vulnerability_alerts = config.vulnerability_alerts;
-            homepage_url = config.homepage_url;
-            pages = config.pages;
+            inherit name;
+            inherit (config) description visibility has_issues has_discussions has_wiki has_projects has_downloads is_template allow_merge_commit allow_squash_merge allow_rebase_merge allow_auto_merge delete_branch_on_merge topics vulnerability_alerts homepage_url pages;
           };
 
           branchProtection =
@@ -236,7 +220,7 @@ in {
           # the mapped `name` is used to create a unique name for the resource
           # the mapped `value` contains the values as they will be given to the resource
           secretResources = let
-            terraformName = config.terraformName;
+            inherit (config) terraformName;
             repoName = name;
           in
             lib.mapAttrsToList (name: config: {
@@ -282,8 +266,10 @@ in {
     in
       builtins.listToAttrs allValues;
   in {
-    resource.github_repository = repositories;
-    resource.github_branch_protection = branchProtections;
-    resource.github_actions_secret = secrets;
+    resource = {
+      github_repository = repositories;
+      github_branch_protection = branchProtections;
+      github_actions_secret = secrets;
+    };
   };
 }

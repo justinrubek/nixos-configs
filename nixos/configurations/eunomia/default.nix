@@ -28,11 +28,56 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.displayManager = {
-    sddm.enable = true;
+  services = {
+    displayManager = {
+      sddm.enable = true;
 
-    defaultSession = "hyprland";
+      defaultSession = "hyprland";
+    };
+    flatpak.enable = true;
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
+    };
+    xserver.enable = true;
+    mullvad-vpn = {
+      enable = false;
+      # openFirewall = true;
+    };
+    pixiecore = let
+      netSystem = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ({
+            config,
+            pkgs,
+            lib,
+            modulesPath,
+            ...
+          }: {
+            imports = [
+              "${inputs.nixpkgs}/nixos/modules/installer/netboot/netboot-minimal.nix"
+            ];
+            config = {
+              users.users.root.openssh.authorizedKeys.keys = [
+                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsUQZGQOH2kmQNeG/Ezmsv6A/70JUO8nLh9WaZ/o7DlmpYeEyUdloTazxpP9FjuRv7d7nzRqtQFOF74TBaDEAxR9/eHxX9zc5RfyE1RYeGWPGgnuHpxoTijh70ncTlU6sr0oqP7e24qeIy7pqWKQmV8RDOkr2etbnb5OpCHEsZJ0l0sPYQpYi0Ud8cM/HFCCVPeg21wVuxBX2rA4ze8+YgnPJZRnhtHZg7rAapvhiIfDAJ3xIweauCoz0vZdmANlUsg2AoOx9b2Ym6rGNmRrJUNZYcsNxmUHc1/oc1g9NZ7GoaMhfw0BHVJ0kyfE2glpJX9iu6WHWjbL+XM0QnCFrc3hbQc41zYQsMHcY/N/P5MW9Gj77Q9P/qRDbwlVOdoFw1bUpIoMgsJ95o5gv5mClHuBLZD3ZO5cyRfnjH4w0pt6EnWtbkORsT5A7ULOQOG8AOuBL3ok/yVTVAFV2yMbaEg1BM2By0U6hn9M6SGWuOiM1oMwvVFJWdmZsvPeTZqaU= justin"
+              ];
+            };
+          })
+        ];
+      };
+
+      inherit (netSystem.config.system) build;
+    in {
+      enable = true;
+      mode = "boot";
+      openFirewall = true;
+      kernel = "${build.kernel}/bzImage";
+      initrd = "${build.netbootRamdisk}/initrd";
+      cmdLine = "init=${build.toplevel}/init loglevel=4";
+      debug = true;
+      dhcpNoBind = true;
+    };
   };
 
   # personal modules
@@ -65,8 +110,6 @@
     };
   };
 
-  programs.zsh.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -84,15 +127,19 @@
     pkgs.pkgsi686Linux.gperftools
   ];
 
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "no";
-  };
-
   # Enable networking
-  networking.networkmanager = {
-    enable = true;
-    wifi.scanRandMacAddress = false;
+  networking = {
+    networkmanager = {
+      enable = true;
+      wifi.scanRandMacAddress = false;
+    };
+    firewall.allowedTCPPorts = [8000];
+    firewall.interfaces.${config.services.tailscale.interfaceName} = {
+      allowedTCPPorts = [
+        3000
+        8000
+      ];
+    };
   };
   systemd.services.NetworkManager-wait-online.enable = false;
 
@@ -108,14 +155,6 @@
   # Open ports in the firewall.
 
   # networking.firewall.allowedTCPPorts = [ ... ];
-  networking.firewall.allowedTCPPorts = [8000];
-  networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
-    allowedTCPPorts = [
-      3000
-      8000
-    ];
-  };
-
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
@@ -134,31 +173,34 @@
     '';
   };
 
-  programs.gamescope.enable = true;
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    gamescopeSession = {
+  programs = {
+    gamescope.enable = true;
+    steam = {
       enable = true;
-      args = [
-        "-w 2560"
-        "-h 1440"
-      ];
-    };
+      remotePlay.openFirewall = true;
+      gamescopeSession = {
+        enable = true;
+        args = [
+          "-w 2560"
+          "-h 1440"
+        ];
+      };
 
-    package = pkgs.steam.override {
-      extraPkgs = pkgs: [
-        pkgs.xorg.libXcursor
-        pkgs.xorg.libXi
-        pkgs.xorg.libXinerama
-        pkgs.libpng
-        pkgs.libpulseaudio
-        pkgs.libvorbis
-        pkgs.stdenv.cc.cc.lib
-        pkgs.libkrb5
-        pkgs.keyutils
-      ];
+      package = pkgs.steam.override {
+        extraPkgs = pkgs: [
+          pkgs.xorg.libXcursor
+          pkgs.xorg.libXi
+          pkgs.xorg.libXinerama
+          pkgs.libpng
+          pkgs.libpulseaudio
+          pkgs.libvorbis
+          pkgs.stdenv.cc.cc.lib
+          pkgs.libkrb5
+          pkgs.keyutils
+        ];
+      };
     };
+    zsh.enable = true;
   };
 
   # enable fix for steam issues with xdg-desktop-portal
@@ -169,48 +211,6 @@
 
   hardware.ckb-next.enable = true;
 
-  services.flatpak.enable = true;
-
   # allow swaylock to verify login
   security.pam.services.swaylock.text = "auth include login";
-
-  services.mullvad-vpn = {
-    enable = false;
-    # openFirewall = true;
-  };
-
-  services.pixiecore = let
-    netSystem = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ({
-          config,
-          pkgs,
-          lib,
-          modulesPath,
-          ...
-        }: {
-          imports = [
-            "${inputs.nixpkgs}/nixos/modules/installer/netboot/netboot-minimal.nix"
-          ];
-          config = {
-            users.users.root.openssh.authorizedKeys.keys = [
-              "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsUQZGQOH2kmQNeG/Ezmsv6A/70JUO8nLh9WaZ/o7DlmpYeEyUdloTazxpP9FjuRv7d7nzRqtQFOF74TBaDEAxR9/eHxX9zc5RfyE1RYeGWPGgnuHpxoTijh70ncTlU6sr0oqP7e24qeIy7pqWKQmV8RDOkr2etbnb5OpCHEsZJ0l0sPYQpYi0Ud8cM/HFCCVPeg21wVuxBX2rA4ze8+YgnPJZRnhtHZg7rAapvhiIfDAJ3xIweauCoz0vZdmANlUsg2AoOx9b2Ym6rGNmRrJUNZYcsNxmUHc1/oc1g9NZ7GoaMhfw0BHVJ0kyfE2glpJX9iu6WHWjbL+XM0QnCFrc3hbQc41zYQsMHcY/N/P5MW9Gj77Q9P/qRDbwlVOdoFw1bUpIoMgsJ95o5gv5mClHuBLZD3ZO5cyRfnjH4w0pt6EnWtbkORsT5A7ULOQOG8AOuBL3ok/yVTVAFV2yMbaEg1BM2By0U6hn9M6SGWuOiM1oMwvVFJWdmZsvPeTZqaU= justin"
-            ];
-          };
-        })
-      ];
-    };
-
-    build = netSystem.config.system.build;
-  in {
-    enable = true;
-    mode = "boot";
-    openFirewall = true;
-    kernel = "${build.kernel}/bzImage";
-    initrd = "${build.netbootRamdisk}/initrd";
-    cmdLine = "init=${build.toplevel}/init loglevel=4";
-    debug = true;
-    dhcpNoBind = true;
-  };
 }

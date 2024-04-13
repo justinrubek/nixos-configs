@@ -1,4 +1,4 @@
-{...}: {
+_: {
   provider = {
     minio = {};
   };
@@ -6,111 +6,111 @@
   locals = {
   };
 
-  resource.minio_s3_bucket = {
-    nix_cache = {
-      bucket = "nix-cache";
+  resource = {
+    minio_s3_bucket = {
+      nix_cache = {
+        bucket = "nix-cache";
+      };
+
+      scratch_files = {
+        bucket = "scratch-files";
+      };
+    };
+    minio_iam_user = {
+      nix_cache = {
+        name = "nix-cache";
+        force_destroy = true;
+      };
+
+      justin = {
+        name = "justin";
+        force_destroy = true;
+      };
     };
 
-    scratch_files = {
-      bucket = "scratch-files";
+    minio_iam_service_account = {
+      nix_cache = {
+        target_user = "\${minio_iam_user.nix_cache.name}";
+      };
+
+      justin = {
+        target_user = "\${minio_iam_user.justin.name}";
+      };
+    };
+
+    minio_iam_group = {
+      nix-cache = {
+        name = "nix-cache";
+      };
+
+      justin = {
+        name = "justin";
+      };
+    };
+
+    minio_iam_group_membership = {
+      nix-cache = {
+        name = "nix-cache";
+        group = "\${minio_iam_group.nix-cache.name}";
+        users = [
+          "\${minio_iam_user.nix_cache.name}"
+        ];
+      };
+
+      justin = {
+        name = "justin";
+        group = "\${minio_iam_group.justin.name}";
+        users = [
+          "\${minio_iam_user.justin.name}"
+        ];
+      };
+    };
+
+    minio_iam_group_policy = {
+      read-write-nix-cache = {
+        name = "read-write-nix-cache";
+        group = "\${minio_iam_group.nix-cache.name}";
+        policy = ''
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:*"
+                    ],
+                    "Resource": [
+                        "arn:aws:s3:::''${minio_s3_bucket.nix_cache.bucket}/*"
+                    ]
+                }
+            ]
+          }
+        '';
+      };
+
+      # grant all
+      justin = {
+        name = "justin";
+        group = "\${minio_iam_group.justin.name}";
+        policy = ''
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Action": [
+                        "s3:*"
+                    ],
+                    "Resource": [
+                        "arn:aws:s3:::*"
+                    ]
+                }
+            ]
+          }
+        '';
+      };
     };
   };
-
-  resource.minio_iam_user = {
-    nix_cache = {
-      name = "nix-cache";
-      force_destroy = true;
-    };
-
-    justin = {
-      name = "justin";
-      force_destroy = true;
-    };
-  };
-
-  resource.minio_iam_service_account = {
-    nix_cache = {
-      target_user = "\${minio_iam_user.nix_cache.name}";
-    };
-
-    justin = {
-      target_user = "\${minio_iam_user.justin.name}";
-    };
-  };
-
-  resource.minio_iam_group = {
-    nix-cache = {
-      name = "nix-cache";
-    };
-
-    justin = {
-      name = "justin";
-    };
-  };
-
-  resource.minio_iam_group_membership = {
-    nix-cache = {
-      name = "nix-cache";
-      group = "\${minio_iam_group.nix-cache.name}";
-      users = [
-        "\${minio_iam_user.nix_cache.name}"
-      ];
-    };
-
-    justin = {
-      name = "justin";
-      group = "\${minio_iam_group.justin.name}";
-      users = [
-        "\${minio_iam_user.justin.name}"
-      ];
-    };
-  };
-
-  resource.minio_iam_group_policy = {
-    read-write-nix-cache = {
-      name = "read-write-nix-cache";
-      group = "\${minio_iam_group.nix-cache.name}";
-      policy = ''
-        {
-          "Version": "2012-10-17",
-          "Statement": [
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "s3:*"
-                  ],
-                  "Resource": [
-                      "arn:aws:s3:::''${minio_s3_bucket.nix_cache.bucket}/*"
-                  ]
-              }
-          ]
-        }
-      '';
-    };
-
-    # grant all
-    justin = {
-      name = "justin";
-      group = "\${minio_iam_group.justin.name}";
-      policy = ''
-        {
-          "Version": "2012-10-17",
-          "Statement": [
-              {
-                  "Effect": "Allow",
-                  "Action": [
-                      "s3:*"
-                  ],
-                  "Resource": [
-                      "arn:aws:s3:::*"
-                  ]
-              }
-          ]
-        }
-      '';
-    };
-  };
-
   # terraform configuration outputs
   output = {
     bucket_nix_cache_name = {

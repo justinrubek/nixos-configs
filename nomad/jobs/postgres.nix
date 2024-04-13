@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.postgres = {
     datacenters = ["dc1"];
 

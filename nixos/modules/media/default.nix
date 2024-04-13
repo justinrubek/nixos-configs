@@ -25,26 +25,24 @@ in {
         extraGroups = ["jellyfin"];
       };
 
-      services.jellyfin = {
-        enable = true;
-        user = "${user}";
-      };
-
-      services.sonarr = {
-        enable = true;
-        user = "${user}";
-        dataDir = "/home/${user}/sonarr";
-      };
-
-      # deluge for torrenting
-      services.deluge = {
-        enable = false;
-        user = "${user}";
-        dataDir = "/home/${user}/deluge";
-
-        web = {
+      services = {
+        deluge = {
+          enable = false;
+          user = "${user}";
+          dataDir = "/home/${user}/deluge";
+          web = {
+            enable = true;
+            port = 8112;
+          };
+        };
+        jellyfin = {
           enable = true;
-          port = 8112;
+          user = "${user}";
+        };
+        sonarr = {
+          enable = true;
+          user = "${user}";
+          dataDir = "/home/${user}/sonarr";
         };
       };
 

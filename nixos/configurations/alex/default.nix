@@ -91,7 +91,7 @@
 
   networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
     allowedTCPPorts = [
-      config.services.postgresql.port
+      config.services.justinrubek.postgresql.port
     ];
   };
 

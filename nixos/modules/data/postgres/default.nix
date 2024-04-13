@@ -11,9 +11,9 @@ with lib; let
   postgresql = cfg.package;
 
   toStr = value:
-    if true == value
+    if builtins.isBool value && value
     then "yes"
-    else if false == value
+    else if builtins.isBool value && !value
     then "no"
     else if isString value
     then "'${lib.replaceStrings ["'"] ["''"] value}'"
@@ -465,59 +465,61 @@ in {
       maintenance improvements.
     ";
 
-    services.justinrubek.postgresql.settings = {
-      hba_file = "${pkgs.writeText "pg_hba.conf" cfg.authentication}";
-      ident_file = "${pkgs.writeText "pg_ident.conf" cfg.identMap}";
-      log_destination = "stderr";
-      log_line_prefix = cfg.logLinePrefix;
-      listen_addresses =
-        if cfg.enableTCPIP
-        then "*"
-        else "localhost";
-      port = cfg.port;
-      jit = mkDefault (
-        if cfg.enableJIT
-        then "on"
-        else "off"
-      );
+    services.justinrubek.postgresql = {
+      settings = {
+        hba_file = "${pkgs.writeText "pg_hba.conf" cfg.authentication}";
+        ident_file = "${pkgs.writeText "pg_ident.conf" cfg.identMap}";
+        log_destination = "stderr";
+        log_line_prefix = cfg.logLinePrefix;
+        listen_addresses =
+          if cfg.enableTCPIP
+          then "*"
+          else "localhost";
+        inherit (cfg) port;
+        jit = mkDefault (
+          if cfg.enableJIT
+          then "on"
+          else "off"
+        );
+      };
+
+      package = let
+        mkThrow = ver: throw "postgresql_${ver} was removed, please upgrade your postgresql version.";
+        base =
+          if versionAtLeast config.system.stateVersion "23.11"
+          then pkgs.postgresql_15
+          else if versionAtLeast config.system.stateVersion "22.05"
+          then pkgs.postgresql_14
+          else if versionAtLeast config.system.stateVersion "21.11"
+          then pkgs.postgresql_13
+          else if versionAtLeast config.system.stateVersion "20.03"
+          then mkThrow "11"
+          else if versionAtLeast config.system.stateVersion "17.09"
+          then mkThrow "9_6"
+          else mkThrow "9_5";
+      in
+        # Note: when changing the default, make it conditional on
+        # ‘system.stateVersion’ to maintain compatibility with existing
+        # systems!
+        mkDefault (
+          if cfg.enableJIT
+          then base.withJIT
+          else base
+        );
+
+      dataDir = mkDefault "/var/lib/postgresql/${cfg.package.psqlSchema}";
+
+      authentication = mkMerge [
+        (mkBefore "# Generated file; do not edit!")
+        (mkAfter
+          ''
+            # default value of services.justinrubek.postgresql.authentication
+            local all all              peer
+            host  all all 127.0.0.1/32 md5
+            host  all all ::1/128      md5
+          '')
+      ];
     };
-
-    services.justinrubek.postgresql.package = let
-      mkThrow = ver: throw "postgresql_${ver} was removed, please upgrade your postgresql version.";
-      base =
-        if versionAtLeast config.system.stateVersion "23.11"
-        then pkgs.postgresql_15
-        else if versionAtLeast config.system.stateVersion "22.05"
-        then pkgs.postgresql_14
-        else if versionAtLeast config.system.stateVersion "21.11"
-        then pkgs.postgresql_13
-        else if versionAtLeast config.system.stateVersion "20.03"
-        then mkThrow "11"
-        else if versionAtLeast config.system.stateVersion "17.09"
-        then mkThrow "9_6"
-        else mkThrow "9_5";
-    in
-      # Note: when changing the default, make it conditional on
-      # ‘system.stateVersion’ to maintain compatibility with existing
-      # systems!
-      mkDefault (
-        if cfg.enableJIT
-        then base.withJIT
-        else base
-      );
-
-    services.justinrubek.postgresql.dataDir = mkDefault "/var/lib/postgresql/${cfg.package.psqlSchema}";
-
-    services.justinrubek.postgresql.authentication = mkMerge [
-      (mkBefore "# Generated file; do not edit!")
-      (mkAfter
-        ''
-          # default value of services.justinrubek.postgresql.authentication
-          local all all              peer
-          host  all all 127.0.0.1/32 md5
-          host  all all ::1/128      md5
-        '')
-    ];
 
     users.users.postgres = {
       name = "postgres";

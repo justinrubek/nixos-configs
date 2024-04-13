@@ -15,9 +15,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     services.tailscale.enable = true;
-    networking.firewall.checkReversePath = "loose";
-    networking.nameservers = ["100.100.100.100" "1.1.1.1" "8.8.8.8"];
-    networking.search = ["tailfef00.ts.net"];
+    networking = {
+      firewall.checkReversePath = "loose";
+      nameservers = ["100.100.100.100" "1.1.1.1" "8.8.8.8"];
+      search = ["tailfef00.ts.net"];
+    };
 
     sops.secrets."tailscale_key" = lib.mkIf cfg.autoconnect.enable {
       sopsFile = "${flakeRootPath}/secrets/tailscale/server.yaml";

@@ -1,4 +1,4 @@
-{...}: let
+_: let
   annapurna-image = "ghcr.io/justinrubek/annapurna:e5e48732bf6c2c2ea4e8144a9a3b2bbce6905ba9";
 
   lockpadSecret = name: ''{{ with secret "kv-v2/data/annapurna/lockpad" }}{{ .Data.data.${name} | toJSON }}{{ end }}'';

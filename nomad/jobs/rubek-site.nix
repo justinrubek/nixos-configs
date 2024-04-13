@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.rubek_site = {
     datacenters = ["dc1"];
 

@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.conduit = {
     datacenters = ["dc1"];
 

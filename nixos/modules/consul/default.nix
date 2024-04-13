@@ -29,8 +29,6 @@ in {
   };
 
   config = let
-    hostName = config.networking.hostName;
-
     tailscaleInterface = config.services.tailscale.interfaceName;
   in
     lib.mkIf cfg.enable {
@@ -43,7 +41,7 @@ in {
         webUi = true;
         extraConfig = {
           datacenter = "dc1";
-          node_name = cfg.node_name;
+          inherit (cfg) node_name retry_join;
 
           # bind_addr = "0.0.0.0";
           client_addr = "0.0.0.0";
@@ -51,8 +49,6 @@ in {
 
           server = true;
           bootstrap_expect = 3;
-
-          retry_join = cfg.retry_join;
 
           acl = lib.mkIf cfg.acl.enable {
             enabled = true;

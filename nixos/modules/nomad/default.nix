@@ -12,7 +12,7 @@ in {
   };
 
   config = let
-    hostName = config.networking.hostName;
+    inherit (config.networking) hostName;
 
     tailscaleInterface = config.services.tailscale.interfaceName;
   in

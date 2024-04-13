@@ -33,9 +33,11 @@
     };
     thoenix = {
       url = "github:justinrubek/thoenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.terranix.follows = "terranix";
-      inputs.fenix.follows = "fenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        terranix.follows = "terranix";
+        fenix.follows = "fenix";
+      };
     };
 
     comma = {

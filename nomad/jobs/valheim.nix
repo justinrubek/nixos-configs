@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.valheim = {
     datacenters = ["dc1"];
 
@@ -28,9 +28,11 @@
       networks = [
         {
           mode = "bridge";
-          port.game1.to = 2456;
-          port.game2.to = 2457;
-          port.supervisor.to = 9001;
+          port = {
+            game1.to = 2456;
+            game2.to = 2457;
+            supervisor.to = 9001;
+          };
         }
       ];
 

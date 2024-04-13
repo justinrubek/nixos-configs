@@ -9,29 +9,27 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  fileSystems."/" = {
-    device = "fpool/local/root";
-    fsType = "zfs";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/D3E4-CF9F";
-    fsType = "vfat";
-  };
-
-  fileSystems."/nix" = {
-    device = "fpool/local/nix";
-    fsType = "zfs";
-  };
-
-  fileSystems."/home" = {
-    device = "fpool/safe/home";
-    fsType = "zfs";
-  };
-
-  fileSystems."/persist" = {
-    device = "fpool/safe/persist";
-    fsType = "zfs";
+  fileSystems = {
+    "/" = {
+      device = "fpool/local/root";
+      fsType = "zfs";
+    };
+    "/boot" = {
+      device = "/dev/disk/by-uuid/D3E4-CF9F";
+      fsType = "vfat";
+    };
+    "/nix" = {
+      device = "fpool/local/nix";
+      fsType = "zfs";
+    };
+    "/home" = {
+      device = "fpool/safe/home";
+      fsType = "zfs";
+    };
+    "/persist" = {
+      device = "fpool/safe/persist";
+      fsType = "zfs";
+    };
   };
 
   swapDevices = [];
@@ -44,19 +42,23 @@
   # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.opengl = {
-    enable = true;
-    extraPackages = [
-      pkgs.rocm-opencl-icd
-      pkgs.rocm-opencl-runtime
-    ];
-    driSupport = true;
-    driSupport32Bit = true;
+  hardware = {
+    bluetooth.enable = true;
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = [
+        pkgs.rocm-opencl-icd
+        pkgs.rocm-opencl-runtime
+      ];
+    };
   };
-  services.xserver.videoDrivers = ["amdgpu"];
 
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  services = {
+    blueman.enable = true;
+    xserver.videoDrivers = ["amdgpu"];
+  };
 }

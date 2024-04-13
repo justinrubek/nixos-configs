@@ -18,7 +18,7 @@
       enable = true;
 
       configDirectory = ../terraform/configurations;
-      extraArgs = {nomadJobs = self'.packages.nomadJobs;};
+      extraArgs = {inherit (self'.packages) nomadJobs;};
 
       terranixModules = lib.mapAttrsToList (name: value: value) self.terraformModules;
     };

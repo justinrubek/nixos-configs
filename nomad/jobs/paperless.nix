@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.paperless = {
     datacenters = ["dc1"];
 

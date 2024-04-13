@@ -1,4 +1,4 @@
-{...}: {
+_: {
   job.vault-key-test = {
     datacenters = ["dc1"];
 

@@ -36,7 +36,7 @@ in {
       }
     ''));
 
-    hostName = config.networking.hostName;
+    inherit (config.networking) hostName;
   in
     lib.mkIf cfg.enable {
       services.vault = {
