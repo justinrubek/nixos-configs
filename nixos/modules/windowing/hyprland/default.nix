@@ -12,7 +12,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs.hyprland.enable = true;
-    services.xserver.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
+    services.displayManager.sessionPackages = [inputs.hyprland.packages.${pkgs.system}.default];
 
     # Configure keymap in X11
     services.xserver = {
