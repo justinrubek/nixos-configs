@@ -1,16 +1,4 @@
-{pkgs, ...} @ inputs: let
-  # example quick source get for non-packaged plugins
-  # nvim-lsp-installer = pkgs.vimUtils.buildVimPlugin {
-  #   name = "nvim-lsp-installer";
-  #   src = pkgs.fetchFromGitHub {
-  #     owner = "justinrubek";
-  #     repo = "nvim-lsp-installer";
-  #     rev = "4d35f4c";
-  #     sha256 = "sha256-GMrNOCVcd0cM0jNaeuJhGQumuFaNeZT9Z7+5K5/y7jo=";
-  #   };
-  # };
-  PWD = ./.;
-in {
+{pkgs, ...}: {
   imports = [
     ./which-key.nix
   ];
@@ -219,10 +207,9 @@ in {
     ${builtins.readFile ./lua/functions.lua}
   '';
 
-  # luafile ${PWD}/lua/lsp.lua
   extraConfigVim = ''
-    luafile ${PWD}/lua/copilot.lua
-    luafile ${PWD}/lua/keymaps.lua
+    luafile ${./lua/copilot.lua}
+    luafile ${./lua/keymaps.lua}
   '';
 
   extraPlugins = with pkgs.vimPlugins; [
