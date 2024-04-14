@@ -9,7 +9,7 @@
   }: {
     packages = {
       neovim = inputs.nixvim.legacyPackages.${pkgs.system}.makeNixvimWithModule {
-        module = import ./config.nix {inherit pkgs;};
+        module = import ./config.nix {inherit pkgs inputs';};
       };
     };
   };

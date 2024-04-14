@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs',
+  ...
+}: {
   imports = [
     ./which-key.nix
   ];
@@ -219,5 +223,6 @@
   extraPackages = [
     pkgs.nodejs
     pkgs.python310
+    inputs'.ghlink.packages.ghlink
   ];
 }

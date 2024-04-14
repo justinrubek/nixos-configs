@@ -67,7 +67,10 @@
     generation-toolkit = {
       url = "github:justinrubek/generation-toolkit";
     };
-
+    ghlink = {
+      url = "github:matthewdargan/ghlink";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     git-prune-branches = {
       url = "github:justinrubek/git-prune-branches";
       inputs.nixpkgs.follows = "nixpkgs";
