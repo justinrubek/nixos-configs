@@ -2,12 +2,15 @@ _: {pkgs, ...}: {
   config = {
     activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
 
-    home.packages = with pkgs; [
-      rofi
-      (dwarf-fortress-packages.dwarf-fortress-full.override {
-        enableIntro = false;
-      })
-    ];
+    home = {
+      packages = with pkgs; [
+        rofi
+        (dwarf-fortress-packages.dwarf-fortress-full.override {
+          enableIntro = false;
+        })
+      ];
+      stateVersion = "22.05";
+    };
 
     services.kdeconnect = {
       enable = true;
