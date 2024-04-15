@@ -1,8 +1,0 @@
-{
-  pkgs,
-  lib,
-  self,
-  config,
-  ...
-}: {
-}
