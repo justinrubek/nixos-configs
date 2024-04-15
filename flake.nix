@@ -133,7 +133,6 @@
         inputs.thoenix.customOutputModule
 
         ./flake-parts/devshell
-        ./flake-parts/packages
         ./flake-parts/ci.nix
 
         ./containers
