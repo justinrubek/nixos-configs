@@ -57,10 +57,14 @@ in {
           };
         };
 
-        config = {
+        config = let
+          configDir = "${self}/nixos/configurations/${name}";
+          entryPoint = import configDir (inputs // {inherit self;});
+        in {
           nixosConfig = self.lib.nixosSystem {
-            inherit (config) system modules;
             inherit name;
+            inherit (config) system;
+            modules = config.modules ++ [entryPoint];
           };
 
           nixosPackage = config.nixosConfig.config.system.build.toplevel;

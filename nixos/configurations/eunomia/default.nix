@@ -5,6 +5,8 @@
   ...
 }: {
   imports = [
+    ./bootloader.nix
+    ./hardware.nix
   ];
 
   # Linux kernel
