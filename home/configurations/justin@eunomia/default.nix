@@ -95,6 +95,8 @@
           extraLibraries = pkgs: [];
         })
       ];
+
+      stateVersion = "22.11";
     };
 
     xdg.configFile."pgcli/config".source = ./pgcli.config;

@@ -1,66 +1,11 @@
 _: {
   justinrubek.homeConfigurations = {
-    "justin@manusya" = {
-      system = "x86_64-linux";
-      modules = [
-        {
-          home.stateVersion = "22.05";
-        }
-      ];
-    };
-
-    "justin@eunomia" = {
-      system = "x86_64-linux";
-      modules = [
-        {
-          home.stateVersion = "22.11";
-        }
-      ];
-    };
-
-    "justin@bunky" = {
-      system = "x86_64-linux";
-      modules = [
-        {
-          home.stateVersion = "21.11";
-        }
-      ];
-    };
-
-    "justin@pyxis" = {
-      system = "x86_64-linux";
-      modules = [
-        {
-          home.stateVersion = "21.11";
-        }
-      ];
-    };
-
-    "justin@ceylon" = {
-      system = "x86_64-linux";
-      modules = [
-        {
-          home.stateVersion = "21.11";
-        }
-      ];
-    };
-
-    "justin@huginn" = {
-      system = "x86_64-linux";
-      modules = [
-        {
-          home.stateVersion = "21.11";
-        }
-      ];
-    };
-
-    "justin@alex" = {
-      system = "x86_64-linux";
-      modules = [
-        {
-          home.stateVersion = "21.11";
-        }
-      ];
-    };
+    "justin@manusya".system = "x86_64-linux";
+    "justin@eunomia".system = "x86_64-linux";
+    "justin@bunky".system = "x86_64-linux";
+    "justin@pyxis".system = "x86_64-linux";
+    "justin@ceylon".system = "x86_64-linux";
+    "justin@huginn".system = "x86_64-linux";
+    "justin@alex".system = "x86_64-linux";
   };
 }
