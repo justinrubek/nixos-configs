@@ -1,11 +1,14 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.media;
-in {
+in
+{
   options.profiles.media = {
     enable = lib.mkEnableOption "media profile";
   };

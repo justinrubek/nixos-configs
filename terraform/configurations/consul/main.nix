@@ -1,7 +1,7 @@
 _: {
   # configure hcloud
   provider = {
-    vault = {};
+    vault = { };
     consul = {
       datacenter = "dc1";
     };
@@ -17,9 +17,7 @@ _: {
   resource = {
     consul_acl_token.vault = {
       description = "ACL token for Consul secrets engine in Vault";
-      policies = [
-        "\${data.consul_acl_policy.management.name}"
-      ];
+      policies = [ "\${data.consul_acl_policy.management.name}" ];
       local = true;
     };
 
@@ -73,17 +71,13 @@ _: {
     vault_github_team.app_team = {
       backend = "\${vault_github_auth_backend.org.id}";
       team = "app-team";
-      policies = [
-        "\${vault_policy.app_team.name}"
-      ];
+      policies = [ "\${vault_policy.app_team.name}" ];
     };
 
     vault_github_user.justin = {
       backend = "\${vault_github_auth_backend.org.id}";
       user = "justinrubek";
-      policies = [
-        "\${vault_policy.app_team.name}"
-      ];
+      policies = [ "\${vault_policy.app_team.name}" ];
     };
   };
 }

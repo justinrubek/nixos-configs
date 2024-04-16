@@ -1,6 +1,8 @@
-_inputs: {pkgs, ...}: {
+_inputs:
+{ pkgs, ... }:
+{
   config = {
-    activeProfiles = ["development"];
+    activeProfiles = [ "development" ];
     home.stateVersion = "21.11";
   };
 }

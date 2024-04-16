@@ -1,9 +1,11 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.base;
 
   shellAliases = {
@@ -16,7 +18,8 @@
     VISUAL = "nvim";
     SHELL = "${pkgs.zsh}/bin/zsh";
   };
-in {
+in
+{
   options.profiles.base = {
     enable = lib.mkEnableOption "base profile";
   };

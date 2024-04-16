@@ -1,11 +1,14 @@
-inputs @ {self, ...}: {
+inputs@{ self, ... }:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.graphical.fonts;
-in {
+in
+{
   options.justinrubek.graphical.fonts = {
     enable = lib.mkEnableOption "enable fonts";
   };
@@ -26,10 +29,19 @@ in {
       ];
 
       fontconfig.defaultFonts = {
-        serif = ["Noto Serif" "Noto Color Emoji"];
-        sansSerif = ["Noto Sans" "Noto Color Emoji"];
-        monospace = ["JetBrainsMono Nerd Font" "Noto Color Emoji"];
-        emoji = ["Noto Color Emoji"];
+        serif = [
+          "Noto Serif"
+          "Noto Color Emoji"
+        ];
+        sansSerif = [
+          "Noto Sans"
+          "Noto Color Emoji"
+        ];
+        monospace = [
+          "JetBrainsMono Nerd Font"
+          "Noto Color Emoji"
+        ];
+        emoji = [ "Noto Color Emoji" ];
       };
     };
   };

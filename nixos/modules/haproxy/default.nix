@@ -1,12 +1,15 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   pkgs,
   lib,
   flakeRootPath,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.haproxy;
-in {
+in
+{
   options.justinrubek.haproxy = {
     enable = lib.mkEnableOption "run haproxy";
 
@@ -38,11 +41,10 @@ in {
 
         resolvers consul
           ${
-          lib.concatMapStringsSep "\n" (node: ''
-            nameserver ${node} ${node}:8600
-          '')
-          cfg.nodes
-        }
+            lib.concatMapStringsSep "\n" (node: ''
+              nameserver ${node} ${node}:8600
+            '') cfg.nodes
+          }
           accepted_payload_size 8192
           hold valid 5s
 
@@ -50,15 +52,16 @@ in {
           bind 0.0.0.0:80
           bind [::]:80
           ${
-          if cfg.ssl.enable
-          then ''
-            # require SSL for all requests using the wildcard certificate
-              bind 0.0.0.0:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
-              bind [::]:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
-              http-request redirect scheme https code 301 unless { ssl_fc }
-          ''
-          else ""
-        }
+            if cfg.ssl.enable then
+              ''
+                # require SSL for all requests using the wildcard certificate
+                  bind 0.0.0.0:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
+                  bind [::]:443 ssl crt /var/lib/acme/rubek.cloud/full.pem
+                  http-request redirect scheme https code 301 unless { ssl_fc }
+              ''
+            else
+              ""
+          }
 
           acl host_nix_cache hdr(host) -i nix-cache.rubek.cloud
           use_backend nix-cache if host_nix_cache
@@ -146,9 +149,7 @@ in {
       defaults = {
         email = "justintrubek@protonmail.com";
 
-        reloadServices = [
-          "haproxy.service"
-        ];
+        reloadServices = [ "haproxy.service" ];
       };
       certs = {
         "rubek.cloud" = {

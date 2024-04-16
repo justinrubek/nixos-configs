@@ -1,23 +1,24 @@
-_: let
+_:
+let
   annapurna-image = "ghcr.io/justinrubek/annapurna:e5e48732bf6c2c2ea4e8144a9a3b2bbce6905ba9";
 
-  lockpadSecret = name: ''{{ with secret "kv-v2/data/annapurna/lockpad" }}{{ .Data.data.${name} | toJSON }}{{ end }}'';
+  lockpadSecret =
+    name:
+    ''{{ with secret "kv-v2/data/annapurna/lockpad" }}{{ .Data.data.${name} | toJSON }}{{ end }}'';
 
   postgresKey = "annapurna/postgres";
-  postgresSecret = name: ''{{ with secret "kv-v2/data/${postgresKey}" }}{{ .Data.data.${name} }}{{ end }}'';
+  postgresSecret =
+    name: ''{{ with secret "kv-v2/data/${postgresKey}" }}{{ .Data.data.${name} }}{{ end }}'';
   postgresUrl = ''postgres://${postgresSecret "username"}:${postgresSecret "password"}@alex:5435/${postgresSecret "database"}'';
-in {
+in
+{
   job.annapurna = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.annapurna = {
       count = 1;
 
-      networks = [
-        {
-          port.http.to = 3000;
-        }
-      ];
+      networks = [ { port.http.to = 3000; } ];
 
       task.database_migration = {
         lifecycle = {
@@ -40,7 +41,7 @@ in {
         };
 
         vault = {
-          policies = ["annapurna-postgres"];
+          policies = [ "annapurna-postgres" ];
         };
 
         templates = [
@@ -60,7 +61,7 @@ in {
         config = {
           image = annapurna-image;
 
-          ports = ["http"];
+          ports = [ "http" ];
           command = "annapurna-cli";
           args = [
             "server"
@@ -69,7 +70,10 @@ in {
         };
 
         vault = {
-          policies = ["annapurna" "annapurna-postgres"];
+          policies = [
+            "annapurna"
+            "annapurna-postgres"
+          ];
         };
 
         templates = [

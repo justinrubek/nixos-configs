@@ -4,10 +4,9 @@
   pkgs,
   modulesPath,
   ...
-}: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/8cebcf74-68af-4d6e-b8e1-16a63cef5c6c";
@@ -19,9 +18,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/46fcc499-a282-4cd0-b3ba-b78c94cf593b";}
-  ];
+  swapDevices = [ { device = "/dev/disk/by-uuid/46fcc499-a282-4cd0-b3ba-b78c94cf593b"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
@@ -43,5 +40,8 @@
       modesetting.enable = true;
     };
   };
-  services.xserver.videoDrivers = ["nvidia" "intel"];
+  services.xserver.videoDrivers = [
+    "nvidia"
+    "intel"
+  ];
 }

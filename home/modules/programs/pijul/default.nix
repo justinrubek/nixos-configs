@@ -1,11 +1,14 @@
-inputs: {
+inputs:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.programs.pijul;
-in {
+in
+{
   options.justinrubek.programs.pijul = {
     enable = lib.mkEnableOption "Enable pijul";
 
@@ -34,9 +37,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [
-      cfg.package
-    ];
+    home.packages = [ cfg.package ];
 
     xdg.configFile."pijul/config.toml".source = pkgs.writeText "pijul-config" ''
       [author]

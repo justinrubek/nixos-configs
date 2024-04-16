@@ -1,8 +1,5 @@
+{ inputs, self, ... }@moduleInput:
 {
-  inputs,
-  self,
-  ...
-} @ moduleInput: {
   # TODO: Rewrite modules to have better inputs
   flake.nixosModules = {
     cachix = import ./cachix inputs;

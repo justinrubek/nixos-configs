@@ -1,12 +1,12 @@
-{nixpkgs, ...} @ inputs: {
+{ nixpkgs, ... }@inputs:
+{
   config,
   pkgs,
   lib,
   ...
-}: {
-  imports = [
-    ./hardware.nix
-  ];
+}:
+{
+  imports = [ ./hardware.nix ];
 
   # Linux kernel
 
@@ -28,14 +28,8 @@
     networks."10-wan" = {
       matchConfig.Name = "enp1s0";
       networkConfig.DHCP = "ipv4";
-      address = [
-        "2a01:4ff:1f0:ad0a::1/64"
-      ];
-      routes = [
-        {
-          routeConfig.Gateway = "fe80::1";
-        }
-      ];
+      address = [ "2a01:4ff:1f0:ad0a::1/64" ];
+      routes = [ { routeConfig.Gateway = "fe80::1"; } ];
     };
   };
 
@@ -57,7 +51,10 @@
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       shell = pkgs.zsh;
 
       openssh.authorizedKeys.keys = [
@@ -73,8 +70,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # services.openssh = {
   #   enable = true;

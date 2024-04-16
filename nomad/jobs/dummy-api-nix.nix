@@ -1,15 +1,11 @@
 _: {
   job.dummy_api_nix = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.api = {
       count = 1;
 
-      networks = [
-        {
-          port.http.to = 8000;
-        }
-      ];
+      networks = [ { port.http.to = 8000; } ];
 
       task.backend = {
         driver = "docker";
@@ -17,9 +13,9 @@ _: {
         config = {
           nix_flake_ref = "github:justinrubek/axum-dummy-api#packages.x86_64-linux.api";
           nix_flake_sha = "sha256-ypid10gYPAeGneUy5l9S3MNxHBOKCXnlhH9no40XqVs=";
-          entrypoint = ["bin/dummy_api"];
+          entrypoint = [ "bin/dummy_api" ];
 
-          ports = ["http"];
+          ports = [ "http" ];
 
           mount = [
             {

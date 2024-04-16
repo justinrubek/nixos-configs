@@ -1,23 +1,21 @@
-{
-  helpers,
-  pkgs,
-  ...
-}: let
-  mkRequireBind = {
-    module,
-    cmd,
-    desc,
-  }: [
-    (helpers.mkRaw "require(\"${module}\").${cmd}")
-    desc
-  ];
-  mkCmdBind = {
-    cmd,
-    desc,
-  }: [
-    "<cmd>${cmd}<cr>"
-    desc
-  ];
+{ helpers, pkgs, ... }:
+let
+  mkRequireBind =
+    {
+      module,
+      cmd,
+      desc,
+    }:
+    [
+      (helpers.mkRaw "require(\"${module}\").${cmd}")
+      desc
+    ];
+  mkCmdBind =
+    { cmd, desc }:
+    [
+      "<cmd>${cmd}<cr>"
+      desc
+    ];
 
   bindings = {
     normal = {
@@ -194,14 +192,19 @@
       };
     };
   };
-in {
-  extraConfigLua = let
-    names = builtins.attrNames bindings;
-    generateRegistrations = name: let
-      inherit (bindings.${name}) registrations opts;
-    in "require(\"which-key\").register(${helpers.toLuaObject registrations}, ${helpers.toLuaObject opts})";
-  in
+in
+{
+  extraConfigLua =
+    let
+      names = builtins.attrNames bindings;
+      generateRegistrations =
+        name:
+        let
+          inherit (bindings.${name}) registrations opts;
+        in
+        "require(\"which-key\").register(${helpers.toLuaObject registrations}, ${helpers.toLuaObject opts})";
+    in
     builtins.concatStringsSep "\n" (builtins.map generateRegistrations names);
 
-  extraPlugins = [pkgs.vimPlugins.which-key-nvim];
+  extraPlugins = [ pkgs.vimPlugins.which-key-nvim ];
 }

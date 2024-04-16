@@ -1,16 +1,19 @@
-_: {
+_:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   folder = ./caches;
   toImport = name: value: folder + ("/" + name);
   filterCaches = key: value: value == "regular" && lib.hasSuffix ".nix" key;
   imports = lib.mapAttrsToList toImport (lib.filterAttrs filterCaches (builtins.readDir folder));
 
   cfg = config.caches;
-in {
+in
+{
   options = {
     caches = {
       enable = lib.mkEnableOption "cache configuration";
@@ -18,11 +21,9 @@ in {
   };
 
   config = lib.mkIf config.caches.enable {
-    nix.settings.substituters = ["https://cache.nixos.org/"];
+    nix.settings.substituters = [ "https://cache.nixos.org/" ];
 
-    environment.systemPackages = [
-      pkgs.cachix
-    ];
+    environment.systemPackages = [ pkgs.cachix ];
   };
 
   inherit imports;

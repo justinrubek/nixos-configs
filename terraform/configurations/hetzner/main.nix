@@ -1,4 +1,5 @@
-_: let
+_:
+let
   server_type = "cpx11";
   location = "hil";
   image = "\${data.hcloud_image.nixos_base.id}";
@@ -7,7 +8,8 @@ _: let
     ipv4_enabled = true;
     ipv6_enabled = true;
   };
-in {
+in
+{
   # configure hcloud
   variable.hcloud_token.sensitive = true;
   provider.hcloud.token = "\${var.hcloud_token}";
@@ -81,9 +83,7 @@ in {
 
     hcloud_firewall_attachment.http_firewall = {
       firewall_id = "\${hcloud_firewall.load_balancer.id}";
-      server_ids = [
-        "\${hcloud_server.huginn.id}"
-      ];
+      server_ids = [ "\${hcloud_server.huginn.id}" ];
     };
 
     ### NFS

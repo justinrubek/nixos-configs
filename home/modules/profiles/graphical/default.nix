@@ -1,11 +1,14 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.graphical;
-in {
+in
+{
   options.profiles.graphical = {
     enable = lib.mkEnableOption "graphical profile";
   };

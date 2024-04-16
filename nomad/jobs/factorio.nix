@@ -1,6 +1,6 @@
 _: {
   job.factorio = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.factorio = {
       count = 1;
@@ -27,8 +27,7 @@ _: {
       task.factorio-server = {
         driver = "docker";
 
-        env = {
-        };
+        env = { };
 
         volumeMounts = [
           {
@@ -72,37 +71,40 @@ _: {
         };
 
         vault = {
-          policies = ["factorio-server"];
+          policies = [ "factorio-server" ];
         };
 
         templates = [
           {
-            data = let
-              secretKey = "factorio";
-              envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
-            in ''
-              FACTORIO_USERNAME=${envSecret "username"}
-              FACTORIO_TOKEN=${envSecret "token"}
-            '';
+            data =
+              let
+                secretKey = "factorio";
+                envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
+              in
+              ''
+                FACTORIO_USERNAME=${envSecret "username"}
+                FACTORIO_TOKEN=${envSecret "token"}
+              '';
             destination = "secrets/env";
             env = true;
           }
           {
             destination = "local/server-settings.json";
-            data = let
-              server-settings = {
-                name = "The Factory Must Grow.";
-                description = "I used to have a family, but now I have a factory.";
-                visibility.lan = true;
+            data =
+              let
+                server-settings = {
+                  name = "The Factory Must Grow.";
+                  description = "I used to have a family, but now I have a factory.";
+                  visibility.lan = true;
 
-                autosave_interval = 1;
-                autosave_slots = 10;
-                non_blocking_saving = true;
+                  autosave_interval = 1;
+                  autosave_slots = 10;
+                  non_blocking_saving = true;
 
-                auto_pause = true;
-              };
-              json = builtins.toJSON server-settings;
-            in
+                  auto_pause = true;
+                };
+                json = builtins.toJSON server-settings;
+              in
               json;
           }
           {
@@ -116,13 +118,14 @@ _: {
           }
           {
             destination = "local/server-adminlist.json";
-            data = let
-              server-adminlist = [
-                "justinkingr"
-                "sinnyen"
-              ];
-              json = builtins.toJSON server-adminlist;
-            in
+            data =
+              let
+                server-adminlist = [
+                  "justinkingr"
+                  "sinnyen"
+                ];
+                json = builtins.toJSON server-adminlist;
+              in
               json;
           }
           {

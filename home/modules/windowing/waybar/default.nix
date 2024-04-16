@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-} @ inputs: let
+}@inputs:
+let
   cfg = config.justinrubek.windowing.waybar;
-in {
+in
+{
   options.justinrubek.windowing.waybar = {
     enable = lib.mkEnableOption "Enable waybar configuration";
   };
@@ -22,9 +25,18 @@ in {
             "HDMI-A-1"
             "DP-1"
           ];
-          modules-left = ["hyprland/workspaces" "tray"];
-          modules-center = ["hyprland/window"];
-          modules-right = ["temperature" "memory" "pulseaudio" "clock#date" "clock#time"];
+          modules-left = [
+            "hyprland/workspaces"
+            "tray"
+          ];
+          modules-center = [ "hyprland/window" ];
+          modules-right = [
+            "temperature"
+            "memory"
+            "pulseaudio"
+            "clock#date"
+            "clock#time"
+          ];
 
           "clock#date" = {
             format = "{:%Y-%m-%d}";
@@ -53,8 +65,20 @@ in {
             all-outputs = true;
             on-click = "activate";
             persistent-workspaces = {
-              "DP-1" = [1 2 3 4 5];
-              "HDMI-A-1" = [6 7 8 9 10];
+              "DP-1" = [
+                1
+                2
+                3
+                4
+                5
+              ];
+              "HDMI-A-1" = [
+                6
+                7
+                8
+                9
+                10
+              ];
             };
             window-rewrite = {
               "class<firefox>" = "";

@@ -1,9 +1,11 @@
-{nixpkgs, ...} @ inputs: {
+{ nixpkgs, ... }@inputs:
+{
   config,
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./bootloader.nix
     ./hardware.nix
@@ -41,7 +43,10 @@
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
     };
   };
 
@@ -90,7 +95,10 @@
   networking = {
     networkmanager.enable = true;
 
-    nameservers = ["1.1.1.1" "9.9.9.9"];
+    nameservers = [
+      "1.1.1.1"
+      "9.9.9.9"
+    ];
     firewall.allowedTCPPorts = [
       8080
       8081

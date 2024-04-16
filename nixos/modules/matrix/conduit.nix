@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.matrix.conduit;
-in {
+in
+{
   options.justinrubek.matrix.conduit = {
     enable = lib.mkEnableOption "enable conduit matrix homeserver";
 
@@ -26,12 +29,13 @@ in {
     };
   };
 
-  config = let
-    well_known_server = pkgs.writeText "well-known-matrix-server" ''
-      {
-        "m.server": "${cfg.matrix_hostname}"
-      }
-    '';
-  in
-    lib.mkIf cfg.enable ({} // podmanConfig // dockerConfig);
+  config =
+    let
+      well_known_server = pkgs.writeText "well-known-matrix-server" ''
+        {
+          "m.server": "${cfg.matrix_hostname}"
+        }
+      '';
+    in
+    lib.mkIf cfg.enable ({ } // podmanConfig // dockerConfig);
 }

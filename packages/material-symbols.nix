@@ -13,10 +13,10 @@ stdenvNoCC.mkDerivation {
     repo = "material-design-icons";
     rev = "511eea577b20d2b02ad77477750da1e44c66a52c";
     sha256 = "sha256-ENoWeyV9Dw26pgjy0Xst+qpxJ/mjgfqrY2Du2VwzwCE=";
-    sparseCheckout = ["variablefont"];
+    sparseCheckout = [ "variablefont" ];
   };
 
-  nativeBuildInputs = [util-linux];
+  nativeBuildInputs = [ util-linux ];
 
   installPhase = ''
     runHook preInstall

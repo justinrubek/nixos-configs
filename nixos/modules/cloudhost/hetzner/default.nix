@@ -1,14 +1,17 @@
-inputs: {
+inputs:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.cloudhost.hetzner;
 
   # nixpkgs modules
   modulesPath = "${inputs.nixpkgs}/nixos/modules";
-in {
+in
+{
   options.justinrubek.cloudhost.hetzner = {
     enable = lib.mkEnableOption "enable hetzner cloud modules";
   };
@@ -27,10 +30,10 @@ in {
         # postDeviceCommands for systemd in stage-1
         services.rollback = {
           description = "Rollback to empty snapshot";
-          wantedBy = ["initrd.target"];
-          after = ["zfs-import.target"];
-          before = ["sysroot.mount"];
-          path = [pkgs.zfs];
+          wantedBy = [ "initrd.target" ];
+          after = [ "zfs-import.target" ];
+          before = [ "sysroot.mount" ];
+          path = [ pkgs.zfs ];
           unitConfig.DefaultDependencies = "no";
           serviceConfig = {
             Type = "oneshot";
@@ -53,7 +56,10 @@ in {
         "vm.swappiness" = 10;
       };
 
-      supportedFilesystems = ["zfs" "ext4"];
+      supportedFilesystems = [
+        "zfs"
+        "ext4"
+      ];
       zfs.package = pkgs.zfs_unstable;
 
       tmp.useTmpfs = true;

@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.windowing.plasma;
-in {
+in
+{
   options.justinrubek.windowing.plasma = {
     enable = lib.mkEnableOption "enable kde plasma";
   };

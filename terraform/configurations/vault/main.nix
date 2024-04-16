@@ -1,11 +1,13 @@
-_: let
+_:
+let
   kv_v2_path = "kv-v2";
-in {
+in
+{
   # configure hcloud
   provider = {
-    vault = {};
+    vault = { };
 
-    sops = {};
+    sops = { };
   };
 
   data.sops_file.vault_admin = {
@@ -89,11 +91,12 @@ in {
     };
 
     vault_generic_endpoint.admin = {
-      depends_on = ["vault_auth_backend.userpass"];
+      depends_on = [ "vault_auth_backend.userpass" ];
       path = "auth/userpass/users/admin";
       ignore_absent_fields = true;
 
-      data_json = ''        {
+      data_json = ''
+        {
                 "password": "''${local.vault_admin}",
                 "policies": ["admins", "eaas-client"]
               }'';
@@ -121,7 +124,7 @@ in {
     vault_token_auth_backend_role.nomad_cluster = {
       role_name = "nomad-cluster";
 
-      disallowed_policies = ["nomad-server"];
+      disallowed_policies = [ "nomad-server" ];
       token_explicit_max_ttl = "0";
       orphan = true;
       token_period = "259200";

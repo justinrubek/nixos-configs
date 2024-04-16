@@ -1,21 +1,25 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   pkgs,
   lib,
   flakeRootPath,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.nomad;
-in {
+in
+{
   options.justinrubek.nomad = {
     enable = lib.mkEnableOption "run nomad";
   };
 
-  config = let
-    inherit (config.networking) hostName;
+  config =
+    let
+      inherit (config.networking) hostName;
 
-    tailscaleInterface = config.services.tailscale.interfaceName;
-  in
+      tailscaleInterface = config.services.tailscale.interfaceName;
+    in
     lib.mkIf cfg.enable {
       services.nomad = {
         enable = true;
@@ -27,20 +31,22 @@ in {
         # use patched nomad for flake support
         package = self.packages.${pkgs.system}.nomad;
 
-        extraPackages = [config.nix.package];
+        extraPackages = [ config.nix.package ];
 
         settings = {
           bind_addr = "0.0.0.0";
           # bind_addr = ''{{ GetInterfaceIP "${tailscaleInterface}" }}'';
           datacenter = "dc1";
 
-          advertise = let
-            address = "{{ GetInterfaceIP \"${tailscaleInterface}\" }}";
-          in {
-            http = address;
-            rpc = address;
-            serf = address;
-          };
+          advertise =
+            let
+              address = "{{ GetInterfaceIP \"${tailscaleInterface}\" }}";
+            in
+            {
+              http = address;
+              rpc = address;
+              serf = address;
+            };
 
           server = {
             enabled = true;
@@ -75,19 +81,23 @@ in {
       sops.secrets.nomad_env = {
         sopsFile = "${flakeRootPath}/secrets/nomad.yaml";
         owner = config.systemd.services.serviceConfig.User or "root";
-        restartUnits = ["nomad.service"];
+        restartUnits = [ "nomad.service" ];
       };
 
       systemd.services.nomad = {
         serviceConfig = {
-          EnvironmentFile = [config.sops.secrets."nomad_env".path];
+          EnvironmentFile = [ config.sops.secrets."nomad_env".path ];
         };
       };
 
       networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
         # nomad ports
-        allowedTCPPorts = [4646 4647 4648];
-        allowedUDPPorts = [4648];
+        allowedTCPPorts = [
+          4646
+          4647
+          4648
+        ];
+        allowedUDPPorts = [ 4648 ];
 
         # ephemeral ports
         allowedTCPPortRanges = [

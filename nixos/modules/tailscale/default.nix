@@ -1,12 +1,15 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   pkgs,
   lib,
   flakeRootPath,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.tailscale;
-in {
+in
+{
   options.justinrubek.tailscale = {
     enable = lib.mkEnableOption "configure tailscale";
 
@@ -17,23 +20,34 @@ in {
     services.tailscale.enable = true;
     networking = {
       firewall.checkReversePath = "loose";
-      nameservers = ["100.100.100.100" "1.1.1.1" "8.8.8.8"];
-      search = ["tailfef00.ts.net"];
+      nameservers = [
+        "100.100.100.100"
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
+      search = [ "tailfef00.ts.net" ];
     };
 
     sops.secrets."tailscale_key" = lib.mkIf cfg.autoconnect.enable {
       sopsFile = "${flakeRootPath}/secrets/tailscale/server.yaml";
     };
 
-    systemd.services.tailscale-autoconnect = let
-      tailscale = pkgs.lib.getExe pkgs.tailscale;
-      jq = pkgs.lib.getExe pkgs.jq;
-    in
+    systemd.services.tailscale-autoconnect =
+      let
+        tailscale = pkgs.lib.getExe pkgs.tailscale;
+        jq = pkgs.lib.getExe pkgs.jq;
+      in
       lib.mkIf cfg.autoconnect.enable {
         description = "Automatically connect to tailscale";
-        after = ["network-pre.target" "tailscale.service"];
-        wants = ["network-pre.target" "tailscale.service"];
-        wantedBy = ["multi-user.target"];
+        after = [
+          "network-pre.target"
+          "tailscale.service"
+        ];
+        wants = [
+          "network-pre.target"
+          "tailscale.service"
+        ];
+        wantedBy = [ "multi-user.target" ];
         serviceConfig.Type = "oneshot";
         script = ''
           # wait for tailscale to be ready

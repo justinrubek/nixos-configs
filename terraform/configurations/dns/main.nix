@@ -1,7 +1,7 @@
 _: {
   # configure hcloud
   provider = {
-    vault = {};
+    vault = { };
     porkbun = {
       api_key = "\${data.vault_kv_secret_v2.porkbun_key.data.api_key}";
       secret_key = "\${data.vault_kv_secret_v2.porkbun_key.data.secret_key}";

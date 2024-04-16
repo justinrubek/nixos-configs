@@ -1,9 +1,11 @@
-{nixpkgs, ...} @ inputs: {
+{ nixpkgs, ... }@inputs:
+{
   config,
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   imports = [
     ./bootloader.nix
     ./hardware.nix
@@ -17,7 +19,10 @@
     # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
     kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
     # kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
-    supportedFilesystems = ["zfs" "ext4"];
+    supportedFilesystems = [
+      "zfs"
+      "ext4"
+    ];
     zfs.package = pkgs.zfs_unstable;
   };
 
@@ -46,40 +51,43 @@
       enable = false;
       # openFirewall = true;
     };
-    pixiecore = let
-      netSystem = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ({
-            config,
-            pkgs,
-            lib,
-            modulesPath,
-            ...
-          }: {
-            imports = [
-              "${inputs.nixpkgs}/nixos/modules/installer/netboot/netboot-minimal.nix"
-            ];
-            config = {
-              users.users.root.openssh.authorizedKeys.keys = [
-                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsUQZGQOH2kmQNeG/Ezmsv6A/70JUO8nLh9WaZ/o7DlmpYeEyUdloTazxpP9FjuRv7d7nzRqtQFOF74TBaDEAxR9/eHxX9zc5RfyE1RYeGWPGgnuHpxoTijh70ncTlU6sr0oqP7e24qeIy7pqWKQmV8RDOkr2etbnb5OpCHEsZJ0l0sPYQpYi0Ud8cM/HFCCVPeg21wVuxBX2rA4ze8+YgnPJZRnhtHZg7rAapvhiIfDAJ3xIweauCoz0vZdmANlUsg2AoOx9b2Ym6rGNmRrJUNZYcsNxmUHc1/oc1g9NZ7GoaMhfw0BHVJ0kyfE2glpJX9iu6WHWjbL+XM0QnCFrc3hbQc41zYQsMHcY/N/P5MW9Gj77Q9P/qRDbwlVOdoFw1bUpIoMgsJ95o5gv5mClHuBLZD3ZO5cyRfnjH4w0pt6EnWtbkORsT5A7ULOQOG8AOuBL3ok/yVTVAFV2yMbaEg1BM2By0U6hn9M6SGWuOiM1oMwvVFJWdmZsvPeTZqaU= justin"
-              ];
-            };
-          })
-        ];
-      };
+    pixiecore =
+      let
+        netSystem = inputs.nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            (
+              {
+                config,
+                pkgs,
+                lib,
+                modulesPath,
+                ...
+              }:
+              {
+                imports = [ "${inputs.nixpkgs}/nixos/modules/installer/netboot/netboot-minimal.nix" ];
+                config = {
+                  users.users.root.openssh.authorizedKeys.keys = [
+                    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCsUQZGQOH2kmQNeG/Ezmsv6A/70JUO8nLh9WaZ/o7DlmpYeEyUdloTazxpP9FjuRv7d7nzRqtQFOF74TBaDEAxR9/eHxX9zc5RfyE1RYeGWPGgnuHpxoTijh70ncTlU6sr0oqP7e24qeIy7pqWKQmV8RDOkr2etbnb5OpCHEsZJ0l0sPYQpYi0Ud8cM/HFCCVPeg21wVuxBX2rA4ze8+YgnPJZRnhtHZg7rAapvhiIfDAJ3xIweauCoz0vZdmANlUsg2AoOx9b2Ym6rGNmRrJUNZYcsNxmUHc1/oc1g9NZ7GoaMhfw0BHVJ0kyfE2glpJX9iu6WHWjbL+XM0QnCFrc3hbQc41zYQsMHcY/N/P5MW9Gj77Q9P/qRDbwlVOdoFw1bUpIoMgsJ95o5gv5mClHuBLZD3ZO5cyRfnjH4w0pt6EnWtbkORsT5A7ULOQOG8AOuBL3ok/yVTVAFV2yMbaEg1BM2By0U6hn9M6SGWuOiM1oMwvVFJWdmZsvPeTZqaU= justin"
+                  ];
+                };
+              }
+            )
+          ];
+        };
 
-      inherit (netSystem.config.system) build;
-    in {
-      enable = true;
-      mode = "boot";
-      openFirewall = true;
-      kernel = "${build.kernel}/bzImage";
-      initrd = "${build.netbootRamdisk}/initrd";
-      cmdLine = "init=${build.toplevel}/init loglevel=4";
-      debug = true;
-      dhcpNoBind = true;
-    };
+        inherit (netSystem.config.system) build;
+      in
+      {
+        enable = true;
+        mode = "boot";
+        openFirewall = true;
+        kernel = "${build.kernel}/bzImage";
+        initrd = "${build.netbootRamdisk}/initrd";
+        cmdLine = "init=${build.toplevel}/init loglevel=4";
+        debug = true;
+        dhcpNoBind = true;
+      };
   };
 
   # personal modules
@@ -101,13 +109,19 @@
     mediahost.enable = true;
   };
 
-  users.groups.mediahost = {};
+  users.groups.mediahost = { };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "docker" "input" "systemd-journal"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+        "input"
+        "systemd-journal"
+      ];
       shell = pkgs.zsh;
     };
   };
@@ -135,7 +149,7 @@
       enable = true;
       wifi.scanRandMacAddress = false;
     };
-    firewall.allowedTCPPorts = [8000];
+    firewall.allowedTCPPorts = [ 8000 ];
     firewall.interfaces.${config.services.tailscale.interfaceName} = {
       allowedTCPPorts = [
         3000
@@ -208,7 +222,7 @@
   # enable fix for steam issues with xdg-desktop-portal
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   hardware.ckb-next.enable = true;

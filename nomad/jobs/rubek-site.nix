@@ -1,15 +1,11 @@
 _: {
   job.rubek_site = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.api = {
       count = 1;
 
-      networks = [
-        {
-          port.http.to = 8000;
-        }
-      ];
+      networks = [ { port.http.to = 8000; } ];
 
       task.backend = {
         driver = "docker";
@@ -20,7 +16,7 @@ _: {
           # entrypoint = ["bin/start_server"];
           image = "justinrubek/rubek.dev:0.4.1";
 
-          ports = ["http"];
+          ports = [ "http" ];
 
           # mount = [
           #   {
@@ -36,21 +32,23 @@ _: {
         };
 
         vault = {
-          policies = ["calendar-client"];
+          policies = [ "calendar-client" ];
         };
 
         templates = [
           {
-            data = let
-              secretKey = "calendar/rubek-site";
-              envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
-            in ''
-              CALDAV_USERNAME=${envSecret "username"}
-              CALDAV_PASSWORD=${envSecret "password"}
-              CALDAV_URL=${envSecret "url"}
-              AVAILABLE_CALENDAR=${envSecret "available_calendar"}
-              BOOKED_CALENDAR=${envSecret "booked_calendar"}
-            '';
+            data =
+              let
+                secretKey = "calendar/rubek-site";
+                envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
+              in
+              ''
+                CALDAV_USERNAME=${envSecret "username"}
+                CALDAV_PASSWORD=${envSecret "password"}
+                CALDAV_URL=${envSecret "url"}
+                AVAILABLE_CALENDAR=${envSecret "available_calendar"}
+                BOOKED_CALENDAR=${envSecret "booked_calendar"}
+              '';
             destination = "secrets/env";
             env = true;
           }

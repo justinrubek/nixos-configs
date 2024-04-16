@@ -1,6 +1,16 @@
-{comma, ...} @ inputs: {pkgs, ...}: {
+{ comma, ... }@inputs:
+{ pkgs, ... }:
+{
   config = {
-    activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
+    activeProfiles = [
+      "development"
+      "browsing"
+      "gaming"
+      "graphical"
+      "design"
+      "work"
+      "media"
+    ];
 
     programs = {
       obs-studio.enable = true;
@@ -70,9 +80,7 @@
 
       packages = with pkgs; [
         rofi
-        (dwarf-fortress-packages.dwarf-fortress-full.override {
-          enableIntro = false;
-        })
+        (dwarf-fortress-packages.dwarf-fortress-full.override { enableIntro = false; })
         comma.packages.x86_64-linux.default
         alejandra
         prismlauncher
@@ -91,9 +99,7 @@
         pkgs.pavucontrol
         pkgs.tokei
 
-        (pkgs.lutris.override {
-          extraLibraries = pkgs: [];
-        })
+        (pkgs.lutris.override { extraLibraries = pkgs: [ ]; })
       ];
 
       stateVersion = "22.11";

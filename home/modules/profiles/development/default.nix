@@ -1,21 +1,25 @@
-{self, ...} @ inputs: {
+{ self, ... }@inputs:
+{
   config,
   lib,
   pkgs,
   specialArgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.development;
-in {
+in
+{
   options.profiles.development = {
     enable = lib.mkEnableOption "development profile";
   };
 
-  config = let
-    full_name = "Justin Rubek";
-    email = "25621857+justinrubek@users.noreply.github.com";
-    name = specialArgs.username;
-  in
+  config =
+    let
+      full_name = "Justin Rubek";
+      email = "25621857+justinrubek@users.noreply.github.com";
+      name = specialArgs.username;
+    in
     lib.mkIf cfg.enable {
       programs = {
         git = {

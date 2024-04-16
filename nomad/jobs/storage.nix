@@ -1,6 +1,6 @@
 _: {
   job.storage_controller = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.controller.task.plugin = {
       driver = "docker";
@@ -41,7 +41,7 @@ _: {
   };
 
   job.storage_node = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     type = "system";
 

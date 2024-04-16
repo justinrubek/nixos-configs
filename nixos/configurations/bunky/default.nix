@@ -1,12 +1,12 @@
-{nixpkgs, ...} @ inputs: {
+{ nixpkgs, ... }@inputs:
+{
   config,
   pkgs,
   lib,
   ...
-}: {
-  imports = [
-    ./hardware.nix
-  ];
+}:
+{
+  imports = [ ./hardware.nix ];
 
   # Linux kernel
 
@@ -58,7 +58,10 @@
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       shell = pkgs.zsh;
 
       openssh.authorizedKeys.keys = [
@@ -74,8 +77,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # services.openssh = {
   #   enable = true;

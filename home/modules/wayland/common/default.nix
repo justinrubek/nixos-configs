@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-} @ inputs: let
+}@inputs:
+let
   cfg = config.justinrubek.wayland.common;
-in {
+in
+{
   options.justinrubek.wayland.common = {
     enable = lib.mkEnableOption "Enable common wayland configuration";
 
@@ -27,7 +30,7 @@ in {
     systemd.user.targets.tray = lib.mkIf cfg.faketray.enable {
       Unit = {
         Description = "Home Manager System Tray";
-        Requires = ["graphical-session-pre.target"];
+        Requires = [ "graphical-session-pre.target" ];
       };
     };
   };

@@ -1,6 +1,6 @@
 _: {
   job.valheim = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.valheim = {
       count = 1;

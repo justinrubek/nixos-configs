@@ -1,15 +1,11 @@
 _: {
   job.flake_builder = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.api = {
       count = 1;
 
-      networks = [
-        {
-          port.http.to = 3000;
-        }
-      ];
+      networks = [ { port.http.to = 3000; } ];
 
       task.backend = {
         driver = "docker";
@@ -18,7 +14,7 @@ _: {
           # image = "justinrubek/flake-builder:69c2cbe5d0c3d7cafb7f0e67355d84ad1f98cbdf";
           image = "justinrubek/flake-builder:latest";
 
-          ports = ["http"];
+          ports = [ "http" ];
 
           command = "flake-builder-cli";
           args = [
@@ -26,9 +22,7 @@ _: {
             "http"
           ];
 
-          volumes = [
-            "local/nix.conf:/etc/nix/nix.conf"
-          ];
+          volumes = [ "local/nix.conf:/etc/nix/nix.conf" ];
         };
 
         templates = [

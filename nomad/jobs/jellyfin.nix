@@ -1,6 +1,6 @@
 _: {
   job.jellyfin = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.jellyfin = {
       count = 1;

@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.filesystem.zfs;
-in {
+in
+{
   options.justinrubek.filesystem.zfs = {
     enable = lib.mkEnableOption "enable zfs filesystem";
   };

@@ -1,11 +1,6 @@
+{ inputs, self, ... }:
 {
-  inputs,
-  self,
-  ...
-}: {
-  imports = [
-  ];
+  imports = [ ];
 
-  flake.modules = {
-  };
+  flake.modules = { };
 }

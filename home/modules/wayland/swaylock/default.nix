@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-} @ inputs: let
+}@inputs:
+let
   cfg = config.justinrubek.wayland.swaylock;
-in {
+in
+{
   options.justinrubek.wayland.swaylock = {
     enable = lib.mkEnableOption "Enable swaylock";
 

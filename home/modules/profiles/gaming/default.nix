@@ -1,11 +1,14 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.gaming;
-in {
+in
+{
   options.profiles.gaming = {
     enable = lib.mkEnableOption "gaming profile";
   };

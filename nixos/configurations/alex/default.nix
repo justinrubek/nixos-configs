@@ -1,19 +1,22 @@
-{nixpkgs, ...} @ inputs: {
+{ nixpkgs, ... }@inputs:
+{
   config,
   pkgs,
   lib,
   ...
-}: {
-  imports = [
-    ./hardware.nix
-  ];
+}:
+{
+  imports = [ ./hardware.nix ];
 
   services.justinrubek.postgresql = {
     enable = true;
     package = inputs.nix-postgres.packages.${pkgs.system}."psql_15/bin";
     port = 5435;
 
-    ensureDatabases = ["lockpad" "annapurna"];
+    ensureDatabases = [
+      "lockpad"
+      "annapurna"
+    ];
     ensureUsers = [
       {
         name = "annapurna";
@@ -61,7 +64,10 @@
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       shell = pkgs.zsh;
 
       openssh.authorizedKeys.keys = [
@@ -91,9 +97,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
 
   networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
-    allowedTCPPorts = [
-      config.services.justinrubek.postgresql.port
-    ];
+    allowedTCPPorts = [ config.services.justinrubek.postgresql.port ];
   };
 
   # Or disable the firewall altogether.

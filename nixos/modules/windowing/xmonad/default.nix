@@ -1,11 +1,14 @@
-_: {
+_:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.windowing.xmonad;
-in {
+in
+{
   options.justinrubek.windowing.xmonad = {
     enable = lib.mkEnableOption "enable xmonad";
   };

@@ -1,10 +1,12 @@
-_: let
+_:
+let
   sshModule = {
     justinrubek.administration = {
       enable = true;
     };
   };
-in {
+in
+{
   justinrubek.nixosConfigurations = {
     # physical machines
     manusya.system = "x86_64-linux";
@@ -13,29 +15,29 @@ in {
     # cloud servers
     bunky = {
       system = "x86_64-linux";
-      modules = [sshModule];
+      modules = [ sshModule ];
     };
     pyxis = {
       system = "x86_64-linux";
-      modules = [sshModule];
+      modules = [ sshModule ];
     };
     ceylon = {
       system = "x86_64-linux";
-      modules = [sshModule];
+      modules = [ sshModule ];
     };
     huginn = {
       system = "x86_64-linux";
-      modules = [sshModule];
+      modules = [ sshModule ];
     };
     alex = {
       system = "x86_64-linux";
-      modules = [sshModule];
+      modules = [ sshModule ];
     };
 
     # other
     hetzner-base = {
       system = "x86_64-linux";
-      modules = [sshModule];
+      modules = [ sshModule ];
     };
   };
 }

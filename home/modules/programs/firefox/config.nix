@@ -1,4 +1,6 @@
-flake-inputs: {pkgs, ...}: username: {
+flake-inputs:
+{ pkgs, ... }:
+username: {
   enable = true;
 
   profiles.${username} = {

@@ -1,15 +1,17 @@
-input @ {
+input@{
   self,
   inputs,
   config,
   ...
-}: {
+}:
+{
   # The input to the custom nixosSystem function
   modules,
   name,
   system,
   ...
-}: let
+}:
+let
   ###
   ### Configure a nixosSystem call with default values
   ### including this flake's custom modules, modules specified,
@@ -41,10 +43,10 @@ input @ {
     ++ builtins.attrValues self.nixosModules
     ++ builtins.attrValues self.modules;
 in
-  inputs.nixpkgs.lib.nixosSystem {
-    inherit system;
-    modules = finalModules;
-    specialArgs = {
-      flakeRootPath = ../.;
-    };
-  }
+inputs.nixpkgs.lib.nixosSystem {
+  inherit system;
+  modules = finalModules;
+  specialArgs = {
+    flakeRootPath = ../.;
+  };
+}

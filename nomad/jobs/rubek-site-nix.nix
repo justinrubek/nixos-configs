@@ -1,15 +1,11 @@
 _: {
   job.rubek_site_nix = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.api = {
       count = 1;
 
-      networks = [
-        {
-          port.http.to = 8000;
-        }
-      ];
+      networks = [ { port.http.to = 8000; } ];
 
       task.backend = {
         driver = "docker";
@@ -17,10 +13,10 @@ _: {
         config = {
           nix_flake_ref = "github:justinrubek/rubek.dev#packages.x86_64-linux.server/script";
           nix_flake_sha = "sha256-hAX/bmafN+Yn0n6y1lGGQOfkNfIHrb7g8IBJqcoT/y8=";
-          entrypoint = ["bin/start_server"];
+          entrypoint = [ "bin/start_server" ];
           # image = "justinrubek/rubek.dev:0.1.5";
 
-          ports = ["http"];
+          ports = [ "http" ];
 
           mount = [
             {
@@ -36,20 +32,23 @@ _: {
         };
 
         vault = {
-          policies = ["calendar-client"];
+          policies = [ "calendar-client" ];
         };
 
         templates = [
           {
-            data = let
-              envSecret = name: ''{{ with secret "kv-v2/data/calendar/rubek-site" }}{{ .Data.data.${name} }}{{ end }}'';
-            in ''
-              CALDAV_USERNAME=${envSecret "username"}
-              CALDAV_PASSWORD=${envSecret "password"}
-              CALDAV_URL=${envSecret "url"}
-              AVAILABLE_CALENDAR=${envSecret "available_calendar"}
-              BOOKED_CALENDAR=${envSecret "booked_calendar"}
-            '';
+            data =
+              let
+                envSecret =
+                  name: ''{{ with secret "kv-v2/data/calendar/rubek-site" }}{{ .Data.data.${name} }}{{ end }}'';
+              in
+              ''
+                CALDAV_USERNAME=${envSecret "username"}
+                CALDAV_PASSWORD=${envSecret "password"}
+                CALDAV_URL=${envSecret "url"}
+                AVAILABLE_CALENDAR=${envSecret "available_calendar"}
+                BOOKED_CALENDAR=${envSecret "booked_calendar"}
+              '';
             destination = "secrets/env";
             env = true;
           }

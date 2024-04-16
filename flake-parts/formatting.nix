@@ -1,31 +1,25 @@
+{ inputs, self, ... }:
 {
-  inputs,
-  self,
-  ...
-}: {
-  perSystem = {
-    pkgs,
-    lib,
-    ...
-  }: let
-    formatters = [
-      pkgs.alejandra
-    ];
+  perSystem =
+    { pkgs, lib, ... }:
+    let
+      formatters = [ pkgs.alejandra ];
 
-    treefmt = pkgs.writeShellApplication {
-      name = "treefmt";
-      runtimeInputs = [pkgs.treefmt] ++ formatters;
-      text = ''
-        exec treefmt "$@"
-      '';
-    };
-  in {
-    packages = {
-      inherit treefmt;
-    };
+      treefmt = pkgs.writeShellApplication {
+        name = "treefmt";
+        runtimeInputs = [ pkgs.treefmt ] ++ formatters;
+        text = ''
+          exec treefmt "$@"
+        '';
+      };
+    in
+    {
+      packages = {
+        inherit treefmt;
+      };
 
-    legacyPackages = {
-      inherit formatters;
+      legacyPackages = {
+        inherit formatters;
+      };
     };
-  };
 }

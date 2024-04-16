@@ -1,13 +1,16 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.browsing;
 
   inherit (config.home) username;
-in {
+in
+{
   options.profiles.browsing = {
     enable = lib.mkEnableOption "browsing profile";
   };
@@ -18,8 +21,6 @@ in {
       inherit username;
     };
 
-    home.packages = with pkgs; [
-      brave
-    ];
+    home.packages = with pkgs; [ brave ];
   };
 }

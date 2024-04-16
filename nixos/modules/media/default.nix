@@ -1,20 +1,24 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   # Mediahost module
   # Provides Jellyfin, Sonarr, Radarr, and Jackett
   cfg = config.justinrubek.mediahost;
-in {
+in
+{
   options.justinrubek.mediahost = {
     enable = lib.mkEnableOption "run consul";
   };
 
-  config = let
-    user = "mediahost";
-  in
+  config =
+    let
+      user = "mediahost";
+    in
     lib.mkIf cfg.enable {
       # home directory for "mediahost" user
       users.users.mediahost = {
@@ -22,7 +26,7 @@ in {
         home = "/home/${user}";
         createHome = true;
         group = "${user}";
-        extraGroups = ["jellyfin"];
+        extraGroups = [ "jellyfin" ];
       };
 
       services = {
@@ -47,15 +51,17 @@ in {
       };
 
       # open service ports to the tailnet
-      networking.firewall.interfaces.${config.services.tailscale.interfaceName} = let
-        ports = {
-          jellyfin = [8096];
-        };
+      networking.firewall.interfaces.${config.services.tailscale.interfaceName} =
+        let
+          ports = {
+            jellyfin = [ 8096 ];
+          };
 
-        allPorts = lib.flatten (lib.attrValues ports);
-      in {
-        allowedTCPPorts = allPorts;
-        allowedUDPPorts = allPorts;
-      };
+          allPorts = lib.flatten (lib.attrValues ports);
+        in
+        {
+          allowedTCPPorts = allPorts;
+          allowedUDPPorts = allPorts;
+        };
     };
 }

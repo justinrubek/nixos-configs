@@ -1,12 +1,12 @@
-{nixpkgs, ...} @ inputs: {
+{ nixpkgs, ... }@inputs:
+{
   config,
   pkgs,
   lib,
   ...
-}: {
-  imports = [
-    ./hardware.nix
-  ];
+}:
+{
+  imports = [ ./hardware.nix ];
 
   # Linux kernel
 
@@ -22,15 +22,18 @@
   };
 
   # personal modules
-  justinrubek = {
-  };
+  justinrubek = { };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "docker"];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+      ];
       shell = pkgs.zsh;
     };
   };
@@ -42,8 +45,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   # services.openssh = {
   #   enable = true;

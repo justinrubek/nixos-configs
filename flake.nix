@@ -118,16 +118,16 @@
     };
   };
 
-  outputs = {
-    self,
-    flake-parts,
-    ...
-  } @ inputs:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    { self, flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       flake = {
         homeModules = import ./home/modules inputs;
       };
-      systems = ["x86_64-linux" "aarch64-linux"];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       imports = [
         inputs.thoenix.flakeModule
         inputs.thoenix.customOutputModule

@@ -1,10 +1,9 @@
 _: {
   provider = {
-    minio = {};
+    minio = { };
   };
 
-  locals = {
-  };
+  locals = { };
 
   resource = {
     minio_s3_bucket = {
@@ -52,17 +51,13 @@ _: {
       nix-cache = {
         name = "nix-cache";
         group = "\${minio_iam_group.nix-cache.name}";
-        users = [
-          "\${minio_iam_user.nix_cache.name}"
-        ];
+        users = [ "\${minio_iam_user.nix_cache.name}" ];
       };
 
       justin = {
         name = "justin";
         group = "\${minio_iam_group.justin.name}";
-        users = [
-          "\${minio_iam_user.justin.name}"
-        ];
+        users = [ "\${minio_iam_user.justin.name}" ];
       };
     };
 

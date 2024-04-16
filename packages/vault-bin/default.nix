@@ -2,7 +2,8 @@
   vault-bin,
   fetchzip,
   system,
-}: let
+}:
+let
   suffix =
     {
       x86_64-linux = "linux_amd64";
@@ -13,10 +14,10 @@
     }
     .${system};
 in
-  vault-bin.overrideAttrs (old: rec {
-    version = "1.11.6";
-    src = fetchzip {
-      url = "https://releases.hashicorp.com/vault/${version}/vault_${version}_${suffix}.zip";
-      hash = "sha256-ppqlPvMIc3luhCs4V83K0J9IuUw9f9zLF5iYvo6amVE=";
-    };
-  })
+vault-bin.overrideAttrs (old: rec {
+  version = "1.11.6";
+  src = fetchzip {
+    url = "https://releases.hashicorp.com/vault/${version}/vault_${version}_${suffix}.zip";
+    hash = "sha256-ppqlPvMIc3luhCs4V83K0J9IuUw9f9zLF5iYvo6amVE=";
+  };
+})

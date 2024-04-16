@@ -1,22 +1,18 @@
 _: {
   job.dummy_api = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.api = {
       count = 1;
 
-      networks = [
-        {
-          port.http.to = 8000;
-        }
-      ];
+      networks = [ { port.http.to = 8000; } ];
 
       task.backend = {
         driver = "docker";
 
         config = {
           image = "justinrubek/axum-dummy-api:0.2.1";
-          ports = ["http"];
+          ports = [ "http" ];
         };
       };
 

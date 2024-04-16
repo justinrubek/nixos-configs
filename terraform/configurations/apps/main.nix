@@ -1,9 +1,11 @@
-{nomadJobs, ...}: let
+{ nomadJobs, ... }:
+let
   nomad_jobs = nomadJobs;
-in {
+in
+{
   # configure hcloud
   provider = {
-    nomad = {};
+    nomad = { };
   };
 
   justinrubek.nomadVolumes = {
@@ -102,7 +104,10 @@ in {
       enable = false;
       jobspec = "${nomad_jobs}/valheim.json";
       extraArgs = {
-        depends_on = ["resource.nomad_volume.valheim_data" "resource.nomad_volume.valheim_config"];
+        depends_on = [
+          "resource.nomad_volume.valheim_data"
+          "resource.nomad_volume.valheim_config"
+        ];
       };
     };
 
@@ -135,7 +140,11 @@ in {
       enable = false;
       jobspec = "${nomad_jobs}/jellyfin.json";
       extraArgs = {
-        depends_on = ["resource.nomad_volume.jellyfin_cache" "resource.nomad_volume.jellyfin_config" "resource.nomad_volume.jellyfin_media"];
+        depends_on = [
+          "resource.nomad_volume.jellyfin_cache"
+          "resource.nomad_volume.jellyfin_config"
+          "resource.nomad_volume.jellyfin_media"
+        ];
       };
     };
 
@@ -143,7 +152,11 @@ in {
       enable = false;
       jobspec = "${nomad_jobs}/paperless.json";
       extraArgs = {
-        depends_on = ["resource.nomad_volume.paperless_consume" "resource.nomad_volume.paperless_data" "resource.nomad_volume.paperless_media"];
+        depends_on = [
+          "resource.nomad_volume.paperless_consume"
+          "resource.nomad_volume.paperless_data"
+          "resource.nomad_volume.paperless_media"
+        ];
       };
     };
 
@@ -156,7 +169,7 @@ in {
       enable = true;
       jobspec = "${nomad_jobs}/conduit.json";
       extraArgs = {
-        depends_on = ["resource.nomad_volume.conduit_data"];
+        depends_on = [ "resource.nomad_volume.conduit_data" ];
       };
     };
 
@@ -164,7 +177,7 @@ in {
       enable = false;
       jobspec = "${nomad_jobs}/factorio.json";
       extraArgs = {
-        depends_on = ["resource.nomad_volume.factorio_data"];
+        depends_on = [ "resource.nomad_volume.factorio_data" ];
       };
     };
 
@@ -177,7 +190,7 @@ in {
       enable = true;
       jobspec = "${nomad_jobs}/nix_cache.json";
       extraArgs = {
-        depends_on = ["resource.nomad_volume.nix_cache_postgres"];
+        depends_on = [ "resource.nomad_volume.nix_cache_postgres" ];
       };
     };
 
@@ -185,7 +198,7 @@ in {
       enable = true;
       jobspec = "${nomad_jobs}/lockpad.json";
       extraArgs = {
-        depends_on = ["resource.nomad_volume.lockpad_postgres"];
+        depends_on = [ "resource.nomad_volume.lockpad_postgres" ];
       };
     };
 

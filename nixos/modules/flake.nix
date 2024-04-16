@@ -1,14 +1,17 @@
-{nixpkgs, ...}: {
+{ nixpkgs, ... }:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.nix.flakes;
 
   channelBase = "/etc/nixpkgs/channels";
   nixpkgsChannel = "${channelBase}/nixpkgs";
-in {
+in
+{
   options.nix.flakes.enable = lib.mkEnableOption "nix flakes";
 
   config = lib.mkIf cfg.enable {
@@ -17,15 +20,13 @@ in {
 
       registry.nixpkgs.flake = nixpkgs;
 
-      nixPath = [
-        "nixpkgs=${nixpkgs}"
-      ];
+      nixPath = [ "nixpkgs=${nixpkgs}" ];
     };
 
     /*
-    systemd.tmpfiles.rules = [
-      "L+ ${nixpkgsChannel} - - - - ${nixpkgs}"
-    ];
+      systemd.tmpfiles.rules = [
+        "L+ ${nixpkgsChannel} - - - - ${nixpkgs}"
+      ];
     */
   };
 }

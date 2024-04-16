@@ -1,11 +1,14 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.design;
-in {
+in
+{
   options.profiles.design = {
     enable = lib.mkEnableOption "design profile";
   };

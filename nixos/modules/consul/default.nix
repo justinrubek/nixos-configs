@@ -1,11 +1,14 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.consul;
-in {
+in
+{
   options.justinrubek.consul = {
     enable = lib.mkEnableOption "run consul";
 
@@ -17,7 +20,7 @@ in {
 
     retry_join = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = "A list of nodes to join";
     };
 
@@ -28,9 +31,10 @@ in {
     };
   };
 
-  config = let
-    tailscaleInterface = config.services.tailscale.interfaceName;
-  in
+  config =
+    let
+      tailscaleInterface = config.services.tailscale.interfaceName;
+    in
     lib.mkIf cfg.enable {
       services.consul = {
         enable = true;
@@ -97,6 +101,6 @@ in {
         ];
       };
 
-      environment.systemPackages = [pkgs.consul];
+      environment.systemPackages = [ pkgs.consul ];
     };
 }

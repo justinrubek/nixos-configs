@@ -5,7 +5,8 @@
   modulesPath,
   flakeRootPath,
   ...
-}: {
+}:
+{
   imports = [
     "${modulesPath}/profiles/minimal.nix"
     "${modulesPath}/profiles/qemu-guest.nix"
@@ -31,7 +32,7 @@
     enable = true;
     browser = true;
 
-    dataDir = ["/var/nfs/minio"];
+    dataDir = [ "/var/nfs/minio" ];
     rootCredentialsFile = config.sops.secrets."minio_env".path;
 
     listenAddress = "0.0.0.0:9000";
@@ -41,7 +42,7 @@
   sops.secrets.minio_env = {
     sopsFile = "${flakeRootPath}/secrets/minio.yaml";
     owner = config.systemd.services.serviceConfig.User or "root";
-    restartUnits = ["minio.service"];
+    restartUnits = [ "minio.service" ];
   };
 
   services.nfs.server = {
@@ -54,27 +55,27 @@
     '';
   };
 
-  networking.firewall.interfaces.${config.services.tailscale.interfaceName} = let
-    ports = [
-      # NFS
-      111
-      2049
-      4000
-      4001
-      4002
-      20048
-      # minio
-      9000
-      9001
-    ];
-  in {
-    allowedTCPPorts = ports;
-    allowedUDPPorts = ports;
-  };
+  networking.firewall.interfaces.${config.services.tailscale.interfaceName} =
+    let
+      ports = [
+        # NFS
+        111
+        2049
+        4000
+        4001
+        4002
+        20048
+        # minio
+        9000
+        9001
+      ];
+    in
+    {
+      allowedTCPPorts = ports;
+      allowedUDPPorts = ports;
+    };
 
-  swapDevices = [
-    {device = "/dev/disk/by-label/SWAP";}
-  ];
+  swapDevices = [ { device = "/dev/disk/by-label/SWAP"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

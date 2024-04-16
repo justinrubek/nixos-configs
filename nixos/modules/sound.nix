@@ -1,11 +1,14 @@
-{nixpkgs, ...}: {
+{ nixpkgs, ... }:
+{
   config,
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.sound;
-in {
+in
+{
   options.justinrubek.sound = {
     enable = lib.mkEnableOption "enable sound";
   };

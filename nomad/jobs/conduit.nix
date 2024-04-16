@@ -1,6 +1,6 @@
 _: {
   job.conduit = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.matrix = {
       count = 1;
@@ -16,11 +16,7 @@ _: {
         };
       };
 
-      networks = [
-        {
-          port.http.to = 6167;
-        }
-      ];
+      networks = [ { port.http.to = 6167; } ];
 
       task.backend = {
         driver = "docker";
@@ -28,11 +24,9 @@ _: {
         config = {
           image = "justinrubek/conduit:c56d3b54f32207644e5619123ffff93e79396bc7";
 
-          ports = ["http"];
+          ports = [ "http" ];
 
-          volumes = [
-            "local/conduit.toml:/etc/conduit.toml"
-          ];
+          volumes = [ "local/conduit.toml:/etc/conduit.toml" ];
         };
 
         volumeMounts = [
@@ -44,7 +38,7 @@ _: {
         ];
 
         vault = {
-          policies = ["matrix-homeserver-conduit"];
+          policies = [ "matrix-homeserver-conduit" ];
         };
 
         env = {
@@ -82,8 +76,7 @@ _: {
         {
           name = "matrix-conduit";
           port = "http";
-          checks = [
-          ];
+          checks = [ ];
         }
       ];
 

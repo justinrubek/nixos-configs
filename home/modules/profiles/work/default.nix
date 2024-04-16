@@ -1,18 +1,17 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.profiles.work;
-in {
+in
+{
   options.profiles.work = {
     enable = lib.mkEnableOption "work profile";
   };
 
-  config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      slack
-    ];
-  };
+  config = lib.mkIf cfg.enable { home.packages = with pkgs; [ slack ]; };
 }

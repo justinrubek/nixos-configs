@@ -1,6 +1,6 @@
 _: {
   job.nix_cache = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.cache = {
       count = 1;
@@ -30,7 +30,7 @@ _: {
         config = {
           image = "docker.io/postgres@sha256:2e89ed90224245851ea2b01e0b20c4b893e69141eb36e7a1cece7fb9e19f21f0";
 
-          ports = ["database"];
+          ports = [ "database" ];
         };
 
         volumeMounts = [
@@ -42,18 +42,20 @@ _: {
         ];
 
         vault = {
-          policies = ["nix-cache-postgres"];
+          policies = [ "nix-cache-postgres" ];
         };
 
         templates = [
           {
-            data = let
-              secretKey = "nix-cache/postgres";
-              envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
-            in ''
-              POSTGRES_USER=${envSecret "username"}
-              POSTGRES_PASSWORD=${envSecret "password"}
-            '';
+            data =
+              let
+                secretKey = "nix-cache/postgres";
+                envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
+              in
+              ''
+                POSTGRES_USER=${envSecret "username"}
+                POSTGRES_PASSWORD=${envSecret "password"}
+              '';
             destination = "secrets/env";
             env = true;
           }
@@ -71,53 +73,57 @@ _: {
             "secrets/attic.toml"
           ];
 
-          ports = ["http"];
+          ports = [ "http" ];
         };
 
         vault = {
-          policies = ["nix-cache-attic"];
+          policies = [ "nix-cache-attic" ];
         };
 
-        templates = let
-          databaseSecret = name: ''{{ with secret "kv-v2/data/nix-cache/database" }}{{ .Data.data.${name} }}{{ end }}'';
-          minioSecret = name: ''{{ with secret "kv-v2/data/nix-cache/minio" }}{{ .Data.data.${name} }}{{ end }}'';
+        templates =
+          let
+            databaseSecret =
+              name: ''{{ with secret "kv-v2/data/nix-cache/database" }}{{ .Data.data.${name} }}{{ end }}'';
+            minioSecret =
+              name: ''{{ with secret "kv-v2/data/nix-cache/minio" }}{{ .Data.data.${name} }}{{ end }}'';
 
-          postgresUrl = ''postgres://${databaseSecret "username"}:${databaseSecret "password"}@localhost:5432/${databaseSecret "database"}'';
-        in [
-          {
-            changeMode = "restart";
-            destination = "secrets/attic.toml";
-            data = ''
-              listen = "[::]:8080"
-              allowed-hosts = []
-              api-endpoint = "https://nix-cache.rubek.cloud/"
-              require-proof-of-possession = false
-              token-hs256-secret-base64 = '${databaseSecret "token_secret"}'
+            postgresUrl = ''postgres://${databaseSecret "username"}:${databaseSecret "password"}@localhost:5432/${databaseSecret "database"}'';
+          in
+          [
+            {
+              changeMode = "restart";
+              destination = "secrets/attic.toml";
+              data = ''
+                listen = "[::]:8080"
+                allowed-hosts = []
+                api-endpoint = "https://nix-cache.rubek.cloud/"
+                require-proof-of-possession = false
+                token-hs256-secret-base64 = '${databaseSecret "token_secret"}'
 
-              [database]
-              url = '${postgresUrl}'
+                [database]
+                url = '${postgresUrl}'
 
-              [storage]
-              type = "s3"
-              region = "us-east-1"
-              bucket = '${minioSecret "bucket"}'
-              endpoint = "http://alex:9000"
+                [storage]
+                type = "s3"
+                region = "us-east-1"
+                bucket = '${minioSecret "bucket"}'
+                endpoint = "http://alex:9000"
 
-              [storage.credentials]
-              access_key_id = '${minioSecret "access_key"}'
-              secret_access_key = '${minioSecret "secret_key"}'
+                [storage.credentials]
+                access_key_id = '${minioSecret "access_key"}'
+                secret_access_key = '${minioSecret "secret_key"}'
 
-              [chunking]
-              nar-size-threshold = 65536
-              min-size = 16384
-              avg-size = 65536
-              max-size = 262144
+                [chunking]
+                nar-size-threshold = 65536
+                min-size = 16384
+                avg-size = 65536
+                max-size = 262144
 
-              [compression]
-              type = "zstd"
-            '';
-          }
-        ];
+                [compression]
+                type = "zstd"
+              '';
+            }
+          ];
 
         resources = {
           cpu = 500;
@@ -129,8 +135,7 @@ _: {
         {
           name = "nix-cache";
           port = "http";
-          checks = [
-          ];
+          checks = [ ];
         }
       ];
     };

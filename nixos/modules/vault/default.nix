@@ -1,12 +1,15 @@
-{self, ...}: {
+{ self, ... }:
+{
   config,
   pkgs,
   lib,
   flakeRootPath,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.vault;
-in {
+in
+{
   options.justinrubek.vault = {
     enable = lib.mkEnableOption "configure vault";
 
@@ -18,7 +21,7 @@ in {
 
     retry_join = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = "The list of nodes to join.";
     };
 
@@ -29,15 +32,18 @@ in {
     };
   };
 
-  config = let
-    retry_join = lib.concatStringsSep "\n" (lib.lists.forEach cfg.retry_join (value: ''
-      retry_join {
-        leader_api_addr = "${value}"
-      }
-    ''));
+  config =
+    let
+      retry_join = lib.concatStringsSep "\n" (
+        lib.lists.forEach cfg.retry_join (value: ''
+          retry_join {
+            leader_api_addr = "${value}"
+          }
+        '')
+      );
 
-    inherit (config.networking) hostName;
-  in
+      inherit (config.networking) hostName;
+    in
     lib.mkIf cfg.enable {
       services.vault = {
         enable = true;
@@ -68,9 +74,12 @@ in {
       };
 
       networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
-        allowedTCPPorts = [8200 8201];
+        allowedTCPPorts = [
+          8200
+          8201
+        ];
       };
 
-      environment.systemPackages = lib.mkIf cfg.include_package [pkgs.vault];
+      environment.systemPackages = lib.mkIf cfg.include_package [ pkgs.vault ];
     };
 }

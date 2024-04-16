@@ -1,13 +1,16 @@
-flake-inputs: {
+flake-inputs:
+{
   config,
   lib,
   pkgs,
   ...
-} @ inputs: let
+}@inputs:
+let
   firefoxEnabled = config.programs.ufirefox.enable;
 
   inherit (config.programs.ufirefox) username;
-in {
+in
+{
   options.programs.ufirefox = {
     enable = lib.mkEnableOption "Enable firefox";
 

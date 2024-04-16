@@ -1,11 +1,6 @@
+{ pkgs, inputs', ... }:
 {
-  pkgs,
-  inputs',
-  ...
-}: {
-  imports = [
-    ./which-key.nix
-  ];
+  imports = [ ./which-key.nix ];
 
   clipboard = {
     register = "unnamedplus";
@@ -62,7 +57,7 @@
         };
         snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         sources = [
-          {name = "nvim_lsp";}
+          { name = "nvim_lsp"; }
           {
             name = "nvim_lsp";
             keywordLength = 3;
@@ -75,7 +70,7 @@
             name = "treesitter";
             keywordLength = 2;
           }
-          {name = "path";}
+          { name = "path"; }
           {
             name = "buffer";
             keywordLength = 3;
@@ -196,7 +191,14 @@
       moduleConfig = {
         autotag = {
           enable = true;
-          filetypes = ["html" "xml" "astro" "javascriptreact" "typescriptreact" "svelte"];
+          filetypes = [
+            "html"
+            "xml"
+            "astro"
+            "javascriptreact"
+            "typescriptreact"
+            "svelte"
+          ];
         };
         highlight = {
           enable = true;
@@ -216,9 +218,7 @@
     luafile ${./lua/keymaps.lua}
   '';
 
-  extraPlugins = with pkgs.vimPlugins; [
-    vim-abolish
-  ];
+  extraPlugins = with pkgs.vimPlugins; [ vim-abolish ];
 
   extraPackages = [
     pkgs.nodejs

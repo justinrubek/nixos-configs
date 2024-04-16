@@ -1,8 +1,5 @@
+{ nomadJobs, pkgs, ... }:
 {
-  nomadJobs,
-  pkgs,
-  ...
-}: {
   # TODO: determine how to handle workspace/config name in address
   backend.http = {
     address = "http://localhost:4646/tf/state/test";
@@ -13,12 +10,12 @@
   };
 
   provider = {
-    null = {};
+    null = { };
   };
 
   resource = {
     null_resource = {
-      "foo" = {};
+      "foo" = { };
     };
   };
 }

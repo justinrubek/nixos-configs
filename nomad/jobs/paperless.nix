@@ -1,6 +1,6 @@
 _: {
   job.paperless = {
-    datacenters = ["dc1"];
+    datacenters = [ "dc1" ];
 
     group.paperless = {
       count = 1;
@@ -45,7 +45,7 @@ _: {
 
         config = {
           image = "redis:6";
-          ports = ["redis"];
+          ports = [ "redis" ];
         };
 
         resources = {
@@ -64,11 +64,11 @@ _: {
 
         config = {
           image = "justinrubek/paperless:latest";
-          entrypoint = ["/sbin/docker-entrypoint.sh"];
+          entrypoint = [ "/sbin/docker-entrypoint.sh" ];
           command = "/usr/local/bin/paperless_cmd.sh";
           work_dir = "/usr/src/paperless/src";
           # image = "paperlessngx/paperless-ngx:latest";
-          ports = ["http"];
+          ports = [ "http" ];
         };
 
         volumeMounts = [

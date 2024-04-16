@@ -1,9 +1,11 @@
-_: {
+_:
+{
   config,
   lib,
   pkgs,
   ...
-} @ inputs: let
+}@inputs:
+let
   cfg = config.justinrubek.windowing.hyprland;
 
   colors = {
@@ -20,7 +22,8 @@ _: {
     launcher = "wofi --show drun --style ${./wofi-style.css}";
     emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   };
-in {
+in
+{
   options.justinrubek.windowing.hyprland = {
     enable = lib.mkEnableOption "Enable hyprland configuration";
   };
@@ -115,21 +118,23 @@ in {
             "$mod SHIFT, bracketright, focusmonitor, r"
           ]
           ++ (builtins.genList (
-              x: let
-                s = toString x;
-              in ''
-                bind = $mod, ${s}, workspace, ${s}
-              ''
-            )
-            10)
+            x:
+            let
+              s = toString x;
+            in
+            ''
+              bind = $mod, ${s}, workspace, ${s}
+            ''
+          ) 10)
           ++ (builtins.genList (
-              x: let
-                s = toString x;
-              in ''
-                bind = $mod SHIFT, ${s}, movetoworkspace, ${s}
-              ''
-            )
-            10);
+            x:
+            let
+              s = toString x;
+            in
+            ''
+              bind = $mod SHIFT, ${s}, movetoworkspace, ${s}
+            ''
+          ) 10);
         bindl = [
           ", XF86AudioPlay, exec, playerctl play-pause"
           ", XF86AudioStop, exec, playerctl stop"
@@ -165,9 +170,7 @@ in {
           pseudotile = true;
           preserve_split = true;
         };
-        exec-once = [
-          "waybar"
-        ];
+        exec-once = [ "waybar" ];
         general = {
           border_size = 2;
           gaps_in = 5;

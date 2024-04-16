@@ -1,9 +1,11 @@
-inputs: {
+inputs:
+{
   config,
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.justinrubek.programs.eww;
 
   dependencies = [
@@ -40,7 +42,8 @@ inputs: {
     pkgs.wlogout
     pkgs.wofi
   ];
-in {
+in
+{
   options.justinrubek.programs.eww = {
     enable = lib.mkEnableOption "Enable eww bars";
   };
@@ -55,14 +58,14 @@ in {
     systemd.user.services.eww = {
       Unit = {
         Description = "Eww Daemon";
-        PartOf = ["graphical-session.target"];
+        PartOf = [ "graphical-session.target" ];
       };
       Service = {
         Environment = "PATH=/run/wrappers/bin:${lib.makeBinPath dependencies}";
         ExecStart = "${config.programs.eww.package}/bin/eww daemon --no-daemonize";
         Restart = "on-failure";
       };
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 }
