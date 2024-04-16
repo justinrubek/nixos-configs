@@ -3999,11 +3999,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1711394031,
-        "narHash": "sha256-J7Wf8R2mLY2/Wfvlx1roYwamIz2ag0ZnJHrtRnMUqQE=",
+        "lastModified": 1713281215,
+        "narHash": "sha256-++eGHDYM50EppSn/qCypaheY2wGZ/lD0teTeCTtJ48s=",
         "owner": "altsem",
         "repo": "gitu",
-        "rev": "9a4d476fabfe728c5d301922a0358f75c95e9d68",
+        "rev": "3aadf9264824f2db41a58acc2a32b2965ac5ff37",
         "type": "github"
       },
       "original": {
