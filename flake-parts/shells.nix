@@ -20,6 +20,7 @@
         buildInputs = with pkgs; [
           alejandra
           inputs.home-manager.packages.${system}.home-manager
+          pkgs.nh
           hcloud
           hashicorp-pkgs.packer
           inputs'.deploy-rs.packages.deploy-rs
