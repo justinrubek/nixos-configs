@@ -60,7 +60,7 @@ in {
               "class<firefox>" = "";
               "class<alacritty>" = "";
               "class<steam>" = "";
-              "class<webcord>" = "󰙯";
+              "class<vesktop>" = "󰙯";
             };
             window-rewrite-default = "";
           };

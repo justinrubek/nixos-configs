@@ -17,14 +17,22 @@ in {
       pkgs.mangohud
       pkgs.teamspeak_client
       # see https://github.com/NixOS/nixpkgs/issues/78961
-      (pkgs.discord.override {
-        nss = pkgs.nss_latest;
-        # withOpenASAR = true;
+      (pkgs.vesktop.override {
+        withSystemVencord = false;
       })
-      pkgs.webcord
       pkgs.airshipper
       # pkgs.runelite
       pkgs.teamspeak5_client
     ];
+
+    # add a .Desktop entry for Vesktop called "Discord"
+    xdg.desktopEntries = {
+      discord = {
+        name = "Discord";
+        exec = "vesktop";
+        genericName = "Discord";
+        terminal = false;
+      };
+    };
   };
 }

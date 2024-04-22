@@ -34,7 +34,6 @@ in {
       pkgs.playerctl
       pkgs.wireplumber
       pkgs.wl-clipboard
-      pkgs.xwaylandvideobridge
     ];
     programs.wlogout = {
       enable = true;
