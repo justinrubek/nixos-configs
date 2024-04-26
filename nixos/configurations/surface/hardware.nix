@@ -14,8 +14,8 @@
       availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod"];
       kernelModules = [];
     };
-    kernelModules = ["kvm-intel"];
-    extraModulePackages = [];
+    kernelModules = ["kvm-intel" "acpi_call"];
+    extraModulePackages = [config.boot.kernelPackages.acpi_call];
   };
 
   fileSystems = {
