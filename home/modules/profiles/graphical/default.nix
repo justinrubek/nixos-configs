@@ -18,6 +18,7 @@ in {
       flameshot
       nerdfonts
       bitwarden
+      pkgs.rnote
     ];
   };
 }
