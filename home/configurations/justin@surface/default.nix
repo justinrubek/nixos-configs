@@ -65,6 +65,15 @@ inputs: {pkgs, ...}: {
         alejandra
         pkgs.libreoffice
         pkgs.pavucontrol
+        # https://github.com/NixOS/nixpkgs/pull/274016
+        (pkgs.iptsd.overrideAttrs (oldAttrs: {
+          mesonFlags = [
+            "-Dservice_manager=systemd"
+            "-Dsample_config=false"
+            "-Ddebug_tools=calibrate"
+            "-Db_lto=false"
+          ];
+        }))
       ];
 
       stateVersion = "24.05";

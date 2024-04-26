@@ -25,6 +25,12 @@
           TouchThreshold = 20;
           StabilityThreshold = 0.1;
         };
+        Contacts = {
+          SizeMin = 0.818;
+          SizeMax = 3.987;
+          AspectMin = 1.009;
+          AspectMax = 3.630;
+        };
       };
     };
   };
