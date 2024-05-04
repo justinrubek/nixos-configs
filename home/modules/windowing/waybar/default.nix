@@ -5,6 +5,14 @@ _: {
   ...
 } @ inputs: let
   cfg = config.justinrubek.windowing.waybar;
+  icons = {
+    discord = "󰙯";
+    firefox = "";
+    matrix = "󰘨";
+    steam = "";
+    terminal = "";
+    unknown = "";
+  };
 in {
   options.justinrubek.windowing.waybar = {
     enable = lib.mkEnableOption "Enable waybar configuration";
@@ -57,12 +65,14 @@ in {
               "HDMI-A-1" = [6 7 8 9 10];
             };
             window-rewrite = {
-              "class<firefox>" = "";
-              "class<alacritty>" = "";
-              "class<steam>" = "";
-              "class<vesktop>" = "󰙯";
+              "class<alacritty>" = icons.terminal;
+              "class<discord>" = icons.discord;
+              "class<element>" = icons.matrix;
+              "class<firefox>" = icons.firefox;
+              "class<steam>" = icons.steam;
+              "class<vesktop>" = icons.discord;
             };
-            window-rewrite-default = "";
+            window-rewrite-default = icons.unknown;
           };
 
           "temperature" = {
