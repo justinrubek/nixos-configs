@@ -65,6 +65,11 @@ in {
       ];
     };
 
+    services.mako = {
+      enable = true;
+      defaultTimeout = 7;
+    };
+
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = true;
