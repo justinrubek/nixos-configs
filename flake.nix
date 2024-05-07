@@ -69,7 +69,10 @@
     };
     ghlink = {
       url = "github:matthewdargan/ghlink";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        fenix.follows = "fenix";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     git-prune-branches = {
       url = "github:justinrubek/git-prune-branches";
