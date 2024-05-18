@@ -30,39 +30,50 @@ in {
       pkgs.wf-recorder
       pkgs.xorg.xprop
       pkgs.wofi
-      pkgs.alacritty
       pkgs.playerctl
       pkgs.wireplumber
       pkgs.wl-clipboard
     ];
-    programs.wlogout = {
-      enable = true;
-      layout = [
-        {
-          label = "lock";
-          action = "swaylock";
-          text = "Lock";
-          keybind = "l";
-        }
-        {
-          label = "logout";
-          action = "${pkgs.wayland-logout}/bin/wayland-logout";
-          text = "Logout";
-          keybind = "e";
-        }
-        {
-          label = "shutdown";
-          action = "systemctl poweroff";
-          text = "Shutdown";
-          keybind = "s";
-        }
-        {
-          label = "reboot";
-          action = "systemctl reboot";
-          text = "Reboot";
-          keybind = "r";
-        }
-      ];
+    programs = {
+      alacritty = {
+        enable = true;
+        settings.keyboard.bindings = [
+          {
+            key = "Enter";
+            mods = "Control";
+            action = "CreateNewWindow";
+          }
+        ];
+      };
+      wlogout = {
+        enable = true;
+        layout = [
+          {
+            label = "lock";
+            action = "swaylock";
+            text = "Lock";
+            keybind = "l";
+          }
+          {
+            label = "logout";
+            action = "${pkgs.wayland-logout}/bin/wayland-logout";
+            text = "Logout";
+            keybind = "e";
+          }
+          {
+            label = "shutdown";
+            action = "systemctl poweroff";
+            text = "Shutdown";
+            keybind = "s";
+          }
+          {
+            label = "reboot";
+            action = "systemctl reboot";
+            text = "Reboot";
+            keybind = "r";
+          }
+        ];
+      };
     };
 
     services.mako = {
