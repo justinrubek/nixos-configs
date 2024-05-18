@@ -56,7 +56,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland";
+      url = "git+https://github.com/hyprwm/hyprland?submodules=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -121,6 +121,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.fenix.follows = "fenix";
     };
+    wezterm = {
+      url = "github:wez/wezterm?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -129,9 +133,6 @@
     ...
   } @ inputs:
     flake-parts.lib.mkFlake {inherit inputs;} {
-      flake = {
-        homeModules = import ./home/modules inputs;
-      };
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
         inputs.thoenix.flakeModule
@@ -153,6 +154,7 @@
 
         ./flake-parts/home_configurations.nix
         ./home/configurations
+        ./home/modules
 
         ./deploy
 

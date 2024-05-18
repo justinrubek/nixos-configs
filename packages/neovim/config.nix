@@ -23,26 +23,24 @@
   };
 
   opts = {
-    mouse = "a";
-    shiftwidth = 4;
-    tabstop = 4;
-    smartindent = true;
     autoindent = true;
+    autoread = true;
+    compatible = false;
+    cursorline = true;
     expandtab = true;
-    smartcase = true;
+    hidden = true;
     ignorecase = true;
-
+    incsearch = true;
+    mouse = "a";
     number = true;
     relativenumber = true;
-    cursorline = true;
     scrolloff = 12;
-
+    shiftwidth = 4;
+    smartcase = true;
+    smartindent = true;
+    tabstop = 4;
+    title = true;
     ttimeoutlen = 5;
-    compatible = false;
-    autoread = true;
-    incsearch = true;
-    hidden = true;
-
     undofile = true;
   };
 
@@ -154,13 +152,14 @@
         cssls.enable = true;
         html.enable = true;
         jsonls.enable = true;
+        lua-ls.enable = true;
         nil_ls.enable = true;
+        pyright.enable = true;
         rust-analyzer = {
           enable = true;
           installCargo = false;
           installRustc = false;
         };
-        pyright.enable = true;
         tailwindcss.enable = true;
         terraformls.enable = true;
         texlab.enable = true;
@@ -191,19 +190,14 @@
     todo-comments.enable = true;
     treesitter = {
       enable = true;
-      ensureInstalled = "all";
-      nixGrammars = true;
       moduleConfig = {
-        autotag = {
-          enable = true;
-          filetypes = ["html" "xml" "astro" "javascriptreact" "typescriptreact" "svelte"];
-        };
         highlight = {
           enable = true;
         };
       };
     };
     trouble.enable = true;
+    ts-autotag.enable = true;
     undotree.enable = true;
   };
 

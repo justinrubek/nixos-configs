@@ -71,6 +71,7 @@ in {
               "class<firefox>" = icons.firefox;
               "class<steam>" = icons.steam;
               "class<vesktop>" = icons.discord;
+              "class<org.wezfurlong.wezterm>" = icons.terminal;
             };
             window-rewrite-default = icons.unknown;
           };

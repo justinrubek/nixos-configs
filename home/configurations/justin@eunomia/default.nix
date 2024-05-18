@@ -81,8 +81,6 @@
 
         inputs.generation-toolkit.packages.${pkgs.system}.generation-toolkit
 
-        pkgs.wezterm
-
         pkgs.fluffychat
         (pkgs.element-desktop.override {electron = pkgs.electron_28;})
 

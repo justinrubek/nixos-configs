@@ -1,9 +1,9 @@
-_: {
+inputs: {
   config,
   lib,
   pkgs,
   ...
-} @ inputs: let
+}: let
   cfg = config.justinrubek.windowing.hyprland;
 
   colors = {
@@ -16,7 +16,7 @@ _: {
   };
 
   apps = {
-    terminal = "alacritty";
+    terminal = "wezterm";
     launcher = "wofi --show drun --style ${./wofi-style.css}";
     emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
   };
@@ -44,6 +44,12 @@ in {
             action = "CreateNewWindow";
           }
         ];
+      };
+      wezterm = {
+        enable = true;
+        enableZshIntegration = true;
+        extraConfig = builtins.readFile ./wezterm.lua;
+        package = inputs.wezterm.packages.${pkgs.system}.default;
       };
       wlogout = {
         enable = true;
