@@ -3445,11 +3445,11 @@
         "pre-commit-hooks": "pre-commit-hooks_4"
       },
       "locked": {
-        "lastModified": 1715032727,
-        "narHash": "sha256-QE9m/ZNgIIQZovxVM0EMqAsR79YGVVVDQPR1I2tTm6E=",
+        "lastModified": 1715276711,
+        "narHash": "sha256-gYX4JcmVOE9EMqii9mpuAvzWbEL85rl8HJH3XDeKQVM=",
         "owner": "matthewdargan",
         "repo": "ghlink",
-        "rev": "58b13de41fc7cba3828573fbb91c40b842dc3288",
+        "rev": "1e02b0f3e0c957a4bf75253c3d4a5b06f28f629b",
         "type": "github"
       },
       "original": {
@@ -5771,11 +5771,11 @@
     },
     "nixpkgs_16": {
       "locked": {
-        "lastModified": 1713297878,
-        "narHash": "sha256-hOkzkhLT59wR8VaMbh1ESjtZLbGi+XNaBN6h49SPqEc=",
+        "lastModified": 1715534503,
+        "narHash": "sha256-5ZSVkFadZbFP1THataCaSf0JH2cAH3S29hU9rrxTEqk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "66adc1e47f8784803f2deb6cacd5e07264ec2d5c",
+        "rev": "2057814051972fa1453ddfb0d98badbea9b83c06",
         "type": "github"
       },
       "original": {

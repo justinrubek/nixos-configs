@@ -84,6 +84,7 @@
         pkgs.wezterm
 
         pkgs.fluffychat
+        (pkgs.element-desktop.override {electron = pkgs.electron_28;})
 
         inputs.project-runner.packages.${pkgs.system}.project-runner
 
