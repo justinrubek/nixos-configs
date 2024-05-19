@@ -84,8 +84,19 @@
     };
 
     bomper = {
-      description = "bump version strings in your files";
-      topics = mkTopic ["rust" "flake"];
+      description = "automated project releases and changelogs";
+      topics =
+        mkTopic ["rust" "flake"]
+        ++ [
+          "cargo-integration"
+          "changelog"
+          "cli"
+          "conventional-commits"
+          "git"
+          "gitoxide"
+          "release"
+          "semver"
+        ];
 
       inherit prevent_deletion;
     };
