@@ -40,6 +40,8 @@
     smartindent = true;
     tabstop = 4;
     title = true;
+    titlelen = 0;
+    titlestring = ''nvim %{fnamemodify(expand('%'), ':~')}%a%r%m'';
     ttimeoutlen = 5;
     undofile = true;
   };
