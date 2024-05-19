@@ -1,4 +1,8 @@
-inputs: {pkgs, ...}: {
+inputs: {
+  pkgs,
+  flakeRootPath,
+  ...
+}: {
   config = {
     activeProfiles = ["development" "browsing" "graphical"];
 
@@ -16,8 +20,19 @@ inputs: {pkgs, ...}: {
 
     justinrubek = {
       windowing = {
-        hyprland.enable = true;
-        waybar.enable = true;
+        hyprland = {
+          enable = true;
+          monitors = {
+            primary = {
+              name = "eDP-1";
+              position = "0x0";
+              refreshRate = 60;
+              resolution = "3000x2000";
+              scale = "auto";
+              wallpaper = "${flakeRootPath}/wallpapers/mountain-stream.png";
+            };
+          };
+        };
       };
       wayland = {
         common.enable = true;

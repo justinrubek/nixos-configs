@@ -1,5 +1,6 @@
 inputs: {
   config,
+  flakeRootPath,
   lib,
   pkgs,
   ...
@@ -7,32 +8,82 @@ inputs: {
   cfg = config.justinrubek.windowing.hyprland;
 
   colors = {
-    mauve = "c0a2c7";
     blue = "7aa2f7";
     crust = "f7c07a";
     lavender = "e0b0ff";
-    surface0 = "f7f7f7";
+    mauve = "c0a2c7";
     pink = "f7a2a2";
+    surface0 = "f7f7f7";
+  };
+
+  icons = {
+    discord = "󰙯";
+    firefox = "";
+    matrix = "󰘨";
+    steam = "";
+    terminal = "";
+    unknown = "";
   };
 
   apps = {
-    terminal = "wezterm";
-    launcher = "wofi --show drun --style ${./wofi-style.css}";
     emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
+    hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+    launcher = "wofi --show drun --style ${./wofi-style.css}";
+    logout = "${pkgs.wayland-logout}/bin/wayland-logout";
+    terminal = "wezterm";
   };
+
+  monitorType = lib.types.submodule {
+    options = {
+      name = lib.mkOption {
+        type = lib.types.string;
+      };
+      position = lib.mkOption {
+        type = lib.types.string;
+      };
+      refreshRate = lib.mkOption {
+        type = lib.types.int;
+      };
+      resolution = lib.mkOption {
+        type = lib.types.string;
+      };
+      scale = lib.mkOption {
+        type = lib.types.string;
+        default = "1";
+      };
+      wallpaper = lib.mkOption {
+        type = lib.types.nullOr lib.types.string;
+        default = null;
+      };
+    };
+  };
+
+  monitorExists = monitor: monitor != null;
+  monitorHasWallpaper = monitor: monitor.wallpaper != null;
+  availableMonitors = lib.attrsets.filterAttrs (name: monitorExists) cfg.monitors;
 in {
   options.justinrubek.windowing.hyprland = {
     enable = lib.mkEnableOption "Enable hyprland configuration";
+
+    monitors = {
+      primary = lib.mkOption {
+        type = monitorType;
+      };
+      secondary = lib.mkOption {
+        type = lib.types.nullOr monitorType;
+        default = null;
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      pkgs.wf-recorder
-      pkgs.xorg.xprop
-      pkgs.wofi
       pkgs.playerctl
+      pkgs.wf-recorder
       pkgs.wireplumber
       pkgs.wl-clipboard
+      pkgs.wofi
+      pkgs.xorg.xprop
     ];
     programs = {
       alacritty = {
@@ -75,6 +126,150 @@ in {
           ];
         };
       };
+      waybar = {
+        enable = true;
+        settings = {
+          mainBar = {
+            layer = "top";
+            position = "top";
+            height = 32;
+            output = lib.attrsets.mapAttrsToList (name: monitor: monitor.name) availableMonitors;
+            modules-left = ["hyprland/workspaces" "tray"];
+            modules-center = ["hyprland/window"];
+            modules-right = ["temperature" "memory" "pulseaudio" "clock#date" "clock#time"];
+
+            "clock#date" = {
+              format = "    {:%Y-%m-%d}";
+              interval = 20;
+            };
+
+            "clock#time" = {
+              format = "{:%H:%M:%S}";
+              interval = 1;
+            };
+
+            "custom/powermenu" = {
+              "format" = "";
+              "on-click" = "sleep 0.1 && wlogout -p layer-shell";
+              "tooltip" = false;
+            };
+
+            "hyprland/window" = {
+              separate-outputs = true;
+            };
+
+            "hyprland/workspaces" = {
+              format = "{icon} {windows}";
+              on-scroll-up = "hyprctl dispatch workspace e+1";
+              on-scroll-down = "hyprctl dispatch workspace e-1";
+              all-outputs = true;
+              on-click = "activate";
+              # persistent-workspaces = {
+              #   "DP-1" = [1 2 3 4 5];
+              #   "HDMI-A-1" = [6 7 8 9 10];
+              # };
+              window-rewrite = {
+                "class<alacritty>" = icons.terminal;
+                "class<discord>" = icons.discord;
+                "class<element>" = icons.matrix;
+                "class<firefox>" = icons.firefox;
+                "class<steam>" = icons.steam;
+                "class<vesktop>" = icons.discord;
+                "class<org.wezfurlong.wezterm>" = icons.terminal;
+              };
+              window-rewrite-default = icons.unknown;
+            };
+
+            "memory" = {
+              format = "   {percentage}%";
+            };
+
+            "temperature" = {
+              critical-threshold = 80;
+              format = " {temperatureC}°C";
+            };
+
+            "pulseaudio" = {
+              format = "   {volume}%";
+              on-click = "pavucontrol";
+            };
+          };
+        };
+        style = ''
+          @define-color date-background @black;
+          @define-color date-color @white;
+          @define-color time-background @white;
+          @define-color time-color @black;
+
+          window {
+            background: rgba(0, 0, 0, 0.5);
+            color: @text;
+            font-size: 12px;
+            font-family: "JetBrains Mono";
+          }
+
+          #clock,
+          #workspaces,
+          #memory,
+          #temperature {
+            padding: 0 8px;
+          }
+
+          #clock.date {
+            background-color: @date-background;
+            color: @date-color;
+          }
+
+          #clock.time {
+            background-color: @time-background;
+            color: @time-color;
+          }
+
+          #temperature {
+            padding: 0 8px;
+            color: rgb(180, 84, 4);
+          }
+
+          #memory {
+            padding: 0 8px;
+            color: rgb(0, 64, 8);
+          }
+
+          #pulseaudio {
+            padding: 0 8px;
+            color: rgb(0, 255, 255);
+          }
+
+          #workspaces button {
+            padding: 0 0.5em;
+            background-color: @surface0;
+            color: @text;
+            margin: 0.25em;
+          }
+
+          #workspaces button:hover {
+            box-shadow: inset 0 0 0 1px @blue;
+          }
+
+          #workspaces button.empty {
+            color: @overlay0;
+          }
+
+          #workspaces button.visible {
+            color: @blue;
+          }
+
+          #workspaces button.active {
+            color: @green;
+          }
+
+          #workspaces button.urgent {
+            background-color: @red;
+            border-radius: 1em;
+            color: @text;
+          }
+        '';
+      };
       wezterm = {
         enable = true;
         enableZshIntegration = true;
@@ -86,13 +281,13 @@ in {
         layout = [
           {
             label = "lock";
-            action = "swaylock";
+            action = apps.hyprlock;
             text = "Lock";
             keybind = "l";
           }
           {
             label = "logout";
-            action = "${pkgs.wayland-logout}/bin/wayland-logout";
+            action = apps.logout;
             text = "Logout";
             keybind = "e";
           }
@@ -124,17 +319,27 @@ in {
 
           listener = [
             {
-              timeout = 1500;
-              on-timeout = "hyprlock";
+              timeout = 900;
+              on-timeout = apps.hyprlock;
             }
             {
-              timeout = 1600;
+              timeout = 1200;
               on-timeout = "hyprctl dispatch dpms off";
               on-resume = "hyprctl dispatch dpms on";
             }
           ];
         };
       };
+      hyprpaper = let
+        wallpaperMonitors = lib.attrsets.filterAttrs (name: monitor: monitorExists monitor && monitorHasWallpaper monitor) cfg.monitors;
+
+        preloads = lib.attrsets.mapAttrsToList (name: monitor: monitor.wallpaper) wallpaperMonitors;
+        wallpapers = lib.attrsets.mapAttrsToList (name: monitor: "${monitor.name},${monitor.wallpaper}") wallpaperMonitors;
+      in {
+        enable = true;
+        inherit preloads wallpapers;
+      };
+
       mako = {
         enable = true;
         defaultTimeout = 7;
@@ -271,10 +476,18 @@ in {
           vfr = true;
           disable_autoreload = true; # no need for auto-reload on nix
         };
-        monitor = [
-          "HDMI-A-1, 2560x1440@100, 1920x0, auto"
-          "DP-1, 1920x1080@144, 0x0, auto"
-        ];
+        monitor = let
+          getMonitor = {
+            name,
+            resolution,
+            refreshRate,
+            position,
+            scale,
+            ...
+          }: "${name}, ${resolution}@${builtins.toString refreshRate}, ${position}, ${scale}";
+          monitors = lib.attrsets.mapAttrsToList (name: getMonitor) availableMonitors;
+        in
+          monitors;
         windowrulev2 = [
           # disable idle when watching video
           "idleinhibit fullscreen, class:^(firefox)$"
@@ -290,11 +503,8 @@ in {
           "float, class:(steam), title:(Friends List)"
           "size 400 600, class:(steam), title:(Friends List)"
         ];
-        workspace = [
-          "HDMI-A-1, 1"
-          "DP-1, 10"
-        ];
       };
     };
   };
+  _file = ./default.nix;
 }

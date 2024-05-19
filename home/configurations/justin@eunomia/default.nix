@@ -1,4 +1,8 @@
-{comma, ...} @ inputs: {pkgs, ...}: {
+{comma, ...} @ inputs: {
+  pkgs,
+  flakeRootPath,
+  ...
+}: {
   config = {
     activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
 
@@ -23,8 +27,27 @@
 
     justinrubek = {
       windowing = {
-        hyprland.enable = true;
-        waybar.enable = true;
+        hyprland = {
+          enable = true;
+          monitors = {
+            primary = {
+              name = "HDMI-A-1";
+              position = "1920x0";
+              refreshRate = 100;
+              resolution = "2560x1440";
+              scale = "auto";
+              wallpaper = "${flakeRootPath}/wallpapers/mountain-stream.png";
+            };
+            secondary = {
+              name = "DP-1";
+              position = "0x0";
+              refreshRate = 144;
+              resolution = "1920x1080";
+              scale = "auto";
+              wallpaper = "${flakeRootPath}/wallpapers/shiny_purple.png";
+            };
+          };
+        };
       };
       wayland = {
         common.enable = true;
