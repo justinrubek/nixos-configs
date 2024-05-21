@@ -4,6 +4,7 @@
   ...
 }: {
   imports = [
+    ./copilot.nix
     ./which-key.nix
   ];
 
