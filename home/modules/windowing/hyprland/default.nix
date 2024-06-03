@@ -20,6 +20,7 @@ inputs: {
     discord = "󰙯";
     firefox = "";
     matrix = "󰘨";
+    rnote = "󱓧";
     steam = "";
     terminal = "";
     unknown = "";
@@ -173,6 +174,7 @@ in {
                 "class<discord>" = icons.discord;
                 "class<element>" = icons.matrix;
                 "class<firefox>" = icons.firefox;
+                "class<com.github.flxzt.rnote>" = icons.rnote;
                 "class<steam>" = icons.steam;
                 "class<vesktop>" = icons.discord;
                 "class<org.wezfurlong.wezterm>" = icons.terminal;
