@@ -128,7 +128,7 @@
       device = "/dev/input/event5";
       display = ":1";
       key_to_press = 276;
-      key_to_send = "F11";
+      key_to_send = "F10";
     };
   };
 }
