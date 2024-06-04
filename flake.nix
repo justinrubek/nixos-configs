@@ -89,7 +89,6 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -130,6 +129,7 @@
       url = "github:matthewdargan/nix-go";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
     wezterm = {
       url = "github:wez/wezterm?dir=nix";
       inputs.nixpkgs.follows = "nixpkgs";

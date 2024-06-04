@@ -1,4 +1,8 @@
-_: let
+{
+  inputs,
+  self,
+  ...
+}: let
   sshModule = {
     justinrubek.administration = {
       enable = true;
@@ -10,6 +14,7 @@ in {
     manusya.system = "x86_64-linux";
     eunomia.system = "x86_64-linux";
     surface.system = "x86_64-linux";
+    rpi5.system = "aarch64-linux";
 
     # cloud servers
     bunky = {
