@@ -182,4 +182,6 @@
   # allow swaylock to verify login
   security.pam.services.swaylock.text = "auth include login";
   security.pam.services.hyprlock.text = "auth include login";
+
+  boot.binfmt.emulatedSystems = ["aarch64-linux"];
 }
