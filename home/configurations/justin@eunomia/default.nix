@@ -48,6 +48,7 @@
             };
           };
         };
+        river.enable = true;
       };
       wayland = {
         common.enable = true;

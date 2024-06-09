@@ -50,8 +50,11 @@
 
   # personal modules
   justinrubek = {
-    windowing.plasma.enable = true;
-    windowing.hyprland.enable = true;
+    windowing = {
+      hyprland.enable = true;
+      plasma.enable = true;
+      river.enable = true;
+    };
 
     graphical.fonts.enable = true;
 

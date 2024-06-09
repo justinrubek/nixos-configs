@@ -22,6 +22,7 @@
 
     "windowing/xmonad" = import ./windowing/xmonad inputs;
     "windowing/hyprland" = import ./windowing/hyprland inputs;
+    "windowing/river" = import ./windowing/river inputs;
 
     # always runs for every configuration
     "misc/home" = import ./misc/home inputs;
