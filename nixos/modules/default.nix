@@ -13,6 +13,7 @@
     "graphical/fonts" = import ./graphical/fonts moduleInput;
 
     "windowing/hyprland" = import ./windowing/hyprland inputs;
+    "windowing/river" = import ./windowing/river inputs;
     "windowing/xmonad" = import ./windowing/xmonad inputs;
     "windowing/plasma" = import ./windowing/plasma inputs;
 
