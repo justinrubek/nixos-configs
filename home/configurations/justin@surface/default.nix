@@ -36,7 +36,7 @@ inputs: {
       };
       wayland = {
         common.enable = true;
-        swaylock.enable = true;
+        swaylock.enable = false;
       };
     };
 
