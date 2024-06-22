@@ -14,14 +14,13 @@ in {
     home.packages = [
       pkgs.protontricks
       pkgs.winetricks
-      pkgs.mangohud
       pkgs.teamspeak_client
       # see https://github.com/NixOS/nixpkgs/issues/78961
       (pkgs.vesktop.override {
         withSystemVencord = false;
       })
       pkgs.airshipper
-      # pkgs.runelite
+      pkgs.runelite
       pkgs.teamspeak5_client
     ];
 

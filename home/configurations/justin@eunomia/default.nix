@@ -116,6 +116,7 @@
         (pkgs.lutris.override {
           extraLibraries = pkgs: [];
         })
+        inputs.nix-gaming.packages.${pkgs.system}.star-citizen
       ];
 
       stateVersion = "22.11";

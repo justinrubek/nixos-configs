@@ -153,6 +153,10 @@
       servers = {
         astro.enable = true;
         cssls.enable = true;
+        gopls = {
+          enable = true;
+          package = inputs'.nix-go.packages.gopls;
+        };
         html.enable = true;
         jsonls.enable = true;
         lua-ls.enable = true;
