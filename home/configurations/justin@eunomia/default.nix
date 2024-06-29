@@ -105,7 +105,7 @@
         inputs.generation-toolkit.packages.${pkgs.system}.generation-toolkit
 
         pkgs.fluffychat
-        (pkgs.element-desktop.override {electron = pkgs.electron_28;})
+        pkgs.element-desktop
 
         inputs.project-runner.packages.${pkgs.system}.project-runner
 

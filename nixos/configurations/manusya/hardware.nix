@@ -35,7 +35,7 @@
   # nvidia settings
   hardware = {
     cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    opengl.enable = true;
+    graphics.enable = true;
     nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.beta;
 
