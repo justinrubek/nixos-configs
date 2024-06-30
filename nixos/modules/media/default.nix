@@ -1,4 +1,8 @@
-{self, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   config,
   pkgs,
   lib,
@@ -9,20 +13,21 @@
   cfg = config.justinrubek.mediahost;
 in {
   options.justinrubek.mediahost = {
-    enable = lib.mkEnableOption "run consul";
+    enable = lib.mkEnableOption "run media";
   };
 
   config = let
     user = "mediahost";
   in
     lib.mkIf cfg.enable {
-      # home directory for "mediahost" user
       users.users.mediahost = {
         isSystemUser = true;
         home = "/home/${user}";
         createHome = true;
         group = "${user}";
         extraGroups = ["jellyfin"];
+        packages = [inputs.epify.packages.${pkgs.system}.epify];
+        shell = pkgs.bashInteractive;
       };
 
       services = {
@@ -39,14 +44,8 @@ in {
           enable = true;
           user = "${user}";
         };
-        sonarr = {
-          enable = true;
-          user = "${user}";
-          dataDir = "/home/${user}/sonarr";
-        };
       };
 
-      # open service ports to the tailnet
       networking.firewall.interfaces.${config.services.tailscale.interfaceName} = let
         ports = {
           jellyfin = [8096];

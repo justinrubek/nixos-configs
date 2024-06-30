@@ -108,17 +108,19 @@
       };
     };
 
+    epify = {
+      url = "github:matthewdargan/epify";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     global-keybind = {
       url = "github:justinrubek/global-keybind";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.fenix.follows = "fenix";
     };
-
     gitu = {
       url = "github:altsem/gitu";
       inputs.nixpkgs.follows = "nixpkgs";
