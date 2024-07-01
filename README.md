@@ -38,6 +38,7 @@ Deployment configuration contained in `./deploy`
 - build the image: `nix build .#nixosConfigurations.rpi5.config.system.build.sdImage`
 - decompress (to `rpi-image`): `zstd --decompress result/sd-image/nixos-sd-image-24.11.20240529.ad57eef-aarch64-linux.img.zst -o rpi-image`
 - use `dd` to write the image to an sd card: `sudo dd if=rpi-image of=/dev/sdX bs=4M`
+- remotely apply nixos-configuration: `nixos-rebuild switch --flake .#rpi5 --target-host rpi5`
 
 ## terraform
 
