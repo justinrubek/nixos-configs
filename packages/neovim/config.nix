@@ -18,6 +18,7 @@
 
   colorschemes.tokyonight.enable = true;
   # colorschemes.nord.enable = true;
+  diagnostics.virtual_lines.only_current_line = true;
 
   globals = {
     mapleader = " ";
@@ -160,7 +161,7 @@
         html.enable = true;
         jsonls.enable = true;
         lua-ls.enable = true;
-        nil_ls.enable = true;
+        nil-ls.enable = true;
         pyright.enable = true;
         rust-analyzer = {
           enable = true;
@@ -179,7 +180,6 @@
     };
     lsp-lines = {
       enable = true;
-      currentLine = true;
     };
     lspsaga.enable = true;
     lualine.enable = true;
