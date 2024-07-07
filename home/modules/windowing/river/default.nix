@@ -31,6 +31,7 @@ inputs: {
     hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
     launcher = "wofi --show drun --style ${./wofi-style.css}";
     logout = "${pkgs.wayland-logout}/bin/wayland-logout";
+    logout-screen = "wlogout -p layer-shell";
     terminal = "wezterm";
   };
 
@@ -90,6 +91,28 @@ in {
     wayland.windowManager.river = {
       enable = true;
       settings = {
+        background-color = "0x2a2a4e";
+        border-color-focused = "0x93a1a1";
+        border-color-unfocused = "0x586e75";
+        border-width = 2;
+        default-layout = "rivertile";
+        focus-follows-cursor = "normal";
+        keyboard-layout = "us";
+        map.normal = {
+          "Super L" = "focus-view right";
+          "Super H" = "focus-view left";
+          "Super K" = "focus-view up";
+          "Super J" = "focus-view down";
+          "Super Q" = "close";
+          "Super Return" = "spawn '${apps.terminal}'";
+          "Super Space" = "spawn '${apps.launcher}'";
+          "Super Escape" = "spawn '${apps.logout-screen}'";
+        };
+        map-pointer.normal = {
+          "Super BTN_LEFT" = "move-view";
+          "Super BTN_RIGHT" = "resize-view";
+        };
+        spawn = ["rivertile"];
       };
     };
   };

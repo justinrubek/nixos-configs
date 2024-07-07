@@ -1,0 +1,32 @@
+window {
+	font-family: iosevka;
+	transition: 1s ease-in-out;
+}
+#input image {
+	color: rgba(0,0,0,0)
+}
+#input {
+	margin-bottom: 20px;
+	margin-left: 100px;
+	margin-right: 100px;
+	margin-top: 10px;
+	box-shadow: none;
+	border-radius: 0px;
+	transition: 0.5s ease-in-out;
+    font-size: 32px;
+}
+#input:focus {
+	margin-left: 10px;
+	margin-right: 10px;
+	transition: 0.5s ease-in-out;
+}
+label {
+	transition: 0.5s ease-in-out;
+}
+#outer-box {
+	transition: 0.5s ease-in-out;
+}
+
+#text {
+    font-size: 28px;
+}
