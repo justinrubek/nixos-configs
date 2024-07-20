@@ -28,7 +28,7 @@ inputs: {
 
   apps = {
     emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
-    hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
+    hyprlock = "${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
     launcher = "wofi --show drun --style ${./wofi-style.css}";
     logout = "${pkgs.wayland-logout}/bin/wayland-logout";
     terminal = "wezterm";
@@ -335,11 +335,13 @@ in {
       hyprpaper = let
         wallpaperMonitors = lib.attrsets.filterAttrs (name: monitor: monitorExists monitor && monitorHasWallpaper monitor) cfg.monitors;
 
-        preloads = lib.attrsets.mapAttrsToList (name: monitor: monitor.wallpaper) wallpaperMonitors;
-        wallpapers = lib.attrsets.mapAttrsToList (name: monitor: "${monitor.name},${monitor.wallpaper}") wallpaperMonitors;
+        preload = lib.attrsets.mapAttrsToList (name: monitor: monitor.wallpaper) wallpaperMonitors;
+        wallpaper = lib.attrsets.mapAttrsToList (name: monitor: "${monitor.name},${monitor.wallpaper}") wallpaperMonitors;
       in {
         enable = true;
-        inherit preloads wallpapers;
+        settings = {
+          inherit preload wallpaper;
+        };
       };
 
       mako = {

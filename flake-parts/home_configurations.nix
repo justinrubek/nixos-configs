@@ -130,9 +130,8 @@ in {
             ]
             ++ config.modules
             ++ [
-              {disabledModules = ["services/hyprpaper.nix" "services/hyprland.nix"];}
+              {disabledModules = ["services/hyprland.nix"];}
               inputs.hyprland.homeManagerModules.default
-              inputs.hyprpaper.homeManagerModules.hyprpaper
               inputs.global-keybind.homeModules.global-keybind
               inputs.nixvim.homeManagerModules.nixvim
             ]
