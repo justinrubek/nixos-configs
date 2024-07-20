@@ -8,10 +8,10 @@
   lib,
   ...
 }: let
-  # Mediahost module
-  # Provides Jellyfin, Sonarr, Radarr, and Jackett
   cfg = config.justinrubek.mediahost;
 in {
+  imports = [./suwayomi.nix];
+
   options.justinrubek.mediahost = {
     enable = lib.mkEnableOption "run media";
   };
@@ -26,14 +26,14 @@ in {
         createHome = true;
         group = "${user}";
         extraGroups = ["jellyfin"];
-        packages = [inputs.epify.packages.${pkgs.system}.epify];
+        packages = [inputs.epify.packages.${pkgs.system}.epify pkgs.beets self.packages.${pkgs.system}.neovim];
         shell = pkgs.bashInteractive;
       };
 
       services = {
         deluge = {
+          inherit user;
           enable = false;
-          user = "${user}";
           dataDir = "/home/${user}/deluge";
           web = {
             enable = true;
@@ -41,14 +41,34 @@ in {
           };
         };
         jellyfin = {
+          inherit user;
           enable = true;
-          user = "${user}";
+        };
+        navidrome = {
+          inherit user;
+          enable = true;
+          settings = {
+            Address = "0.0.0.0";
+            MusicFolder = "/home/${user}/music";
+            Port = 8114;
+          };
+        };
+        suwayomi = {
+          inherit user;
+          enable = true;
+          dataDir = "/home/${user}/.local/share/Tachidesk";
+          settings.server = {
+            localSourcePath = "/home/${user}/.local/share/Tachidesk/local";
+            port = 8113;
+          };
         };
       };
 
       networking.firewall.interfaces.${config.services.tailscale.interfaceName} = let
         ports = {
           jellyfin = [8096];
+          suwayomi = [config.services.suwayomi.settings.server.port];
+          navidrome = [config.services.navidrome.settings.Port];
         };
 
         allPorts = lib.flatten (lib.attrValues ports);
@@ -61,5 +81,7 @@ in {
         allowedTCPPorts = [8096];
         allowedUDPPorts = [8096];
       };
+
+      systemd.services.navidrome.serviceConfig.ProtectHome = lib.mkForce false;
     };
 }
