@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ./copilot.nix
+    # ./copilot.nix
     ./which-key.nix
   ];
 
@@ -103,9 +103,6 @@
     cmp-vsnip.enable = true;
     cmp-cmdline.enable = true;
     comment.enable = true;
-    # copilot-lua.enable = true;
-    copilot-vim.enable = true;
-    # cmp-copilot.enable = true;
     cursorline = {
       enable = true;
       cursorline.enable = false;
@@ -213,7 +210,6 @@
   '';
 
   extraConfigVim = ''
-    luafile ${./lua/copilot.lua}
     luafile ${./lua/keymaps.lua}
   '';
 
