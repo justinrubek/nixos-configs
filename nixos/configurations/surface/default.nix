@@ -58,7 +58,6 @@
 
   networking.firewall.allowedTCPPorts = [22];
 
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {

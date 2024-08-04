@@ -11,8 +11,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    sound.enable = true;
-
     services.pipewire = {
       enable = true;
 
