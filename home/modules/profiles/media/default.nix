@@ -13,7 +13,8 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       vlc
-      youtube-dl
+      yt-dlp
+      feishin
       ffmpeg
     ];
 

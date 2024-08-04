@@ -11,8 +11,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      slack
+    home.packages = [
+      pkgs.slack
+      pkgs.zoom-us
     ];
   };
 }

@@ -7,7 +7,9 @@ inputs: {
   imports = [
     inputs.raspberry-pi-nix.nixosModules.raspberry-pi
   ];
-  environment.systemPackages = [inputs.self.packages.aarch64-linux.neovim];
+  boot.kernelModules = ["i2c-dev"];
+  documentation.man.generateCaches = lib.mkForce false;
+  environment.systemPackages = [inputs.self.packages.aarch64-linux.neovim pkgs.git];
   justinrubek = {
     administration.enable = true;
     tailscale.enable = true;
@@ -18,11 +20,13 @@ inputs: {
       allowedTCPPorts = [22];
     };
   };
+  raspberry-pi-nix.libcamera-overlay.enable = false;
+  system.stateVersion = "24.11";
   users.users = {
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "docker" "input" "systemd-journal"];
+      extraGroups = ["networkmanager" "wheel" "docker" "input" "systemd-journal" "video"];
       shell = pkgs.bashInteractive;
       openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l"];
     };

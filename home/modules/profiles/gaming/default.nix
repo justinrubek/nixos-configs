@@ -12,16 +12,16 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = [
+      pkgs.airshipper
       pkgs.protontricks
-      pkgs.winetricks
+      pkgs.runelite
       pkgs.teamspeak_client
       # see https://github.com/NixOS/nixpkgs/issues/78961
       (pkgs.vesktop.override {
         withSystemVencord = false;
       })
-      pkgs.airshipper
-      pkgs.runelite
-      pkgs.teamspeak5_client
+      pkgs.warzone2100
+      pkgs.winetricks
     ];
 
     # add a .Desktop entry for Vesktop called "Discord"
