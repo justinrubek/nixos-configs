@@ -67,8 +67,6 @@ in {
         curlie
         gnumake
         gcc
-        inputs.git-prune-branches.packages.${pkgs.system}.git-prune-branches
-        inputs.gitu.packages.${pkgs.system}.gitu
         cargo
         rustc
         rust-analyzer

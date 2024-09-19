@@ -28,16 +28,6 @@ in {
 
     xdg = {
       enable = true;
-
-      userDirs = {
-        enable = true;
-        desktop = "${config.home.homeDirectory}/desktop";
-        documents = "${config.home.homeDirectory}/documents";
-        download = "${config.home.homeDirectory}/downloads";
-        music = "${config.home.homeDirectory}/music";
-        pictures = "${config.home.homeDirectory}/pictures";
-        videos = "${config.home.homeDirectory}/videos";
-      };
     };
 
     programs = {
@@ -155,14 +145,11 @@ in {
 
     home.packages = with pkgs; [
       self'.packages.neovim
-      psmisc
       fd
       zip
       unzip
       neofetch
-      procs
       duf
-      bitwarden
     ];
   };
 }

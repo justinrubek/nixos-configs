@@ -51,6 +51,7 @@
       "justin@huginn".system = "x86_64-linux";
       "justin@alex".system = "x86_64-linux";
       "justin@surface".system = "x86_64-linux";
+      "justin@M-JWW1JWQ5PW".system = "aarch64-darwin";
     };
   };
 }
