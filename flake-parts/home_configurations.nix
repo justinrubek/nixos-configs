@@ -123,6 +123,7 @@ in {
                       "steam-run"
                       "teamspeak-client"
                       "teamspeak5-client"
+                      "terraform"
                       "zoom"
                     ];
                   config.xdg.configHome = "${config.homeDirectory}/.config";
