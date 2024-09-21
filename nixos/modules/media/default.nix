@@ -26,7 +26,11 @@ in {
         createHome = true;
         group = "${user}";
         extraGroups = ["jellyfin"];
-        packages = [inputs.epify.packages.${pkgs.system}.epify pkgs.beets self.packages.${pkgs.system}.neovim];
+        packages = [
+          inputs.epify.packages.${pkgs.system}.epify
+          pkgs.beets
+          self.packages.${pkgs.system}.neovim
+        ];
         shell = pkgs.bashInteractive;
       };
 

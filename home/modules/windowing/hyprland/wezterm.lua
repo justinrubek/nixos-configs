@@ -1,6 +1,8 @@
 local config = wezterm.config_builder()
 
 config.enable_tab_bar = false
+config.color_scheme = 'tokyonight'
+
 local opacity = 0.65
 config.window_background_opacity = opacity
 config.window_padding = {

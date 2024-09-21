@@ -94,9 +94,9 @@
 
       packages = with pkgs; [
         rofi
-        (dwarf-fortress-packages.dwarf-fortress-full.override {
-          enableIntro = false;
-        })
+        # (dwarf-fortress-packages.dwarf-fortress-full.override {
+        #   enableIntro = false;
+        # })
         comma.packages.x86_64-linux.default
         alejandra
         prismlauncher
@@ -104,9 +104,6 @@
         pkgs.libreoffice
 
         inputs.generation-toolkit.packages.${pkgs.system}.generation-toolkit
-
-        pkgs.fluffychat
-        pkgs.element-desktop
 
         inputs.project-runner.packages.${pkgs.system}.project-runner
 

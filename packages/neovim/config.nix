@@ -51,8 +51,10 @@
   plugins = {
     bufferline = {
       enable = true;
-      diagnostics = "nvim_lsp";
-      separatorStyle = "slant";
+      settings.options = {
+        diagnostics = "nvim_lsp";
+        separator_style = "slant";
+      };
     };
     cmp = {
       enable = true;
@@ -117,7 +119,7 @@
         indent.char = "¦";
       };
     };
-    intellitab.enable = true;
+    intellitab.enable = false;
     nix.enable = true;
     nvim-tree.enable = true;
     lastplace.enable = true;
@@ -158,6 +160,7 @@
         html.enable = true;
         jsonls.enable = true;
         lua-ls.enable = true;
+        marksman.enable = true;
         nil-ls.enable = true;
         pyright.enable = true;
         rust-analyzer = {
@@ -194,9 +197,10 @@
     todo-comments.enable = true;
     treesitter = {
       enable = true;
-      moduleConfig = {
+      settings = {
+        ensure_installed = "all";
         highlight = {
-          enable = true;
+          enable = false;
         };
       };
     };
