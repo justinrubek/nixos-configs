@@ -60,6 +60,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nix-nomad = {
       url = "github:tristanpemble/nix-nomad";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -176,6 +181,9 @@
 
         ./home/configurations
         ./home/modules
+
+        ./flake-parts/darwin_configurations.nix
+        ./darwin/configurations
 
         ./deploy
 

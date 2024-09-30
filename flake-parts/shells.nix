@@ -20,6 +20,7 @@
         buildInputs = with pkgs; [
           inputs.home-manager.packages.${system}.home-manager
           pkgs.nh
+          inputs'.nix-darwin.packages.darwin-rebuild
         ];
 
         shellHook = ''

@@ -5212,6 +5212,26 @@
         "type": "github"
       }
     },
+    "nix-darwin_2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1728385805,
+        "narHash": "sha256-mUd38b0vhB7yzgAjNOaFz7VY9xIVzlbn3P2wjGBcVV0=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "48b50b3b137be5cfb9f4d006835ce7c3fe558ccc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "nix-filter": {
       "locked": {
         "lastModified": 1681154353,
@@ -7969,6 +7989,7 @@
         "hyprpaper": "hyprpaper",
         "lockpad": "lockpad",
         "neovim-config": "neovim-config",
+        "nix-darwin": "nix-darwin_2",
         "nix-gaming": "nix-gaming",
         "nix-go": "nix-go_2",
         "nix-nomad": "nix-nomad",
