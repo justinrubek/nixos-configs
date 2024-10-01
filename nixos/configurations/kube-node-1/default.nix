@@ -23,6 +23,7 @@ inputs: {
   nix.settings.trusted-users = ["@wheel"];
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
+  security.sudo.wheelNeedsPassword = false;
   services = {
     openssh.enable = true;
     xserver = {
