@@ -12,7 +12,14 @@ inputs: {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.networkmanager.enable = true;
+  networking = {
+    networkmanager.enable = true;
+    hosts = {
+      "192.168.64.3" = ["server.kubernetes.local" "kube-server"];
+      "192.168.64.4" = ["node-0.kubernetes.local" "kube-node-0"];
+      "192.168.64.5" = ["node-1.kubernetes.local" "kube-node-1"];
+    };
+  };
   time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
   services = {
