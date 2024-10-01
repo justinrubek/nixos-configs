@@ -35,6 +35,10 @@ inputs: {
     packages = [
       pkgs.kdePackages.kate
     ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAWyGeNxOahO03gCLeiIF2Iz3QSTXPm2dzJJu7VnfEpZ justin@M-JWW1JWQ5PW"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF1rHmZdKc/O+GC616XWl/Cc6LQT4fZ8LTVKIRJ7m2jT justin@kube-jump"
+    ];
   };
 
   # Allow unfree packages
