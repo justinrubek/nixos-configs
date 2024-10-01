@@ -69,5 +69,8 @@ in {
         modules = [sshModule];
       };
     };
+
+    # kubernetes-the-hard-way
+    kube-jump.system = "aarch64-linux";
   };
 }
