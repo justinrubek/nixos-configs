@@ -72,5 +72,8 @@ in {
 
     # kubernetes-the-hard-way
     kube-jump.system = "aarch64-linux";
+    kube-server.system = "aarch64-linux";
+    kube-node-0.system = "aarch64-linux";
+    kube-node-1.system = "aarch64-linux";
   };
 }
