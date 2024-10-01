@@ -44,6 +44,13 @@ inputs: {
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     inputs.self.packages.${pkgs.system}.neovim
+    pkgs.kubectl
+    pkgs.kubernetes
+    pkgs.cri-tools
+    pkgs.runc
+    pkgs.cni-plugins
+    pkgs.containerd
+    pkgs.etcd
   ];
 
   # Open ports in the firewall.
