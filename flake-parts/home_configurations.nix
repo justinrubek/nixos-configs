@@ -128,6 +128,9 @@ in {
                   config.xdg.configHome = "${config.homeDirectory}/.config";
                 };
               }
+              ({config, ...}: {
+                home.file."${config.gtk.gtk2.configLocation}".force = true; # always force .gtkrc-2.0 replacement
+              })
             ]
             ++ config.modules
             ++ [
