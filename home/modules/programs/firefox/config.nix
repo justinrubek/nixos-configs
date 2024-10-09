@@ -1,8 +1,8 @@
-flake-inputs: {pkgs, ...}: username: {
+{pkgs, inputs, ...}: username: {
   enable = true;
 
   profiles.${username} = {
-    extensions = with flake-inputs.firefox-addons.packages.${pkgs.system}; [
+    extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
       decentraleyes
       ublock-origin
       clearurls

@@ -1,6 +1,7 @@
-{comma, ...} @ inputs: {
+{
+  inputs,
   pkgs,
-  flakeRootPath,
+  self,
   ...
 }: {
   config = {
@@ -36,7 +37,7 @@
               refreshRate = 144;
               resolution = "2560x1440";
               scale = "auto";
-              wallpaper = "${flakeRootPath}/wallpapers/mountain-stream.png";
+              wallpaper = "${self}/wallpapers/mountain-stream.png";
             };
             secondary = {
               name = "DP-6";
@@ -44,7 +45,7 @@
               refreshRate = 100;
               resolution = "2560x1440";
               scale = "auto";
-              wallpaper = "${flakeRootPath}/wallpapers/shiny_purple.png";
+              wallpaper = "${self}/wallpapers/shiny_purple.png";
             };
           };
         };
@@ -97,7 +98,6 @@
         # (dwarf-fortress-packages.dwarf-fortress-full.override {
         #   enableIntro = false;
         # })
-        comma.packages.x86_64-linux.default
         alejandra
         prismlauncher
 

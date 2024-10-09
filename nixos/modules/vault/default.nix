@@ -1,8 +1,8 @@
-{self, ...}: {
+{
   config,
-  pkgs,
   lib,
-  flakeRootPath,
+  pkgs,
+  self',
   ...
 }: let
   cfg = config.justinrubek.vault;
@@ -64,7 +64,7 @@ in {
 
         # TODO: use regular vault package after 1.12.3 is released
         # https://github.com/hashicorp/vault/issues/17527
-        package = self.packages.${pkgs.system}.vault-bin;
+        package = self'.packages.vault-bin;
       };
 
       networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {

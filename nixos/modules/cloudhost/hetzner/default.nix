@@ -1,13 +1,10 @@
-inputs: {
+{
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.justinrubek.cloudhost.hetzner;
-
-  # nixpkgs modules
-  modulesPath = "${inputs.nixpkgs}/nixos/modules";
 in {
   options.justinrubek.cloudhost.hetzner = {
     enable = lib.mkEnableOption "enable hetzner cloud modules";

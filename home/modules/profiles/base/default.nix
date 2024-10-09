@@ -1,7 +1,8 @@
-{self, ...}: {
+{
   config,
   lib,
   pkgs,
+  self',
   ...
 }: let
   cfg = config.profiles.base;
@@ -153,7 +154,7 @@ in {
     };
 
     home.packages = with pkgs; [
-      self.packages.${pkgs.system}.neovim
+      self'.packages.neovim
       psmisc
       fd
       zip

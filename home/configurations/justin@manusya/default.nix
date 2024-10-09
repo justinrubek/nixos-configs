@@ -1,4 +1,4 @@
-_: {pkgs, ...}: {
+{pkgs, ...}: {
   config = {
     activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
 

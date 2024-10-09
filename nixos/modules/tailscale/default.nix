@@ -1,8 +1,8 @@
-{self, ...}: {
+{
+  self,
   config,
   pkgs,
   lib,
-  flakeRootPath,
   ...
 }: let
   cfg = config.justinrubek.tailscale;
@@ -22,7 +22,7 @@ in {
     };
 
     sops.secrets."tailscale_key" = lib.mkIf cfg.autoconnect.enable {
-      sopsFile = "${flakeRootPath}/secrets/tailscale/server.yaml";
+      sopsFile = "${self}/secrets/tailscale/server.yaml";
     };
 
     systemd.services.tailscale-autoconnect = let

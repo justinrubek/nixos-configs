@@ -1,6 +1,5 @@
-inputs: {
+{
   config,
-  flakeRootPath,
   lib,
   pkgs,
   ...

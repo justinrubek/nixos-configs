@@ -1,8 +1,7 @@
-{self, ...}: {
+{
   config,
   pkgs,
   lib,
-  flakeRootPath,
   ...
 }:
 with lib; let

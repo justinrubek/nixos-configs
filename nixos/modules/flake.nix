@@ -1,7 +1,8 @@
-{nixpkgs, ...}: {
+{
   config,
-  pkgs,
+  inputs,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.nix.flakes;
@@ -15,10 +16,10 @@ in {
     nix = {
       settings.experimental-features = "nix-command flakes";
 
-      registry.nixpkgs.flake = nixpkgs;
+      registry.nixpkgs.flake = inputs.nixpkgs;
 
       nixPath = [
-        "nixpkgs=${nixpkgs}"
+        "nixpkgs=${inputs.nixpkgs}"
       ];
     };
 

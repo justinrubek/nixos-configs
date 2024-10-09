@@ -1,9 +1,8 @@
-_: {
+{
   config,
   lib,
-  pkgs,
   ...
-} @ inputs: let
+}: let
   cfg = config.justinrubek.windowing.xmonad;
 in {
   options.justinrubek.windowing.xmonad = {

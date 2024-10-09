@@ -1,6 +1,6 @@
-inputs: {
+{
   pkgs,
-  flakeRootPath,
+  self,
   ...
 }: {
   config = {
@@ -29,7 +29,7 @@ inputs: {
               refreshRate = 60;
               resolution = "3000x2000";
               scale = "auto";
-              wallpaper = "${flakeRootPath}/wallpapers/mountain-stream.png";
+              wallpaper = "${self}/wallpapers/mountain-stream.png";
             };
           };
         };

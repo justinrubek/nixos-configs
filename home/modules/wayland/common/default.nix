@@ -1,9 +1,9 @@
-_: {
+{
   config,
   lib,
   pkgs,
   ...
-} @ inputs: let
+}: let
   cfg = config.justinrubek.wayland.common;
 in {
   options.justinrubek.wayland.common = {

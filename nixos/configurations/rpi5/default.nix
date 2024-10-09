@@ -1,7 +1,9 @@
-inputs: {
+{
   config,
-  pkgs,
+  inputs,
   lib,
+  pkgs,
+  self,
   ...
 }: {
   imports = [
@@ -9,7 +11,7 @@ inputs: {
   ];
   boot.kernelModules = ["i2c-dev"];
   documentation.man.generateCaches = lib.mkForce false;
-  environment.systemPackages = [inputs.self.packages.aarch64-linux.neovim pkgs.git];
+  environment.systemPackages = [self.packages.aarch64-linux.neovim pkgs.git];
   justinrubek = {
     administration.enable = true;
     tailscale.enable = true;

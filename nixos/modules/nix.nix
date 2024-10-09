@@ -1,8 +1,4 @@
-_: {
-  config,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   config = lib.mkMerge [
     {nix.settings.auto-optimise-store = lib.mkDefault true;}
     {

@@ -1,8 +1,8 @@
-{self, ...} @ inputs: {
+{
   config,
+  inputs,
   lib,
   pkgs,
-  specialArgs,
   ...
 }: let
   cfg = config.profiles.development;
@@ -14,7 +14,7 @@ in {
   config = let
     full_name = "Justin Rubek";
     email = "25621857+justinrubek@users.noreply.github.com";
-    name = specialArgs.username;
+    name = config.home.username;
   in
     lib.mkIf cfg.enable {
       programs = {

@@ -1,8 +1,9 @@
-{self, ...}: {
+{
   config,
-  pkgs,
   lib,
-  flakeRootPath,
+  pkgs,
+  self,
+  self',
   ...
 }: let
   cfg = config.justinrubek.nomad;
@@ -25,7 +26,7 @@ in {
         dropPrivileges = false;
 
         # use patched nomad for flake support
-        package = self.packages.${pkgs.system}.nomad;
+        package = self'.packages.nomad;
 
         extraPackages = [config.nix.package];
 
@@ -73,7 +74,7 @@ in {
       };
 
       sops.secrets.nomad_env = {
-        sopsFile = "${flakeRootPath}/secrets/nomad.yaml";
+        sopsFile = "${self}/secrets/nomad.yaml";
         owner = config.systemd.services.serviceConfig.User or "root";
         restartUnits = ["nomad.service"];
       };

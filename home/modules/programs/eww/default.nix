@@ -1,5 +1,6 @@
-inputs: {
+{
   config,
+  inputs',
   lib,
   pkgs,
   ...
@@ -48,7 +49,7 @@ in {
   config = lib.mkIf cfg.enable {
     programs.eww = {
       enable = true;
-      package = inputs.eww.packages.${pkgs.system}.eww-wayland;
+      package = inputs'.eww.packages.eww-wayland;
       configDir = ./config;
     };
 

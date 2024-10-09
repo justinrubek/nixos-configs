@@ -1,7 +1,7 @@
-inputs: {
+{
   config,
-  pkgs,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.justinrubek.windowing.river;

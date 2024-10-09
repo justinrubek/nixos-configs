@@ -1,5 +1,4 @@
-{nixpkgs, ...} @ inputs: {
-  config,
+{
   pkgs,
   lib,
   ...

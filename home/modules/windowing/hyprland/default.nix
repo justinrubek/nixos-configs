@@ -1,6 +1,6 @@
-inputs: {
+{
   config,
-  flakeRootPath,
+  inputs',
   lib,
   pkgs,
   ...
@@ -28,7 +28,7 @@ inputs: {
 
   apps = {
     emoji = "${pkgs.wofi-emoji}/bin/wofi-emoji";
-    hyprlock = "${inputs.hyprlock.packages.${pkgs.system}.hyprlock}/bin/hyprlock";
+    hyprlock = "${inputs'.hyprlock.packages.hyprlock}/bin/hyprlock";
     launcher = "wofi --show drun --style ${./wofi-style.css}";
     logout = "${pkgs.wayland-logout}/bin/wayland-logout";
     terminal = "wezterm";
@@ -276,7 +276,7 @@ in {
         enable = true;
         enableZshIntegration = true;
         extraConfig = builtins.readFile ./wezterm.lua;
-        package = inputs.wezterm.packages.${pkgs.system}.default;
+        package = inputs'.wezterm.packages.default;
       };
       wlogout = {
         enable = true;

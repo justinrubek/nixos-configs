@@ -1,9 +1,8 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
-  flakeRootPath,
+  self,
   ...
 }: {
   imports = [
@@ -39,7 +38,7 @@
   };
 
   sops.secrets.minio_env = {
-    sopsFile = "${flakeRootPath}/secrets/minio.yaml";
+    sopsFile = "${self}/secrets/minio.yaml";
     owner = config.systemd.services.serviceConfig.User or "root";
     restartUnits = ["minio.service"];
   };

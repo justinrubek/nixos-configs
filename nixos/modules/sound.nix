@@ -1,6 +1,5 @@
-{nixpkgs, ...}: {
+{
   config,
-  pkgs,
   lib,
   ...
 }: let

@@ -1,11 +1,9 @@
 {
-  self,
-  inputs,
-  ...
-}: {
   config,
-  pkgs,
+  inputs',
   lib,
+  pkgs,
+  self',
   ...
 }: let
   cfg = config.justinrubek.mediahost;
@@ -27,9 +25,9 @@ in {
         group = "${user}";
         extraGroups = ["jellyfin"];
         packages = [
-          inputs.epify.packages.${pkgs.system}.epify
+          inputs'.epify.packages.epify
           pkgs.beets
-          self.packages.${pkgs.system}.neovim
+          self'.packages.neovim
         ];
         shell = pkgs.bashInteractive;
       };

@@ -5,6 +5,14 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     hashicorp_nixpkgs.url = "github:nixos/nixpkgs/f91ee3065de91a3531329a674a45ddcb3467a650";
 
+    config-parts = {
+      url = "github:justinrubek/config-parts";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -161,15 +169,11 @@
         ./containers
         ./packages
 
-        ./lib
-
         ./modules
 
-        ./flake-parts/nixos_configurations.nix
         ./nixos/configurations
         ./nixos/modules
 
-        ./flake-parts/home_configurations.nix
         ./home/configurations
         ./home/modules
 

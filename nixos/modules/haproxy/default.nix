@@ -1,8 +1,7 @@
-{self, ...}: {
+{
   config,
-  pkgs,
   lib,
-  flakeRootPath,
+  self,
   ...
 }: let
   cfg = config.justinrubek.haproxy;
@@ -137,7 +136,7 @@ in {
       ];
 
     sops.secrets."porkbun_api" = lib.mkIf cfg.ssl.enable {
-      sopsFile = "${flakeRootPath}/secrets/porkbun/creds.yaml";
+      sopsFile = "${self}/secrets/porkbun/creds.yaml";
       owner = "acme";
     };
 

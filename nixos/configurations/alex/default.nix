@@ -1,7 +1,8 @@
-{nixpkgs, ...} @ inputs: {
+{
   config,
-  pkgs,
+  inputs,
   lib,
+  pkgs,
   ...
 }: {
   imports = [

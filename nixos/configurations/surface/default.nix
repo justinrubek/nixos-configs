@@ -1,17 +1,12 @@
 {
-  nixpkgs,
-  nixos-hardware,
-  ...
-} @ inputs: {
-  config,
-  lib,
+  inputs,
   pkgs,
   ...
 }: {
   imports = [
     ./bootloader.nix
     ./hardware.nix
-    nixos-hardware.nixosModules.microsoft-surface-common
+    inputs.nixos-hardware.nixosModules.microsoft-surface-common
   ];
   system.stateVersion = "24.05";
 

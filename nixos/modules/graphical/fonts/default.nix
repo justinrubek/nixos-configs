@@ -1,7 +1,8 @@
-inputs @ {self, ...}: {
+{
   config,
-  pkgs,
   lib,
+  pkgs,
+  self',
   ...
 }: let
   cfg = config.justinrubek.graphical.fonts;
@@ -13,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     fonts = {
       packages = [
-        self.packages.${pkgs.system}.material-symbols
+        self'.packages.material-symbols
 
         pkgs.lexend
         pkgs.nerdfonts

@@ -3,38 +3,37 @@
   self,
   ...
 } @ moduleInput: {
-  # TODO: Rewrite modules to have better inputs
   flake.nixosModules = {
-    cachix = import ./cachix inputs;
-    nix = import ./nix.nix inputs;
-    flake = import ./flake.nix inputs;
-    sound = import ./sound.nix inputs;
+    cachix = ./cachix;
+    nix = ./nix.nix;
+    flake = ./flake.nix;
+    sound = ./sound.nix;
 
-    "graphical/fonts" = import ./graphical/fonts moduleInput;
+    "graphical/fonts" = ./graphical/fonts;
 
-    "windowing/hyprland" = import ./windowing/hyprland inputs;
-    "windowing/river" = import ./windowing/river inputs;
-    "windowing/xmonad" = import ./windowing/xmonad inputs;
-    "windowing/plasma" = import ./windowing/plasma inputs;
+    "windowing/hyprland" = ./windowing/hyprland;
+    "windowing/river" = ./windowing/river;
+    "windowing/xmonad" = ./windowing/xmonad;
+    "windowing/plasma" = ./windowing/plasma;
 
-    containers = import ./containers.nix inputs;
+    containers = ./containers.nix;
 
-    nomad = import ./nomad moduleInput;
-    vault = import ./vault moduleInput;
-    consul = import ./consul moduleInput;
+    nomad = ./nomad;
+    vault = ./vault;
+    consul = ./consul;
 
-    tailscale = import ./tailscale moduleInput;
+    tailscale = ./tailscale;
 
-    haproxy = import ./haproxy moduleInput;
+    haproxy = ./haproxy;
 
-    admin_ssh = import ./admin_ssh.nix inputs;
+    admin_ssh = ./admin_ssh.nix;
 
-    "filesystem/zfs" = import ./filesystem/zfs inputs;
+    "filesystem/zfs" = ./filesystem/zfs;
 
-    "cloudhost/hetzner" = import ./cloudhost/hetzner inputs;
+    "cloudhost/hetzner" = ./cloudhost/hetzner;
 
-    "media" = import ./media moduleInput;
+    "media" = ./media;
 
-    postgres = import ./data/postgres moduleInput;
+    postgres = ./data/postgres;
   };
 }
