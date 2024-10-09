@@ -137,7 +137,6 @@ in {
               {disabledModules = ["services/hyprland.nix"];}
               inputs.hyprland.homeManagerModules.default
               inputs.global-keybind.homeModules.global-keybind
-              inputs.nixvim.homeManagerModules.nixvim
             ]
             # include this flake's modules
             ++ builtins.attrValues self.homeModules

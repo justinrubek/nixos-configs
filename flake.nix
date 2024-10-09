@@ -18,12 +18,14 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
-    nixvim = {
-      url = "github:pta2002/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+    neovim-config = {
+      url = "github:justinrubek/neovim-config";
+      inputs = {
+        fenix.follows = "fenix";
+        nix-go.follows = "nix-go";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     deploy-rs.url = "github:serokell/deploy-rs";
 
