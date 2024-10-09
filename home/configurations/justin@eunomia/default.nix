@@ -31,18 +31,18 @@
           enable = true;
           monitors = {
             primary = {
-              name = "HDMI-A-1";
-              position = "1920x0";
-              refreshRate = 100;
+              name = "DP-1";
+              position = "0x0";
+              refreshRate = 144;
               resolution = "2560x1440";
               scale = "auto";
               wallpaper = "${flakeRootPath}/wallpapers/mountain-stream.png";
             };
             secondary = {
-              name = "DP-1";
-              position = "0x0";
-              refreshRate = 144;
-              resolution = "1920x1080";
+              name = "DP-6";
+              position = "-2560x0";
+              refreshRate = 100;
+              resolution = "2560x1440";
               scale = "auto";
               wallpaper = "${flakeRootPath}/wallpapers/shiny_purple.png";
             };
