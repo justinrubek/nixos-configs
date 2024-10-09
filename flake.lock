@@ -5757,6 +5757,21 @@
         "type": "indirect"
       }
     },
+    "nixpkgs-2405": {
+      "locked": {
+        "lastModified": 1728500571,
+        "narHash": "sha256-dOymOQ3AfNI4Z337yEwHGohrVQb4yPODCW9MDUyAc4w=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d51c28603def282a24fa034bcb007e2bcb5b5dd0",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-24.05",
+        "type": "indirect"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "dir": "lib",
@@ -7997,6 +8012,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_19",
+        "nixpkgs-2405": "nixpkgs-2405",
         "pre-commit-hooks": "pre-commit-hooks_18",
         "project-runner": "project-runner",
         "raspberry-pi-nix": "raspberry-pi-nix",

@@ -12,7 +12,7 @@ inputs: {
         inputs.nix-go.packages.${pkgs.system}.go
         pkgs.awscli
         pkgs.kind
-        pkgs.kops
+        inputs.nixpkgs-2405.legacyPackages.${pkgs.system}.kops_1_26
         pkgs.kubectl
         pkgs.kubernetes-helm
         pkgs.podman
