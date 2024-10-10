@@ -23,7 +23,6 @@ in {
     };
 
     security.sudo.wheelNeedsPassword = false;
-    nix.settings.trusted-users = ["@wheel"];
 
     services.getty.autologinUser = "admin";
 
