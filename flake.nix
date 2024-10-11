@@ -7,10 +7,7 @@
 
     config-parts = {
       url = "github:justinrubek/config-parts";
-      inputs = {
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     fenix = {

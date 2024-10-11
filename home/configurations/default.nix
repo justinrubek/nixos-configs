@@ -25,8 +25,8 @@
                 "teamspeak5-client"
                 "zoom"
               ];
-            config.xdg.configHome = "${config.homeDirectory}/.config";
           };
+          xdg.configHome = "${config.home.homeDirectory}/.config";
         })
         {disabledModules = ["services/hyprland.nix"];}
         inputs.hyprland.homeManagerModules.default

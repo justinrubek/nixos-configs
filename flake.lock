@@ -445,20 +445,17 @@
       "inputs": {
         "flake-parts": "flake-parts_2",
         "git-hooks": "git-hooks",
-        "home-manager": [
-          "home-manager"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ],
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1728530868,
-        "narHash": "sha256-Nol6XfGX4jkJ2MXR1mk8Vz16hjXeiarJpHKOu4bEBAQ=",
+        "lastModified": 1728622711,
+        "narHash": "sha256-1993JqYRGziSLIpyuCLJlZLqjZmKwC4L4A7yuVkdg6s=",
         "owner": "justinrubek",
         "repo": "config-parts",
-        "rev": "898618557de337050ebca4755bd0bc4a9bd1aa7a",
+        "rev": "a5478e6f36b48852c124eda552dbc16013401918",
         "type": "github"
       },
       "original": {
