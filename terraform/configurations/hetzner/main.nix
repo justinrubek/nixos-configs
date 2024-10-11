@@ -9,8 +9,12 @@ _: let
   };
 in {
   # configure hcloud
-  variable.hcloud_token.sensitive = true;
-  provider.hcloud.token = "\${var.hcloud_token}";
+  provider = {
+    minio = {
+      minio_region = "fsn1";
+      minio_ssl = true;
+    };
+  };
 
   data.hcloud_image.nixos_base = {
     id = "92487340";
@@ -98,6 +102,11 @@ in {
       server_id = "\${hcloud_server.alex.id}";
       volume_id = "\${hcloud_volume.persist.id}";
       automount = false;
+    };
+
+    minio_s3_bucket.nix_cache = {
+      bucket = "rubek-nix-cache";
+      acl = "private";
     };
   };
 
