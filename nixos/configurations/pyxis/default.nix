@@ -29,10 +29,10 @@
     vault = {
       enable = true;
 
-      retry_join = [
-        "http://bunky:8200"
-        "http://ceylon:8200"
-      ];
+      # retry_join = [
+      #   "http://bunky:8200"
+      #   "http://ceylon:8200"
+      # ];
     };
 
     consul = {

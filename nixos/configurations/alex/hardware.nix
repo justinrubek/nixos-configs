@@ -26,23 +26,6 @@
     };
   };
 
-  services.minio = {
-    enable = true;
-    browser = true;
-
-    dataDir = ["/var/nfs/minio"];
-    rootCredentialsFile = config.sops.secrets."minio_env".path;
-
-    listenAddress = "0.0.0.0:9000";
-    consoleAddress = "0.0.0.0:9001";
-  };
-
-  sops.secrets.minio_env = {
-    sopsFile = "${self}/secrets/minio.yaml";
-    owner = config.systemd.services.serviceConfig.User or "root";
-    restartUnits = ["minio.service"];
-  };
-
   services.nfs.server = {
     enable = true;
     statdPort = 4000;

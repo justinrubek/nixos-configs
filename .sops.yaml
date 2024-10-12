@@ -1,9 +1,9 @@
 keys:
   - &admin_justin age1en3a406mje3x7nqpmrth4x9n23fz6mwztmyhmtn3fqyrkl25avgqfwghcd
   - &server_eunomia age1en3a406mje3x7nqpmrth4x9n23fz6mwztmyhmtn3fqyrkl25avgqfwghcd
-  - &server_bunky age1eg73s6n7kw0nu73cmlh7r7h3glc7umufv4q027nd9af757lkhflsxdyqp5
-  - &server_ceylon age1sdpel8lnp90e43a7nag7p44mkpuglf5mg0f0ccq4kr9pvxmdkfpqznvu2r
-  - &server_pyxis age1n52ec7jk26u40rx3c858s9udwp603s24af05h8jpc4h5zqr95uzs86t9w7 
+  - &server_bunky age1p9guzg2fw70rtsjfwt69ux0pfjcfgzykjy7u4p7wsmg5lf4pgvcqh5pxnv
+  - &server_ceylon age19ryr2zcmnzg6fvnlk7q7zcc2gd3zxmw2u4twq0n9h4jgxjgnhe0qwj87uy
+  - &server_pyxis age12trd5jrghe4g39phdpdapn6dlk9kqakzqgk39kufwwpknr77ze7slsy3km
   - &server_huginn age1l5pkxrftt3e25kny6l8xllw53uh6almh9usv8x9h67g82k7q63ss8daq5e
   - &server_alex age1z94tzmzngntrkn32jm4283m2fwhhw73q8gghawld4vya7a6jtafsyznmnk
 creation_rules:

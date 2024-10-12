@@ -39,9 +39,7 @@ in {
       ceylon = {
         name = "ceylon";
 
-        server_type = "cpx31";
-        # inherit server_type;
-        inherit location image;
+        inherit server_type location image;
         inherit public_net;
       };
       huginn = {

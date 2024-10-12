@@ -3,6 +3,7 @@ _: {
   provider = {
     vault = {};
     consul = {
+      address = "bunky:8500";
       datacenter = "dc1";
     };
   };
