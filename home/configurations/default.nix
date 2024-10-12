@@ -36,7 +36,6 @@
       ++ builtins.attrValues self.modules;
 
     configurations = {
-      "justin@manusya".system = "x86_64-linux";
       "justin@eunomia" = {
         system = "x86_64-linux";
         modules = [
