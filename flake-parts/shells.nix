@@ -19,6 +19,7 @@
       default = pkgs.mkShell {
         buildInputs = with pkgs; [
           alejandra
+          pkgs.attic-client
           inputs.home-manager.packages.${system}.home-manager
           pkgs.nh
           hcloud

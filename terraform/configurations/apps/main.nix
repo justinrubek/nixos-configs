@@ -153,7 +153,7 @@ in {
     };
 
     conduit = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/conduit.json";
       extraArgs = {
         depends_on = ["resource.nomad_volume.conduit_data"];
@@ -182,7 +182,7 @@ in {
     };
 
     lockpad = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/lockpad.json";
       extraArgs = {
         depends_on = ["resource.nomad_volume.lockpad_postgres"];
@@ -190,7 +190,7 @@ in {
     };
 
     annapurna = {
-      enable = true;
+      enable = false;
       jobspec = "${nomad_jobs}/annapurna.json";
     };
   };

@@ -61,6 +61,10 @@ in {
         system = "x86_64-linux";
         modules = [sshModule];
       };
+      factorio = {
+        system = "x86_64-linux";
+        modules = [sshModule];
+      };
 
       # other
       hetzner-base = {

@@ -53,11 +53,6 @@ in {
         policy = builtins.readFile ./policies/factorio-server.hcl;
       };
 
-      nix_cache_postgres = {
-        name = "nix-cache-postgres";
-        policy = builtins.readFile ./policies/nix-cache-postgres.hcl;
-      };
-
       nix_cache_attic = {
         name = "nix-cache-attic";
         policy = builtins.readFile ./policies/nix-cache-attic.hcl;
@@ -81,6 +76,11 @@ in {
       annapurna_postgres = {
         name = "annapurna-postgres";
         policy = builtins.readFile ./policies/annapurna-postgres.hcl;
+      };
+
+      flake_builder_github = {
+        name = "flake-builder-github";
+        policy = builtins.readFile ./policies/flake-builder-github.hcl;
       };
     };
 

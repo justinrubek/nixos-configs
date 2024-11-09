@@ -14,10 +14,10 @@
   boot = {
     # kernelPackages = pkgs.linuxKernel.packages.linux_6_0;
     # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
+    # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
     # kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
     supportedFilesystems = ["zfs" "ext4"];
-    zfs.package = pkgs.zfs_unstable;
+    # zfs.package = pkgs.zfs_unstable;
   };
 
   # Set your time zone.

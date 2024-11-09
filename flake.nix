@@ -10,6 +10,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    factorio-server = {
+      url = "github:justinrubek/factorio-server";
+      inputs = {
+        fenix.follows = "fenix";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     fenix = {
       url = "github:nix-community/fenix";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -1,70 +1,27 @@
-_: {
+_: let
+  atticSecret = name: ''{{ with secret "kv-v2/data/nix-cache/attic" }}{{ .Data.data.${name} }}{{ end }}'';
+  storageSecret = name: ''{{ with secret "kv-v2/data/nix-cache/object-storage" }}{{ .Data.data.${name} }}{{ end }}'';
+  postgresSecret = name: ''{{ with secret "kv-v2/data/nix-cache/postgres" }}{{ .Data.data.${name} }}{{ end }}'';
+
+  postgresUrl = ''postgres://${postgresSecret "username"}:${postgresSecret "password"}@alex:5435/${postgresSecret "database"}'';
+in {
   job.nix_cache = {
     datacenters = ["dc1"];
 
     group.cache = {
       count = 1;
 
-      volume = {
-        "nix_cache_postgres" = {
-          type = "csi";
-          source = "nix_cache_postgres";
-          readOnly = false;
-
-          attachmentMode = "file-system";
-          accessMode = "single-node-writer";
-        };
-      };
-
       networks = [
         {
-          mode = "bridge";
           port.http.to = 8080;
-          port.database.to = 5432;
         }
       ];
-
-      task.database = {
-        driver = "docker";
-
-        config = {
-          image = "docker.io/postgres@sha256:2e89ed90224245851ea2b01e0b20c4b893e69141eb36e7a1cece7fb9e19f21f0";
-
-          ports = ["database"];
-        };
-
-        volumeMounts = [
-          {
-            volume = "nix_cache_postgres";
-            destination = "/var/lib/postgresql/data";
-            readOnly = false;
-          }
-        ];
-
-        vault = {
-          policies = ["nix-cache-postgres"];
-        };
-
-        templates = [
-          {
-            data = let
-              secretKey = "nix-cache/postgres";
-              envSecret = name: ''{{ with secret "kv-v2/data/${secretKey}" }}{{ .Data.data.${name} }}{{ end }}'';
-            in ''
-              POSTGRES_USER=${envSecret "username"}
-              POSTGRES_PASSWORD=${envSecret "password"}
-            '';
-            destination = "secrets/env";
-            env = true;
-          }
-        ];
-      };
 
       task.server = {
         driver = "docker";
 
         config = {
-          image = "docker.io/justinrubek/attic@sha256:cd208158db0733791714d1c59d72a3710f4e67f7490ee0b770a786b3ca1b61ab";
+          image = "ghcr.io/zhaofengli/attic:e5c8d2d50981a34602358d917e7be011b2c397a8";
 
           args = [
             "--config"
@@ -78,12 +35,7 @@ _: {
           policies = ["nix-cache-attic"];
         };
 
-        templates = let
-          databaseSecret = name: ''{{ with secret "kv-v2/data/nix-cache/database" }}{{ .Data.data.${name} }}{{ end }}'';
-          minioSecret = name: ''{{ with secret "kv-v2/data/nix-cache/minio" }}{{ .Data.data.${name} }}{{ end }}'';
-
-          postgresUrl = ''postgres://${databaseSecret "username"}:${databaseSecret "password"}@localhost:5432/${databaseSecret "database"}'';
-        in [
+        templates = [
           {
             changeMode = "restart";
             destination = "secrets/attic.toml";
@@ -92,20 +44,22 @@ _: {
               allowed-hosts = []
               api-endpoint = "https://nix-cache.rubek.cloud/"
               require-proof-of-possession = false
-              token-hs256-secret-base64 = '${databaseSecret "token_secret"}'
+
+              [jwt.signing]
+              token-hs256-secret-base64 = '${atticSecret "token_secret"}'
 
               [database]
               url = '${postgresUrl}'
 
               [storage]
               type = "s3"
-              region = "us-east-1"
-              bucket = '${minioSecret "bucket"}'
-              endpoint = "http://alex:9000"
+              region = '${storageSecret "region"}'
+              bucket = '${storageSecret "bucket"}'
+              endpoint = '${storageSecret "endpoint"}'
 
               [storage.credentials]
-              access_key_id = '${minioSecret "access_key"}'
-              secret_access_key = '${minioSecret "secret_key"}'
+              access_key_id = '${storageSecret "access_key"}'
+              secret_access_key = '${storageSecret "secret_key"}'
 
               [chunking]
               nar-size-threshold = 65536
@@ -120,8 +74,8 @@ _: {
         ];
 
         resources = {
-          cpu = 500;
-          memory = 400;
+          cpu = 1500;
+          memory = 1600;
         };
       };
 

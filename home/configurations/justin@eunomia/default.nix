@@ -40,9 +40,9 @@
               wallpaper = "${self}/wallpapers/mountain-stream.png";
             };
             secondary = {
-              name = "DP-6";
+              name = "DP-2";
               position = "-2560x0";
-              refreshRate = 100;
+              refreshRate = 60;
               resolution = "2560x1440";
               scale = "auto";
               wallpaper = "${self}/wallpapers/shiny_purple.png";

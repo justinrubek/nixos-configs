@@ -6,6 +6,7 @@ keys:
   - &server_pyxis age12trd5jrghe4g39phdpdapn6dlk9kqakzqgk39kufwwpknr77ze7slsy3km
   - &server_huginn age1l5pkxrftt3e25kny6l8xllw53uh6almh9usv8x9h67g82k7q63ss8daq5e
   - &server_alex age1z94tzmzngntrkn32jm4283m2fwhhw73q8gghawld4vya7a6jtafsyznmnk
+  - &server_factorio age1cvzm79nyup6klnwc8dhwhhssk34sk48ke6kqn5nwm6pfskkp5g2qla9lkr
 creation_rules:
   - path_regex: secrets/bunky/[^/]+\.yaml$
     key_groups:
@@ -22,6 +23,7 @@ creation_rules:
       - *server_pyxis
       - *server_huginn
       - *server_alex
+      - *server_factorio
 
   - path_regex: secrets/vault/[^/]+\.yaml$
     key_groups:

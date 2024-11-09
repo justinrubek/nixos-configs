@@ -54,6 +54,13 @@ in {
         inherit server_type location image;
         inherit public_net;
       };
+      factorio = {
+        name = "factorio";
+
+        server_type = "cpx31";
+        inherit location image;
+        inherit public_net;
+      };
     };
 
     hcloud_firewall.load_balancer = {

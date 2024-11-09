@@ -1,59 +1,24 @@
 {
   config,
-  inputs,
-  lib,
   pkgs,
+  lib,
+  inputs',
   ...
 }: {
   imports = [
     ./hardware.nix
   ];
 
-  services.justinrubek.postgresql = {
-    enable = true;
-    package = inputs.nix-postgres.packages.${pkgs.system}."psql_15/bin";
-    port = 5435;
-
-    ensureDatabases = ["lockpad" "annapurna" "nix-cache"];
-    ensureUsers = [
-      {
-        name = "annapurna";
-        ensureDBOwnership = true;
-      }
-      {
-        name = "nix-cache";
-        ensureDBOwnership = true;
-      }
-    ];
-
-    identMap = ''
-      superuser_map justin postgres
-      superuser_map postgres postgres
-      superuser_map      /^(.*)$   \1
-    '';
-    authentication = ''
-      local all all peer map=superuser_map
-      host all all 100.64.0.0/10 scram-sha-256
-    '';
-    enableTCPIP = true;
-  };
-
   # Linux kernel
 
   # Enable networking
   # networking.networkmanager.enable = true;
 
-  # Set your time zone.
   time.timeZone = "America/Chicago";
-
-  # Select internationalisation properties.
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
+  i18n.defaultLocale = "en_US.UTF-8";
 
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
-  # personal modules
   justinrubek = {
     tailscale = {
       enable = true;
@@ -83,7 +48,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    inputs.nix-postgres.packages.${pkgs.system}."psql_15/bin"
   ];
 
   # services.openssh = {
@@ -91,16 +55,29 @@
   #   permitRootLogin = "no";
   # };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-
-  networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
-    allowedTCPPorts = [
-      config.services.justinrubek.postgresql.port
-    ];
+  # rpc.statd fix
+  services = {
+    nfs.server.enable = true;
+    factorio = {
+      enable = true;
+      package = inputs'.factorio-server.packages.factorio-headless;
+      admins = ["justinkingr"];
+      autosave-interval = 2;
+      game-name = "I used to have a family, now I have a factory";
+      game-password = "UG"; # TODO: change this
+      lan = false;
+      loadLatestSave = true;
+      nonBlockingSaving = true;
+      openFirewall = true;
+      port = 34500;
+      saveName = "first-space-age";
+    };
   };
 
+  # Open ports in the firewall.
+  networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
+    allowedUDPPorts = [ 34500 ];
+  };
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
