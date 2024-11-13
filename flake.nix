@@ -5,6 +5,10 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     hashicorp_nixpkgs.url = "github:nixos/nixpkgs/f91ee3065de91a3531329a674a45ddcb3467a650";
 
+    cam2ip = {
+      url = "github:justinrubek/cam2ip";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     config-parts = {
       url = "github:justinrubek/config-parts";
       inputs.nixpkgs.follows = "nixpkgs";

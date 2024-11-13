@@ -1,5 +1,6 @@
 {
   inputs,
+  inputs',
   pkgs,
   ...
 }: {
@@ -41,6 +42,15 @@
     };
     xserver.enable = true;
     openssh.enable = true;
+  };
+  systemd.services = {
+    cam2ip = {
+      description = "webcam IP camera";
+      requires = ["network.target"];
+      serviceConfig = {
+        ExecStart = "${inputs'.cam2ip.packages.cam2ip}";
+      };
+    };
   };
   justinrubek = {
     windowing.plasma.enable = true;
