@@ -75,6 +75,9 @@ in {
         default = null;
       };
     };
+    screen-lock = {
+      enable = lib.mkEnableOption "Enable screen-locking";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -97,8 +100,8 @@ in {
           }
         ];
       };
-      hyprlock = {
-        enable = true;
+      hyprlock = lib.mkIf cfg.screen-lock.enable {
+        enable = false;
         settings = {
           general = {
             grace = 300;
@@ -310,7 +313,7 @@ in {
     };
 
     services = {
-      hypridle = {
+      hypridle = lib.mkIf cfg.screen-lock.enable {
         enable = true;
         settings = {
           general = {

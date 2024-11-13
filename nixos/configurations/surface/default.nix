@@ -11,8 +11,19 @@
   system.stateVersion = "24.05";
 
   microsoft-surface = {
-    kernelVersion = "6.8";
-    ipts = {
+    kernelVersion = "6.11.4";
+  };
+
+  time.timeZone = "America/Chicago";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+  };
+
+  programs.zsh.enable = true;
+
+  services = {
+    displayManager.sddm.enable = true;
+    iptsd = {
       enable = true;
       config = {
         Config = {
@@ -28,17 +39,6 @@
         };
       };
     };
-  };
-
-  time.timeZone = "America/Chicago";
-  i18n = {
-    defaultLocale = "en_US.UTF-8";
-  };
-
-  programs.zsh.enable = true;
-
-  services = {
-    displayManager.sddm.enable = true;
     xserver.enable = true;
     openssh.enable = true;
   };

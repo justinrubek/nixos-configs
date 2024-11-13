@@ -50,7 +50,10 @@
   # personal modules
   justinrubek = {
     windowing = {
-      hyprland.enable = true;
+      hyprland = {
+        enable = true;
+        screen-lock.enable = true;
+      };
       plasma.enable = true;
       river.enable = true;
     };
