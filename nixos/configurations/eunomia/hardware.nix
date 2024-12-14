@@ -50,8 +50,8 @@
       enable = true;
       enable32Bit = true;
       extraPackages = [
-        pkgs.rocm-opencl-icd
-        pkgs.rocm-opencl-runtime
+        pkgs.rocmPackages.clr
+        pkgs.rocmPackages.clr.icd
       ];
     };
   };

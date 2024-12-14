@@ -11,14 +11,15 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      gtop
-      gping
-      speedcrunch
-      flameshot
-      nerdfonts
-      bitwarden
-      pkgs.rnote
-    ];
+    home.packages = with pkgs;
+      [
+        gtop
+        gping
+        speedcrunch
+        flameshot
+        bitwarden
+        pkgs.rnote
+      ]
+      ++ (builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts));
   };
 }

@@ -20,6 +20,7 @@
                 "slack"
                 "steam"
                 "steam-original"
+                "steam-unwrapped"
                 "steam-run"
                 "teamspeak-client"
                 "teamspeak5-client"

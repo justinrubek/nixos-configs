@@ -13,18 +13,20 @@ in {
 
   config = lib.mkIf cfg.enable {
     fonts = {
-      packages = [
-        self'.packages.material-symbols
+      packages =
+        [
+          self'.packages.material-symbols
 
-        pkgs.lexend
-        pkgs.nerdfonts
-        pkgs.noto-fonts
-        pkgs.noto-fonts-emoji
+          pkgs.lexend
 
-        pkgs.roboto
+          pkgs.noto-fonts
+          pkgs.noto-fonts-emoji
 
-        pkgs.iosevka
-      ];
+          pkgs.roboto
+
+          pkgs.iosevka
+        ]
+        ++ (builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts));
 
       fontconfig.defaultFonts = {
         serif = ["Noto Serif" "Noto Color Emoji"];
