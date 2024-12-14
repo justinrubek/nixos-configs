@@ -101,7 +101,7 @@ in {
         ];
       };
       hyprlock = lib.mkIf cfg.screen-lock.enable {
-        enable = false;
+        enable = true;
         settings = {
           general = {
             grace = 300;

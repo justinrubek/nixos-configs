@@ -52,7 +52,6 @@
     windowing = {
       hyprland = {
         enable = true;
-        screen-lock.enable = true;
       };
       plasma.enable = true;
       river.enable = true;

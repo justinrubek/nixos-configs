@@ -48,6 +48,7 @@
               wallpaper = "${self}/wallpapers/shiny_purple.png";
             };
           };
+          screen-lock.enable = true;
         };
         river.enable = true;
       };
