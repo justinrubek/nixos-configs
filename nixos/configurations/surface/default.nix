@@ -48,7 +48,9 @@
       description = "webcam IP camera";
       requires = ["network.target"];
       serviceConfig = {
-        ExecStart = "${inputs'.cam2ip.packages.cam2ip}";
+        ExecStart = "${inputs'.cam2ip.packages.cam2ip}/bin/cam2ip --width 1280 --height 720";
+        Nice = -10;
+        IOSchedulingClass = 2;
       };
     };
   };
