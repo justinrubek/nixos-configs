@@ -22,6 +22,7 @@
                 "steam-original"
                 "steam-unwrapped"
                 "steam-run"
+                "teamspeak3"
                 "teamspeak-client"
                 "teamspeak5-client"
                 "zoom"

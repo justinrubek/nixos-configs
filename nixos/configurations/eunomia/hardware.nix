@@ -52,6 +52,7 @@
       extraPackages = [
         pkgs.rocmPackages.clr
         pkgs.rocmPackages.clr.icd
+        pkgs.amf
       ];
     };
   };

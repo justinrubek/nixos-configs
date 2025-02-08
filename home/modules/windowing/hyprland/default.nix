@@ -441,12 +441,13 @@ in {
             passes = 3;
             new_optimizations = true;
           };
-          drop_shadow = true;
-          shadow_ignore_window = true;
-          shadow_offset = "2 2";
-          shadow_range = 4;
-          shadow_render_power = 1;
-          "col.shadow" = "0x55000000";
+          shadow = {
+            color_inactive = "0x55000000";
+            ignore_window = true;
+            offset = "2 2";
+            range = 4;
+            render_power = 1;
+          };
         };
         dwindle = {
           pseudotile = true;
@@ -470,8 +471,8 @@ in {
             gradients = false;
           };
 
-          "col.border_active" = "${colors.pink}";
-          "col.border_inactive" = "${colors.surface0}";
+          "col.border_active" = "0x${colors.pink}";
+          "col.border_inactive" = "0x${colors.surface0}";
         };
         input = {
           kb_layout = "us";
@@ -509,6 +510,13 @@ in {
           "workspace special silent, class:(steam), title:(Sign in to Steam)"
           "float, class:(steam), title:(Friends List)"
           "size 400 600, class:(steam), title:(Friends List)"
+          # https://wiki.hyprland.org/Useful-Utilities/Screen-Sharing/#xwayland
+          "opacity 0.0 override, class:^(xwaylandvideobridge)$"
+          "noanim, class:^(xwaylandvideobridge)$"
+          "noinitialfocus, class:^(xwaylandvideobridge)$"
+          "maxsize 1 1, class:^(xwaylandvideobridge)$"
+          "noblur, class:^(xwaylandvideobridge)$"
+          "nofocus, class:^(xwaylandvideobridge)$"
         ];
       };
     };

@@ -116,12 +116,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    project-runner = {
-      url = "github:justinrubek/project-runner";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.fenix.follows = "fenix";
-    };
-
     lockpad = {
       url = "github:justinrubek/lockpad";
       inputs = {
@@ -154,10 +148,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
-    wezterm = {
-      url = "github:wez/wezterm?dir=nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    wezterm.url = "github:wez/wezterm?dir=nix";
   };
 
   outputs = {

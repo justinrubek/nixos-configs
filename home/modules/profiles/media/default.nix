@@ -15,7 +15,8 @@ in {
       vlc
       yt-dlp
       feishin
-      ffmpeg
+      pkgs.ffmpeg-full
+      pkgs.mkvtoolnix
     ];
 
     programs.mpv.enable = true;

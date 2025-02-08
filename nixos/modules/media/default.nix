@@ -26,7 +26,11 @@ in {
         extraGroups = ["jellyfin"];
         packages = [
           inputs'.epify.packages.epify
-          pkgs.beets
+          (pkgs.beets.override {
+            pluginOverrides = {
+              lyrics.enable = true;
+            };
+          })
           self'.packages.neovim
         ];
         shell = pkgs.bashInteractive;

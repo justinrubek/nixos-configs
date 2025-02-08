@@ -106,8 +106,6 @@
 
         inputs.generation-toolkit.packages.${pkgs.system}.generation-toolkit
 
-        inputs.project-runner.packages.${pkgs.system}.project-runner
-
         pkgs.tiled
         pkgs.pavucontrol
         pkgs.tokei
