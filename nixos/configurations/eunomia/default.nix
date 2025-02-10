@@ -69,6 +69,8 @@
     tailscale.enable = true;
 
     mediahost.enable = true;
+
+    services.paperless.enable = true;
   };
 
   users.groups.mediahost = {};
@@ -105,7 +107,10 @@
       enable = true;
       wifi.scanRandMacAddress = false;
     };
-    firewall.allowedTCPPorts = [8000];
+    firewall.allowedTCPPorts = [
+      8000
+      21040 # sftpgo-ftp
+    ];
     firewall.interfaces.${config.services.tailscale.interfaceName} = {
       allowedTCPPorts = [
         3000

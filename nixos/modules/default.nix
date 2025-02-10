@@ -35,5 +35,6 @@
     "media" = ./media;
 
     postgres = ./data/postgres;
+    paperless = ./paperless;
   };
 }
