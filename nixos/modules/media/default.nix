@@ -25,7 +25,7 @@ in {
         group = "${user}";
         extraGroups = ["jellyfin"];
         packages = [
-          inputs'.epify.packages.epify
+          # inputs'.epify.packages.epify
           (pkgs.beets.override {
             pluginOverrides = {
               lyrics.enable = true;

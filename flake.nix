@@ -116,14 +116,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lockpad = {
-      url = "github:justinrubek/lockpad";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        fenix.follows = "fenix";
-      };
-    };
-
     epify = {
       url = "github:matthewdargan/epify";
       inputs.nixpkgs.follows = "nixpkgs";

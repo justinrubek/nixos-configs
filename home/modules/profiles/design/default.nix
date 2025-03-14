@@ -12,9 +12,11 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
+      blender
       gimp
       kdenlive
-      blender
+      openscad-unstable
+      prusa-slicer
     ];
   };
 }

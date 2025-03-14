@@ -20,6 +20,7 @@
   systemd.services.systemd-networkd-wait-online.enable = lib.mkForce false;
 
   justinrubek = {
+    services.vintagestory.enable = true;
     tailscale = {
       enable = true;
       autoconnect.enable = true;
@@ -76,8 +77,9 @@
 
   # Open ports in the firewall.
   networking.firewall.interfaces.${config.services.tailscale.interfaceName} = {
-    allowedUDPPorts = [ 34500 ];
+    allowedUDPPorts = [34500];
   };
+
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

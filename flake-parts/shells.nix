@@ -41,7 +41,6 @@
           pkgs.skopeo
           self'.packages."scripts/skopeo-push"
 
-          inputs'.lockpad.packages.cli
           inputs'.nix-postgres.packages."psql_15/bin"
         ];
 
