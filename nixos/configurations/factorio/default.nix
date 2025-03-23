@@ -96,4 +96,7 @@
       experimental-features = nix-command flakes
     '';
   };
+
+  # TODO: remove
+  systemd.services.zfs-zed.wantedBy = lib.mkForce [];
 }

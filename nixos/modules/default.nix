@@ -36,6 +36,5 @@
 
     postgres = ./data/postgres;
     paperless = ./paperless;
-    vintagestory = ./vintagestory.nix;
   };
 }
