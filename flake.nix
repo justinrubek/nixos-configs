@@ -1,6 +1,4 @@
 {
-  description = "nixos configuration";
-
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
 
@@ -123,22 +121,14 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
-        ./flake-parts/shells.nix
         ./flake-parts/ci.nix
-
-        ./packages
-
-        ./modules
-
-        ./nixos/configurations
-        ./nixos/modules
-
+        ./flake-parts/pre-commit.nix
+        ./flake-parts/shells.nix
         ./home/configurations
         ./home/modules
-
-        ./flake-parts/pre-commit.nix
-        ./flake-parts/formatting.nix
-        inputs.pre-commit-hooks.flakeModule
+        ./nixos/configurations
+        ./nixos/modules
+        ./packages
       ];
     };
 }

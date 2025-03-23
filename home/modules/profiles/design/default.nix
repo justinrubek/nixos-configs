@@ -14,7 +14,7 @@ in {
     home.packages = with pkgs; [
       blender
       gimp
-      kdenlive
+      kdePackages.kdenlive
       openscad-unstable
       prusa-slicer
     ];
