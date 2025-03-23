@@ -56,6 +56,7 @@ in {
           User = "paperless";
           WorkingDirectory = dataDir;
         };
+        wantedBy = ["multi-user.target"];
       };
     };
   };
