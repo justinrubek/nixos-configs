@@ -34,8 +34,7 @@
         inputs.hyprland.homeManagerModules.default
         inputs.global-keybind.homeModules.global-keybind
       ]
-      ++ builtins.attrValues self.homeModules
-      ++ builtins.attrValues self.modules;
+      ++ builtins.attrValues self.homeModules;
 
     configurations = {
       "justin@eunomia" = {
