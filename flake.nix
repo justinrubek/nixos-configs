@@ -66,6 +66,10 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    git-bare = {
+      url = "github:justinrubek/git-bare";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     git-prune-branches = {
       url = "github:justinrubek/git-prune-branches";
       inputs.nixpkgs.follows = "nixpkgs";
