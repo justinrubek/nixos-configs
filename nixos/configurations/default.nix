@@ -25,8 +25,7 @@
         inputs.hyprland.nixosModules.default
         inputs.sops-nix.nixosModules.sops
       ]
-      ++ builtins.attrValues self.nixosModules
-      ++ builtins.attrValues self.modules;
+      ++ builtins.attrValues self.nixosModules;
 
     configurations = {
       eunomia.system = "x86_64-linux";
