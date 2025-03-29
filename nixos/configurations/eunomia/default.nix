@@ -38,6 +38,20 @@
       defaultSession = "hyprland";
     };
     flatpak.enable = true;
+    home-assistant = {
+      enable = true;
+      extraComponents = [
+        "airgradient"
+        "air_quality"
+        "default_config"
+        "esphome"
+        "met"
+        "radio_browser"
+      ];
+      config = {
+        default_config = {};
+      };
+    };
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";
