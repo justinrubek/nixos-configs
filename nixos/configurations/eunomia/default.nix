@@ -49,8 +49,13 @@
         "radio_browser"
       ];
       config = {
-        default_config = {};
+        homeassistant = {
+          name = "home";
+          unit_system = "metric";
+          time_zone = "America/Chicago";
+        };
       };
+      customComponents = [pkgs.home-assistant-custom-components.garmin_connect];
     };
     openssh = {
       enable = true;
