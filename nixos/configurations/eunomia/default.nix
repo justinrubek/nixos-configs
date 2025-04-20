@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   inputs',
   lib,
   ...
@@ -60,6 +61,47 @@
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";
+    };
+    pixiecore = let
+      sys = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ({
+            config,
+            pkgs,
+            lib,
+            modulesPath,
+            ...
+          }: {
+            imports = [(modulesPath + "/installer/netboot/netboot-minimal.nix")];
+            config = {
+              services.openssh = {
+                enable = true;
+                openFirewall = true;
+
+                settings = {
+                  PasswordAuthentication = false;
+                  KbdInteractiveAuthentication = false;
+                };
+              };
+              users.users.root.openssh.authorizedKeys.keys = [
+                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l justin@eunomia"
+              ];
+            };
+          })
+        ];
+      };
+      inherit (sys.config.system) build;
+    in {
+      enable = true;
+      openFirewall = true;
+      dhcpNoBind = true;
+
+      mode = "boot";
+      kernel = "${build.kernel}/bzImage";
+      initrd = "${build.netbootRamdisk}/initrd";
+      cmdLine = "init=${build.toplevel}/init loglevel=4";
+      debug = true;
     };
     xserver.enable = true;
     mullvad-vpn = {
