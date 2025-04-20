@@ -25,6 +25,7 @@
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
 
     neovim-config = {
+      # url = "github:justinrubek/neovim-config/8f8281a24ebab665f6e755db4727df4bd5e8b852";
       url = "github:justinrubek/neovim-config";
       inputs = {
         fenix.follows = "fenix";
