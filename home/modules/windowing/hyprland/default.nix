@@ -66,11 +66,16 @@ in {
   options.justinrubek.windowing.hyprland = {
     enable = lib.mkEnableOption "Enable hyprland configuration";
 
+    # TODO: consider making this a list
     monitors = {
       primary = lib.mkOption {
         type = monitorType;
       };
       secondary = lib.mkOption {
+        type = lib.types.nullOr monitorType;
+        default = null;
+      };
+      tertiary = lib.mkOption {
         type = lib.types.nullOr monitorType;
         default = null;
       };
@@ -491,6 +496,7 @@ in {
             refreshRate,
             position,
             scale,
+            transform ? 0,
             ...
           }: "${name}, ${resolution}@${builtins.toString refreshRate}, ${position}, ${scale}";
           monitors = lib.attrsets.mapAttrsToList (name: getMonitor) availableMonitors;

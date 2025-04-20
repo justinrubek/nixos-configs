@@ -1,8 +1,12 @@
-{pkgs, inputs, ...}: username: {
+{
+  pkgs,
+  inputs,
+  ...
+}: username: {
   enable = true;
 
   profiles.${username} = {
-    extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+    extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
       decentraleyes
       ublock-origin
       clearurls

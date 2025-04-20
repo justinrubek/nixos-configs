@@ -19,7 +19,7 @@
         };
       };
       zellij = {
-        enable = true;
+        enable = false;
         settings = {
           default-shell = "zsh";
         };
@@ -41,7 +41,7 @@
             };
             secondary = {
               name = "DP-2";
-              position = "-2560x0";
+              position = "2560x0";
               refreshRate = 60;
               resolution = "2560x1440";
               scale = "auto";

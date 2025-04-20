@@ -33,8 +33,14 @@
 
   # Enable the X11 windowing system.
   services = {
+    diod = {
+      enable = true;
+    };
     displayManager = {
-      sddm.enable = true;
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
 
       defaultSession = "hyprland";
     };
@@ -50,6 +56,7 @@
         "radio_browser"
       ];
       config = {
+        default_config = {};
         homeassistant = {
           name = "home";
           unit_system = "metric";
@@ -142,7 +149,7 @@
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "docker" "input" "systemd-journal"];
+      extraGroups = ["networkmanager" "wheel" "docker" "input" "systemd-journal" "dialout"];
       shell = pkgs.zsh;
     };
   };
@@ -173,6 +180,8 @@
     firewall.allowedTCPPorts = [
       8000
       21040 # sftpgo-ftp
+      27016
+      8123 # home-assistant
     ];
     firewall.interfaces.${config.services.tailscale.interfaceName} = {
       allowedTCPPorts = [
@@ -194,8 +203,8 @@
 
   # Open ports in the firewall.
 
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+  # networking.firewall.allowedTCPPorts = [ 27016 ];
+  networking.firewall.allowedUDPPorts = [27016];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
