@@ -1,6 +1,7 @@
 {
   imports = [
     ./installer-image.nix
+    ./cm3588
   ];
 
   perSystem = {

@@ -33,6 +33,12 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    nixos-aarch64-images = {
+      url = "github:mic92/nixos-aarch64-images";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
 
     comma = {
       url = "github:nix-community/comma";

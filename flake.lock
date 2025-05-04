@@ -3351,6 +3351,26 @@
         "type": "github"
       }
     },
+    "nixos-aarch64-images": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1734082854,
+        "narHash": "sha256-g0fJ2+EPec5qnMayEWd6ao9GGI323NWvs4xxrQAhn+c=",
+        "owner": "mic92",
+        "repo": "nixos-aarch64-images",
+        "rev": "544fc9ebf89173e639650c1f501d51832c93458a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mic92",
+        "repo": "nixos-aarch64-images",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1744633460,
@@ -4858,6 +4878,7 @@
         "nix-gaming": "nix-gaming",
         "nix-go": "nix-go_3",
         "nix-postgres": "nix-postgres",
+        "nixos-aarch64-images": "nixos-aarch64-images",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_13",
