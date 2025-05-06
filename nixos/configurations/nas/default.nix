@@ -2,6 +2,7 @@
   inputs,
   lib,
   pkgs,
+  self',
   ...
 }: {
   imports = [
@@ -37,6 +38,7 @@
 
   environment.systemPackages = [
     pkgs.tailscale
+    self'.packages.neovim
   ];
 
   networking = {
