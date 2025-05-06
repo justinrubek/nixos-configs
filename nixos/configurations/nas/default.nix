@@ -1,12 +1,15 @@
 {
   inputs,
+  inputs',
   lib,
   pkgs,
   self',
   ...
 }: {
   imports = [
+    inputs.disko.nixosModules.disko
     "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+    ./disko.nix
   ];
   boot = {
     supportedFilesystems = ["ext4" "btrfs"];
@@ -37,6 +40,7 @@
   };
 
   environment.systemPackages = [
+    inputs'.disko.packages.default
     pkgs.tailscale
     self'.packages.neovim
   ];

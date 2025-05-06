@@ -407,6 +407,26 @@
         "type": "github"
       }
     },
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1746411114,
+        "narHash": "sha256-mLlkVX1kKbAa/Ns5u26wDYw4YW4ziMFM21fhtRmfirU=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "b5d1320ebc2f34dbea4655f95167f55e2130cdb3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "epify": {
       "inputs": {
         "nix-go": "nix-go_2",
@@ -4686,6 +4706,7 @@
         "cam2ip": "cam2ip",
         "comma": "comma",
         "config-parts": "config-parts",
+        "disko": "disko",
         "epify": "epify",
         "fenix": "fenix",
         "firefox-addons": "firefox-addons",
