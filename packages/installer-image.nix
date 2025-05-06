@@ -1,6 +1,7 @@
 {inputs, ...}: {
   perSystem = {
     config,
+    inputs',
     pkgs,
     system,
     self',
@@ -29,6 +30,7 @@
     packages = {
       "installer/graphical" = graphical.config.system.build.isoImage;
       "installer/minimal" = minimal.config.system.build.isoImage;
+      "installer/cm3588" = inputs'.nixos-aarch64-images.packages.cm3588NAS;
     };
   };
 }
