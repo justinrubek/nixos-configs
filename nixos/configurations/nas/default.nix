@@ -56,19 +56,19 @@
     # };
   };
 
-  # systemd.services.NetworkManager-wait-online.enable = false;
-  # networking.useNetworkd = false;
-  # systemd.network = {
-  #   enable = true;
-  #   networks.default = {
-  #     matchConfig.Name = "en*";
-  #     networkConfig.DHCP = "yes";
-  #   };
-  # };
-
   system.stateVersion = "22.11";
 
   programs = {
+    fish = {
+      enable = true;
+      interactiveShellInit = ''
+        fish_vi_key_bindings
+        set -x EDITOR nvim
+        set -x VISUAL nvim
+      '';
+      shellAbbrs.vi = "nvim";
+    };
     zsh.enable = true;
   };
+  security.sudo.wheelNeedsPassword = false;
 }
