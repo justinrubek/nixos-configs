@@ -26,5 +26,6 @@
 
     postgres = ./data/postgres;
     paperless = ./paperless;
+    unpfs = ./unpfs;
   };
 }

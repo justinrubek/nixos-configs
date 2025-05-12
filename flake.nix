@@ -121,6 +121,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
+    unpfs = {
+      url = "github:justinrubek/rust-9p";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.fenix.follows = "fenix";
+    };
     sftpgo = {
       url = "github:justinrubek/sftpgo";
       inputs.nixpkgs.follows = "nixpkgs";
