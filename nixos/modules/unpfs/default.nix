@@ -35,7 +35,8 @@ in {
       after = ["network-online.target" "mnt-data.mount"];
 
       script = ''
-        ${inputs'.unpfs.packages.cli}/bin/unpfs tcp!0.0.0.0!4500 /mnt/data
+        mkdir -p ${cfg.dataDir}/root
+        ${inputs'.unpfs.packages.cli}/bin/unpfs tcp!0.0.0.0!4500 ${cfg.dataDir}/root
       '';
 
       serviceConfig = {

@@ -19,6 +19,10 @@
   time.timeZone = "America/Chicago";
 
   services = {
+    unpfs = {
+      enable = true;
+      dataDir = "/mnt/data";
+    };
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";
@@ -50,7 +54,10 @@
       enable = true;
       wifi.scanRandMacAddress = false;
     };
-    firewall.allowedTCPPorts = [];
+    firewall.allowedTCPPorts = [
+      4500 # 9p file server
+      4501 # 9p alt file server
+    ];
     # firewall.interfaces.${config.services.tailscale.interfaceName} = {
     #   allowedTCPPorts = [];
     # };
@@ -71,4 +78,25 @@
     zsh.enable = true;
   };
   security.sudo.wheelNeedsPassword = false;
+
+  systemd.sockets.u9fs = {
+    description = "9P filesystem server socket";
+    wantedBy = ["sockets.target"];
+    socketConfig = {
+      ListenStream = "4501"; # Your desired port
+      Accept = "yes";
+    };
+  };
+
+  systemd.services."u9fs@" = {
+    description = "9P filesystem server";
+    after = ["network.target"];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.u9fs}/bin/u9fs -a none -d /mnt/data/alt";
+      User = "stowage";
+      StandardInput = "socket";
+      StandardError = "journal";
+    };
+  };
 }
