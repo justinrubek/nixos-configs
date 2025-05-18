@@ -130,6 +130,11 @@
       url = "github:justinrubek/sftpgo";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stowage = {
+      url = "github:justinrubek/stowage";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.fenix.follows = "fenix";
+    };
     wezterm.url = "github:wez/wezterm?dir=nix";
   };
 

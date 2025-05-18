@@ -265,4 +265,14 @@
   security.pam.services.hyprlock.text = "auth include login";
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
+
+  security.wrappers = {
+    "9fs" = {
+      owner = "root";
+      group = "root";
+      permissions = "u+rx,g+x,o+x";
+      setuid = true;
+      source = "${inputs'.stowage.packages.mount}/bin/stowage-cmd-mount";
+    };
+  };
 }
