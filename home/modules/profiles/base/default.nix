@@ -44,7 +44,7 @@ in {
       bat.enable = true;
       lsd = {
         enable = true;
-        enableAliases = true;
+        enableZshIntegration = true;
       };
       htop.enable = true;
       btop.enable = true;
