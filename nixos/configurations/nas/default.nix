@@ -19,10 +19,6 @@
   time.timeZone = "America/Chicago";
 
   services = {
-    unpfs = {
-      enable = true;
-      dataDir = "/mnt/data";
-    };
     openssh = {
       enable = true;
       settings.PermitRootLogin = "no";
@@ -41,12 +37,17 @@
       openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l"];
       shell = pkgs.zsh;
     };
+    stowage = {
+      isSystemUser = true;
+      group = "stowage";
+    };
   };
+  users.groups.stowage = {};
 
   environment.systemPackages = [
     inputs'.disko.packages.default
     pkgs.tailscale
-    self'.packages.neovim
+    # self'.packages.neovim
   ];
 
   networking = {
@@ -88,15 +89,43 @@
     };
   };
 
-  systemd.services."u9fs@" = {
+  systemd.services."u9fs@" = let
+    mountDir = "/mnt/data/root";
+    user = "stowage";
+    package = pkgs.u9fs.overrideAttrs (old: {
+      dontStrip = true;
+      enableDebugging = true;
+      NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -g -O0 -DDEBUG";
+    });
+  in {
     description = "9P filesystem server";
     after = ["network.target"];
 
     serviceConfig = {
-      ExecStart = "${pkgs.u9fs}/bin/u9fs -a none -d /mnt/data/alt";
-      User = "stowage";
+      ExecStart = "${package}/bin/u9fs -D -a none -u ${user} -d ${mountDir}";
+      User = "${user}";
       StandardInput = "socket";
       StandardError = "journal";
     };
   };
+
+  # systemd.services.stowage = {
+  #   description = "file server";
+
+  #   wantedBy = ["multi-user.target"];
+  #   wants = ["network-online.target"];
+  #   after = ["network-online.target" "mnt-data.mount"];
+
+  #   script = ''
+  #     ${inputs'.stowage.packages.cli}/bin/stowage-cli server --addr '0.0.0.0:4500' --path /mnt/data/alt start
+  #   '';
+
+  #   serviceConfig = {
+  #     User = "stowage";
+  #     Group = "stowage";
+
+  #     Type = "simple";
+  #     Restart = "on-failure";
+  #   };
+  # };
 }

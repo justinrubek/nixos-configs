@@ -23,9 +23,9 @@
     "filesystem/zfs" = ./filesystem/zfs;
 
     "media" = ./media;
+    "media/navidrome" = ./media/navidrome.nix;
 
     postgres = ./data/postgres;
     paperless = ./paperless;
-    unpfs = ./unpfs;
   };
 }

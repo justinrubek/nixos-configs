@@ -19,11 +19,12 @@ in {
   in
     lib.mkIf cfg.enable {
       users.users.mediahost = {
-        isSystemUser = true;
+        isNormalUser = true;
+        linger = true;
         home = "/home/${user}";
         createHome = true;
         group = "${user}";
-        extraGroups = ["jellyfin"];
+        extraGroups = ["jellyfin" "systemd-journal"];
         packages = [
           # inputs'.epify.packages.epify
           (pkgs.beets.override {

@@ -33,9 +33,6 @@
 
   # Enable the X11 windowing system.
   services = {
-    diod = {
-      enable = true;
-    };
     displayManager = {
       sddm = {
         enable = true;
@@ -140,20 +137,32 @@
 
     mediahost.enable = true;
 
-    services.paperless.enable = true;
-  };
-
-  users.groups.mediahost = {};
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = {
-    justin = {
-      isNormalUser = true;
-      description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "docker" "input" "systemd-journal" "dialout"];
-      shell = pkgs.zsh;
+    services = {
+      navidrome.enable = false;
+      paperless.enable = true;
     };
   };
 
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users = {
+    groups.mediahost = {};
+    users = {
+      justin = {
+        isNormalUser = true;
+        description = "Justin";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "docker"
+          "input"
+          "systemd-journal"
+          "dialout"
+          "stowage"
+        ];
+        shell = pkgs.zsh;
+      };
+    };
+  };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -261,8 +270,10 @@
   hardware.ckb-next.enable = true;
 
   # allow swaylock to verify login
-  security.pam.services.swaylock.text = "auth include login";
-  security.pam.services.hyprlock.text = "auth include login";
+  security.pam.services = {
+    swaylock.text = "auth include login";
+    hyprlock.text = "auth include login";
+  };
 
   boot.binfmt.emulatedSystems = ["aarch64-linux"];
 
@@ -274,5 +285,14 @@
       setuid = true;
       source = "${inputs'.stowage.packages.mount}/bin/stowage-cmd-mount";
     };
+  };
+
+  users.groups.stowage = {};
+  users.users.stowage = {
+    isSystemUser = true;
+    group = "stowage";
+    extraGroups = [];
+    packages = [];
+    shell = pkgs.zsh;
   };
 }

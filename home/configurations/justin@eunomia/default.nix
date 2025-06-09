@@ -113,7 +113,7 @@
         (pkgs.lutris.override {
           extraLibraries = pkgs: [];
         })
-        inputs.nix-gaming.packages.${pkgs.system}.star-citizen
+        # inputs.nix-gaming.packages.${pkgs.system}.star-citizen
       ];
 
       stateVersion = "22.11";
@@ -128,5 +128,7 @@
       key_to_press = 276;
       key_to_send = "F10";
     };
+
+    nixpkgs.config.permittedInsecurePackages = ["electron-33.4.11"]; # TODO: remove
   };
 }
