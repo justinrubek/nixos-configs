@@ -199,7 +199,43 @@
       ];
     };
   };
-  systemd.services.NetworkManager-wait-online.enable = false;
+  systemd = {
+    services = {
+      NetworkManager-wait-online.enable = false;
+      mediahost-nas-mount = {
+        description = "mount nas for media host";
+        wantedBy = ["multi-user.target"];
+        after = ["network.target"];
+
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          User = "mediahost";
+          ExecStartPre = [
+            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/n/nas"
+            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/n/movies"
+            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/n/shows"
+          ];
+          ExecStart = [
+            "/run/wrappers/bin/9fs mount -i 'tcp!nas!4501' /home/mediahost/n/nas"
+            "/run/wrappers/bin/9fs bind /home/mediahost/n/nas/movies /home/mediahost/movies"
+            "/run/wrappers/bin/9fs bind /home/mediahost/n/nas/shows /home/mediahost/shows"
+          ];
+        };
+      };
+    };
+
+    user.services.nas-mount = {
+      description = "Mount NAS via 9fs";
+      # manual activation
+      # wantedBy = [ "default.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = "/run/wrappers/bin/9fs mount -i 'tcp!nas!4501' %h/n/nas";
+      };
+    };
+  };
 
   # networking.useNetworkd = false;
   # systemd.network = {

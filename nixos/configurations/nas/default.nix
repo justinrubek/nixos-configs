@@ -93,9 +93,12 @@
     mountDir = "/mnt/data/root";
     user = "stowage";
     package = pkgs.u9fs.overrideAttrs (old: {
-      dontStrip = true;
-      enableDebugging = true;
-      NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -g -O0 -DDEBUG";
+      src = pkgs.fetchFromGitHub {
+        owner = "justinrubek";
+        repo = "u9fs";
+        rev = "a1d7fced2c2c02453190869e628fe421bbd83967";
+        sha256 = "sha256-IaugFpc+AfxtDTybxdi+ydLwnh+pxFPTfLXgi15No4M=";
+      };
     });
   in {
     description = "9P filesystem server";
