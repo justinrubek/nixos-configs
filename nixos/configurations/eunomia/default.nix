@@ -213,12 +213,14 @@
           User = "mediahost";
           ExecStartPre = [
             "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/n/nas"
-            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/n/movies"
-            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/n/shows"
+            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/movies"
+            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/music"
+            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/shows"
           ];
           ExecStart = [
             "/run/wrappers/bin/9fs mount -i 'tcp!nas!4501' /home/mediahost/n/nas"
             "/run/wrappers/bin/9fs bind /home/mediahost/n/nas/movies /home/mediahost/movies"
+            "/run/wrappers/bin/9fs bind /home/mediahost/n/nas/music /home/mediahost/music"
             "/run/wrappers/bin/9fs bind /home/mediahost/n/nas/shows /home/mediahost/shows"
           ];
         };

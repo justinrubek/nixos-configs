@@ -131,6 +131,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.fenix.follows = "fenix";
     };
+    u9fs = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:justinrubek/u9fs";
+    };
     wezterm.url = "github:wez/wezterm?dir=nix";
   };
 
