@@ -40,8 +40,12 @@
       "justin@eunomia" = {
         system = "x86_64-linux";
         modules = [
-          ({config, ...}: {
-            home.file."${config.gtk.gtk2.configLocation}".force = true; # always force .gtkrc-2.0 replacement
+          ({
+            config,
+            lib,
+            ...
+          }: {
+            home.file."${config.gtk.gtk2.configLocation}".force = lib.mkForce true; # always force .gtkrc-2.0 replacement
           })
         ];
       };
