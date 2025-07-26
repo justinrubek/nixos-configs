@@ -354,7 +354,7 @@ in {
 
       mako = {
         enable = true;
-        defaultTimeout = 7;
+        settings.default-timeout = 7;
       };
     };
 

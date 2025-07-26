@@ -19,7 +19,10 @@
     # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
     # kernelPackages = pkgs.linuxKernel.packages.linux_xanmod;
     # kernelPackages = pkgs.zfs.latestCompatibleLinuxPackages;
-    supportedFilesystems = ["zfs" "ext4"];
+    supportedFilesystems = [
+      "zfs"
+      "ext4"
+    ];
     # zfs.package = pkgs.zfs_unstable;
   };
 
@@ -70,29 +73,31 @@
       sys = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ({
-            config,
-            pkgs,
-            lib,
-            modulesPath,
-            ...
-          }: {
-            imports = [(modulesPath + "/installer/netboot/netboot-minimal.nix")];
-            config = {
-              services.openssh = {
-                enable = true;
-                openFirewall = true;
+          (
+            {
+              config,
+              pkgs,
+              lib,
+              modulesPath,
+              ...
+            }: {
+              imports = [(modulesPath + "/installer/netboot/netboot-minimal.nix")];
+              config = {
+                services.openssh = {
+                  enable = true;
+                  openFirewall = true;
 
-                settings = {
-                  PasswordAuthentication = false;
-                  KbdInteractiveAuthentication = false;
+                  settings = {
+                    PasswordAuthentication = false;
+                    KbdInteractiveAuthentication = false;
+                  };
                 };
+                users.users.root.openssh.authorizedKeys.keys = [
+                  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l justin@eunomia"
+                ];
               };
-              users.users.root.openssh.authorizedKeys.keys = [
-                "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l justin@eunomia"
-              ];
-            };
-          })
+            }
+          )
         ];
       };
       inherit (sys.config.system) build;
@@ -143,7 +148,6 @@
     };
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     groups.mediahost = {};
     users = {
@@ -201,28 +205,72 @@
   };
   systemd = {
     services = {
+      "air-fetch@" = {
+        description = "Fetch air data from %i";
+        serviceConfig = let
+          airFetchScript = pkgs.writeShellScriptBin "air-fetch" ''
+            host="$1"
+            date_str=$(date --utc +%Y-%m-%d)
+            output_dir=/var/lib/air
+            mkdir -p "$output_dir"
+            url="http://''${host}/measures/current"
+
+            ${pkgs.curl}/bin/curl -s "$url" >> "$output_dir/''${date_str}.jsonl"
+            echo >> "$output_dir/''${date_str}.jsonl"
+          '';
+        in {
+          Type = "oneshot";
+          ExecStart = "${airFetchScript}/bin/air-fetch %i";
+        };
+      };
       NetworkManager-wait-online.enable = false;
-      mediahost-nas-mount = {
+      mediahost-nas-mount = let
+        target = "tcp!nas!4501";
+        homeDir = "/home/mediahost";
+        mnt = "${homeDir}/n/nas";
+      in {
+        after = ["network.target"];
         description = "mount nas for media host";
         wantedBy = ["multi-user.target"];
-        after = ["network.target"];
 
         serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-          User = "mediahost";
-          ExecStartPre = [
-            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/n/nas"
-            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/movies"
-            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/music"
-            "${pkgs.coreutils}/bin/mkdir -p /home/mediahost/shows"
-          ];
           ExecStart = [
-            "/run/wrappers/bin/9fs mount -i 'tcp!nas!4501' /home/mediahost/n/nas"
-            "/run/wrappers/bin/9fs bind /home/mediahost/n/nas/movies /home/mediahost/movies"
-            "/run/wrappers/bin/9fs bind /home/mediahost/n/nas/music /home/mediahost/music"
-            "/run/wrappers/bin/9fs bind /home/mediahost/n/nas/shows /home/mediahost/shows"
+            "/run/wrappers/bin/9fs mount -i '${target}' '${mnt}'"
+            "/run/wrappers/bin/9fs bind '${mnt}/movies' '${homeDir}/movies'"
+            "/run/wrappers/bin/9fs bind '${mnt}/music' '${homeDir}/music'"
+            "/run/wrappers/bin/9fs bind '${mnt}/shows' '${homeDir}/shows'"
           ];
+          ExecStartPre = [
+            "${pkgs.coreutils}/bin/mkdir -p '${mnt}'"
+            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/movies'"
+            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/music'"
+            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/shows'"
+          ];
+          ExecStop = [
+            "/run/wrappers/bin/9fs umount '${mnt}/n/nas'"
+            "/run/wrappers/bin/9fs umount '${homeDir}/movies'"
+            "/run/wrappers/bin/9fs umount '${homeDir}/music'"
+            "/run/wrappers/bin/9fs umount '${homeDir}/shows'"
+          ];
+          RemainAfterExit = true;
+          Type = "oneshot";
+          User = "mediahost";
+        };
+      };
+    };
+
+    targets."multi-user.target".wantedBy = [
+      "air-fetch@esp32c3-801B40.timer"
+      "air-fetch@esp32c3-A06FEC.timer"
+    ];
+
+    timers = {
+      "air-fetch@" = {
+        enable = true;
+        description = "Timer to fetch air data from %i hourly";
+        timerConfig = {
+          OnCalendar = "*:*:00";
+          Persistent = true;
         };
       };
     };

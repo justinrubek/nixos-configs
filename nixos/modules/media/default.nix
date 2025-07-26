@@ -27,11 +27,11 @@ in {
         extraGroups = ["jellyfin" "systemd-journal"];
         packages = [
           # inputs'.epify.packages.epify
-          (pkgs.beets.override {
-            pluginOverrides = {
-              lyrics.enable = true;
-            };
-          })
+          # (pkgs.beets.override {
+          #   pluginOverrides = {
+          #     lyrics.enable = true;
+          #   };
+          # })
           self'.packages.neovim
         ];
         shell = pkgs.bashInteractive;

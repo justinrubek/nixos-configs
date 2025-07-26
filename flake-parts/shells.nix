@@ -19,6 +19,8 @@
           pkgs.sops
 
           inputs'.nix-postgres.packages."psql_15/bin"
+
+          pkgs.calibre
         ];
 
         shellHook = ''

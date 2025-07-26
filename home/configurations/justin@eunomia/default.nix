@@ -8,6 +8,7 @@
     activeProfiles = ["development" "browsing" "gaming" "graphical" "design" "work" "media"];
 
     programs = {
+      git.extraConfig.safe.directory = "*";
       obs-studio.enable = true;
       thunderbird = {
         enable = true;
