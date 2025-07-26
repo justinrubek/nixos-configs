@@ -37,6 +37,7 @@
       hyprland = {
         enable = true;
       };
+      plasma.enable = true;
     };
   };
 
