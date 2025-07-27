@@ -11,117 +11,28 @@
   boot = {
     supportedFilesystems = ["ext4"];
   };
-
-  time.timeZone = "America/Chicago";
-
-  services = {
-    displayManager = {
-      defaultSession = "hyprland";
-      sddm = {
-        enable = true;
-        wayland.enable = true;
-      };
-    };
-    openssh = {
-      enable = true;
-      settings.PermitRootLogin = "no";
-    };
-    xserver.enable = true;
-  };
-
+  environment.systemPackages = [
+    pkgs.tailscale
+  ];
   justinrubek = {
     graphical.fonts.enable = true;
     sound.enable = true;
     tailscale.enable = true;
     windowing = {
-      hyprland = {
-        enable = true;
-      };
       plasma.enable = true;
     };
   };
-
-  users = {
-    users = {
-      justin = {
-        isNormalUser = true;
-        description = "Justin";
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-          "docker"
-          "input"
-          "systemd-journal"
-          "dialout"
-          "stowage"
-        ];
-        shell = pkgs.fish;
-      };
-    };
-  };
-
-  environment.systemPackages = [
-    pkgs.tailscale
-  ];
-
   networking = {
     networkmanager = {
       enable = true;
       wifi.scanRandMacAddress = false;
     };
   };
-  systemd = {
-    services = {
-      mediahost-nas-mount = let
-        target = "tcp!nas!4501";
-        homeDir = "/home/mediahost";
-        mnt = "${homeDir}/n/nas";
-      in {
-        after = ["network.target"];
-        description = "mount nas for media host";
-        wantedBy = ["multi-user.target"];
-
-        serviceConfig = {
-          ExecStart = [
-            "/run/wrappers/bin/9fs mount -i '${target}' '${mnt}'"
-            "/run/wrappers/bin/9fs bind '${mnt}/movies' '${homeDir}/movies'"
-            "/run/wrappers/bin/9fs bind '${mnt}/music' '${homeDir}/music'"
-            "/run/wrappers/bin/9fs bind '${mnt}/shows' '${homeDir}/shows'"
-          ];
-          ExecStartPre = [
-            "${pkgs.coreutils}/bin/mkdir -p '${mnt}'"
-            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/movies'"
-            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/music'"
-            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/shows'"
-          ];
-          ExecStop = [
-            "/run/wrappers/bin/9fs umount '${mnt}/n/nas'"
-            "/run/wrappers/bin/9fs umount '${homeDir}/movies'"
-            "/run/wrappers/bin/9fs umount '${homeDir}/music'"
-            "/run/wrappers/bin/9fs umount '${homeDir}/shows'"
-          ];
-          RemainAfterExit = true;
-          Type = "oneshot";
-          User = "mediahost";
-        };
-      };
-    };
-  };
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leavecatenate(variables, "bootdev", bootdev)
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
-
   nix = {
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
   };
-
   programs = {
     fish = {
       enable = true;
@@ -204,18 +115,6 @@
     };
     zsh.enable = true;
   };
-
-  # enable fix for steam issues with xdg-desktop-portal
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  };
-
-  # allow swaylock to verify login
-  security.pam.services = {
-    swaylock.text = "auth include login";
-    hyprlock.text = "auth include login";
-  };
   security.wrappers = {
     "9fs" = {
       owner = "root";
@@ -223,6 +122,75 @@
       permissions = "u+rx,g+x,o+x";
       setuid = true;
       source = "${inputs'.stowage.packages.mount}/bin/stowage-cmd-mount";
+    };
+  };
+  services = {
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
+    };
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
+    };
+    xserver.enable = true;
+  };
+  system.stateVersion = "25.11";
+  systemd = {
+    services = {
+      mediahost-nas-mount = let
+        target = "tcp!nas!4501";
+        homeDir = "/home/mediahost";
+        mnt = "${homeDir}/n/nas";
+      in {
+        after = ["network.target"];
+        description = "mount nas for media host";
+        wantedBy = ["multi-user.target"];
+
+        serviceConfig = {
+          ExecStart = [
+            "/run/wrappers/bin/9fs mount -i '${target}' '${mnt}'"
+            "/run/wrappers/bin/9fs bind '${mnt}/movies' '${homeDir}/movies'"
+            "/run/wrappers/bin/9fs bind '${mnt}/music' '${homeDir}/music'"
+            "/run/wrappers/bin/9fs bind '${mnt}/shows' '${homeDir}/shows'"
+          ];
+          ExecStartPre = [
+            "${pkgs.coreutils}/bin/mkdir -p '${mnt}'"
+            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/movies'"
+            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/music'"
+            "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/shows'"
+          ];
+          ExecStop = [
+            "/run/wrappers/bin/9fs umount '${mnt}/n/nas'"
+            "/run/wrappers/bin/9fs umount '${homeDir}/movies'"
+            "/run/wrappers/bin/9fs umount '${homeDir}/music'"
+            "/run/wrappers/bin/9fs umount '${homeDir}/shows'"
+          ];
+          RemainAfterExit = true;
+          Type = "oneshot";
+          User = "mediahost";
+        };
+      };
+    };
+  };
+  time.timeZone = "America/Chicago";
+  users = {
+    users = {
+      justin = {
+        description = "Justin";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "docker"
+          "input"
+          "systemd-journal"
+          "dialout"
+        ];
+        isNormalUser = true;
+        shell = pkgs.fish;
+      };
     };
   };
 }
