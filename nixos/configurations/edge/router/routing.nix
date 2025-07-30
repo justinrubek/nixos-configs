@@ -35,12 +35,12 @@
             chain prerouting {
               type nat hook prerouting priority -100;
 
-              iifname "enp1s0f0" ip protocol tcp tcp dport 443 dnat to 172.16.0.2:443 comment "nat traffic from wan to webserver"
+              iifname "enp1s0f0" ip protocol tcp tcp dport 443 dnat to 10.0.0.2:443 comment "nat traffic from wan to webserver"
             }
             chain postrouting {
               type nat hook postrouting priority 100; policy accept;
 
-              ip saddr 172.16.0.0/24 oifname "enp1s0f0" masquerade comment "masquerade private ip addresses"
+              ip saddr 10.0.0.1/8 oifname "enp1s0f0" masquerade comment "masquerade private ip addresses"
             }
           '';
           family = "ip";
