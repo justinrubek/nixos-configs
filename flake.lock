@@ -5567,14 +5567,17 @@
         "pre-commit-hooks": "pre-commit-hooks_19"
       },
       "locked": {
-        "lastModified": 1749962881,
-        "narHash": "sha256-JJbhSl5NzxGiuQYH4VFmTJg7StSZ/x7TdGvb88ofDZI=",
-        "path": "/home/justin/repos/stowage/fileserver",
-        "type": "path"
+        "lastModified": 1748659505,
+        "narHash": "sha256-NKoSXGTnyA9H33E02YciGfTjMzBstFNeF+TncsWgIXE=",
+        "owner": "justinrubek",
+        "repo": "stowage",
+        "rev": "a8453905bf06647afbd1bcc71ccecde59ae173b8",
+        "type": "github"
       },
       "original": {
-        "path": "/home/justin/repos/stowage/fileserver",
-        "type": "path"
+        "owner": "justinrubek",
+        "repo": "stowage",
+        "type": "github"
       }
     },
     "systems": {
