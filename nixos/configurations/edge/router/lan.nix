@@ -1,7 +1,7 @@
 {
   systemd.network = {
     netdevs."20-br-lan".netdevConfig = {
-      Kind = "brdige";
+      Kind = "bridge";
       Name = "br-lan";
     };
     networks = let
