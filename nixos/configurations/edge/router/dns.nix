@@ -10,7 +10,6 @@
           {
             name = ".";
             forward-addr = [
-              "10.1.1.1@53#openwrt"
               "1.1.1.1@853#cloudflare-dns.com"
               "1.0.0.1@853#cloudflare-dns.com"
               "8.8.8.8@853#dns.google"
