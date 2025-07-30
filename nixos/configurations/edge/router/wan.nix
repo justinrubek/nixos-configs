@@ -5,7 +5,7 @@
         linkConfig.RequiredForOnline = "routable";
         matchConfig.Name = "enp1s0f0";
         networkConfig = {
-          BindCarrier = ["enp1s0f0"];
+          # BindCarrier = ["enp1s0f0"];
           DHCP = "ipv4";
           DNSOverTLS = true;
           DNSSEC = true;
