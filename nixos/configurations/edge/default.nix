@@ -35,9 +35,9 @@
       ];
     };
     networkmanager = {
-      enable = true;
-      wifi.scanRandMacAddress = false;
+      enable = false;
     };
+    useNetworkd = true;
   };
   programs = {
     fish = {
