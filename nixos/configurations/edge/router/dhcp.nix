@@ -20,16 +20,16 @@
             id = 100;
             option-data = [
               {
-                data = "172.16.0.1";
+                data = "10.0.0.1";
                 name = "routers";
               }
               {
-                data = "172.16.0.1";
+                data = "10.0.0.1";
                 name = "domain-name-servers";
               }
             ];
-            pools = [{pool = "172.16.0.100 - 172.16.0.240";}];
-            subnet = "172.16.0.0/24";
+            pools = [{pool = "10.0.0.100 - 10.0.0.240";}];
+            subnet = "10.0.0.0/8";
           }
         ];
         valid-lifetime = 3600 * 4;

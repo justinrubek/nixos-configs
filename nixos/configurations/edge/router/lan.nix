@@ -21,7 +21,7 @@
       # bridge
       "10-br-lan" = {
         address = [
-          "172.16.0.1/24"
+          "10.0.0.1/8"
         ];
         bridgeConfig = {};
         linkConfig.RequiredForOnline = "no";

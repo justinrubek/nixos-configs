@@ -36,7 +36,7 @@
           ];
           extended-statistics = true;
           interface = [
-            "172.16.0.1"
+            "10.0.0.1"
             "127.0.0.1"
           ];
           root-hints = "${pkgs.dns-root-data}/root.hints";
