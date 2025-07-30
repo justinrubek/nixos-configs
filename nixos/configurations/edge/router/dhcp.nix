@@ -29,6 +29,12 @@
               }
             ];
             pools = [{pool = "10.0.0.100 - 10.0.0.240";}];
+            reservations = [
+              {
+                hw-address = "58:11:22:ab:a9:a2";
+                ip-address = "10.0.0.50";
+              }
+            ];
             subnet = "10.0.0.0/8";
           }
         ];
