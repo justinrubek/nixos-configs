@@ -17,6 +17,10 @@
 
               iifname "br-lan" accept comment "allow local network to access router"
               iifname "enp1s0f0" ct state { established, related } accept comment "allow established traffic"
+
+              iifname "enp1s0f0" icmpv6 type { nd-router-advert, nd-neighbor-solicit, nd-neighbor-advert, nd-redirect } counter accept comment "allow ipv6 neighbor discovery"
+              iifname "enp1s0f0" udp dport dhcpv6-client udp sport dhcpv6-server counter accept comment "allow dhcpv6 client"
+
               iifname "enp1s0f0" counter drop comment "drop all other traffic as unsolicited"
               iifname "lo" accept comment "accept traffic from loopback"
             }
