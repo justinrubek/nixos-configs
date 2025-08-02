@@ -126,8 +126,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stowage = {
-      # url = "github:justinrubek/stowage";
-      url = "path:/home/justin/repos/stowage/fileserver";
+      url = "github:justinrubek/stowage";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.fenix.follows = "fenix";
     };
