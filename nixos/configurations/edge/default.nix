@@ -22,8 +22,11 @@
     supportedFilesystems = ["ext4"];
   };
   environment.systemPackages = [
-    pkgs.tailscale
+    inputs'.neovim-config.packages.neovim
+    pkgs.iproute2
+    pkgs.ndisc6
     pkgs.starship
+    pkgs.tailscale
   ];
   justinrubek = {
     tailscale.enable = true;
