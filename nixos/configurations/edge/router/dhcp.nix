@@ -31,7 +31,7 @@
             pools = [{pool = "10.0.0.100 - 10.0.0.240";}];
             reservations = [
               {
-                hw-address = "58:11:22:ab:a9:a2";
+                hw-address = "a0:36:9e:26:99:15";
                 ip-address = "10.0.0.50";
               }
             ];
