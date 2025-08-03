@@ -153,7 +153,7 @@
       mediahost-nas-mount = let
         homeDir = "/home/${user}";
         mnt = "${homeDir}/n/nas";
-        target = "tcp!nas!4501";
+        target = "tcp!nas!4500";
         user = "justin";
       in {
         after = ["network.target"];

@@ -1,7 +1,6 @@
 {
   inputs,
   inputs',
-  lib,
   pkgs,
   self',
   ...
@@ -12,49 +11,14 @@
     ./fde.nix
     ./disko.nix
   ];
-  documentation.man.generateCaches = lib.mkForce false;
-
-  time.timeZone = "America/Chicago";
-
-  services = {
-    openssh = {
-      enable = true;
-      settings.PermitRootLogin = "no";
-    };
-  };
-
-  justinrubek = {
-    tailscale.enable = true;
-  };
-
-  users.users = {
-    justin = {
-      isNormalUser = true;
-      description = "Justin";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "input"
-        "systemd-journal"
-      ];
-      openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l"
-      ];
-      shell = pkgs.fish;
-    };
-    stowage = {
-      isSystemUser = true;
-      group = "stowage";
-    };
-  };
-  users.groups.stowage = {};
-
   environment.systemPackages = [
     inputs'.disko.packages.default
     pkgs.tailscale
     self'.packages.neovim
   ];
-
+  justinrubek = {
+    tailscale.enable = true;
+  };
   networking = {
     networkmanager = {
       enable = true;
@@ -63,13 +27,7 @@
     firewall.allowedTCPPorts = [
       4500 # 9p file server
     ];
-    # firewall.interfaces.${config.services.tailscale.interfaceName} = {
-    #   allowedTCPPorts = [];
-    # };
   };
-
-  system.stateVersion = "25.11";
-
   programs = {
     fish = {
       enable = true;
@@ -163,49 +121,59 @@
       };
     };
   };
-
-  systemd.sockets.u9fs = {
-    description = "9P filesystem server socket";
-    wantedBy = ["sockets.target"];
-    socketConfig = {
-      ListenStream = "4500";
-      Accept = "yes";
+  services = {
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
     };
   };
+  system.stateVersion = "25.11";
+  systemd = {
+    sockets.u9fs = {
+      description = "9P filesystem server socket";
+      wantedBy = ["sockets.target"];
+      socketConfig = {
+        ListenStream = "4500";
+        Accept = "yes";
+      };
+    };
+    services."u9fs@" = let
+      mountDir = "/data/root"; # TODO: ensure this directory exists and is owned by this user
+      user = "stowage";
+      package = inputs'.u9fs.packages.default;
+    in {
+      description = "9P filesystem server";
+      after = ["network.target"];
 
-  systemd.services."u9fs@" = let
-    mountDir = "/data/root"; # TODO: ensure this directory exists and is owned by this user
-    user = "stowage";
-    package = inputs'.u9fs.packages.default;
-  in {
-    description = "9P filesystem server";
-    after = ["network.target"];
-
-    serviceConfig = {
-      ExecStart = "${package}/bin/u9fs -D -a none -u ${user} -d ${mountDir}";
-      User = "${user}";
-      StandardInput = "socket";
-      StandardError = "journal";
+      serviceConfig = {
+        ExecStart = "${package}/bin/u9fs -D -a none -u ${user} -d ${mountDir}";
+        User = "${user}";
+        StandardInput = "socket";
+        StandardError = "journal";
+      };
     };
   };
-
-  # systemd.services.stowage = {
-  #   description = "file server";
-
-  #   wantedBy = ["multi-user.target"];
-  #   wants = ["network-online.target"];
-  #   after = ["network-online.target" "mnt-data.mount"];
-
-  #   script = ''
-  #     ${inputs'.stowage.packages.cli}/bin/stowage-cli server --addr '0.0.0.0:4500' --path /mnt/data/alt start
-  #   '';
-
-  #   serviceConfig = {
-  #     User = "stowage";
-  #     Group = "stowage";
-
-  #     Type = "simple";
-  #     Restart = "on-failure";
-  #   };
-  # };
+  users = {
+    groups.stowage = {};
+    users = {
+      justin = {
+        isNormalUser = true;
+        description = "Justin";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "input"
+          "systemd-journal"
+        ];
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l"
+        ];
+        shell = pkgs.fish;
+      };
+      stowage = {
+        group = "stowage";
+        isSystemUser = true;
+      };
+    };
+  };
 }

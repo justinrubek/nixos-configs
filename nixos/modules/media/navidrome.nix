@@ -30,7 +30,7 @@
 
   svcMounts = setupMounts {
     "/var/lib/navidrome/n/nas" = {
-      dial = "tcp!nas!4501";
+      dial = "tcp!nas!4500";
     };
   };
 in {

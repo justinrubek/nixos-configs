@@ -225,7 +225,7 @@
       };
       NetworkManager-wait-online.enable = false;
       mediahost-nas-mount = let
-        target = "tcp!nas!4501";
+        target = "tcp!nas!4500";
         homeDir = "/home/mediahost";
         mnt = "${homeDir}/n/nas";
       in {
@@ -282,7 +282,7 @@
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;
-        ExecStart = "/run/wrappers/bin/9fs mount -i 'tcp!nas!4501' %h/n/nas";
+        ExecStart = "/run/wrappers/bin/9fs mount -i 'tcp!nas!4500' %h/n/nas";
       };
     };
   };
