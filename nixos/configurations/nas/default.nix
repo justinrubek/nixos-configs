@@ -8,12 +8,10 @@
 }: {
   imports = [
     inputs.disko.nixosModules.disko
-    "${inputs.nixpkgs}/nixos/modules/installer/sd-card/sd-image-aarch64.nix"
+    ./bootloader.nix
+    ./fde.nix
     ./disko.nix
   ];
-  boot = {
-    supportedFilesystems = ["ext4" "btrfs"];
-  };
   documentation.man.generateCaches = lib.mkForce false;
 
   time.timeZone = "America/Chicago";
@@ -26,16 +24,23 @@
   };
 
   justinrubek = {
-    tailscale.enable = false;
+    tailscale.enable = true;
   };
 
   users.users = {
     justin = {
       isNormalUser = true;
       description = "Justin";
-      extraGroups = ["networkmanager" "wheel" "input" "systemd-journal"];
-      openssh.authorizedKeys.keys = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l"];
-      shell = pkgs.zsh;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "input"
+        "systemd-journal"
+      ];
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l"
+      ];
+      shell = pkgs.fish;
     };
     stowage = {
       isSystemUser = true;
@@ -47,14 +52,7 @@
   environment.systemPackages = [
     inputs'.disko.packages.default
     pkgs.tailscale
-    # self'.packages.neovim
-    (
-      pkgs.u9fs.overrideAttrs (old: {
-        dontStrip = true;
-        enableDebugging = true;
-        NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -g -O0 -DDEBUG";
-      })
-    )
+    self'.packages.neovim
   ];
 
   networking = {
@@ -64,14 +62,13 @@
     };
     firewall.allowedTCPPorts = [
       4500 # 9p file server
-      4501 # 9p alt file server
     ];
     # firewall.interfaces.${config.services.tailscale.interfaceName} = {
     #   allowedTCPPorts = [];
     # };
   };
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "25.11";
 
   programs = {
     fish = {
@@ -115,26 +112,69 @@
         set -g fish_pager_color_description $comment
         set -g fish_pager_color_selected_background --background=$selection
 
-        starship init fish | source
+        ${pkgs.starship}/bin/starship init fish | source
       '';
 
       shellAbbrs.vi = "nvim";
     };
-    zsh.enable = true;
+    starship = {
+      enable = true;
+      settings = {
+        add_newline = true;
+        character = {
+          success_symbol = "[➜](bold green)";
+          error_symbol = "[󰇸](bold red)";
+          vicmd_symbol = "[❯](bold green)";
+        };
+        directory = {
+          truncate_to_repo = false;
+        };
+        aws = {
+          disabled = true;
+          symbol = "  ";
+        };
+        buf.symbol = " ";
+        c.symbol = " ";
+        directory.read_only = " ";
+        docker_context.symbol = " ";
+        git_branch.symbol = " ";
+        haskell.symbol = " ";
+        java.symbol = " ";
+        julia.symbol = " ";
+        memory_usage.symbol = " ";
+        nix_shell.symbol = " ";
+        nodejs.symbol = " ";
+        package.symbol = " ";
+        python.symbol = " ";
+        rust.symbol = " ";
+        terraform.symbol = " ";
+      };
+    };
   };
-  security.sudo.wheelNeedsPassword = false;
+  security = {
+    sudo.wheelNeedsPassword = false;
+    wrappers = {
+      "9fs" = {
+        owner = "root";
+        group = "root";
+        permissions = "u+rx,g+x,o+x";
+        setuid = true;
+        source = "${inputs'.stowage.packages.mount}/bin/stowage-cmd-mount";
+      };
+    };
+  };
 
   systemd.sockets.u9fs = {
     description = "9P filesystem server socket";
     wantedBy = ["sockets.target"];
     socketConfig = {
-      ListenStream = "4501";
+      ListenStream = "4500";
       Accept = "yes";
     };
   };
 
   systemd.services."u9fs@" = let
-    mountDir = "/mnt/data/root";
+    mountDir = "/data/root"; # TODO: ensure this directory exists and is owned by this user
     user = "stowage";
     package = inputs'.u9fs.packages.default;
   in {

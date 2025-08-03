@@ -38,7 +38,12 @@
           ];
         };
         system.configurationRevision = self.rev or "dirty";
-        users.users.nixos.initialHashedPassword = lib.mkForce "$y$j9T$hEdGkuB74JufADwQAM/e0/$dEyelup23BSJ382lO/9LEC2SqnONn082g/R5qG2WV1.";
+        users.users.nixos = {
+          initialHashedPassword = lib.mkForce "$y$j9T$hEdGkuB74JufADwQAM/e0/$dEyelup23BSJ382lO/9LEC2SqnONn082g/R5qG2WV1.";
+          openssh.authorizedKeys.keys = [
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l"
+          ];
+        };
       }
     ];
     graphical = inputs.nixpkgs.lib.nixosSystem {
