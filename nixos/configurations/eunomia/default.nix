@@ -223,18 +223,33 @@
           ExecStart = "${airFetchScript}/bin/air-fetch %i";
         };
       };
-      NetworkManager-wait-online.enable = false;
+      jellyfin = {
+        after = ["mediahost-nas-mount.service"];
+        wants = ["mediahost-nas-mount.service"];
+      };
+      navidrome = {
+        after = ["mediahost-nas-mount.service"];
+        wants = ["mediahost-nas-mount.service"];
+      };
       mediahost-nas-mount = let
         target = "tcp!nas!4500";
         homeDir = "/home/mediahost";
         mnt = "${homeDir}/n/nas";
       in {
-        after = ["network.target"];
+        after = [
+          "network.target"
+          "network-online.target"
+        ];
         description = "mount nas for media host";
         wantedBy = ["multi-user.target"];
+        wants = ["network-online.target"];
 
         serviceConfig = {
           ExecStart = [
+            "/bin/sh -c 'if mountpoint -q \"${mnt}\"; then /run/wrappers/bin/9fs umount \"${mnt}\"; fi'"
+            "/bin/sh -c 'if mountpoint -q \"${homeDir}/movies\"; then /run/wrappers/bin/9fs umount \"${homeDir}/movies\"; fi'"
+            "/bin/sh -c 'if mountpoint -q \"${homeDir}/music\"; then /run/wrappers/bin/9fs umount \"${homeDir}/music\"; fi'"
+            "/bin/sh -c 'if mountpoint -q \"${homeDir}/shows\"; then /run/wrappers/bin/9fs umount \"${homeDir}/shows\"; fi'"
             "/run/wrappers/bin/9fs mount -i '${target}' '${mnt}'"
             "/run/wrappers/bin/9fs bind '${mnt}/movies' '${homeDir}/movies'"
             "/run/wrappers/bin/9fs bind '${mnt}/music' '${homeDir}/music'"
@@ -246,13 +261,9 @@
             "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/music'"
             "${pkgs.coreutils}/bin/mkdir -p '${homeDir}/shows'"
           ];
-          ExecStop = [
-            "/run/wrappers/bin/9fs umount '${mnt}/n/nas'"
-            "/run/wrappers/bin/9fs umount '${homeDir}/movies'"
-            "/run/wrappers/bin/9fs umount '${homeDir}/music'"
-            "/run/wrappers/bin/9fs umount '${homeDir}/shows'"
-          ];
           RemainAfterExit = true;
+          Restart = "on-failure";
+          RestartSec = "5s";
           Type = "oneshot";
           User = "mediahost";
         };
