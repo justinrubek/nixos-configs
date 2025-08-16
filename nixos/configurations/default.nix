@@ -33,6 +33,7 @@
     configurations = {
       edge.system = "x86_64-linux";
       eunomia.system = "x86_64-linux";
+      gwynn.system = "x86_64-linux";
       surface.system = "x86_64-linux";
       rpi5.system = "aarch64-linux";
       media-center.system = "x86_64-linux";
