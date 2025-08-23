@@ -136,6 +136,10 @@
   };
   services = {
     displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "guest";
+      };
       sddm = {
         enable = true;
         wayland.enable = true;
@@ -198,6 +202,17 @@
           "input"
           "systemd-journal"
           "dialout"
+        ];
+        isNormalUser = true;
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL1Uj62/yt8juK3rSfrVuX/Ut+xzw1Z75KZS/7fOLm6l"
+        ];
+        shell = pkgs.fish;
+      };
+      guest = {
+        description = "guest";
+        extraGroups = [
+          "networkmanager"
         ];
         isNormalUser = true;
         openssh.authorizedKeys.keys = [
