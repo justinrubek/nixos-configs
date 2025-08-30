@@ -31,7 +31,7 @@
     hyprlock = "${inputs'.hyprlock.packages.hyprlock}/bin/hyprlock";
     launcher = "wofi --show drun --style ${./wofi-style.css}";
     logout = "${pkgs.wayland-logout}/bin/wayland-logout";
-    terminal = "wezterm";
+    terminal = "ghostty";
   };
 
   monitorType = lib.types.submodule {
@@ -63,6 +63,8 @@
   monitorHasWallpaper = monitor: monitor.wallpaper != null;
   availableMonitors = lib.attrsets.filterAttrs (name: monitorExists) cfg.monitors;
 in {
+  imports = [./ghostty.nix];
+
   options.justinrubek.windowing.hyprland = {
     enable = lib.mkEnableOption "Enable hyprland configuration";
 
@@ -186,6 +188,7 @@ in {
                 "class<steam>" = icons.steam;
                 "class<vesktop>" = icons.discord;
                 "class<org.wezfurlong.wezterm>" = icons.terminal;
+                "class<com.mitchellh.ghostty>" = icons.terminal;
               };
               window-rewrite-default = icons.unknown;
             };

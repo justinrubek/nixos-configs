@@ -130,6 +130,6 @@
       key_to_send = "F10";
     };
 
-    nixpkgs.config.permittedInsecurePackages = ["electron-33.4.11"]; # TODO: remove
+    nixpkgs.config.permittedInsecurePackages = ["electron-33.4.11" "qtwebengine-5.15.19"]; # TODO: remove
   };
 }
