@@ -187,7 +187,6 @@ in {
                 "class<com.github.flxzt.rnote>" = icons.rnote;
                 "class<steam>" = icons.steam;
                 "class<vesktop>" = icons.discord;
-                "class<org.wezfurlong.wezterm>" = icons.terminal;
                 "class<com.mitchellh.ghostty>" = icons.terminal;
               };
               window-rewrite-default = icons.unknown;
@@ -282,12 +281,6 @@ in {
             color: @text;
           }
         '';
-      };
-      wezterm = {
-        enable = true;
-        enableZshIntegration = true;
-        extraConfig = builtins.readFile ./wezterm.lua;
-        package = inputs'.wezterm.packages.default;
       };
       wlogout = {
         enable = true;

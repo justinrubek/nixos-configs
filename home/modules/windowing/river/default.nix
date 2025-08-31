@@ -31,7 +31,7 @@
     launcher = "wofi --show drun --style ${./wofi-style.css}";
     logout = "${pkgs.wayland-logout}/bin/wayland-logout";
     logout-screen = "wlogout -p layer-shell";
-    terminal = "wezterm";
+    terminal = "ghostty";
   };
 
   monitorType = lib.types.submodule {
@@ -79,6 +79,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     home.packages = [
+      pkgs.ghostty
       pkgs.playerctl
       pkgs.wf-recorder
       pkgs.wireplumber
