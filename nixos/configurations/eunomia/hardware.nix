@@ -53,6 +53,7 @@
         pkgs.rocmPackages.clr
         pkgs.rocmPackages.clr.icd
         pkgs.amf
+        pkgs.vulkan-tools
       ];
     };
   };

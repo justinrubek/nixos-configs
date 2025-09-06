@@ -189,6 +189,8 @@
 
     # https://github.com/NixOS/nixpkgs/issues/271483#issuecomment-1838055011
     pkgs.pkgsi686Linux.gperftools
+
+    pkgs.xcp
   ];
 
   # Enable networking
