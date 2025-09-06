@@ -41,6 +41,11 @@
     displayManager = {
       sddm = {
         enable = true;
+        extraPackages = [pkgs.bibata-cursors];
+        settings = {
+          XCursor.Theme = "Bibata-Modern-Classic";
+          XCursor.Size = 22;
+        };
         wayland.enable = true;
       };
 
