@@ -10,6 +10,10 @@
       url = "github:justinrubek/config-parts";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    crane = {
+      url = "github:ipetkov/crane";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +47,7 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
+    nix-filter.url = "github:numtide/nix-filter";
 
     comma = {
       url = "github:nix-community/comma";
@@ -152,8 +157,10 @@
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = ["x86_64-linux" "aarch64-linux"];
       imports = [
+        ./flake-parts/cargo.nix
         ./flake-parts/ci.nix
         ./flake-parts/pre-commit.nix
+        ./flake-parts/rust-toolchain.nix
         ./flake-parts/shells.nix
         ./home/configurations
         ./home/modules
