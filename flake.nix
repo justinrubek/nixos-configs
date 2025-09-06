@@ -134,6 +134,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:justinrubek/u9fs";
     };
+    vintagestory-server = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:justinrubek/vintagestory-server";
+    };
   };
 
   outputs = {

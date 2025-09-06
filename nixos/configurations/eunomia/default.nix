@@ -4,11 +4,13 @@
   inputs,
   inputs',
   lib,
+  self,
   ...
 }: {
   imports = [
     ./bootloader.nix
     ./hardware.nix
+    "${self}/nixos/modules/vintagestory.nix"
   ];
 
   # Linux kernel
@@ -145,6 +147,11 @@
     services = {
       navidrome.enable = false;
       paperless.enable = true;
+      vintagestory = {
+        enable = true;
+        modList = ./vintagestory-mods.ron;
+        wrapperPackage = inputs'.vintagestory-server.packages.default;
+      };
     };
   };
 
