@@ -6,7 +6,7 @@
     background-opacity = 0.65
     keybind = ctrl+enter=new_window
     mouse-hide-while-typing = true
-    theme = "tokyonight"
+    theme = "TokyoNight"
     window-decoration = false
   '';
 }
