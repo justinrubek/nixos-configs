@@ -51,7 +51,7 @@ in {
         description = "file server";
         requires = ["network.target"];
         serviceConfig = {
-          ExecStart = "${inputs'.sftpgo.packages.default}/bin/sftpgo serve --config-file ${configFile}";
+          ExecStart = "${pkgs.sftpgo}/bin/sftpgo serve --config-file ${configFile}";
           ReadWritePaths = [dataDir];
           User = "paperless";
           WorkingDirectory = dataDir;

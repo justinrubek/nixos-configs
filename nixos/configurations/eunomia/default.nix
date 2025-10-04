@@ -10,6 +10,7 @@
   imports = [
     ./bootloader.nix
     ./hardware.nix
+    ./task-manager.nix
     "${self}/nixos/modules/vintagestory.nix"
   ];
 
@@ -457,7 +458,7 @@
     extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
-  hardware.ckb-next.enable = true;
+  hardware.ckb-next.enable = false;
 
   # allow swaylock to verify login
   security.pam.services = {

@@ -12,6 +12,6 @@ in {
 
   config = lib.mkIf cfg.enable {
     programs.river.enable = true;
-    services.displayManager.sessionPackages = [pkgs.river];
+    services.displayManager.sessionPackages = [pkgs.river-classic];
   };
 }

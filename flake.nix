@@ -121,6 +121,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     raspberry-pi-nix.url = "github:tstat/raspberry-pi-nix";
+    rrythm = {
+      url = "github:justinrubek/rrythm";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sftpgo = {
       url = "github:justinrubek/sftpgo";
       inputs.nixpkgs.follows = "nixpkgs";
