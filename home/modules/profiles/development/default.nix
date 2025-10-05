@@ -71,7 +71,7 @@ in {
         inputs'.git-bare.packages.clone
         inputs'.git-bare.packages.init
         inputs.git-prune-branches.packages.${pkgs.system}.git-prune-branches
-        inputs.gitu.packages.${pkgs.system}.gitu
+        # inputs.gitu.packages.${pkgs.system}.gitu
         cargo
         rustc
         rust-analyzer
