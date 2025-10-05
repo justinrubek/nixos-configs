@@ -9,6 +9,7 @@
     inputs.disko.nixosModules.disko
     ./bootloader.nix
     ./disko.nix
+    ./http-proxy.nix
     ./router/dhcp.nix
     ./router/dns.nix
     ./router/forwarding.nix
