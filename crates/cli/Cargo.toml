@@ -1,12 +1,14 @@
 [dependencies]
 async-trait = "0.1.89"
+axum = { workspace = true }
 clap = { version = "4", features = ["derive"] }
 pingora = { version = "0.6.0", features = ["rustls", "proxy"] }
 pingora-error = "0.6.0"
 serde = { workspace = true }
 # serde_json = { workspace = true }
 thiserror = { workspace = true }
-# tokio = { workspace = true, features = ["full"] }
+tokio = { workspace = true, features = ["full"] }
+tower-http = { workspace = true, features = ["fs"] }
 tracing = { workspace = true }
 tracing-subscriber = { workspace = true }
 
