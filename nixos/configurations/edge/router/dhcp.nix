@@ -4,7 +4,7 @@
       enable = true;
       settings = {
         control-socket = {
-          socket-name = "/var/run/kea/kea-dhcp4.sock";
+          socket-name = "/run/kea/kea-dhcp4.sock";
           socket-type = "unix";
         };
         interfaces-config.interfaces = ["br-lan"];
