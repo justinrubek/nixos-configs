@@ -1,32 +1,27 @@
-use crate::{
-    commands::{Commands, HelloCommands},
-    error::Result,
-};
+use crate::error::Result;
 use clap::Parser;
 
-mod commands;
 mod error;
+mod http_proxy;
 
 fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
 
-    let args = commands::Args::parse();
+    let args = Args::parse();
     match args.command {
-        Commands::Hello(hello) => {
-            let cmd = hello.command;
-            match cmd {
-                HelloCommands::World => {
-                    println!("Hello, world!");
-                }
-                HelloCommands::Name { name } => {
-                    println!("Hello, {name}!");
-                }
-                HelloCommands::Error => {
-                    Err(crate::error::Error::Other("error".into()))?;
-                }
-            }
-        }
+        Commands::HTTPProxy(command) => command.run(),
     }
-
-    Ok(())
 }
+
+#[derive(clap::Parser, Debug)]
+#[command(author, version, about, long_about = None)]
+pub(crate) struct Args {
+    #[clap(subcommand)]
+    pub command: Commands,
+}
+
+#[derive(clap::Subcommand, Debug)]
+pub(crate) enum Commands {
+    HTTPProxy(crate::http_proxy::Args),
+}
+
