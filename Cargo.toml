@@ -19,7 +19,7 @@ priority = -1
 
 [workspace.package]
 authors = ["Justin Rubek"]
-edition = "2021"
+edition = "2024"
 homepage = "https://github.com/justinrubek/templates"
 license = "MIT"
 repository = "https://github.com/justinrubek/templates"
