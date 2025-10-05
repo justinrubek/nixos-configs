@@ -9,6 +9,7 @@
   }: let
     extraPackages = [
       pkgs.pkg-config
+      pkgs.cmake
     ];
     withExtraPackages = base: base ++ extraPackages;
 

@@ -9,19 +9,23 @@
   }: {
     devShells = {
       default = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          alejandra
-          inputs.home-manager.packages.${system}.home-manager
-          pkgs.nh
+        buildInputs = with pkgs;
+          [
+            alejandra
+            inputs.home-manager.packages.${system}.home-manager
+            pkgs.nh
 
-          pkgs.age
-          pkgs.ssh-to-age
-          pkgs.sops
+            pkgs.age
+            pkgs.ssh-to-age
+            pkgs.sops
 
-          inputs'.nix-postgres.packages."psql_15/bin"
+            inputs'.nix-postgres.packages."psql_15/bin"
 
-          pkgs.calibre
-        ];
+            pkgs.calibre
+            pkgs.bacon
+            self'.packages.rust-toolchain
+          ]
+          ++ self'.legacyPackages.cargoExtraPackages;
 
         shellHook = ''
           ${config.pre-commit.installationScript}
