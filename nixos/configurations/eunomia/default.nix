@@ -11,6 +11,7 @@
     ./bootloader.nix
     ./hardware.nix
     ./task-manager.nix
+    ./http-ingress.nix
     "${self}/nixos/modules/vintagestory.nix"
   ];
 
@@ -210,7 +211,6 @@
       21040 # sftpgo-ftp
       27016
       8123 # home-assistant
-      3502 # edge-files
     ];
     firewall.interfaces.${config.services.tailscale.interfaceName} = {
       allowedTCPPorts = [
